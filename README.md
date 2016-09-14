@@ -4,7 +4,7 @@ Web developers require more information on page load performance in the wild. Th
 
 We propose introducing a `PerformancePageLoadTiming` interface extending the [`PerformanceEntry`](https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface) interface, which will report the times of these key moments. `PerformancePageLoadTiming` will include a `firstPaint` attribute, which is a `DOMHighResTimeStamp` reporting the time when the browser first painted anything non-white after a navigation.
 
-PerformancePageLoadTiming entries will have a `name` of "document", an `entryType` of "pageLoadTime", a `startTime` of 0, and a `duration` of 0. Each entry will have a `firstPaint` attribute, which is a `DOMHighResTimeStamp`.
+PerformancePageLoadTiming entries will have a `name` of "document", an `entryType` of "pageload", a `startTime` of 0, and a `duration` of 0. Each entry will have a `firstPaint` attribute, which is a `DOMHighResTimeStamp`.
 
 ## Computation of `firstPaint`
 The browser has performed a "paint" when it has prepared content to be drawn to the screen.
@@ -23,7 +23,7 @@ var observer = new PerformanceObserver((list) => {
   }
 });
 
-observer.observe({entryTypes: ["longtask"]});
+observer.observe({entryTypes: ["pageload"]});
 ```
 
 ## TODO
