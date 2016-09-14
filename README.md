@@ -2,7 +2,7 @@
 
 Web developers require more information on page load performance in the wild. There's no single point in time which represents when a page had loaded – there's a series of key moments during pageload which developers care about. 
 
-We propose introducing a `PerformancePageLoadTiming` which extends the [`PerformanceEntry`](https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface) interface, which will report the times of these key moments. `PerformancePageLoadTiming` will include a `firstPaint` attribute, which is a `DOMHighResTimeStamp` reporting the time when the browser first painted anything non-white after a navigation.
+We propose introducing a `PerformancePageLoadTiming` interface extending the [`PerformanceEntry`](https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface) interface, which will report the times of these key moments. `PerformancePageLoadTiming` will include a `firstPaint` attribute, which is a `DOMHighResTimeStamp` reporting the time when the browser first painted anything non-white after a navigation.
 
 PerformancePageLoadTiming entries will have a `name` of "document", an `entryType` of "pageLoadTime", a `startTime` of 0, and a `duration` of 0. Each entry will have a `firstPaint` attribute, which is a `DOMHighResTimeStamp`.
 
@@ -17,15 +17,13 @@ More formally, we consider the browser to have "painted" a document when it has 
 `firstPaint` is used by registering a `PerformanceObserver`.
 
 ```javascript
-window.onload = () => { 
 var observer = new PerformanceObserver((list) => {
   for (let perfEntry of list.getEntries()) {
-     console.log("firstPaint :" + perfEntry.firstPaint);
+    console.log("firstPaint :" + perfEntry.firstPaint);
   }
 });
 
 observer.observe({entryTypes: ["longtask"]});
-}
 ```
 
 ## TODO
