@@ -1,6 +1,6 @@
 # PerformancePageLoadTiming firstPaint
 
-Web developers require more information on page load performance in the wild. There's no single point in time which represents when a page had loaded – there's a series of key moments during pageload which developers care about. 
+Web developers require more information on page load performance in the wild. There's no single point in time which represents when a page had loaded – there's a series of key moments during pageload which developers care about.
 
 See the [`firstContentfulPaint`](https://github.com/tdresser/time-to-first-contentful-paint/blob/master/README.md) explainer for details on another of these moments.
 
@@ -29,6 +29,12 @@ var observer = new PerformanceObserver((list) => {
 
 observer.observe({entryTypes: ["pageload"]});
 ```
+
+## Examples
+
+These examples are hand annotated, based on the definitions given above and in the [`firstContentfulPaint`](https://github.com/tdresser/time-to-first-contentful-paint/blob/master/README.md) explainer.
+
+![Web page filmstrips with annotated first paint times.](filmstrip.png)
 
 ## TODO
 * More rigourously define what we mean by "paint".
