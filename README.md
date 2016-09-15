@@ -36,5 +36,7 @@ These examples are hand annotated, based on the definitions given above and in t
 
 ![Web page filmstrips with annotated first paint times.](filmstrip.png)
 
+Some rough bulk data can be seen [here](https://docs.google.com/spreadsheets/d/1i0-tOtZP21m3DjBJflUJYao9-WAKwWV2p9WFlVhVivg/edit#gid=1447332636) or [here](https://docs.google.com/spreadsheets/d/1nGauGA3EvN8NBC3ErWjLd8Bz-NzmmEa6q6UP5KhfgeA/edit#gid=0). This data was collected using a somewhat different definition than we're currently using – it includes white paints in `firstPaint` and only looks at text and image paints for `firstContentfulPaint`.
+
 ## TODO
 * More rigourously define what we mean by "paint".
