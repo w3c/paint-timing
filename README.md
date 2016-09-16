@@ -19,7 +19,6 @@ More formally, we consider the browser to have "painted" a document when it has 
 `firstPaint` reports the time since `navigationStart` until the first time the browser paints anything non-white.
 
 ## Using `firstPaint`
-`firstPaint` is used by registering a `PerformanceObserver`.
 
 ```javascript
 var pageLoadTiming = performance.getEntriesByType("pageload")[0];
