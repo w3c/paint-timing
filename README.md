@@ -1,7 +1,7 @@
 # PerformancePageLoadTiming firstPaint
 
 Web developers require more information on page load performance in the wild. There's no single point in time which represents when a page had loaded – there's a series of key moments during pageload which developers care about.
-For detailed motivation, see [Why First Paint doc](https://docs.google.com/document/d/1wdxSXo_jctZjdPaJeTtYYFF-rLtUFxrU72_7h9qbQaM/edit)
+For detailed motivation, see [Why First Paint? doc](https://docs.google.com/document/d/1wdxSXo_jctZjdPaJeTtYYFF-rLtUFxrU72_7h9qbQaM/edit)
 
 See the [`firstContentfulPaint`](https://github.com/tdresser/time-to-first-contentful-paint/blob/master/README.md) explainer for details on another of these moments.
 
@@ -22,13 +22,8 @@ More formally, we consider the browser to have "painted" a document when it has 
 `firstPaint` is used by registering a `PerformanceObserver`.
 
 ```javascript
-var observer = new PerformanceObserver((list) => {
-  for (let perfEntry of list.getEntries()) {
-    console.log("firstPaint :" + perfEntry.firstPaint);
-  }
-});
-
-observer.observe({entryTypes: ["pageload"]});
+var pageLoadTiming = performance.getEntriesByType("pageload")[0];
+console.log("firstPaint :" + pageLoadTiming.firstPaint);
 ```
 
 ## Examples
