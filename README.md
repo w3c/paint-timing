@@ -30,6 +30,7 @@ Entries will have a `name` as "FirstPaint" and "FirstContentfulPaint" respective
 
 #### Why not add this to Navigation Timing?
 The reason this is not being added to Navigation Timing is because Nav Timing is spec'd as queueing the entry on document load end, however FCP (or FMP in the future) may not have triggered at that point.
+Alternatively we could create a new PerformanceEntry for the new load metrics and add attributes for firstPaint, firstContentfulPaint etc.
 
 ## Computation
 The browser has performed a "paint" when it has prepared content to be drawn to the screen.
@@ -57,6 +58,8 @@ var observer = new PerformanceObserver(function(list) {
 observer.observe({entryTypes: ["firstPaint", "firstContentfulPaint"]});
 
 ```
+
+TODO: Should these be buffered, or is access via PerformanceObserver sufficient ?
 
 ## Examples
 
