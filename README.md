@@ -2,7 +2,8 @@
 
 Web developers require more information on page load performance in the wild. 
 There isn’t ONE loading metric i.e. there isn’t a single moment in time that can properly capture the "loading experience".
-We propose a set of key Progress Metrics to capture the series of key moments during pageload which developers care about
+We propose a set of key Progress Metrics to capture the series of key moments during pageload which developers care about.
+
 For detailed motivation, see [Why First Paint? doc](https://docs.google.com/document/d/1wdxSXo_jctZjdPaJeTtYYFF-rLtUFxrU72_7h9qbQaM/edit)
 
 First Paint (FP), is the first of these key moments. Followed by First Contentful Paint (FCP).
