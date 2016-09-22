@@ -29,7 +29,7 @@ interface PerformanceFirstContentfulPaintTiming : PerformanceEntry {};
 Entries will have a `name` as "FirstPaint" and "FirstContentfulPaint" respectively, an `entryType` of "paint", a `startTime` is the `DOMHighResTimeStamp` of paint, and `duration` of 0.
 
 #### Why not add this to Navigation Timing?
-TODO(spanicker): Add this.
+The reason this is not being added to Navigation Timing is because Nav Timing is spec'd as queueing the entry on document load end, however FCP (or FMP in the future) may not have triggered at that point.
 
 ## Computation
 The browser has performed a "paint" when it has prepared content to be drawn to the screen.
