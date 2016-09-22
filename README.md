@@ -18,6 +18,13 @@ We propose introducing:
 * `PerformanceFirstPaintTiming` interface extending the PerformanceEntry interface, to report the time for first paint.
 * `PerformanceFirstContentfulPaintTiming` interface extending the PerformanceEntry interface, to report the time for first contentful paint.
 
+```javascript
+interface PerformanceFirstPaintTiming : PerformanceEntry {};
+
+interface PerformanceFirstContentfulPaintTiming : PerformanceEntry {};
+
+```
+
 Entries will have a `name` as "FirstPaint" and "FirstContentfulPaint" respectively, an `entryType` of "paint", a `startTime` is the `DOMHighResTimeStamp` of paint, and `duration` of 0.
 
 ## Computation
@@ -27,11 +34,24 @@ More formally, we consider the browser to have "painted" a document when it has 
 
 `firstPaint` reports the time since `navigationStart` until the first time the browser paints anything non-white.
 
+`firstContentfulPaint` reports the time since `navigationStart` until the first time the browser paints any text, image, non-white canvas or SVG. This includes text with pending webfonts.
+
 ## Usage
 
 ```javascript
-var pageLoadTiming = performance.getEntriesByType("pageload")[0];
-console.log("firstPaint :" + pageLoadTiming.firstPaint);
+
+var observer = new PerformanceObserver(function(list) {
+  var perfEntries = list.getEntries();
+  for (var i = 0; i < perfEntries.length; i++) {
+     // Process entries
+     // report back for analytics and monitoring
+     // ...
+  }
+});
+
+// register observer for long task notifications
+observer.observe({entryTypes: ["firstPaint", "firstContentfulPaint"]});
+
 ```
 
 ## Examples
