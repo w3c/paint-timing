@@ -28,6 +28,9 @@ interface PerformanceFirstContentfulPaintTiming : PerformanceEntry {};
 
 Entries will have a `name` as "FirstPaint" and "FirstContentfulPaint" respectively, an `entryType` of "paint", a `startTime` is the `DOMHighResTimeStamp` of paint, and `duration` of 0.
 
+#### Why not add this to Navigation Timing?
+TODO(spanicker): Add this.
+
 ## Computation
 The browser has performed a "paint" when it has prepared content to be drawn to the screen.
 
