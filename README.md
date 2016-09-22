@@ -12,7 +12,7 @@ First Paint (FP), is the first of these key moments. Followed by First Contentfu
 
 *First Contentful Paint* is the DOMHighResTimeStamp reporting the time when the browser first painted any text, image, canvas, or SVG. This is the first time users could start consuming page content.
 
-
+## Interface
 We propose introducing:
 
 * `PerformanceFirstPaintTiming` interface extending the PerformanceEntry interface, to report the time for first paint.
