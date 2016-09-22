@@ -1,24 +1,33 @@
-# PerformancePageLoadTiming firstPaint
+# PerformanceFirstPaintTiming & PerformanceFirstContentfulPaintTiming
 
-Web developers require more information on page load performance in the wild. There's no single point in time which represents when a page had loaded – there's a series of key moments during pageload which developers care about.
+Web developers require more information on page load performance in the wild. 
+There isn’t ONE loading metric i.e. there isn’t a single moment in time that can properly capture the "loading experience".
+We propose a set of key Progress Metrics to capture the series of key moments during pageload which developers care about
 For detailed motivation, see [Why First Paint? doc](https://docs.google.com/document/d/1wdxSXo_jctZjdPaJeTtYYFF-rLtUFxrU72_7h9qbQaM/edit)
 
-See the [`firstContentfulPaint`](https://github.com/tdresser/time-to-first-contentful-paint/blob/master/README.md) explainer for details on another of these moments.
+First Paint (FP), is the first of these key moments. Followed by First Contentful Paint (FCP).
+(And possibly, in the future, First Meaningful Paint i.e. FMP)
 
-We propose introducing a `PerformancePageLoadTiming` interface extending the [`PerformanceEntry`](https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface) interface, which will report the times of these key moments. `PerformancePageLoadTiming` will include a `firstPaint` attribute, which is a `DOMHighResTimeStamp` reporting the time when the browser first painted anything non-white after a navigation.
+*First Paint* is the DOMHighResTimeStamp reporting the time when the browser first painted anything non-white after a navigation. This is the first key moment developers care about in page load – when the browser has started to render the page.
 
-This is the first key moment developers care about in page load – when the browser has started to render the page.
+*First Contentful Paint* is the DOMHighResTimeStamp reporting the time when the browser first painted any text, image, canvas, or SVG. This is the first time users could start consuming page content.
 
-PerformancePageLoadTiming entries will have a `name` of "document", an `entryType` of "pageload", a `startTime` of 0, and a `duration` of 0. Each entry will have a `firstPaint` attribute, which is a `DOMHighResTimeStamp`.
 
-## Computation of `firstPaint`
+We propose introducing:
+
+* `PerformanceFirstPaintTiming` interface extending the PerformanceEntry interface, to report the time for first paint.
+* `PerformanceFirstContentfulPaintTiming` interface extending the PerformanceEntry interface, to report the time for first contentful paint.
+
+Entries will have a `name` as "FirstPaint" and "FirstContentfulPaint" respectively, an `entryType` of "paint", a `startTime` is the `DOMHighResTimeStamp` of paint, and `duration` of 0.
+
+## Computation
 The browser has performed a "paint" when it has prepared content to be drawn to the screen.
 
 More formally, we consider the browser to have "painted" a document when it has updated "the rendering or user interface of that Document and its browsing context to reflect the current state". See the HTML spec's section on the event loop processing model – [section 7.12](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model).
 
 `firstPaint` reports the time since `navigationStart` until the first time the browser paints anything non-white.
 
-## Using `firstPaint`
+## Usage
 
 ```javascript
 var pageLoadTiming = performance.getEntriesByType("pageload")[0];
