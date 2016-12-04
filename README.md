@@ -53,4 +53,4 @@ These examples are hand annotated, based on the definitions given above.
 Some rough bulk data can be seen [here](https://docs.google.com/spreadsheets/d/1i0-tOtZP21m3DjBJflUJYao9-WAKwWV2p9WFlVhVivg/edit#gid=1447332636) or [here](https://docs.google.com/spreadsheets/d/1nGauGA3EvN8NBC3ErWjLd8Bz-NzmmEa6q6UP5KhfgeA/edit#gid=0). This data was collected using a somewhat different definition than we're currently using – it includes white paints in `first-paint` and only looks at text and image paints for `first-contentful-paint`.
 
 #### Why not add this to Navigation Timing?
-This belongs outside Navigation Timing because Navigation Timing is spec'd as queueing the entry on document load end, however FCP (or FMP in the future) may not have triggered at that point.
+This belongs outside Navigation Timing because Navigation Timing is spec'd as queueing the entry on document load end; however, FCP (or FMP in the future) may not have triggered at that point.
