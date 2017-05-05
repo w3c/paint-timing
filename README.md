@@ -18,7 +18,7 @@ interface PerformancePaintTiming : PerformanceEntry {};
 Entries will have a `name` of "first-paint" and "first-contentful-paint" respectively, and an `entryType` of "paint". `startTime` is the `DOMHighResTimeStamp` indicating when the paint occurred, and the `duration` will always be 0.
 
 ## Definition
-"first-paint" entries contain a DOMHighResTimeStamp reporting the time when the browser first painted the [initial containing block](https://drafts.csswg.org/css-display-3/#initial-containing-block) after a navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.
+"first-paint" entries contain a DOMHighResTimeStamp reporting the time when the browser first painted after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.
 
 "first-contentful-paint" contain a DOMHighResTimestamp reporting the time when the browser first painted any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.
 
