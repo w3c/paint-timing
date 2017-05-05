@@ -18,13 +18,15 @@ interface PerformancePaintTiming : PerformanceEntry {};
 Entries will have a `name` of "first-paint" and "first-contentful-paint" respectively, and an `entryType` of "paint". `startTime` is the `DOMHighResTimeStamp` indicating when the paint occurred, and the `duration` will always be 0.
 
 ## Definition
-"first-paint" entries contain a DOMHighResTimeStamp reporting the time when the browser first painted after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.
+"first-paint" entries contain a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.
 
-"first-contentful-paint" contain a DOMHighResTimestamp reporting the time when the browser first painted any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.
+"first-contentful-paint" contain a DOMHighResTimestamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.
 
-The browser has performed a "paint" when it has prepared content to be drawn to the screen.
+The browser has performed a "paint" or "render" when it has converted the render tree to pixels on the screen. 
 
-More formally, we consider the browser to have "painted" a document when it has updated "the rendering or user interface of that Document and its browsing context to reflect the current state". See the HTML spec's section on the event loop processing model – [section 7.12](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model).
+More formally, we consider the browser to have "rendered" a document when it has updated "the rendering or user interface of that Document and its browsing context to reflect the current state". See the HTML spec's section on the event loop processing model – [section 7.12](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model).
+
+The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically a SwapBuffer message is sent to the GPU to instruct it to display to the screen, and this is the timestamp that is recommended for this API.
 
 ## Usage
 
