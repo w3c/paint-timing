@@ -26,7 +26,8 @@ The browser has performed a "paint" or "render" when it has converted the render
 
 More formally, we consider the browser to have "rendered" a document when it has updated "the rendering or user interface of that Document and its browsing context to reflect the current state". See the HTML spec's section on the event loop processing model – [section 7.12](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model).
 
-The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically a SwapBuffer message is sent to the GPU to instruct it to display to the screen, and this is the timestamp that is recommended for this API.
+The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
+
 
 ## Usage
 
