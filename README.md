@@ -5,8 +5,7 @@ No single moment in time completely captures the "loading experience". To give d
 
 For detailed motivation, see the [Why First Paint?](https://docs.google.com/document/d/1wdxSXo_jctZjdPaJeTtYYFF-rLtUFxrU72_7h9qbQaM/edit) doc.
 
-First Paint (FP), is the first of these key moments, followed by First Contentful Paint (FCP).
-(And possibly, in the future, First Meaningful Paint i.e. FMP)
+First Paint (FP), is the first of these key moments, followed by First Contentful Paint (FCP). In the future, we may add additional metrics, such as First Meaningful Paint (FMP), and Time to Iteractive (TTI).
 
 ## Interface
 We propose introducing the `PerformancePaintTiming` interface, extending the PerformanceEntry interface, to report the time to first paint and time to first contentful paint.
@@ -15,12 +14,17 @@ We propose introducing the `PerformancePaintTiming` interface, extending the Per
 interface PerformancePaintTiming : PerformanceEntry {};
 ```
 
-Entries will have a `name` of "first-paint" and "first-contentful-paint" respectively, and an `entryType` of "paint". `startTime` is the `DOMHighResTimeStamp` indicating when the paint occurred, and the `duration` will always be 0.
+Entries will have a `name` of "first-paint" and "first-contentful-paint" respectively, and an `entryType` of `"paint"`. `startTime` is the `DOMHighResTimeStamp` indicating when the paint occurred, and the `duration` will always be 0.
 
 ## Definition
-"first-paint" entries contain a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.
 
-"first-contentful-paint" contain a DOMHighResTimestamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.
+- `"first-paint"` entries contain a `DOMHighResTimeStamp` reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.
+
+- `"first-contentful-paint"` contain a `DOMHighResTimestamp` reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.
+
+_WIP: [define processing algorithm and integration with HTML](https://github.com/WICG/paint-timing/issues/4)_
+
+---
 
 The browser has performed a "paint" or "render" when it has converted the render tree to pixels on the screen. 
 
