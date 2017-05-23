@@ -47,7 +47,7 @@ var observer = new PerformanceObserver(function(list) {
 });
 
 // register observer for long task notifications
-observer.observe({entryTypes: ["firstPaint"]});
+observer.observe({entryTypes: ["paint"]});
 
 ```
 
