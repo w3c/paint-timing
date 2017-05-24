@@ -50,6 +50,12 @@ var observer = new PerformanceObserver(function(list) {
 observer.observe({entryTypes: ["paint"]});
 
 ```
+These entries will be buffered for the cases where PerformanceObserver is unable to register itself early enough on the page. 
+For this case paint entries can be accessed as follows:
+```javascript
+
+performance.getEntriesByType('paint');
+```
 
 ## Examples
 
