@@ -5,7 +5,7 @@ No single moment in time completely captures the "loading experience". To give d
 
 For detailed motivation, see the [Why First Paint?](https://docs.google.com/document/d/1wdxSXo_jctZjdPaJeTtYYFF-rLtUFxrU72_7h9qbQaM/edit) doc.
 
-First Paint (FP), is the first of these key moments, followed by First Contentful Paint (FCP). In the future, we may add additional metrics, such as First Meaningful Paint (FMP), and Time to Iteractive (TTI).
+First Paint (FP), is the first of these key moments, followed by First Contentful Paint (FCP). In the future, we may add additional metrics, such as First Meaningful Paint (FMP), and Time to Interactive (TTI).
 
 ## Interface
 We propose introducing the `PerformancePaintTiming` interface, extending the PerformanceEntry interface, to report the time to first paint and time to first contentful paint.
