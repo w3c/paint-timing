@@ -1,0 +1,101 @@
+<pre class='metadata'>
+Title: Paint Timing
+Shortname: paint-timing
+Level: 1
+URL: https://wicg.github.io/paint-timing/
+Group: wicg
+Status: CG-DRAFT
+Editor: Shubhie Panicker, Google https://google.com, panicker@google.com
+Repository: wicg/paint-timing
+Abstract: This document defines an API that can be used to capture a series of key moments (First Paint, First Contentful Paint) during pageload which developers care about.
+Status Text: If you wish to make comments regarding this document, please send them to  <a href="mailto:public-web-perf@w3.org?subject=%5BLongTasks%5D">public-web-perf@w3.org</a> (<a href="mailto:public-web-perf-request@w3.org?subject=subscribe">subscribe</a>, <a href="https://lists.w3.org/Archives/Public/public-web-perf/">archives</a>) with <code nohighlight>[PaintTiming]</code> at the start of your email's subject.
+Default Highlight: js
+</pre>
+
+<pre class=anchors>
+urlPrefix: https://www.w3.org/TR/performance-timeline-2/; spec: PERFORMANCE-TIMELINE-2;
+    type: interface; url: #the-performanceentry-interface; text: PerformanceEntry;
+    type: attribute; for: PerformanceEntry;
+        text: name; url: #dom-performanceentry-name
+        text: entryType; url: #dom-performanceentry-entrytype
+        text: startTime; url: #dom-performanceentry-starttime
+        text: duration; url: #dom-performanceentry-duration
+urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: HR-TIME-2; type: typedef; text: DOMHighResTimeStamp
+</pre>
+ 
+Introduction {#intro}
+=====================
+Load is not a single moment in time — it's an experience that no one metric can fully capture. There are multiple moments during the load experience that can affect whether a user perceives it as "fast" or "slow".
+
+First Paint (FP), is the first of these key moments, followed by First Contentful Paint (FCP). These metrics mark the points, immediately after navigation, when the browser renders pixels to the screen. This is important to the user because it answers the question: is it happening?
+
+The primary difference between the two metrics is FP marks the point when the browser renders anything that is visually different from what was on the screen prior to navigation. By contrast, FCP is the point when the browser renders the first bit of content from the DOM, which may be text, an image, SVG, or even a canvas element.
+
+Usage Example {#example}
+------------------------
+
+<pre class="example highlight">
+    var observer = new PerformanceObserver(function(list) {
+        var perfEntries = list.getEntries();
+        for (var i = 0; i < perfEntries.length; i++) {
+            // Process entries
+            // report back for analytics and monitoring
+            // ...
+        }
+    });
+
+    // register observer for long task notifications
+    observer.observe({entryTypes: ["paint"]});
+</pre>
+
+Terminology {#sec-terminology}
+==============================
+
+<dfn export>First Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.is the first key moment developers care about in page load – when the browser has started to render the page.
+
+<dfn export>First Contentful Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.
+
+The browser has performed a "paint" or "render" when it has converted the render tree to pixels on the screen.
+More formally, we consider the browser to have "rendered" a document when it has updated "the rendering or user interface of that Document and its browsing context to reflect the current state". See the HTML spec's section on the event loop processing model – section 7.12.
+The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
+
+
+Paint Timing {#sec-paint-timing}
+=======================================
+
+Paint timing involves the following new interface
+
+{{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
+------------------------------------------------------------------------
+
+<pre class="idl">
+    interface PerformancePaintTiming : PerformanceEntry {};
+</pre>
+
+{{PerformancePaintTiming}} extends the following attributes of {{PerformanceEntry}} interface:
+
+* The {{PerformanceEntry/name}} attribute must return {{DOMString}} for minimal frame attribution. Possible values of name are:
+    * <code>first-paint</code>: for First Paint
+    * <code>first-contentful-paint</code>: for First Contentful Paint
+* The {{PerformanceEntry/entryType}} attribute must return <code>"paint"</code>.
+* The {{PerformanceEntry/startTime}} attribute MUST return a {{DOMHighResTimeStamp}} of when the paint occured.
+* The {{PerformanceEntry/duration}} attribute MUST return 0.
+
+Processing Model {#sec-processing-model}
+========================================
+
+Modifications to other specifications {#mod}
+--------------------------------------------
+
+### HTML: <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">event loop processing model</a> ### {#html-event-loop-processing-model}
+
+During step 7.12 in "update the rendering":
+
+* For each fully active Document in docs, update the rendering or user interface of that Document and its browsing context to reflect the current state, and report paint timing for that Document while doing so.
+
+
+Additions to the Paint Timing Spec {#sec-additions-to-spec}
+--------------------------------------------------------
+
+### Report Paint Timing ### {#report-paint-timing}
+
