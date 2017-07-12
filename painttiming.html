@@ -1431,8 +1431,9 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
      <dd><a class="u-url" href="https://wicg.github.io/paint-timing/">https://wicg.github.io/paint-timing/</a>
      <dt>Issue Tracking:
      <dd><a href="https://github.com/wicg/paint-timing/issues/">GitHub</a>
-     <dt class="editor">Editor:
+     <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:panicker@google.com">Shubhie Panicker</a> (<a class="p-org org" href="https://google.com">Google</a>)
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:domenic@google.com">Domenic Denicola</a> (<a class="p-org org" href="https://google.com">Google</a>)
     </dl>
    </div>
    <div data-fill-with="warning"></div>
@@ -1482,7 +1483,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <li>
        <a href="#sec-additions-to-spec"><span class="secno">4.2</span> <span class="content">Additions to the Paint Timing Spec</span></a>
        <ol class="toc">
-        <li><a href="#report-paint-timing"><span class="secno">4.2.1</span> <span class="content">Report Paint Timing</span></a>
+        <li><a href="#paint-or-render"><span class="secno">4.2.1</span> <span class="content">Paint or Render</span></a>
+        <li><a href="#record-first-paint"><span class="secno">4.2.2</span> <span class="content">Record First Paint</span></a>
+        <li><a href="#record-first-contentful-paint"><span class="secno">4.2.3</span> <span class="content">Record First Contentful Paint</span></a>
+        <li><a href="#report-paint-timing"><span class="secno">4.2.4</span> <span class="content">Report Paint Timing</span></a>
        </ol>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
@@ -1555,7 +1559,34 @@ The rendering pipeline is very complex, and the timestamp should be the latest t
      <p>For each fully active Document in docs, update the rendering or user interface of that Document and its browsing context to reflect the current state, and report paint timing for that Document while doing so.</p>
    </ul>
    <h3 class="heading settled" data-level="4.2" id="sec-additions-to-spec"><span class="secno">4.2. </span><span class="content">Additions to the Paint Timing Spec</span><a class="self-link" href="#sec-additions-to-spec"></a></h3>
-   <h4 class="heading settled" data-level="4.2.1" id="report-paint-timing"><span class="secno">4.2.1. </span><span class="content">Report Paint Timing</span><a class="self-link" href="#report-paint-timing"></a></h4>
+   <h4 class="heading settled" data-level="4.2.1" id="paint-or-render"><span class="secno">4.2.1. </span><span class="content">Paint or Render</span><a class="self-link" href="#paint-or-render"></a></h4>
+   <p>The browser has performed a "paint" or "render" when it has converted the render tree to pixels on the screen.
+This is formally defined as the when <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">"update the rendering"</a> happens in event loop processing.</p>
+   <p class="note" role="note"><span>NOTE:</span> The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.</p>
+   <h4 class="heading settled" data-level="4.2.2" id="record-first-paint"><span class="secno">4.2.2. </span><span class="content">Record First Paint</span><a class="self-link" href="#record-first-paint"></a></h4>
+   <p>When the browser first renders after navigation, record the timestamp and perform the Report Paint Timing algorithm.
+This render excludes the default background paint, but includes non-default background paint.</p>
+   <h4 class="heading settled" data-level="4.2.3" id="record-first-contentful-paint"><span class="secno">4.2.3. </span><span class="content">Record First Contentful Paint</span><a class="self-link" href="#record-first-contentful-paint"></a></h4>
+   <p>When the browser first renders content after navigation, record the timestamp and perform the Report Paint Timing algorithm.
+This render must include text, image (including background images), non-white canvas or SVG.</p>
+   <h4 class="heading settled" data-level="4.2.4" id="report-paint-timing"><span class="secno">4.2.4. </span><span class="content">Report Paint Timing</span><a class="self-link" href="#report-paint-timing"></a></h4>
+   <p>Perform the following steps:</p>
+   <ul>
+    <li data-md="">
+     <p>Create a new <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming-3">PerformancePaintTiming</a></code> object newEntry and set its attributes as follows:</p>
+     <ol>
+      <li data-md="">
+       <p>Set newEntry’s name attribute to "first-paint" or "first-contentful-paint" depending on whether it is First Paint or First Contentful Paint</p>
+      <li data-md="">
+       <p>Set newEntry’s entryType attribute to "paint”</p>
+      <li data-md="">
+       <p>Set newEntry’s startTime attribute to timestamp recorded for corresponding render.</p>
+      <li data-md="">
+       <p>Set newEntry’s duration attribute to 0.</p>
+     </ol>
+    <li data-md="">
+     <p>Add the PerformanceEntry newEntry object.</p>
+   </ul>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -1752,6 +1783,7 @@ The rendering pipeline is very complex, and the timestamp should be the latest t
    <b><a href="#performancepainttiming">#performancepainttiming</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-performancepainttiming-1">3.1. PerformancePaintTiming interface</a> <a href="#ref-for-performancepainttiming-2">(2)</a>
+    <li><a href="#ref-for-performancepainttiming-3">4.2.4. Report Paint Timing</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
