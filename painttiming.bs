@@ -8,7 +8,7 @@ Status: CG-DRAFT
 Editor: Shubhie Panicker, Google https://google.com, panicker@google.com
 Repository: wicg/paint-timing
 Abstract: This document defines an API that can be used to capture a series of key moments (First Paint, First Contentful Paint) during pageload which developers care about.
-Status Text: If you wish to make comments regarding this document, please send them to  <a href="mailto:public-web-perf@w3.org?subject=%5BLongTasks%5D">public-web-perf@w3.org</a> (<a href="mailto:public-web-perf-request@w3.org?subject=subscribe">subscribe</a>, <a href="https://lists.w3.org/Archives/Public/public-web-perf/">archives</a>) with <code nohighlight>[PaintTiming]</code> at the start of your email's subject.
+Status Text: If you wish to make comments regarding this document, please use GitHub or send them to  <a href="mailto:public-web-perf@w3.org?subject=%5BLongTasks%5D">public-web-perf@w3.org</a> (<a href="mailto:public-web-perf-request@w3.org?subject=subscribe">subscribe</a>, <a href="https://lists.w3.org/Archives/Public/public-web-perf/">archives</a>) with <code nohighlight>[PaintTiming]</code> at the start of your email's subject.
 Default Highlight: js
 </pre>
 
