@@ -51,14 +51,14 @@ Usage Example {#example}
 Terminology {#sec-terminology}
 ==============================
 
+<dfn export>Paint</dfn>: the browser has performed a "paint" (or "render") when it has converted the render tree to pixels on the screen.
+This is formally defined as the when <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">"update the rendering"</a> happens in event loop processing.
+
+    NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
+
 <dfn export>First Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.is the first key moment developers care about in page load – when the browser has started to render the page.
 
 <dfn export>First Contentful Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.
-
-The browser has performed a "paint" or "render" when it has converted the render tree to pixels on the screen.
-More formally, we consider the browser to have "rendered" a document when it has updated "the rendering or user interface of that Document and its browsing context to reflect the current state". See the HTML spec's section on the event loop processing model – section 7.12.
-The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
-
 
 Paint Timing {#sec-paint-timing}
 =======================================
@@ -91,37 +91,33 @@ Modifications to other specifications {#mod}
 
 During step 7.12 in "update the rendering":
 
-* For each fully active Document in docs, update the rendering or user interface of that Document and its browsing context to reflect the current state, and report paint timing for that Document while doing so.
+* For each fully active Document in docs, update the rendering or user interface of that Document and its browsing context to reflect the current state, and invoke [[#mark-paint-timing]] while doing so.
 
 
-Additions to the Paint Timing Spec {#sec-additions-to-spec}
+Reporting Paint Timing {#sec-reporting-paint-timing}
 --------------------------------------------------------
 
-### Paint or Render ### 
-
-The browser has performed a "paint" or "render" when it has converted the render tree to pixels on the screen.
-This is formally defined as the when <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">"update the rendering"</a> happens in event loop processing.
-
-    NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
-
-### First Paint ###
-
-When the browser first renders after navigation, record the timestamp and perform the Report Paint Timing algorithm.
-This render excludes the default background paint, but includes non-default background paint.
-
-### First Contentful Paint ###
-
-When the browser first renders content after navigation, record the timestamp and perform the Report Paint Timing algorithm.
-This render must include text, image (including background images), non-white canvas or SVG.
-
-
-### Report Paint Timing ### {#report-paint-timing}
+<h4 dfn>Mark Paint Timing</h4>
 
 Perform the following steps:
-* Create a new {{PerformancePaintTiming}} object newEntry and set its attributes as follows:
-    1. Set newEntry's name attribute to "first-paint" or "first-contentful-paint" depending on whether it is First Paint or First Contentful Paint
-    2. Set newEntry's entryType attribute to "paint”
-    3. Set newEntry's startTime attribute to timestamp recorded for corresponding render.
-    4. Set newEntry's duration attribute to 0.
-* Add the PerformanceEntry newEntry object.
+* If this instance of update the rendering is the first paint, then record the timestamp as |paint-timestamp| and invoke [[#report-paint-timing]] algorithm with two arguments: string "first-paint" and |paint-timestamp|.
+
+    NOTE: First paint excludes the default background paint, but includes non-default background paint.
+
+* If this instance of update the rendering is the first contentful paint, then record the timestamp as |paint-timestamp| and invoke [[#report-paint-timing]] algorithm with two arguments: string "first-contentful-paint" and |paint-timestamp|.
+
+    NOTE: This paint must include text, image (including background images), non-white canvas or SVG.
+
+* Otherwise, do nothing and return.
+
+
+<h4 dfn>Report Paint Timing</h4>
+
+Given two arguments |paint-type| and |paint-timestamp|, perform the following steps:
+* Create a new {{PerformancePaintTiming}} object |newEntry| and set its attributes as follows:
+    1. Set |newEntry|'s name attribute to |paint-type|
+    2. Set |newEntry|'s entryType attribute to <code>paint</code>
+    3. Set |newEntry|'s startTime attribute to |paint-timestamp|
+    4. Set |newEntry|'s duration attribute to 0.
+* <a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> |newEntry| object.
 
