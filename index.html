@@ -1176,7 +1176,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version f9aa96bada6cc0645a943ca5dd1cd55eb004d4c0" name="generator">
+  <meta content="Bikeshed version 872fb1bbb75c7b4e192209b354c34f634da3ac0d" name="generator">
   <link href="https://wicg.github.io/paint-timing/" rel="canonical">
 <style>/* style-md-lists */
 
@@ -1424,7 +1424,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Paint Timing</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2017-07-13">13 July 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2017-07-19">19 July 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1480,12 +1480,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <li><a href="#html-event-loop-processing-model"><span class="secno">4.1.1</span> <span class="content">HTML: <span>event loop processing model</span></span></a>
        </ol>
       <li>
-       <a href="#sec-additions-to-spec"><span class="secno">4.2</span> <span class="content">Additions to the Paint Timing Spec</span></a>
+       <a href="#sec-reporting-paint-timing"><span class="secno">4.2</span> <span class="content">Reporting Paint Timing</span></a>
        <ol class="toc">
-        <li><a href="#paint-or-render"><span class="secno">4.2.1</span> <span class="content">Paint or Render ###</span></a>
-        <li><a href="#first-paint0"><span class="secno">4.2.2</span> <span class="content">First Paint ###</span></a>
-        <li><a href="#first-contentful-paint0"><span class="secno">4.2.3</span> <span class="content">First Contentful Paint ###</span></a>
-        <li><a href="#report-paint-timing"><span class="secno">4.2.4</span> <span class="content">Report Paint Timing</span></a>
+        <li><a href="#mark-paint-timing"><span class="secno">4.2.1</span> <span class="content">Mark Paint Timing</span></a>
+        <li><a href="#report-paint-timing"><span class="secno">4.2.2</span> <span class="content">Report Paint Timing</span></a>
        </ol>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
@@ -1506,7 +1504,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <main>
    <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
     Load is not a single moment in time — it’s an experience that no one metric can fully capture. There are multiple moments during the load experience that can affect whether a user perceives it as "fast" or "slow". 
-   <p>First Paint (FP), is the first of these key moments, followed by First Contentful Paint (FCP). These metrics mark the points, immediately after navigation, when the browser renders pixels to the screen. This is important to the user because it answers the question: is it happening?</p>
+   <p>First Paint (FP) is the first of these key moments, followed by First Contentful Paint (FCP). These metrics mark the points, immediately after navigation, when the browser renders pixels to the screen. This is important to the user because it answers the question: is it happening?</p>
    <p>The primary difference between the two metrics is FP marks the point when the browser renders anything that is visually different from what was on the screen prior to navigation. By contrast, FCP is the point when the browser renders the first bit of content from the DOM, which may be text, an image, SVG, or even a canvas element.</p>
    <h3 class="heading settled" data-level="1.1" id="example"><span class="secno">1.1. </span><span class="content">Usage Example</span><a class="self-link" href="#example"></a></h3>
 <pre class="example highlight" id="example-c85fa3f2"><a class="self-link" href="#example-c85fa3f2"></a><span class="kd">var</span> observer <span class="o">=</span> <span class="k">new</span> PerformanceObserver<span class="p">(</span><span class="kd">function</span><span class="p">(</span>list<span class="p">)</span> <span class="p">{</span>
@@ -1522,11 +1520,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
 <span class="c1"></span>observer<span class="p">.</span>observe<span class="p">({</span>entryTypes<span class="o">:</span> <span class="p">[</span><span class="s2">"paint"</span><span class="p">]});</span>
 </pre>
    <h2 class="heading settled" data-level="2" id="sec-terminology"><span class="secno">2. </span><span class="content">Terminology</span><a class="self-link" href="#sec-terminology"></a></h2>
+   <p><dfn data-dfn-type="dfn" data-export="" id="paint">Paint<a class="self-link" href="#paint"></a></dfn>: the browser has performed a "paint" (or "render") when it has converted the render tree to pixels on the screen.
+This is formally defined as the when <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">"update the rendering"</a> happens in event loop processing.</p>
+   <p class="note" role="note"><span>NOTE:</span> The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.</p>
    <p><dfn data-dfn-type="dfn" data-export="" id="first-paint">First Paint<a class="self-link" href="#first-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.is the first key moment developers care about in page load – when the browser has started to render the page.</p>
    <p><dfn data-dfn-type="dfn" data-export="" id="first-contentful-paint">First Contentful Paint<a class="self-link" href="#first-contentful-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.</p>
-   <p>The browser has performed a "paint" or "render" when it has converted the render tree to pixels on the screen.
-More formally, we consider the browser to have "rendered" a document when it has updated "the rendering or user interface of that Document and its browsing context to reflect the current state". See the HTML spec’s section on the event loop processing model – section 7.12.
-The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.</p>
    <h2 class="heading settled" data-level="3" id="sec-paint-timing"><span class="secno">3. </span><span class="content">Paint Timing</span><a class="self-link" href="#sec-paint-timing"></a></h2>
    <p>Paint timing involves the following new interface</p>
    <h3 class="heading settled" data-level="3.1" id="sec-PerformancePaintTiming"><span class="secno">3.1. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming-1">PerformancePaintTiming</a></code> interface</span><a class="self-link" href="#sec-PerformancePaintTiming"></a></h3>
@@ -1555,36 +1553,38 @@ The rendering pipeline is very complex, and the timestamp should be the latest t
    <p>During step 7.12 in "update the rendering":</p>
    <ul>
     <li data-md="">
-     <p>For each fully active Document in docs, update the rendering or user interface of that Document and its browsing context to reflect the current state, and report paint timing for that Document while doing so.</p>
+     <p>For each fully active Document in docs, update the rendering or user interface of that Document and its browsing context to reflect the current state, and invoke <a href="#mark-paint-timing" id="ref-for-mark-paint-timing-1">§4.2.1 Mark Paint Timing</a> while doing so.</p>
    </ul>
-   <h3 class="heading settled" data-level="4.2" id="sec-additions-to-spec"><span class="secno">4.2. </span><span class="content">Additions to the Paint Timing Spec</span><a class="self-link" href="#sec-additions-to-spec"></a></h3>
-   <h4 class="heading settled" data-level="4.2.1" id="paint-or-render"><span class="secno">4.2.1. </span><span class="content">Paint or Render ###</span><a class="self-link" href="#paint-or-render"></a></h4>
-   <p>The browser has performed a "paint" or "render" when it has converted the render tree to pixels on the screen.
-This is formally defined as the when <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">"update the rendering"</a> happens in event loop processing.</p>
-   <p class="note" role="note"><span>NOTE:</span> The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.</p>
-   <h4 class="heading settled" data-level="4.2.2" id="first-paint0"><span class="secno">4.2.2. </span><span class="content">First Paint ###</span><a class="self-link" href="#first-paint0"></a></h4>
-   <p>When the browser first renders after navigation, record the timestamp and perform the Report Paint Timing algorithm.
-This render excludes the default background paint, but includes non-default background paint.</p>
-   <h4 class="heading settled" data-level="4.2.3" id="first-contentful-paint0"><span class="secno">4.2.3. </span><span class="content">First Contentful Paint ###</span><a class="self-link" href="#first-contentful-paint0"></a></h4>
-   <p>When the browser first renders content after navigation, record the timestamp and perform the Report Paint Timing algorithm.
-This render must include text, image (including background images), non-white canvas or SVG.</p>
-   <h4 class="heading settled" data-level="4.2.4" id="report-paint-timing"><span class="secno">4.2.4. </span><span class="content">Report Paint Timing</span><a class="self-link" href="#report-paint-timing"></a></h4>
+   <h3 class="heading settled" data-level="4.2" id="sec-reporting-paint-timing"><span class="secno">4.2. </span><span class="content">Reporting Paint Timing</span><a class="self-link" href="#sec-reporting-paint-timing"></a></h3>
+   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.2.1" data-lt="Mark Paint Timing" data-noexport="" id="mark-paint-timing"><span class="secno">4.2.1. </span><span class="content">Mark Paint Timing</span></h4>
    <p>Perform the following steps:</p>
    <ul>
     <li data-md="">
-     <p>Create a new <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming-3">PerformancePaintTiming</a></code> object newEntry and set its attributes as follows:</p>
+     <p>If this instance of update the rendering is the first paint, then record the timestamp as <var>paint-timestamp</var> and invoke <a href="#report-paint-timing" id="ref-for-report-paint-timing-1">§4.2.2 Report Paint Timing</a> algorithm with two arguments: string "first-paint" and <var>paint-timestamp</var>.</p>
+     <p class="note" role="note"><span>NOTE:</span> First paint excludes the default background paint, but includes non-default background paint.</p>
+    <li data-md="">
+     <p>If this instance of update the rendering is the first contentful paint, then record the timestamp as <var>paint-timestamp</var> and invoke <a href="#report-paint-timing" id="ref-for-report-paint-timing-2">§4.2.2 Report Paint Timing</a> algorithm with two arguments: string "first-contentful-paint" and <var>paint-timestamp</var>.</p>
+     <p class="note" role="note"><span>NOTE:</span> This paint must include text, image (including background images), non-white canvas or SVG.</p>
+    <li data-md="">
+     <p>Otherwise, do nothing and return.</p>
+   </ul>
+   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.2.2" data-lt="Report Paint Timing" data-noexport="" id="report-paint-timing"><span class="secno">4.2.2. </span><span class="content">Report Paint Timing</span></h4>
+   <p>Given two arguments <var>paint-type</var> and <var>paint-timestamp</var>, perform the following steps:</p>
+   <ul>
+    <li data-md="">
+     <p>Create a new <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming-3">PerformancePaintTiming</a></code> object <var>newEntry</var> and set its attributes as follows:</p>
      <ol>
       <li data-md="">
-       <p>Set newEntry’s name attribute to "first-paint" or "first-contentful-paint" depending on whether it is First Paint or First Contentful Paint</p>
+       <p>Set <var>newEntry</var>’s name attribute to <var>paint-type</var></p>
       <li data-md="">
-       <p>Set newEntry’s entryType attribute to "paint”</p>
+       <p>Set <var>newEntry</var>’s entryType attribute to <code class="highlight">paint</code></p>
       <li data-md="">
-       <p>Set newEntry’s startTime attribute to timestamp recorded for corresponding render.</p>
+       <p>Set <var>newEntry</var>’s startTime attribute to <var>paint-timestamp</var></p>
       <li data-md="">
-       <p>Set newEntry’s duration attribute to 0.</p>
+       <p>Set <var>newEntry</var>’s duration attribute to 0.</p>
      </ol>
     <li data-md="">
-     <p>Add the PerformanceEntry newEntry object.</p>
+     <p><a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> <var>newEntry</var> object.</p>
    </ul>
   </main>
   <div data-fill-with="conformance">
@@ -1738,7 +1738,10 @@ This render must include text, image (including background images), non-white ca
   <ul class="index">
    <li><a href="#first-contentful-paint">First Contentful Paint</a><span>, in §2</span>
    <li><a href="#first-paint">First Paint</a><span>, in §2</span>
+   <li><a href="#mark-paint-timing">Mark Paint Timing</a><span>, in §4.2</span>
+   <li><a href="#paint">Paint</a><span>, in §2</span>
    <li><a href="#performancepainttiming">PerformancePaintTiming</a><span>, in §3.1</span>
+   <li><a href="#report-paint-timing">Report Paint Timing</a><span>, in §4.2.1</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -1782,7 +1785,19 @@ This render must include text, image (including background images), non-white ca
    <b><a href="#performancepainttiming">#performancepainttiming</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-performancepainttiming-1">3.1. PerformancePaintTiming interface</a> <a href="#ref-for-performancepainttiming-2">(2)</a>
-    <li><a href="#ref-for-performancepainttiming-3">4.2.4. Report Paint Timing</a>
+    <li><a href="#ref-for-performancepainttiming-3">4.2.2. Report Paint Timing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="mark-paint-timing">
+   <b><a href="#mark-paint-timing">#mark-paint-timing</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-mark-paint-timing-1">4.1.1. HTML: event loop processing model</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="report-paint-timing">
+   <b><a href="#report-paint-timing">#report-paint-timing</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-report-paint-timing-1">4.2.1. Mark Paint Timing</a> <a href="#ref-for-report-paint-timing-2">(2)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
