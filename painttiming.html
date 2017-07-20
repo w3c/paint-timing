@@ -1424,7 +1424,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Paint Timing</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2017-07-18">18 July 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2017-07-20">20 July 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1523,8 +1523,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p><dfn data-dfn-type="dfn" data-export="" id="paint">Paint<a class="self-link" href="#paint"></a></dfn>: the browser has performed a "paint" (or "render") when it has converted the render tree to pixels on the screen.
 This is formally defined as the when <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">"update the rendering"</a> happens in event loop processing.</p>
    <p class="note" role="note"><span>NOTE:</span> The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.</p>
-   <p><dfn data-dfn-type="dfn" data-export="" id="first-paint">First Paint<a class="self-link" href="#first-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.is the first key moment developers care about in page load – when the browser has started to render the page.</p>
-   <p><dfn data-dfn-type="dfn" data-export="" id="first-contentful-paint">First Contentful Paint<a class="self-link" href="#first-contentful-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-export="" id="first-paint">First Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.is the first key moment developers care about in page load – when the browser has started to render the page.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-export="" id="first-contentful-paint">First Contentful Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.</p>
    <h2 class="heading settled" data-level="3" id="sec-paint-timing"><span class="secno">3. </span><span class="content">Paint Timing</span><a class="self-link" href="#sec-paint-timing"></a></h2>
    <p>Paint timing involves the following new interface</p>
    <h3 class="heading settled" data-level="3.1" id="sec-PerformancePaintTiming"><span class="secno">3.1. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming-1">PerformancePaintTiming</a></code> interface</span><a class="self-link" href="#sec-PerformancePaintTiming"></a></h3>
@@ -1550,7 +1550,7 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
    <h2 class="heading settled" data-level="4" id="sec-processing-model"><span class="secno">4. </span><span class="content">Processing Model</span><a class="self-link" href="#sec-processing-model"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="mod"><span class="secno">4.1. </span><span class="content">Modifications to other specifications</span><a class="self-link" href="#mod"></a></h3>
    <h4 class="heading settled" data-level="4.1.1" id="html-event-loop-processing-model"><span class="secno">4.1.1. </span><span class="content">HTML: <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">event loop processing model</a></span><a class="self-link" href="#html-event-loop-processing-model"></a></h4>
-   <p>During step 7.12 in "update the rendering":</p>
+   <p>During step 7.12 in <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="update-the-rendering">update the rendering</dfn>:</p>
    <ul>
     <li data-md="">
      <p>For each fully active Document in docs, update the rendering or user interface of that Document and its browsing context to reflect the current state, and invoke <a href="#mark-paint-timing" id="ref-for-mark-paint-timing-1">§4.2.1 Mark Paint Timing</a> while doing so.</p>
@@ -1560,11 +1560,9 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
    <p>Perform the following steps:</p>
    <ul>
     <li data-md="">
-     <p>If this instance of update the rendering is the first paint, then record the timestamp as <var>paint-timestamp</var> and invoke <a href="#report-paint-timing" id="ref-for-report-paint-timing-1">§4.2.2 Report Paint Timing</a> algorithm with two arguments: string "first-paint" and <var>paint-timestamp</var>.</p>
-     <p class="note" role="note"><span>NOTE:</span> First paint excludes the default background paint, but includes non-default background paint.</p>
+     <p>If this instance of <a data-link-type="dfn" href="#update-the-rendering" id="ref-for-update-the-rendering-1">update the rendering</a> is the <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint-1">first paint</a>, then record the timestamp as <var>paint-timestamp</var> and invoke <a href="#report-paint-timing" id="ref-for-report-paint-timing-1">§4.2.2 Report Paint Timing</a> algorithm with two arguments: string <code class="highlight"><span class="s2">"first-paint"</span></code> and <var>paint-timestamp</var>.</p>
     <li data-md="">
-     <p>If this instance of update the rendering is the first contentful paint, then record the timestamp as <var>paint-timestamp</var> and invoke <a href="#report-paint-timing" id="ref-for-report-paint-timing-2">§4.2.2 Report Paint Timing</a> algorithm with two arguments: string "first-contentful-paint" and <var>paint-timestamp</var>.</p>
-     <p class="note" role="note"><span>NOTE:</span> This paint must include text, image (including background images), non-white canvas or SVG.</p>
+     <p>If this instance of update the rendering is the <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint-1">first contentful paint</a>, then record the timestamp as <var>paint-timestamp</var> and invoke <a href="#report-paint-timing" id="ref-for-report-paint-timing-2">§4.2.2 Report Paint Timing</a> algorithm with two arguments: string <code class="highlight"><span class="s2">"first-contentful-paint"</span></code> and <var>paint-timestamp</var>.</p>
     <li data-md="">
      <p>Otherwise, do nothing and return.</p>
    </ul>
@@ -1575,16 +1573,16 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
      <p>Create a new <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming-3">PerformancePaintTiming</a></code> object <var>newEntry</var> and set its attributes as follows:</p>
      <ol>
       <li data-md="">
-       <p>Set <var>newEntry</var>’s name attribute to <var>paint-type</var></p>
+       <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-name">name</a></code> attribute to <var>paint-type</var></p>
       <li data-md="">
-       <p>Set <var>newEntry</var>’s entryType attribute to <code class="highlight">paint</code></p>
+       <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-entrytype">entryType</a></code> attribute to <code class="highlight"><span class="s2">"paint"</span></code></p>
       <li data-md="">
-       <p>Set <var>newEntry</var>’s startTime attribute to <var>paint-timestamp</var></p>
+       <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-starttime">startTime</a></code> attribute to <var>paint-timestamp</var></p>
       <li data-md="">
-       <p>Set <var>newEntry</var>’s duration attribute to 0.</p>
+       <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-duration">duration</a></code> attribute to 0.</p>
      </ol>
     <li data-md="">
-     <p><a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> <var>newEntry</var> object.</p>
+     <p><a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> <var>newEntry</var>.</p>
    </ul>
   </main>
   <div data-fill-with="conformance">
@@ -1742,6 +1740,7 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
    <li><a href="#paint">Paint</a><span>, in §2</span>
    <li><a href="#performancepainttiming">PerformancePaintTiming</a><span>, in §3.1</span>
    <li><a href="#report-paint-timing">Report Paint Timing</a><span>, in §4.2.1</span>
+   <li><a href="#update-the-rendering">update the rendering</a><span>, in §4.1.1</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -1781,11 +1780,29 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
 <pre class="idl highlight def"><span class="kt">interface</span> <a class="nv" href="#performancepainttiming"><code class="highlight">PerformancePaintTiming</code></a> : <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface">PerformanceEntry</a> {};
 
 </pre>
+  <aside class="dfn-panel" data-for="first-paint">
+   <b><a href="#first-paint">#first-paint</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-first-paint-1">4.2.1. Mark Paint Timing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="first-contentful-paint">
+   <b><a href="#first-contentful-paint">#first-contentful-paint</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-first-contentful-paint-1">4.2.1. Mark Paint Timing</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="performancepainttiming">
    <b><a href="#performancepainttiming">#performancepainttiming</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-performancepainttiming-1">3.1. PerformancePaintTiming interface</a> <a href="#ref-for-performancepainttiming-2">(2)</a>
     <li><a href="#ref-for-performancepainttiming-3">4.2.2. Report Paint Timing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="update-the-rendering">
+   <b><a href="#update-the-rendering">#update-the-rendering</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-update-the-rendering-1">4.2.1. Mark Paint Timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="mark-paint-timing">
