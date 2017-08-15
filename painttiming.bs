@@ -56,7 +56,7 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
-<dfn export>First Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.is the first key moment developers care about in page load – when the browser has started to render the page.
+<dfn export>First Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.
 
 <dfn export>First Contentful Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.
 
