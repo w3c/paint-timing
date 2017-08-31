@@ -62,7 +62,7 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
 Paint Timing {#sec-paint-timing}
 =======================================
 
-Paint timing involves the following new interface
+Paint Timing involves the following new interface
 
 {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 ------------------------------------------------------------------------
