@@ -1,9 +1,10 @@
 <pre class='metadata'>
 Title: Paint Timing
+Group: webperf
 Shortname: paint-timing
 Level: 1
-URL: https://wicg.github.io/paint-timing/
-Group: W3C
+ED: https://w3c.github.io/paint-timing/
+TR: https://www.w3.org/TR/paint-timing/
 Status: ED
 Editor: Shubhie Panicker, Google https://google.com, panicker@google.com
 Repository: w3c/paint-timing
@@ -120,3 +121,11 @@ Given two arguments |paint-type| and |paint-timestamp|, perform the following st
     4. Set |newEntry|'s duration attribute to 0.
 * <a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> |newEntry| object.
 
+
+
+<!-- ============================================================ -->
+<h2 id=acknowledgements>Acknowledgements</h2>
+<!-- ============================================================ -->
+
+Special thanks to <a href="https://github.com/w3c/paint-timing/graphs/contributors">all the contributors</a> for their technical input and suggestions that led to improvements to this
+specification.
