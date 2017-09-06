@@ -5,7 +5,7 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 7d6f0751f5c505884ea426b484a5946459005ac6" name="generator">
+  <meta content="Bikeshed version bbe9248eb5d0801cb5dd013b3254431d0a802f86" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
 <style>/* style-md-lists */
 
@@ -254,7 +254,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-09-01">1 September 2017</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-09-06">6 September 2017</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -358,7 +358,7 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
    <p><dfn data-dfn-type="dfn" data-export="" id="first-paint">First Paint<a class="self-link" href="#first-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.</p>
    <p><dfn data-dfn-type="dfn" data-export="" id="first-contentful-paint">First Contentful Paint<a class="self-link" href="#first-contentful-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.</p>
    <h2 class="heading settled" data-level="3" id="sec-paint-timing"><span class="secno">3. </span><span class="content">Paint Timing</span><a class="self-link" href="#sec-paint-timing"></a></h2>
-   <p>Paint Timing involves the following new interface</p>
+   <p>Paint timing involves the following new interface</p>
    <h3 class="heading settled" data-level="3.1" id="sec-PerformancePaintTiming"><span class="secno">3.1. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming">PerformancePaintTiming</a></code> interface</span><a class="self-link" href="#sec-PerformancePaintTiming"></a></h3>
 <pre class="idl highlight def"><span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="performancepainttiming"><code class="highlight">PerformancePaintTiming</code></dfn> : <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface" id="ref-for-the-performanceentry-interface">PerformanceEntry</a> {};
 </pre>
