@@ -31,7 +31,7 @@ First Paint (FP) is the first of these key moments, followed by First Contentful
 
 The primary difference between the two metrics is FP marks the point when the browser renders anything that is visually different from what was on the screen prior to navigation. By contrast, FCP is the point when the browser renders the first bit of content from the DOM, which may be text, an image, SVG, or even a canvas element.
 
-Usage Example {#example}
+Usage example {#example}
 ------------------------
 
 <pre class="example highlight">
@@ -81,7 +81,7 @@ Paint timing involves the following new interface
 * The {{PerformanceEntry/startTime}} attribute MUST return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute MUST return 0.
 
-Processing Model {#sec-processing-model}
+Processing model {#sec-processing-model}
 ========================================
 
 Modifications to other specifications {#mod}
