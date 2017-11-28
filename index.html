@@ -5,8 +5,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version bbe9248eb5d0801cb5dd013b3254431d0a802f86" name="generator">
+  <meta content="Bikeshed version fbf1456a756299b3ff6d248d0857ec87f2e68cd7" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
+  <meta content="8a7df670510c360a51d884d8426725d07289e2b2" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -254,7 +255,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-09-06">6 September 2017</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-11-28">28 November 2017</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -295,7 +296,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
     <li>
      <a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
      <ol class="toc">
-      <li><a href="#example"><span class="secno">1.1</span> <span class="content">Usage Example</span></a>
+      <li><a href="#example"><span class="secno">1.1</span> <span class="content">Usage example</span></a>
      </ol>
     <li><a href="#sec-terminology"><span class="secno">2</span> <span class="content">Terminology</span></a>
     <li>
@@ -304,7 +305,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
       <li><a href="#sec-PerformancePaintTiming"><span class="secno">3.1</span> <span class="content"><code class="idl"><span>PerformancePaintTiming</span></code> interface</span></a>
      </ol>
     <li>
-     <a href="#sec-processing-model"><span class="secno">4</span> <span class="content">Processing Model</span></a>
+     <a href="#sec-processing-model"><span class="secno">4</span> <span class="content">Processing model</span></a>
      <ol class="toc">
       <li>
        <a href="#mod"><span class="secno">4.1</span> <span class="content">Modifications to other specifications</span></a>
@@ -338,7 +339,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
     Load is not a single moment in time — it’s an experience that no one metric can fully capture. There are multiple moments during the load experience that can affect whether a user perceives it as "fast" or "slow". 
    <p>First Paint (FP) is the first of these key moments, followed by First Contentful Paint (FCP). These metrics mark the points, immediately after navigation, when the browser renders pixels to the screen. This is important to the user because it answers the question: is it happening?</p>
    <p>The primary difference between the two metrics is FP marks the point when the browser renders anything that is visually different from what was on the screen prior to navigation. By contrast, FCP is the point when the browser renders the first bit of content from the DOM, which may be text, an image, SVG, or even a canvas element.</p>
-   <h3 class="heading settled" data-level="1.1" id="example"><span class="secno">1.1. </span><span class="content">Usage Example</span><a class="self-link" href="#example"></a></h3>
+   <h3 class="heading settled" data-level="1.1" id="example"><span class="secno">1.1. </span><span class="content">Usage example</span><a class="self-link" href="#example"></a></h3>
 <pre class="example highlight" id="example-c85fa3f2"><a class="self-link" href="#example-c85fa3f2"></a><span class="kd">var</span> observer <span class="o">=</span> <span class="k">new</span> PerformanceObserver<span class="p">(</span><span class="kd">function</span><span class="p">(</span>list<span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> perfEntries <span class="o">=</span> list<span class="p">.</span>getEntries<span class="p">();</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> i <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> i <span class="o">&lt;</span> perfEntries<span class="p">.</span>length<span class="p">;</span> i<span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -379,7 +380,7 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
     <li data-md="">
      <p>The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration">duration</a></code> attribute MUST return 0.</p>
    </ul>
-   <h2 class="heading settled" data-level="4" id="sec-processing-model"><span class="secno">4. </span><span class="content">Processing Model</span><a class="self-link" href="#sec-processing-model"></a></h2>
+   <h2 class="heading settled" data-level="4" id="sec-processing-model"><span class="secno">4. </span><span class="content">Processing model</span><a class="self-link" href="#sec-processing-model"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="mod"><span class="secno">4.1. </span><span class="content">Modifications to other specifications</span><a class="self-link" href="#mod"></a></h3>
    <h4 class="heading settled" data-level="4.1.1" id="html-event-loop-processing-model"><span class="secno">4.1.1. </span><span class="content">HTML: <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">event loop processing model</a></span><a class="self-link" href="#html-event-loop-processing-model"></a></h4>
    <p>During step 7.12 in "update the rendering":</p>
@@ -459,11 +460,11 @@ specification.</p>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-hr-time-2">[HR-TIME-2]
-   <dd>Ilya Grigorik; James Simonsen; Jatinder Mann. <a href="https://www.w3.org/TR/hr-time-2/">High Resolution Time Level 2</a>. URL: <a href="https://www.w3.org/TR/hr-time-2/">https://www.w3.org/TR/hr-time-2/</a>
+   <dd>Ilya Grigorik; James Simonsen; Jatinder Mann. <a href="https://www.w3.org/TR/hr-time-2/">High Resolution Time Level 2</a>. 3 August 2017. CR. URL: <a href="https://www.w3.org/TR/hr-time-2/">https://www.w3.org/TR/hr-time-2/</a>
    <dt id="biblio-performance-timeline-2">[PERFORMANCE-TIMELINE-2]
-   <dd>Ilya Grigorik; Jatinder Mann; Zhiheng Wang. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
+   <dd>Ilya Grigorik; Jatinder Mann; Zhiheng Wang. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 8 December 2016. CR. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
    <dt id="biblio-webidl">[WebIDL]
-   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def"><span class="kt">interface</span> <a class="nv" href="#performancepainttiming"><code class="highlight">PerformancePaintTiming</code></a> : <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface" id="ref-for-the-performanceentry-interface②">PerformanceEntry</a> {};
