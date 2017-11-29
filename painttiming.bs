@@ -56,7 +56,7 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
-<dfn export>First Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint and iframes (regardless of the contents of the iframe). This is the first key moment developers care about in page load – when the browser has started to render the page.
+<dfn export>First Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the browser has started to render the page.
 
 <dfn export>First Contentful Paint</dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.
 
@@ -102,7 +102,7 @@ Reporting Paint Timing {#sec-reporting-paint-timing}
 Perform the following steps:
 * If this instance of update the rendering is the first paint, then record the timestamp as |paint-timestamp| and invoke [[#report-paint-timing]] algorithm with two arguments: string "first-paint" and |paint-timestamp|.
 
-    NOTE: First paint excludes the default background paint, but includes non-default background paint and iframes.
+    NOTE: First paint excludes the default background paint, but includes non-default background paint.
 
 * If this instance of update the rendering is the first contentful paint, then record the timestamp as |paint-timestamp| and invoke [[#report-paint-timing]] algorithm with two arguments: string "first-contentful-paint" and |paint-timestamp|.
 
@@ -110,6 +110,7 @@ Perform the following steps:
 
 * Otherwise, do nothing and return.
 
+    NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have first paint (due to the enclosing boxes of the iframes) but no first contentful paint.
 
 <h4 dfn>Report Paint Timing</h4>
 
