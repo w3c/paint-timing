@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
   <meta content="Bikeshed version fbf1456a756299b3ff6d248d0857ec87f2e68cd7" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="e216ed6c27c368d121e16355ceb95662bcf9ad45" name="document-revision">
+  <meta content="1c2da2ffacf48a1f3b7ffd3d8a8df8d6d3536801" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -255,7 +255,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-11-28">28 November 2017</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-11-29">29 November 2017</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -356,8 +356,8 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
    <p><dfn data-dfn-type="dfn" data-export="" id="paint">Paint<a class="self-link" href="#paint"></a></dfn>: the browser has performed a "paint" (or "render") when it has converted the render tree to pixels on the screen.
 This is formally defined as the when <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">"update the rendering"</a> happens in event loop processing.</p>
    <p class="note" role="note"><span>NOTE:</span> The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.</p>
-   <p><dfn data-dfn-type="dfn" data-export="" id="first-paint">First Paint<a class="self-link" href="#first-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint. This is the first key moment developers care about in page load – when the browser has started to render the page.</p>
-   <p><dfn data-dfn-type="dfn" data-export="" id="first-contentful-paint">First Contentful Paint<a class="self-link" href="#first-contentful-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.</p>
+   <p><dfn data-dfn-type="dfn" data-export="" id="first-paint">First Paint<a class="self-link" href="#first-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the browser has started to render the page.</p>
+   <p><dfn data-dfn-type="dfn" data-export="" id="first-contentful-paint">First Contentful Paint<a class="self-link" href="#first-contentful-paint"></a></dfn> entry contains a DOMHighResTimeStamp reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.</p>
    <h2 class="heading settled" data-level="3" id="sec-paint-timing"><span class="secno">3. </span><span class="content">Paint Timing</span><a class="self-link" href="#sec-paint-timing"></a></h2>
    <p>Paint timing involves the following new interface</p>
    <h3 class="heading settled" data-level="3.1" id="sec-PerformancePaintTiming"><span class="secno">3.1. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming">PerformancePaintTiming</a></code> interface</span><a class="self-link" href="#sec-PerformancePaintTiming"></a></h3>
@@ -400,6 +400,7 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
      <p class="note" role="note"><span>NOTE:</span> This paint must include text, image (including background images), non-white canvas or SVG.</p>
     <li data-md="">
      <p>Otherwise, do nothing and return.</p>
+     <p class="note" role="note"><span>NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have first paint (due to the enclosing boxes of the iframes) but no first contentful paint.</p>
    </ul>
    <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.2.2" data-lt="Report Paint Timing" data-noexport="" id="report-paint-timing"><span class="secno">4.2.2. </span><span class="content">Report Paint Timing</span></h4>
    <p>Given two arguments <var>paint-type</var> and <var>paint-timestamp</var>, perform the following steps:</p>
