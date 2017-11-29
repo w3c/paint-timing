@@ -106,7 +106,7 @@ Perform the following steps:
 
 * If this instance of update the rendering is the first contentful paint, then record the timestamp as |paint-timestamp| and invoke [[#report-paint-timing]] algorithm with two arguments: string "first-contentful-paint" and |paint-timestamp|.
 
-    NOTE: This paint must include text, image (including background images), non-white canvas or SVG. It should disregard any content from iframes.
+    NOTE: This paint must include text, image (including background images), non-white canvas or SVG.
 
 * Otherwise, do nothing and return.
 
