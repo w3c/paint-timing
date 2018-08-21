@@ -44,7 +44,7 @@ Usage example {#example}
         }
     });
 
-    // register observer for long task notifications
+    // register observer for paint timing notifications
     observer.observe({entryTypes: ["paint"]});
 </pre>
 
