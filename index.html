@@ -5,9 +5,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version a816d78e14132d4d4d2ee44ccaf1b8bc90ac75d5" name="generator">
+  <meta content="Bikeshed version dff342f4b23fb230b71436fb31b55f5f169715bd" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="e390be841a66f43a224a678e99e8b3d2843226f8" name="document-revision">
+  <meta content="e542ef00b3b030890a65dc23d8ef70e7ff5cbf4f" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -255,7 +255,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-08-21">21 August 2018</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-10-04">4 October 2018</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -304,15 +304,10 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <a href="#sec-processing-model"><span class="secno">4</span> <span class="content">Processing model</span></a>
      <ol class="toc">
       <li>
-       <a href="#mod"><span class="secno">4.1</span> <span class="content">Modifications to other specifications</span></a>
+       <a href="#sec-reporting-paint-timing"><span class="secno">4.1</span> <span class="content">Reporting paint timing</span></a>
        <ol class="toc">
-        <li><a href="#html-event-loop-processing-model"><span class="secno">4.1.1</span> <span class="content">HTML: <span>event loop processing model</span></span></a>
-       </ol>
-      <li>
-       <a href="#sec-reporting-paint-timing"><span class="secno">4.2</span> <span class="content">Reporting paint timing</span></a>
-       <ol class="toc">
-        <li><a href="#mark-paint-timing"><span class="secno">4.2.1</span> <span class="content">Mark paint timing</span></a>
-        <li><a href="#report-paint-timing"><span class="secno">4.2.2</span> <span class="content">Report paint timing</span></a>
+        <li><a href="#mark-paint-timing"><span class="secno">4.1.1</span> <span class="content">Mark paint timing</span></a>
+        <li><a href="#report-paint-timing"><span class="secno">4.1.2</span> <span class="content">Report paint timing</span></a>
        </ol>
      </ol>
     <li><a href="#acknowledgements"><span class="secno">5</span> <span class="content">Acknowledgements</span></a>
@@ -375,28 +370,21 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
      <p>The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration">duration</a></code> attribute must return 0.</p>
    </ul>
    <h2 class="heading settled" data-level="4" id="sec-processing-model"><span class="secno">4. </span><span class="content">Processing model</span><a class="self-link" href="#sec-processing-model"></a></h2>
-   <h3 class="heading settled" data-level="4.1" id="mod"><span class="secno">4.1. </span><span class="content">Modifications to other specifications</span><a class="self-link" href="#mod"></a></h3>
-   <h4 class="heading settled" data-level="4.1.1" id="html-event-loop-processing-model"><span class="secno">4.1.1. </span><span class="content">HTML: <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">event loop processing model</a></span><a class="self-link" href="#html-event-loop-processing-model"></a></h4>
-   <p>During step 7.12 in "update the rendering":</p>
-   <ul>
-    <li data-md>
-     <p>For each fully active Document in docs, update the rendering or user interface of that Document and its browsing context to reflect the current state, and invoke <a href="#mark-paint-timing" id="ref-for-mark-paint-timing">§4.2.1 Mark paint timing</a> while doing so.</p>
-   </ul>
-   <h3 class="heading settled" data-level="4.2" id="sec-reporting-paint-timing"><span class="secno">4.2. </span><span class="content">Reporting paint timing</span><a class="self-link" href="#sec-reporting-paint-timing"></a></h3>
-   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.2.1" data-lt="Mark paint timing" data-noexport id="mark-paint-timing"><span class="secno">4.2.1. </span><span class="content">Mark paint timing</span></h4>
+   <h3 class="heading settled" data-level="4.1" id="sec-reporting-paint-timing"><span class="secno">4.1. </span><span class="content">Reporting paint timing</span><a class="self-link" href="#sec-reporting-paint-timing"></a></h3>
+   <h4 class="heading settled" data-dfn-type="dfn" data-level="4.1.1" data-lt="Mark paint timing" data-noexport id="mark-paint-timing"><span class="secno">4.1.1. </span><span class="content">Mark paint timing</span><a class="self-link" href="#mark-paint-timing"></a></h4>
    <p>Perform the following steps:</p>
    <ul>
     <li data-md>
-     <p>If this instance of update the rendering is the first paint, then record the timestamp as <var>paint-timestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing">§4.2.2 Report paint timing</a> algorithm with two arguments: string "first-paint" and <var>paint-timestamp</var>.</p>
+     <p>If this instance of update the rendering is the first paint, then record the timestamp as <var>paint-timestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing">§4.1.2 Report paint timing</a> algorithm with two arguments: string "first-paint" and <var>paint-timestamp</var>.</p>
      <p class="note" role="note"><span>NOTE:</span> First paint excludes the default background paint, but includes non-default background paint.</p>
     <li data-md>
-     <p>If this instance of update the rendering is the first contentful paint, then record the timestamp as <var>paint-timestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing①">§4.2.2 Report paint timing</a> algorithm with two arguments: string "first-contentful-paint" and <var>paint-timestamp</var>.</p>
+     <p>If this instance of update the rendering is the first contentful paint, then record the timestamp as <var>paint-timestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing①">§4.1.2 Report paint timing</a> algorithm with two arguments: string "first-contentful-paint" and <var>paint-timestamp</var>.</p>
      <p class="note" role="note"><span>NOTE:</span> This paint must include text, image (including background images), non-white canvas or SVG.</p>
     <li data-md>
      <p>Otherwise, do nothing and return.</p>
      <p class="note" role="note"><span>NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have first paint (due to the enclosing boxes of the iframes) but no first contentful paint.</p>
    </ul>
-   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.2.2" data-lt="Report paint timing" data-noexport id="report-paint-timing"><span class="secno">4.2.2. </span><span class="content">Report paint timing</span></h4>
+   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.1.2" data-lt="Report paint timing" data-noexport id="report-paint-timing"><span class="secno">4.1.2. </span><span class="content">Report paint timing</span></h4>
    <p>Given two arguments <var>paint-type</var> and <var>paint-timestamp</var>, perform the following steps:</p>
    <ul>
     <li data-md>
@@ -424,10 +412,10 @@ specification.</p>
   <ul class="index">
    <li><a href="#first-contentful-paint">First Contentful Paint</a><span>, in §2</span>
    <li><a href="#first-paint">First Paint</a><span>, in §2</span>
-   <li><a href="#mark-paint-timing">Mark paint timing</a><span>, in §4.2</span>
+   <li><a href="#mark-paint-timing">Mark paint timing</a><span>, in §4.1</span>
    <li><a href="#paint">Paint</a><span>, in §2</span>
    <li><a href="#performancepainttiming">PerformancePaintTiming</a><span>, in §3</span>
-   <li><a href="#report-paint-timing">Report paint timing</a><span>, in §4.2.1</span>
+   <li><a href="#report-paint-timing">Report paint timing</a><span>, in §4.1.1</span>
   </ul>
   <aside class="dfn-panel" data-for="term-for-idl-def-domhighrestimestampdomhighrestimestamp">
    <a href="https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp">https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp</a><b>Referenced in:</b>
@@ -524,19 +512,13 @@ specification.</p>
    <b><a href="#performancepainttiming">#performancepainttiming</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-performancepainttiming">3. The PerformancePaintTiming interface</a> <a href="#ref-for-performancepainttiming①">(2)</a>
-    <li><a href="#ref-for-performancepainttiming②">4.2.2. Report paint timing</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="mark-paint-timing">
-   <b><a href="#mark-paint-timing">#mark-paint-timing</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mark-paint-timing">4.1.1. HTML: event loop processing model</a>
+    <li><a href="#ref-for-performancepainttiming②">4.1.2. Report paint timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="report-paint-timing">
    <b><a href="#report-paint-timing">#report-paint-timing</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-report-paint-timing">4.2.1. Mark paint timing</a> <a href="#ref-for-report-paint-timing">(2)</a>
+    <li><a href="#ref-for-report-paint-timing">4.1.1. Mark paint timing</a> <a href="#ref-for-report-paint-timing">(2)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
