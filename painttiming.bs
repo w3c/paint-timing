@@ -22,7 +22,7 @@ urlPrefix: https://www.w3.org/TR/performance-timeline-2/; spec: PERFORMANCE-TIME
         text: duration; url: #dom-performanceentry-duration
 urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: HR-TIME-2; type: typedef; text: DOMHighResTimeStamp
 </pre>
- 
+
 Introduction {#intro}
 =====================
 Load is not a single moment in time — it's an experience that no one metric can fully capture. There are multiple moments during the load experience that can affect whether a user perceives it as "fast" or "slow".
@@ -78,16 +78,6 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 
 Processing model {#sec-processing-model}
 ========================================
-
-Modifications to other specifications {#mod}
---------------------------------------------
-
-### HTML: <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">event loop processing model</a> ### {#html-event-loop-processing-model}
-
-During step 7.12 in "update the rendering":
-
-* For each fully active Document in docs, update the rendering or user interface of that Document and its browsing context to reflect the current state, and invoke [[#mark-paint-timing]] while doing so.
-
 
 Reporting paint timing {#sec-reporting-paint-timing}
 --------------------------------------------------------
