@@ -22,7 +22,7 @@ Entries will have a `name` of "first-paint" and "first-contentful-paint" respect
 
 - `"first-contentful-paint"` contain a `DOMHighResTimestamp` reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This includes text with pending webfonts. This is the first time users could start consuming page content.
 
-_WIP: [define processing algorithm and integration with HTML](https://github.com/WICG/paint-timing/issues/4)_
+_WIP: [define processing algorithm and integration with HTML](https://github.com/w3c/paint-timing/issues/4)_
 
 ---
 
