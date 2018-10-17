@@ -1,5 +1,8 @@
- {
-    "group":      ["80485"]
-,   "contacts":   ["yoavweiss"]
-,   "shortName":  "paint-timing"
+{
+  "group": 45211,
+  "contacts": [
+    "yoavweiss"
+  ],
+  "shortName": "paint-timing",
+  "repo-type": "rec-track"
 }
