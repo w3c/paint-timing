@@ -20,6 +20,7 @@ urlPrefix: https://www.w3.org/TR/performance-timeline-2/; spec: PERFORMANCE-TIME
         text: entryType; url: #dom-performanceentry-entrytype
         text: startTime; url: #dom-performanceentry-starttime
         text: duration; url: #dom-performanceentry-duration
+    type: dfn; url: #dfn-register-a-performance-entry-type; text: register a performance entry type
 urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: HR-TIME-2; type: typedef; text: DOMHighResTimeStamp
 </pre>
 
@@ -75,6 +76,10 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/entryType}} attribute must return <code>"paint"</code>.
 * The {{PerformanceEntry/startTime}} attribute must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute must return 0.
+
+A user agent implementing {{PerformancePaintTiming}} must perform the following steps:
+1. Run the <a>register a performance entry type</a> algorithm with <code>"first-paint"</code> as input.
+1. Run the <a>register a performance entry type</a> algorithm with <code>"first-contenful-paint"</code> as input.
 
 Processing model {#sec-processing-model}
 ========================================
