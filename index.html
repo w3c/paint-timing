@@ -5,9 +5,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 018be3f805d3272ce699a232398d6e3902d1ea8d" name="generator">
+  <meta content="Bikeshed version f9fa604b61e5fc96edf5cdebd2c04e0e69b33a7b" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="8b866e1b4a909f6f01b9831daaac4bc9783e8e19" name="document-revision">
+  <meta content="228cf220ba59902f8c4f099574f5562b36fdec26" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -255,7 +255,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-10-17">17 October 2018</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-11-29">29 November 2018</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -369,6 +369,13 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
     <li data-md>
      <p>The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration">duration</a></code> attribute must return 0.</p>
    </ul>
+   <p>A user agent implementing <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming②">PerformancePaintTiming</a></code> must perform the following steps:</p>
+   <ol>
+    <li data-md>
+     <p>Run the <a data-link-type="dfn" href="https://www.w3.org/TR/performance-timeline-2/#dfn-register-a-performance-entry-type" id="ref-for-dfn-register-a-performance-entry-type">register a performance entry type</a> algorithm with <code class="highlight"><c- u>"first-paint"</c-></code> as input.</p>
+    <li data-md>
+     <p>Run the <a data-link-type="dfn" href="https://www.w3.org/TR/performance-timeline-2/#dfn-register-a-performance-entry-type" id="ref-for-dfn-register-a-performance-entry-type①">register a performance entry type</a> algorithm with <code class="highlight"><c- u>"first-contenful-paint"</c-></code> as input.</p>
+   </ol>
    <h2 class="heading settled" data-level="4" id="sec-processing-model"><span class="secno">4. </span><span class="content">Processing model</span><a class="self-link" href="#sec-processing-model"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="sec-reporting-paint-timing"><span class="secno">4.1. </span><span class="content">Reporting paint timing</span><a class="self-link" href="#sec-reporting-paint-timing"></a></h3>
    <h4 class="heading settled" data-dfn-type="dfn" data-level="4.1.1" data-lt="Mark paint timing" data-noexport id="mark-paint-timing"><span class="secno">4.1.1. </span><span class="content">Mark paint timing</span><a class="self-link" href="#mark-paint-timing"></a></h4>
@@ -388,7 +395,7 @@ This is formally defined as the when <a href="https://html.spec.whatwg.org/multi
    <p>Given two arguments <var>paint-type</var> and <var>paint-timestamp</var>, perform the following steps:</p>
    <ul>
     <li data-md>
-     <p>Create a new <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming②">PerformancePaintTiming</a></code> object <var>newEntry</var> and set its attributes as follows:</p>
+     <p>Create a new <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming③">PerformancePaintTiming</a></code> object <var>newEntry</var> and set its attributes as follows:</p>
      <ol>
       <li data-md>
        <p>Set <var>newEntry</var>’s name attribute to <var>paint-type</var></p>
@@ -448,6 +455,12 @@ specification.</p>
     <li><a href="#ref-for-dom-performanceentry-name">3. The PerformancePaintTiming interface</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-dfn-register-a-performance-entry-type">
+   <a href="https://www.w3.org/TR/performance-timeline-2/#dfn-register-a-performance-entry-type">https://www.w3.org/TR/performance-timeline-2/#dfn-register-a-performance-entry-type</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dfn-register-a-performance-entry-type">3. The PerformancePaintTiming interface</a> <a href="#ref-for-dfn-register-a-performance-entry-type①">(2)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-dom-performanceentry-starttime">
    <a href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-starttime">https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-starttime</a><b>Referenced in:</b>
    <ul>
@@ -474,6 +487,7 @@ specification.</p>
      <li><span class="dfn-paneled" id="term-for-dom-performanceentry-duration" style="color:initial">duration</span>
      <li><span class="dfn-paneled" id="term-for-dom-performanceentry-entrytype" style="color:initial">entryType</span>
      <li><span class="dfn-paneled" id="term-for-dom-performanceentry-name" style="color:initial">name</span>
+     <li><span class="dfn-paneled" id="term-for-dfn-register-a-performance-entry-type" style="color:initial">register a performance entry type</span>
      <li><span class="dfn-paneled" id="term-for-dom-performanceentry-starttime" style="color:initial">startTime</span>
     </ul>
    <li>
@@ -488,7 +502,7 @@ specification.</p>
    <dt id="biblio-hr-time-2">[HR-TIME-2]
    <dd>Ilya Grigorik; James Simonsen; Jatinder Mann. <a href="https://www.w3.org/TR/hr-time-2/">High Resolution Time Level 2</a>. 1 March 2018. CR. URL: <a href="https://www.w3.org/TR/hr-time-2/">https://www.w3.org/TR/hr-time-2/</a>
    <dt id="biblio-performance-timeline-2">[PERFORMANCE-TIMELINE-2]
-   <dd>Ilya Grigorik; Jatinder Mann; Zhiheng Wang. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 8 December 2016. CR. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
+   <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 19 November 2018. WD. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
    <dt id="biblio-webidl">[WebIDL]
    <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
@@ -511,8 +525,8 @@ specification.</p>
   <aside class="dfn-panel" data-for="performancepainttiming">
    <b><a href="#performancepainttiming">#performancepainttiming</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-performancepainttiming">3. The PerformancePaintTiming interface</a> <a href="#ref-for-performancepainttiming①">(2)</a>
-    <li><a href="#ref-for-performancepainttiming②">4.1.2. Report paint timing</a>
+    <li><a href="#ref-for-performancepainttiming">3. The PerformancePaintTiming interface</a> <a href="#ref-for-performancepainttiming①">(2)</a> <a href="#ref-for-performancepainttiming②">(3)</a>
+    <li><a href="#ref-for-performancepainttiming③">4.1.2. Report paint timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="report-paint-timing">
