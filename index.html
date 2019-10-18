@@ -5,9 +5,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 08c4b0e94d147852f66673459784d3429bb3bda1" name="generator">
+  <meta content="Bikeshed version 98212c11613b78977e54b28cc53499f2ee83d388" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="2ba5fc67037912d3ac3aee11708722e311a18ba4" name="document-revision">
+  <meta content="e58ecf808112b344a4df2db4146062288975a3a4" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -266,7 +266,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-23">23 August 2019</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-10-18">18 October 2019</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -390,12 +390,12 @@ This allows developers to detect support for paint timing.</p>
      Perform the following steps: 
     <ol>
      <li data-md>
-      <p>Let <var>paint-timestamp</var> be the input timestamp.</p>
+      <p>Let <var>paintTimestamp</var> be the input timestamp.</p>
      <li data-md>
-      <p>If this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering①">update the rendering</a> is the <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint①">first paint</a>, then record the timestamp as <var>paint-timestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing">§ 4.1.2 Report paint timing</a> algorithm with two arguments: <code class="highlight"><c- u>"first-paint"</c-></code> and <var>paint-timestamp</var>.</p>
+      <p>If this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering①">update the rendering</a> is the <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint①">first paint</a>, then record the timestamp as <var>paintTimestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing">§ 4.1.2 Report paint timing</a> algorithm with two arguments: <code class="highlight"><c- u>"first-paint"</c-></code> and <var>paintTimestamp</var>.</p>
       <p class="note" role="note"><span>NOTE:</span> First paint excludes the default background paint, but includes non-default background paint.</p>
      <li data-md>
-      <p>Otherwise, if this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering②">update the rendering</a> is the <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint①">first contentful paint</a>, then record the timestamp as <var>paint-timestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing①">§ 4.1.2 Report paint timing</a> algorithm with two arguments: <code class="highlight"><c- u>"first-contentful-paint"</c-></code> and <var>paint-timestamp</var>.</p>
+      <p>Otherwise, if this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering②">update the rendering</a> is the <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint①">first contentful paint</a>, then record the timestamp as <var>paintTimestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing①">§ 4.1.2 Report paint timing</a> algorithm with two arguments: <code class="highlight"><c- u>"first-contentful-paint"</c-></code> and <var>paintTimestamp</var>.</p>
       <p class="note" role="note"><span>NOTE:</span> This paint must include text, image (including background images), non-white canvas or SVG.</p>
      <li data-md>
       <p>Otherwise, do nothing and return.</p>
@@ -404,17 +404,17 @@ This allows developers to detect support for paint timing.</p>
    </div>
    <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.1.2" data-lt="Report paint timing" data-noexport id="report-paint-timing"><span class="secno">4.1.2. </span><span class="content">Report paint timing</span></h4>
    <div class="algorithm" data-algorithm="Report paint timing">
-     Given two arguments <var>paint-type</var> and <var>paint-timestamp</var>, perform the following steps: 
+     Given two arguments <var>paintType</var> and <var>paintTimestamp</var>, perform the following steps: 
     <ol>
      <li data-md>
       <p>Create a new <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming③">PerformancePaintTiming</a></code> object <var>newEntry</var> and set its attributes as follows:</p>
       <ol>
        <li data-md>
-        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-name" id="ref-for-dom-performanceentry-name①">name</a></code> attribute to <var>paint-type</var></p>
+        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-name" id="ref-for-dom-performanceentry-name①">name</a></code> attribute to <var>paintType</var></p>
        <li data-md>
         <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-entrytype" id="ref-for-dom-performanceentry-entrytype①">entryType</a></code> attribute to <code class="highlight">paint</code></p>
        <li data-md>
-        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-starttime" id="ref-for-dom-performanceentry-starttime①">startTime</a></code> attribute to <var>paint-timestamp</var></p>
+        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-starttime" id="ref-for-dom-performanceentry-starttime①">startTime</a></code> attribute to <var>paintTimestamp</var></p>
        <li data-md>
         <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration①">duration</a></code> attribute to 0.</p>
       </ol>
@@ -547,7 +547,7 @@ specification.</p>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-performance-timeline-2">[PERFORMANCE-TIMELINE-2]
-   <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 26 June 2019. WD. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
+   <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 17 September 2019. WD. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
    <dt id="biblio-webidl">[WebIDL]
    <dd>Boris Zbarsky. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
