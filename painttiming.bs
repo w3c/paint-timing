@@ -83,7 +83,7 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/startTime}} attribute must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute must return 0.
 
-NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"first-paint"</code> and <code>"first-contentful-paint"</code> in {{PerformanceObserver/supportedEntryTypes}} for {{Window}} contexts.
+NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} for {{Window}} contexts.
 This allows developers to detect support for paint timing.
 
 Processing model {#sec-processing-model}
