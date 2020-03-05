@@ -64,7 +64,7 @@ This is formally defined as the when <a>update the rendering</a> happens in even
 
 <dfn export>First Paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
-<dfn export>First Contentful Paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered any text, image (including background images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.
+<dfn export>First Contentful Paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered any text, image (including background images and mask images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.
 
 Whenever a user agent preemptively paints content outside of the viewport, those paints MUST be considered for <a>First Paint</a> and <a>First Contentful Paint</a>.
 
@@ -108,7 +108,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
 
     1. Otherwise, if this instance of <a>update the rendering</a> is the <a>first contentful paint</a>, then record the timestamp as |paintTimestamp| and invoke the [[#report-paint-timing]] algorithm with two arguments: <code>"first-contentful-paint"</code> and |paintTimestamp|.
 
-        NOTE: This paint must include text, image (including background images), non-white canvas or SVG.
+        NOTE: This paint must include text, image (including background images and mask images), non-white canvas or SVG.
 
     1. Otherwise, do nothing and return.
 
