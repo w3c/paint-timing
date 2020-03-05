@@ -57,14 +57,18 @@ Usage example {#example}
 Terminology {#sec-terminology}
 ==============================
 
-<dfn export>Paint</dfn>: the browser has performed a "paint" (or "render") when it has converted the render tree to pixels on the screen.
+<dfn export>Paint</dfn>: the user agent has performed a "paint" (or "render") when it has converted the render tree to pixels on the screen.
 This is formally defined as the when <a>update the rendering</a> happens in event loop processing.
 
-    NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the browser is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
+    NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
-<dfn export>First Paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the browser first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the browser has started to render the page.
+<dfn export>First Paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
-<dfn export>First Contentful Paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the browser first rendered any text, image (including background images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.
+<dfn export>First Contentful Paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered any text, image (including background images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.
+
+Whenever a user agent preemptively paints content outside of the viewport, those paints MUST be considered for <a>First Paint</a> and <a>First Contentful Paint</a>.
+
+    NOTE: a user agent has freedom to choose their own strategy for painting. Such strategy could even be to never paint content that is outside of the viewport. Therefore, different user agents can have different behaviors for <a>First Paint</a> and <a>First Contentful Paint</a> in edge cases where the only content occurs outside of the viewport.
 
 The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 =======================================
