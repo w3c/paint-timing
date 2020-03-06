@@ -64,9 +64,9 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 
 <dfn export>First Contentful Paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered any text, image (including background images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.
 
-Whenever a user agent preemptively paints content outside of the viewport, those paints MUST be considered for <a>First Paint</a> and <a>First Contentful Paint</a>.
+Whenever a user agent preemptively paints content outside of the viewport, those paints must be considered for [=First Paint=] and [=First Contentful Paint=].
 
-    NOTE: a user agent has freedom to choose their own strategy for painting. Such strategy could even be to never paint content that is outside of the viewport. Therefore, different user agents can have different behaviors for <a>First Paint</a> and <a>First Contentful Paint</a> in edge cases where the only content occurs outside of the viewport.
+    NOTE: a user agent has freedom to choose their own strategy for painting. Such strategy could even be to never paint content that is outside of the viewport. Therefore, different user agents can have different behaviors for [=First Paint=] and [=First Contentful Paint=] in edge cases where the only content occurs outside of the viewport.
 
 The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 =======================================
@@ -78,12 +78,12 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 
 {{PerformancePaintTiming}} extends the following attributes of {{PerformanceEntry}} interface:
 
-* The {{PerformanceEntry/name}} attribute must return a {{DOMString}} for minimal frame attribution. Possible values of name are:
+* The {{PerformanceEntry/name}} attribute's getter must return a {{DOMString}} for minimal frame attribution. Possible values of name are:
     * <code>"first-paint"</code>: for [=First Paint=]
     * <code>"first-contentful-paint"</code>: for [=First Contentful Paint=]
-* The {{PerformanceEntry/entryType}} attribute must return <code>"paint"</code>.
-* The {{PerformanceEntry/startTime}} attribute must return a {{DOMHighResTimeStamp}} of when the paint occured.
-* The {{PerformanceEntry/duration}} attribute must return 0.
+* The {{PerformanceEntry/entryType}} attribute's getter must return <code>"paint"</code>.
+* The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
+* The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
 NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} for {{Window}} contexts.
 This allows developers to detect support for paint timing.
@@ -100,17 +100,17 @@ Reporting paint timing {#sec-reporting-paint-timing}
     Perform the following steps:
 
     1. Let |paintTimestamp| be the input timestamp.
-    1. If this instance of [=update the rendering=] is the <a>first paint</a>, then record the timestamp as |paintTimestamp| and invoke the [[#report-paint-timing]] algorithm with two arguments: <code>"first-paint"</code> and |paintTimestamp|.
+    1. If this instance of [=update the rendering=] is the [=First Paint=], then record the timestamp as |paintTimestamp| and invoke the [[#report-paint-timing]] algorithm with two arguments: <code>"first-paint"</code> and |paintTimestamp|.
 
-        NOTE: First paint excludes the default background paint, but includes non-default background paint.
+        NOTE: [=First Paint=] excludes the default background paint, but includes non-default background paint.
 
-    1. Otherwise, if this instance of [=update the rendering=] is the <a>first contentful paint</a>, then record the timestamp as |paintTimestamp| and invoke the [[#report-paint-timing]] algorithm with two arguments: <code>"first-contentful-paint"</code> and |paintTimestamp|.
+    1. Otherwise, if this instance of [=update the rendering=] is the [=First Contentful Paint</a>, then record the timestamp as |paintTimestamp| and invoke the [[#report-paint-timing]] algorithm with two arguments: <code>"first-contentful-paint"</code> and |paintTimestamp|.
 
         NOTE: This paint must include text, image (including background images), non-white canvas or SVG.
 
     1. Otherwise, do nothing and return.
 
-        NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have first paint (due to the enclosing boxes of the iframes) but no first contentful paint.
+        NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=First Paint=] (due to the enclosing boxes of the iframes) but no [=First Contentful Paint=].
 </div>
 
 <h4 dfn>Report paint timing</h4>
