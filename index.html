@@ -5,9 +5,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 5721fde7f6b8111f662b83b678f9e181a9838206" name="generator">
+  <meta content="Bikeshed version 70c86369151f7b7b97b78c0f664dba09a4024ca2" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="cb5e822822505d01875accfd170e2b9f4a9543f2" name="document-revision">
+  <meta content="a3113c308837ae06a273cd45c4f96c7efd2a7ced" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -360,7 +360,7 @@ Formally, we consider the user agent to have "rendered" a document when it has p
    <p class="note" role="note"><span>NOTE:</span> The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="first-paint">First Paint</dfn> entry contains a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp" id="ref-for-idl-def-domhighrestimestampdomhighrestimestamp">DOMHighResTimeStamp</a></code> reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="first-contentful-paint">First Contentful Paint</dfn> entry contains a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp" id="ref-for-idl-def-domhighrestimestampdomhighrestimestamp①">DOMHighResTimeStamp</a></code> reporting the time when the user agent first rendered any text, image (including background images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.</p>
-   <p>Whenever a user agent preemptively paints content outside of the viewport, those paints MUST be considered for <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint">First Paint</a> and <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint">First Contentful Paint</a>.</p>
+   <p>Whenever a user agent preemptively paints content outside of the <a data-link-type="dfn" href="https://www.w3.org/TR/CSS2/visuren.html#viewport" id="ref-for-viewport">viewport</a>, those paints MUST be considered for <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint">First Paint</a> and <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint">First Contentful Paint</a>.</p>
    <p class="note" role="note"><span>NOTE:</span> a user agent has freedom to choose their own strategy for painting. Such strategy could even be to never paint content that is outside of the viewport. Therefore, different user agents can have different behaviors for <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint①">First Paint</a> and <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint①">First Contentful Paint</a> in edge cases where the only content occurs outside of the viewport.</p>
    <h2 class="heading settled" data-level="3" id="sec-PerformancePaintTiming"><span class="secno">3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming">PerformancePaintTiming</a></code> interface</span><a class="self-link" href="#sec-PerformancePaintTiming"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -439,6 +439,12 @@ specification.</p>
    <li><a href="#performancepainttiming">PerformancePaintTiming</a><span>, in §3</span>
    <li><a href="#report-paint-timing">Report paint timing</a><span>, in §4.1.1</span>
   </ul>
+  <aside class="dfn-panel" data-for="term-for-viewport">
+   <a href="https://www.w3.org/TR/CSS2/visuren.html#viewport">https://www.w3.org/TR/CSS2/visuren.html#viewport</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-viewport">2. Terminology</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-idl-def-domhighrestimestampdomhighrestimestamp">
    <a href="https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp">https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp</a><b>Referenced in:</b>
    <ul>
@@ -513,6 +519,11 @@ specification.</p>
   </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
+   <li>
+    <a data-link-type="biblio">[css-2]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="term-for-viewport" style="color:initial">viewport</span>
+    </ul>
    <li>
     <a data-link-type="biblio">[hr-time-2]</a> defines the following terms:
     <ul>
