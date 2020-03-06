@@ -25,6 +25,8 @@ urlPrefix: https://www.w3.org/TR/performance-timeline-2/; spec: PERFORMANCE-TIME
         text: supportedEntryTypes; url: #supportedentrytypes-attribute
 urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: HR-TIME-2;
     type: typedef; text: DOMHighResTimeStamp
+urlPrefix: https://www.w3.org/TR/CSS2/visuren.html; spec: CSS-2;
+    type: dfn; url: #viewport; text: viewport
 </pre>
 
 Introduction {#intro}
@@ -64,7 +66,7 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 
 <dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered any text, image (including background images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.
 
-Whenever a user agent preemptively paints content outside of the viewport, those paints must be considered for [=first paint=] and [=first contentful paint=].
+Whenever a user agent preemptively paints content outside of the [=viewport=], those paints must be considered for [=first paint=] and [=first contentful paint=].
 
     NOTE: a user agent has freedom to choose their own strategy for painting. Such strategy could even be to never paint content that is outside of the viewport. Therefore, different user agents can have different behaviors for [=first paint=] and [=first contentful paint=] in edge cases where the only content occurs outside of the viewport.
 
