@@ -25,8 +25,6 @@ urlPrefix: https://www.w3.org/TR/performance-timeline-2/; spec: PERFORMANCE-TIME
         text: supportedEntryTypes; url: #supportedentrytypes-attribute
 urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: HR-TIME-2;
     type: typedef; text: DOMHighResTimeStamp
-urlPrefix: https://html.spec.whatwg.org/multipage/webappapis.html; spec: HTML;
-    type: dfn; url: #update-the-rendering; text: update the rendering;
 </pre>
 
 Introduction {#intro}
@@ -58,7 +56,7 @@ Terminology {#sec-terminology}
 ==============================
 
 <dfn export>Paint</dfn>: the user agent has performed a "paint" (or "render") when it has converted the render tree to pixels on the screen.
-This is formally defined as the when <a>update the rendering</a> happens in event loop processing.
+Formally, we consider the user agent to have "rendered" a document when it has performed the [=update the rendering=] steps of the event loop.
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
@@ -102,11 +100,11 @@ Reporting paint timing {#sec-reporting-paint-timing}
     Perform the following steps:
 
     1. Let |paintTimestamp| be the input timestamp.
-    1. If this instance of <a>update the rendering</a> is the <a>first paint</a>, then record the timestamp as |paintTimestamp| and invoke the [[#report-paint-timing]] algorithm with two arguments: <code>"first-paint"</code> and |paintTimestamp|.
+    1. If this instance of [=update the rendering=] is the <a>first paint</a>, then record the timestamp as |paintTimestamp| and invoke the [[#report-paint-timing]] algorithm with two arguments: <code>"first-paint"</code> and |paintTimestamp|.
 
         NOTE: First paint excludes the default background paint, but includes non-default background paint.
 
-    1. Otherwise, if this instance of <a>update the rendering</a> is the <a>first contentful paint</a>, then record the timestamp as |paintTimestamp| and invoke the [[#report-paint-timing]] algorithm with two arguments: <code>"first-contentful-paint"</code> and |paintTimestamp|.
+    1. Otherwise, if this instance of [=update the rendering=] is the <a>first contentful paint</a>, then record the timestamp as |paintTimestamp| and invoke the [[#report-paint-timing]] algorithm with two arguments: <code>"first-contentful-paint"</code> and |paintTimestamp|.
 
         NOTE: This paint must include text, image (including background images), non-white canvas or SVG.
 
