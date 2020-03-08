@@ -27,6 +27,10 @@ urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: H
     type: typedef; text: DOMHighResTimeStamp
 urlPrefix: https://www.w3.org/TR/CSS2/visuren.html; spec: CSS-2;
     type: dfn; url: #viewport; text: viewport
+urlPrefix: https://www.w3.org/TR/CSS22/visufx.html; spec: CSS-2;
+    type: dfn; url: #propdef-visibility; text: visibility;
+urlPrefix: https://www.w3.org/TR/css-color-3; spec: CSS-COLOR-3;
+    type: dfn; url: #opacity; text: opacity;
 urlPrefix: https://www.w3.org/TR/cssom-view/; spec: CSSOM-VIEW-1;
     type: dfn; text: getBoundingClientRect; url: #dom-element-getboundingclientrect
 urlPrefix: https://dom.spec.whatwg.org/; spec: DOM
@@ -45,7 +49,8 @@ urlPrefix: https://html.spec.whatwg.org/
     type: dfn; text: canvas; url: #the-canvas-element;
     type: dfn; text: context mode; url: #concept-canvas-context-mode;
     type: dfn; text: replaced image; url: #images-3;
-
+urlPrefix: https://w3c.github.io/IntersectionObserver/
+    type: dfn; text: Intersection rect algorithm; url: #calculate-intersection-rect-algo
 </pre>
 
 Introduction {#intro}
@@ -95,9 +100,17 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 * The element is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * The element is an [=svg element with rendered descendants=].
 
+<dfn export>Paintable</dfn>: An element counts as paintable when all of the following apply:
+* The element intersects with the document, as defined by [=Intersection rect algorithm=]. 
+
+    NOTE: This covers the cases where the element is transformed to zero size, or is positioned in negative coordinates,
+
+* The element's [=visibility=] is visible.
+* The element's [=opacity=] is greater than 0.
+
 <dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
-<dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered an element or part of an element which counts as [=contentful=], and has a non-empty bounding rect, as returned by [=getBoundingClientRect=].
+<dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered an element or part of an element which counts as [=contentful=] and [=paintable=].
 
 Whenever a user agent preemptively paints content outside of the [=viewport=], those paints must be considered for [=first paint=] and [=first contentful paint=].
 
@@ -141,7 +154,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
 
     1. If this instance of [=update the rendering=] is the [=first contentful paint=] of |document|, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
 
-        NOTE: This paint must include [=contentful=] elemenets with a non empty bounding rect as defined in [=getBoundingClientRect=].
+        NOTE: This paint must include elemenets that are both [=contentful=] and [=paintable=].
 
         NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
 </div>
