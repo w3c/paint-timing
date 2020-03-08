@@ -27,6 +27,25 @@ urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: H
     type: typedef; text: DOMHighResTimeStamp
 urlPrefix: https://www.w3.org/TR/CSS2/visuren.html; spec: CSS-2;
     type: dfn; url: #viewport; text: viewport
+urlPrefix: https://www.w3.org/TR/cssom-view/; spec: CSSOM-VIEW-1;
+    type: dfn; text: getBoundingClientRect; url: #dom-element-getboundingclientrect
+urlPrefix: https://dom.spec.whatwg.org/; spec: DOM
+    type: dfn; text: text node; url: #text
+urlPrefix: https://www.w3.org/TR/css-images-3/#url-notation; spec: CSS-IMAGES-3;
+    type: dfn; text: loaded; url: #typedef-image
+urlPrefix: https://www.w3.org/TR/SVG2/render.html; spec: CR-SVG2
+    type: dfn; url: #Rendered-vs-NonRendered; text: svg element with rendered descendants;
+urlPrefix: https://www.w3.org/TR/css-text-3; spec: CSS-TEXT-3;
+    type: dfn; text: white-space; url: #white-space;
+urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-BACKGROUNDS-3;
+    type: dfn; text: background-image; url: #propdef-background-image;
+urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-MASKING-1;
+    type: dfn; text: mask-image; url: #the-mask-image;
+urlPrefix: https://html.spec.whatwg.org/
+    type: dfn; text: canvas; url: #the-canvas-element;
+    type: dfn; text: context mode; url: #concept-canvas-context-mode;
+    type: dfn; text: replaced image; url: #images-3;
+
 </pre>
 
 Introduction {#intro}
@@ -69,9 +88,16 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
+<dfn export>Contentful</dfn>: An element counts as contentful when one or more of the following apply:
+* The element contains a [=text node=], with at least one character, excluding [=white-space=].
+* The element is a [=replaced image=] representing a [=loaded=] image.
+* The element's current style contains a [=loaded=] [=background-image=] or [=mask-image=].
+* The element is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
+* The element is an [=svg element with rendered descendants=].
+
 <dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
-<dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered any text, image (including background images), non-white canvas or SVG. This excludes any content of iframes, but includes text with pending webfonts. This is the first time users could start consuming page content.
+<dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered an element or part of an element which counts as [=contentful=], and has a non-empty bounding rect, as returned by [=getBoundingClientRect=].
 
 Whenever a user agent preemptively paints content outside of the [=viewport=], those paints must be considered for [=first paint=] and [=first contentful paint=].
 
@@ -115,7 +141,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
 
     1. If this instance of [=update the rendering=] is the [=first contentful paint=] of |document|, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
 
-        NOTE: This paint must include text, image (including background images), non-white canvas or SVG.
+        NOTE: This paint must include [=contentful=] elemenets with a non empty bounding rect as defined in [=getBoundingClientRect=].
 
         NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
 </div>
