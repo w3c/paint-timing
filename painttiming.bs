@@ -31,7 +31,7 @@ urlPrefix: https://www.w3.org/TR/CSS22/visufx.html; spec: CSS-2;
     type: dfn; url: #propdef-visibility; text: visibility;
 urlPrefix: https://www.w3.org/TR/css-color-3; spec: CSS-COLOR-3;
     type: dfn; url: #opacity; text: opacity;
-urlPrefix: https://www.w3.org/TR/css-images-3/#url-notation; spec: CSS-IMAGES-3;
+urlPrefix: https://www.w3.org/TR/css-images-3/; spec: CSS-IMAGES-3;
     type: dfn; text: loaded; url: #typedef-image
 urlPrefix: https://www.w3.org/TR/SVG2/render.html; spec: CR-SVG2
     type: dfn; url: #Rendered-vs-NonRendered; text: svg element with rendered descendants;
