@@ -31,26 +31,23 @@ urlPrefix: https://www.w3.org/TR/CSS22/visufx.html; spec: CSS-2;
     type: dfn; url: #propdef-visibility; text: visibility;
 urlPrefix: https://www.w3.org/TR/css-color-3; spec: CSS-COLOR-3;
     type: dfn; url: #opacity; text: opacity;
-urlPrefix: https://www.w3.org/TR/cssom-view/; spec: CSSOM-VIEW-1;
-    type: dfn; text: getBoundingClientRect; url: #dom-element-getboundingclientrect
-urlPrefix: https://dom.spec.whatwg.org/; spec: DOM
-    type: dfn; text: text node; url: #text
 urlPrefix: https://www.w3.org/TR/css-images-3/#url-notation; spec: CSS-IMAGES-3;
     type: dfn; text: loaded; url: #typedef-image
 urlPrefix: https://www.w3.org/TR/SVG2/render.html; spec: CR-SVG2
     type: dfn; url: #Rendered-vs-NonRendered; text: svg element with rendered descendants;
-urlPrefix: https://www.w3.org/TR/css-text-3; spec: CSS-TEXT-3;
-    type: dfn; text: white-space; url: #white-space;
 urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-BACKGROUNDS-3;
     type: dfn; text: background-image; url: #propdef-background-image;
-urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-MASKING-1;
+urlPrefix: https://www.w3.org/TR/css-masking-1/; spec: CSS-MASKING-1;
     type: dfn; text: mask-image; url: #the-mask-image;
-urlPrefix: https://html.spec.whatwg.org/
-    type: dfn; text: canvas; url: #the-canvas-element;
+urlPrefix: https://html.spec.whatwg.org/multipage/canvas.html
+    type: dfn; text: canvas;
     type: dfn; text: context mode; url: #concept-canvas-context-mode;
+urlPrefix: https://html.spec.whatwg.org/multipage/rendering.html
     type: dfn; text: replaced image; url: #images-3;
 urlPrefix: https://w3c.github.io/IntersectionObserver/
     type: dfn; text: Intersection rect algorithm; url: #calculate-intersection-rect-algo
+urlPrefix: https://drafts.csswg.org/css-cascade-4/
+    type: dfn; text: computed; url: #computed-value;
 </pre>
 
 Introduction {#intro}
@@ -93,20 +90,21 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
-<dfn export>Contentful</dfn>: An element counts as contentful when one or more of the following apply:
-* The element contains a [=text node=], with at least one character, excluding [=white-space=].
+<dfn>Contentful</dfn>: An element counts as contentful when one or more of the following apply:
+* The element has a [=text node=] descendant, with at least one character, excluding [=document white space characters=].
 * The element is a [=replaced image=] representing a [=loaded=] image.
 * The element's current style contains a [=loaded=] [=background-image=] or [=mask-image=].
 * The element is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * The element is an [=svg element with rendered descendants=].
 
-<dfn export>Paintable</dfn>: An element counts as paintable when all of the following apply:
+<dfn>Paintable</dfn>: An element counts as paintable when all of the following apply:
 * The element intersects with the document, as defined by [=Intersection rect algorithm=]. 
 
     NOTE: This covers the cases where the element is transformed to zero size, or is positioned in negative coordinates,
 
-* The element's [=visibility=] is visible.
-* The element's [=opacity=] is greater than 0.
+* The element's [=computed=] [=visibility=] is <code>visible</code>.
+* The element is not fully transparent, as defined  [=computed=] [=opacity=] is greater than 0.
+* All of the element's ancestors have [=computed=] [=opacity=]
 
 <dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
