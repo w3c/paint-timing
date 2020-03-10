@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
   <meta content="Bikeshed version 70c86369151f7b7b97b78c0f664dba09a4024ca2" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="ecfe84ec3eb9853ae32f879d66ca080d6176c7b0" name="document-revision">
+  <meta content="3fe291ff8c26f59bbab2712db4dfbe2eec09833b" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -266,7 +266,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-06">6 March 2020</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-10">10 March 2020</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -387,41 +387,39 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 This allows developers to detect support for paint timing.</p>
    <h2 class="heading settled" data-level="4" id="sec-processing-model"><span class="secno">4. </span><span class="content">Processing model</span><a class="self-link" href="#sec-processing-model"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="sec-reporting-paint-timing"><span class="secno">4.1. </span><span class="content">Reporting paint timing</span><a class="self-link" href="#sec-reporting-paint-timing"></a></h3>
-   <h4 class="heading settled" data-dfn-type="dfn" data-level="4.1.1" data-lt="Mark paint timing" data-noexport id="mark-paint-timing"><span class="secno">4.1.1. </span><span class="content">Mark paint timing</span><a class="self-link" href="#mark-paint-timing"></a></h4>
+   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export data-level="4.1.1" data-lt="Mark paint timing" id="mark-paint-timing"><span class="secno">4.1.1. </span><span class="content">Mark paint timing</span></h4>
    <div class="algorithm" data-algorithm="Mark paint timing">
-     Perform the following steps: 
+     When asked to <a data-link-type="dfn" href="#mark-paint-timing" id="ref-for-mark-paint-timing">mark paint timing</a> given a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document">Document</a> <var>document</var> as input, perform the following steps: 
     <ol>
      <li data-md>
-      <p>Let <var>paintTimestamp</var> be the input timestamp.</p>
+      <p>Let <var>paintTimestamp</var> be the <a data-link-type="dfn" href="https://www.w3.org/TR/hr-time-2/#dfn-current-high-resolution-time" id="ref-for-dfn-current-high-resolution-time">current high resolution time</a>.</p>
      <li data-md>
-      <p>If this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering①">update the rendering</a> is the <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint③">first paint</a>, then record the timestamp as <var>paintTimestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing">§ 4.1.2 Report paint timing</a> algorithm with two arguments: <code class="highlight"><c- u>"first-paint"</c-></code> and <var>paintTimestamp</var>.</p>
+      <p>If this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering①">update the rendering</a> is the <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint③">first paint</a> of <var>document</var>, then invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing">§ 4.1.2 Report paint timing</a> algorithm with <var>document</var>, <code class="highlight"><c- u>"first-paint"</c-></code>, and <var>paintTimestamp</var>.</p>
       <p class="note" role="note"><span>NOTE:</span> <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint④">First paint</a> excludes the default background paint, but includes non-default background paint.</p>
      <li data-md>
-      <p>Otherwise, if this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering②">update the rendering</a> is the [=first contentful paint, then record the timestamp as <var>paintTimestamp</var> and invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing①">§ 4.1.2 Report paint timing</a> algorithm with two arguments: <code class="highlight"><c- u>"first-contentful-paint"</c-></code> and <var>paintTimestamp</var>.</p>
+      <p>If this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering②">update the rendering</a> is the <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint③">first contentful paint</a> of <var>document</var>, then invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing①">§ 4.1.2 Report paint timing</a> algorithm with <var>document</var>, <code class="highlight"><c- u>"first-contentful-paint"</c-></code>, and <var>paintTimestamp</var> as arguments.</p>
       <p class="note" role="note"><span>NOTE:</span> This paint must include text, image (including background images), non-white canvas or SVG.</p>
-     <li data-md>
-      <p>Otherwise, do nothing and return.</p>
-      <p class="note" role="note"><span>NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑤">first paint</a> (due to the enclosing boxes of the iframes) but no <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint③">first contentful paint</a>.</p>
+      <p class="note" role="note"><span>NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑤">first paint</a> (due to the enclosing boxes of the iframes) but no <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint④">first contentful paint</a>.</p>
     </ol>
    </div>
    <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.1.2" data-lt="Report paint timing" data-noexport id="report-paint-timing"><span class="secno">4.1.2. </span><span class="content">Report paint timing</span></h4>
    <div class="algorithm" data-algorithm="Report paint timing">
-     Given two arguments <var>paintType</var> and <var>paintTimestamp</var>, perform the following steps: 
+     When asked to <a data-link-type="dfn" href="#report-paint-timing" id="ref-for-report-paint-timing②">report paint timing</a> given <var>document</var>, <var>paintType</var>, and <var>paintTimestamp</var> as arguments, perform the following steps: 
     <ol>
      <li data-md>
       <p>Create a new <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming③">PerformancePaintTiming</a></code> object <var>newEntry</var> and set its attributes as follows:</p>
       <ol>
        <li data-md>
-        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-name" id="ref-for-dom-performanceentry-name①">name</a></code> attribute to <var>paintType</var></p>
+        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-name" id="ref-for-dom-performanceentry-name①">name</a></code> attribute to <var>paintType</var>.</p>
        <li data-md>
-        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-entrytype" id="ref-for-dom-performanceentry-entrytype①">entryType</a></code> attribute to <code class="highlight">paint</code></p>
+        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-entrytype" id="ref-for-dom-performanceentry-entrytype①">entryType</a></code> attribute to <code class="highlight"><c- u>"paint"</c-></code>.</p>
        <li data-md>
-        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-starttime" id="ref-for-dom-performanceentry-starttime①">startTime</a></code> attribute to <var>paintTimestamp</var></p>
+        <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-starttime" id="ref-for-dom-performanceentry-starttime①">startTime</a></code> attribute to <var>paintTimestamp</var>.</p>
        <li data-md>
         <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration①">duration</a></code> attribute to 0.</p>
       </ol>
      <li data-md>
-      <p><a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> <var>newEntry</var> object.</p>
+      <p><a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> <var>newEntry</var> object, with <var>document</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global">relevant global object</a> as input.</p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="5" id="acknowledgements"><span class="secno">5. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
@@ -445,6 +443,12 @@ specification.</p>
     <li><a href="#ref-for-viewport">2. Terminology</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-document">
+   <a href="https://dom.spec.whatwg.org/#concept-document">https://dom.spec.whatwg.org/#concept-document</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-document">4.1.1. Mark paint timing</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-idl-def-domhighrestimestampdomhighrestimestamp">
    <a href="https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp">https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp</a><b>Referenced in:</b>
    <ul>
@@ -452,10 +456,22 @@ specification.</p>
     <li><a href="#ref-for-idl-def-domhighrestimestampdomhighrestimestamp②">3. The PerformancePaintTiming interface</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-dfn-current-high-resolution-time">
+   <a href="https://www.w3.org/TR/hr-time-2/#dfn-current-high-resolution-time">https://www.w3.org/TR/hr-time-2/#dfn-current-high-resolution-time</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dfn-current-high-resolution-time">4.1.1. Mark paint timing</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-window">
    <a href="https://html.spec.whatwg.org/multipage/window-object.html#window">https://html.spec.whatwg.org/multipage/window-object.html#window</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-window">3. The PerformancePaintTiming interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-relevant-global">
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-relevant-global">4.1.2. Report paint timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-update-the-rendering">
@@ -525,14 +541,21 @@ specification.</p>
      <li><span class="dfn-paneled" id="term-for-viewport" style="color:initial">viewport</span>
     </ul>
    <li>
+    <a data-link-type="biblio">[DOM]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="term-for-concept-document" style="color:initial">document</span>
+    </ul>
+   <li>
     <a data-link-type="biblio">[hr-time-2]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-idl-def-domhighrestimestampdomhighrestimestamp" style="color:initial">DOMHighResTimeStamp</span>
+     <li><span class="dfn-paneled" id="term-for-dfn-current-high-resolution-time" style="color:initial">current high resolution time</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-window" style="color:initial">Window</span>
+     <li><span class="dfn-paneled" id="term-for-concept-relevant-global" style="color:initial">relevant global object</span>
      <li><span class="dfn-paneled" id="term-for-update-the-rendering" style="color:initial">update the rendering</span>
     </ul>
    <li>
@@ -555,6 +578,8 @@ specification.</p>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
+   <dt id="biblio-dom">[DOM]
+   <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-hr-time-2">[HR-TIME-2]
    <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/hr-time-2/">High Resolution Time Level 2</a>. 21 November 2019. REC. URL: <a href="https://www.w3.org/TR/hr-time-2/">https://www.w3.org/TR/hr-time-2/</a>
    <dt id="biblio-html">[HTML]
@@ -582,7 +607,7 @@ specification.</p>
    <ul>
     <li><a href="#ref-for-first-contentful-paint">2. Terminology</a> <a href="#ref-for-first-contentful-paint①">(2)</a>
     <li><a href="#ref-for-first-contentful-paint②">3. The PerformancePaintTiming interface</a>
-    <li><a href="#ref-for-first-contentful-paint③">4.1.1. Mark paint timing</a>
+    <li><a href="#ref-for-first-contentful-paint③">4.1.1. Mark paint timing</a> <a href="#ref-for-first-contentful-paint④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="performancepainttiming">
@@ -592,10 +617,17 @@ specification.</p>
     <li><a href="#ref-for-performancepainttiming③">4.1.2. Report paint timing</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="mark-paint-timing">
+   <b><a href="#mark-paint-timing">#mark-paint-timing</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-mark-paint-timing">4.1.1. Mark paint timing</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="report-paint-timing">
    <b><a href="#report-paint-timing">#report-paint-timing</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-report-paint-timing">4.1.1. Mark paint timing</a> <a href="#ref-for-report-paint-timing">(2)</a>
+    <li><a href="#ref-for-report-paint-timing">4.1.2. Report paint timing</a>
    </ul>
   </aside>
 <script>/* script-var-click-highlighting */
