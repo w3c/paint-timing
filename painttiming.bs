@@ -111,7 +111,7 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     NOTE: there could be cases where a <code>paintable</code> element would not be visible to the user, for example in the case of text that has the same color as its background.
     Those elements would still considered as paintable for the purpose of computing [=first contentful paint=].    
 
-* The element's bounding rect, as returned by [=getBoundingClientRect=] has non-zero width and height, after applying clipping as defined in [=Intersection rect algorithm=], but without clipping to the [=viewport=]. 
+* The element's bounding rect, as returned by [=getBoundingClientRect=] has positive right, bottom, width and height, after applying clipping as defined in [=Intersection rect algorithm=], but without clipping to the [=viewport=]. 
     
     NOTE: This covers the cases where the element is scaled to zero size, has <code>display: none</code>, or <code>display: contents</code> where the contents resolve to an empty rect.
 
