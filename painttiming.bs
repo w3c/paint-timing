@@ -37,8 +37,6 @@ urlPrefix: https://www.w3.org/TR/SVG2/render.html; spec: CR-SVG2
     type: dfn; url: #Rendered-vs-NonRendered; text: svg element with rendered descendants;
 urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-BACKGROUNDS-3;
     type: dfn; text: background-image; url: #propdef-background-image;
-urlPrefix: https://www.w3.org/TR/css-masking-1/; spec: CSS-MASKING-1;
-    type: dfn; text: mask-image; url: #the-mask-image;
 urlPrefix: https://html.spec.whatwg.org/multipage/canvas.html
     type: dfn; text: canvas;
     type: dfn; text: context mode; url: #concept-canvas-context-mode;
@@ -49,11 +47,11 @@ urlPrefix: https://w3c.github.io/IntersectionObserver/
 urlPrefix: https://drafts.csswg.org/css-cascade-4/
     type: dfn; text: computed; url: #computed-value;
 urlPrefix: https://html.spec.whatwg.org/multipage/dom.html
-    type: dfn; text: element; url: #element;
+    type: dfn; text: document-sourced element; url: #element;
 urlPrefix: https://drafts.csswg.org/css-pseudo-4
     type: dfn; text: generated content pseudo-element; url: #generated-content;
 urlPrefix: https://www.w3.org/TR/cssom-view
-    type: dfn; text: getBoundingClientRect; url: #getBoundingClientRect;
+    type: dfn; text: getBoundingClientRect; url: #dom-element-getboundingclientrect;
 </pre>
 
 Introduction {#intro}
@@ -96,7 +94,8 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
-<dfn>Contentful</dfn>: An [=element=] or a [=pseudo-element=] counts as contentful when one or more of the following apply:
+<dfn>Element or pseudo-element</dfn>: A [=document-sourced element=] or a [=generated content pseudo-element=].
+<dfn>Contentful</dfn>: An [=element or pseudo-element=] counts as contentful when one or more of the following apply:
 * The element has a [=text node=] child, with at least one character, excluding [=document white space characters=].
 * The element is a [=replaced image=] representing a [=loaded=] image.
 * The element's [=computed=] style contains a [=loaded=] [=background-image=].
@@ -104,20 +103,25 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 * The element is an [=svg element with rendered descendants=].
 * The element's [=computed=] style contains a [=contentful=] and [=paintable=] [=generated content pseudo-element=].
 
-<dfn>Paintable</dfn>: An [=element=] or a [=generated content pseudo-element=] counts as paintable when all of the following apply:
+<dfn>Paintable</dfn>: As a general rule, an [=element or pseudo-element=] is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling.
+An [=element or pseudo-element=] counts as paintable when all of the following apply:
 * The element's [=computed=] [=visibility=] is <code>visible</code>.
 * The element and all of its ancestors have positive [=computed=] [=opacity=].
 
-    NOTE: there could be cases where a <code>paintable</code> element would not be visible to the user, for example in the case of text that has the same color as its background.
+    NOTE: there could be cases where a <code>paintable</code> [=element or pseudo-element=] would not be visible to the user, for example in the case of text that has the same color as its background.
     Those elements would still considered as paintable for the purpose of computing [=first contentful paint=].    
 
-* The element's bounding rect, as returned by [=getBoundingClientRect=] has positive right, bottom, width and height, after applying clipping as defined in [=Intersection rect algorithm=], but without clipping to the [=viewport=]. 
+* The element's [=paintable bounding rect=] has positive right, bottom, width and height values. 
     
     NOTE: This covers the cases where the element is scaled to zero size, has <code>display: none</code>, or <code>display: contents</code> where the contents resolve to an empty rect.
 
+<dfn>Paintable Bounding Rect</dfn>: The paintable bounding rect is the element's bounding rect, which would be the result of running the [=getBoundingClientRect=] algorithm on the [=element or pseudo-element=], clipped by ancestors with <code>overflow: clip</code>.
+
+    NOTE: elements contained by boxes with <code>overflow: scroll</code> or <code>overflow: hidden</code> don't have their [=paintable bounding rect=] clipped, as in both cases the [=element or pseudo-element=] can become visible by scrolling.
+
 <dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
-<dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered a [=document=] which includes at least one [=element=] that is both [=contentful=] and [=paintable=].
+<dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered a [=document=] which includes at least one [=element or pseudo-element=] that is both [=contentful=] and [=paintable=].
 
 Whenever a user agent preemptively paints content outside of the [=viewport=], those paints must be considered for [=first paint=] and [=first contentful paint=].
 
