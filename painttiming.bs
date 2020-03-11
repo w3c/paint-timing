@@ -102,6 +102,9 @@ An [=element=] is <dfn export>contentful</dfn> when one or more of the following
 * The element has a [=text node=] child, with at least one character, excluding [=document white space characters=].
 * The element is a [=replaced element=] representing a [=loaded=] image.
 * The element's [=used=] style contains a [=loaded=] [=background-image=].
+
+    NOTE: a gradient is not considered a loaded background image, and thus would not make an element count as contentful.
+
 * The element is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * The element is an [=svg element with rendered descendants=].
 * The element is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=loaded=] image or text with at least one character excluding [=document white space characters=].
