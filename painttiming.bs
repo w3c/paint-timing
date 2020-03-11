@@ -122,6 +122,7 @@ An [=element=] is <dfn>paintable</dfn> when all of the following apply:
     NOTE: This covers the cases where the element is scaled to zero size, has <code>display: none</code>, or <code>display: contents</code> where the contents resolve to an empty rect.
 
     NOTE: As a general rule, an [=element=] is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling or zooming.
+
 <dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
 <dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered a [=document=] which includes at least one [=element=] that is both [=contentful=] and [=paintable=].
