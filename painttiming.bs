@@ -102,7 +102,7 @@ An [=element=] is <dfn export>contentful</dfn> when one or more of the following
 * The element is an [=svg element with rendered descendants=].
 * The element is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=loaded=] image or text with at least one character excluding [=document white space characters=].
 
-<dfn>Paintable</dfn>: An [=element=] counts as paintable when all of the following apply:
+An [=element=] is <dfn>paintable</dfn> when all of the following apply:
 * The element's [=used=] [=visibility=] is <code>visible</code>.
 * The element and all of its ancestors' [=used=] [=opacity=] is greater than zero.
 
@@ -115,10 +115,9 @@ An [=element=] is <dfn export>contentful</dfn> when one or more of the following
 
     NOTE: As a general rule, an [=element=] is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling or zooming.
 
-<dfn>Paintable pseudo-element</dfn>: A [=generated content pseudo-element=] counts as paintable when all of the following apply:
+A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> when all of the following apply:
 * The pseudo-element's [=used=] [=visibility=] is <code>visible</code>.
 * The pseudo-element's [=used=] [=opacity=] is greater than zero.
-* The pseudo-element generates a non-empty box.
 
 <dfn>Paintable Bounding Rect</dfn>: The paintable bounding rect is the [=element=]'s bounding rect, which would be the result of running the [=getBoundingClientRect=] algorithm on the [=element=], clipped by ancestors with <code>overflow: clip</code>.
 
