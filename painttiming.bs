@@ -41,13 +41,13 @@ urlPrefix: https://html.spec.whatwg.org/multipage/canvas.html
     type: dfn; text: canvas;
     type: dfn; text: context mode; url: #concept-canvas-context-mode;
 urlPrefix: https://html.spec.whatwg.org/multipage/rendering.html
-    type: dfn; text: replaced image; url: #images-3;
+    type: dfn; text: replaced element; url: #replaced-elements;
 urlPrefix: https://w3c.github.io/IntersectionObserver/
     type: dfn; text: Intersection rect algorithm; url: #calculate-intersection-rect-algo
 urlPrefix: https://drafts.csswg.org/css-cascade-4/
-    type: dfn; text: computed; url: #computed-value;
+    type: dfn; text: used; url: #used;
 urlPrefix: https://html.spec.whatwg.org/multipage/dom.html
-    type: dfn; text: document-sourced element; url: #element;
+    type: dfn; text: element; url: #element;
 urlPrefix: https://drafts.csswg.org/css-pseudo-4
     type: dfn; text: generated content pseudo-element; url: #generated-content;
 urlPrefix: https://www.w3.org/TR/cssom-view
@@ -94,34 +94,39 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
-<dfn>Element or pseudo-element</dfn>: A [=document-sourced element=] or a [=generated content pseudo-element=].
-<dfn>Contentful</dfn>: An [=element or pseudo-element=] counts as contentful when one or more of the following apply:
+<dfn>Contentful</dfn>: An [=element=] counts as contentful when one or more of the following apply:
 * The element has a [=text node=] child, with at least one character, excluding [=document white space characters=].
-* The element is a [=replaced image=] representing a [=loaded=] image.
-* The element's [=computed=] style contains a [=loaded=] [=background-image=].
+* The element is a [=replaced element=] representing a [=loaded=] image.
+* The element's [=used=] style contains a [=loaded=] [=background-image=].
 * The element is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * The element is an [=svg element with rendered descendants=].
-* The element's [=computed=] style contains a [=contentful=] and [=paintable=] [=generated content pseudo-element=].
+* The element is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=loaded=] image or text with at least one character excluding [=document white space characters=].
 
-<dfn>Paintable</dfn>: As a general rule, an [=element or pseudo-element=] is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling.
-An [=element or pseudo-element=] counts as paintable when all of the following apply:
-* The element's [=computed=] [=visibility=] is <code>visible</code>.
-* The element and all of its ancestors have positive [=computed=] [=opacity=].
+<dfn>Paintable</dfn>: An [=element=] counts as paintable when all of the following apply:
+* The element's [=used=] [=visibility=] is <code>visible</code>.
+* The element and all of its ancestors' [=used=] [=opacity=] is greater than zero.
 
-    NOTE: there could be cases where a <code>paintable</code> [=element or pseudo-element=] would not be visible to the user, for example in the case of text that has the same color as its background.
+    NOTE: there could be cases where a <code>paintable</code> [=element=] would not be visible to the user, for example in the case of text that has the same color as its background.
     Those elements would still considered as paintable for the purpose of computing [=first contentful paint=].    
 
 * The element's [=paintable bounding rect=] has positive right, bottom, width and height values. 
     
     NOTE: This covers the cases where the element is scaled to zero size, has <code>display: none</code>, or <code>display: contents</code> where the contents resolve to an empty rect.
 
-<dfn>Paintable Bounding Rect</dfn>: The paintable bounding rect is the element's bounding rect, which would be the result of running the [=getBoundingClientRect=] algorithm on the [=element or pseudo-element=], clipped by ancestors with <code>overflow: clip</code>.
+    NOTE: As a general rule, an [=element=] is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling or zooming.
 
-    NOTE: elements contained by boxes with <code>overflow: scroll</code> or <code>overflow: hidden</code> don't have their [=paintable bounding rect=] clipped, as in both cases the [=element or pseudo-element=] can become visible by scrolling.
+<dfn>Paintable pseudo-element</dfn>: A [=generated content pseudo-element=] counts as paintable when all of the following apply:
+* The pseudo-element's [=used=] [=visibility=] is <code>visible</code>.
+* The pseudo-element's [=used=] [=opacity=] is greater than zero.
+* The pseudo-element generates a non-empty box.
+
+<dfn>Paintable Bounding Rect</dfn>: The paintable bounding rect is the [=element=]'s bounding rect, which would be the result of running the [=getBoundingClientRect=] algorithm on the [=element=], clipped by ancestors with <code>overflow: clip</code>.
+
+    NOTE: elements contained by boxes with <code>overflow: scroll</code> or <code>overflow: hidden</code> don't have their [=paintable bounding rect=] clipped, as in both cases the [=element=] can become visible by scrolling.
 
 <dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
-<dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered a [=document=] which includes at least one [=element or pseudo-element=] that is both [=contentful=] and [=paintable=].
+<dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered a [=document=] which includes at least one [=element=] that is both [=contentful=] and [=paintable=].
 
 Whenever a user agent preemptively paints content outside of the [=viewport=], those paints must be considered for [=first paint=] and [=first contentful paint=].
 
