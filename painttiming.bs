@@ -94,7 +94,7 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
-<dfn>Contentful</dfn>: An [=element=] counts as contentful when one or more of the following apply:
+An [=element=] is <dfn export>contentful</dfn> when one or more of the following apply:
 * The element has a [=text node=] child, with at least one character, excluding [=document white space characters=].
 * The element is a [=replaced element=] representing a [=loaded=] image.
 * The element's [=used=] style contains a [=loaded=] [=background-image=].
