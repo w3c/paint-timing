@@ -37,6 +37,7 @@ urlPrefix: https://www.w3.org/TR/SVG2/render.html; spec: CR-SVG2
     type: dfn; url: #Rendered-vs-NonRendered; text: svg element with rendered descendants;
 urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-BACKGROUNDS-3;
     type: dfn; text: background-image; url: #propdef-background-image;
+    type: dfn; text: background-size; url: #background-size;
 urlPrefix: https://html.spec.whatwg.org/multipage/canvas.html
     type: dfn; text: canvas;
     type: dfn; text: context mode; url: #concept-canvas-context-mode;
@@ -52,6 +53,7 @@ urlPrefix: https://drafts.csswg.org/css-pseudo-4
     type: dfn; text: generated content pseudo-element; url: #generated-content;
 urlPrefix: https://www.w3.org/TR/cssom-view
     type: dfn; text: getBoundingClientRect; url: #dom-element-getboundingclientrect;
+    type: dfn; text: scrolling area; url: #scrolling-area;
 </pre>
 
 Introduction {#intro}
@@ -97,11 +99,12 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> when all of the following apply:
 * The pseudo-element's [=used=] [=visibility=] is <code>visible</code>.
 * The pseudo-element's [=used=] [=opacity=] is greater than zero.
+* The pseudo-element generates a non-empty [=box=].
 
 An [=element=] is <dfn export>contentful</dfn> when one or more of the following apply:
 * The element has a [=text node=] child, with at least one character, excluding [=document white space characters=].
 * The element is a [=replaced element=] representing a [=loaded=] image.
-* The element's [=used=] style contains a [=loaded=] [=background-image=].
+* The element has a [=loaded=] [=background-image=], and its [=used=] [=background-size=] has non-zero width and height values.
 
     NOTE: a gradient is not considered a loaded background image, and thus would not make an element count as contentful.
 
@@ -120,7 +123,7 @@ An [=element=] is <dfn>paintable</dfn> when all of the following apply:
     NOTE: there could be cases where a <code>paintable</code> [=element=] would not be visible to the user, for example in the case of text that has the same color as its background.
     Those elements would still considered as paintable for the purpose of computing [=first contentful paint=].    
 
-* The element's [=paintable bounding rect=] has positive right, bottom, width and height values. 
+* The element's [=paintable bounding rect=] intersects with the [=scrolling area=] of the [=document=]. 
     
     NOTE: This covers the cases where the element is scaled to zero size, has <code>display: none</code>, or <code>display: contents</code> where the contents resolve to an empty rect.
 
