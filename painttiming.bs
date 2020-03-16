@@ -31,11 +31,16 @@ urlPrefix: https://www.w3.org/TR/CSS2/visuren.html; spec: CSS-2;
 
 Introduction {#intro}
 =====================
+
+<div class=non-normative>
+
+<em>This section is non-normative.</em>
+
 Load is not a single moment in time — it's an experience that no one metric can fully capture. There are multiple moments during the load experience that can affect whether a user perceives it as "fast" or "slow".
 
-First paint (FP) is the first of these key moments, followed by first contentful paint (FCP). These metrics mark the points, immediately after navigation, when the browser renders pixels to the screen. This is important to the user because it answers the question: is it happening?
+First paint (FP) is the first of these key moments, followed by first contentful paint (FCP). These metrics mark the points in time when the browser renders a given document. This is important to the user because it answers the question: is it happening?
 
-The primary difference between the two metrics is FP marks the point when the browser renders anything that is visually different from what was on the screen prior to navigation. By contrast, FCP is the point when the browser renders the first bit of content from the DOM, which may be text, an image, SVG, or even a canvas element.
+The primary difference between the two metrics is FP marks the first time the browser renders anything for a given document. By contrast, FCP marks the time when the browser renders the first bit of image or text content from the DOM.
 
 Usage example {#example}
 ------------------------
@@ -53,6 +58,8 @@ Usage example {#example}
     // register observer for paint timing notifications
     observer.observe({entryTypes: ["paint"]});
 </pre>
+
+</div>
 
 Terminology {#sec-terminology}
 ==============================
