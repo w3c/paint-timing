@@ -5,9 +5,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 70c86369151f7b7b97b78c0f664dba09a4024ca2" name="generator">
+  <meta content="Bikeshed version 7dd49ddf2b095c0a9accc859934f2349a4fb5d3c" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="3fe291ff8c26f59bbab2712db4dfbe2eec09833b" name="document-revision">
+  <meta content="b79e89b19a479f2e63ba97529afd7056e349f505" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -266,7 +266,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-10">10 March 2020</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-16">16 March 2020</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -338,10 +338,12 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   </nav>
   <main>
    <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
-    Load is not a single moment in time — it’s an experience that no one metric can fully capture. There are multiple moments during the load experience that can affect whether a user perceives it as "fast" or "slow". 
-   <p>First paint (FP) is the first of these key moments, followed by first contentful paint (FCP). These metrics mark the points, immediately after navigation, when the browser renders pixels to the screen. This is important to the user because it answers the question: is it happening?</p>
-   <p>The primary difference between the two metrics is FP marks the point when the browser renders anything that is visually different from what was on the screen prior to navigation. By contrast, FCP is the point when the browser renders the first bit of content from the DOM, which may be text, an image, SVG, or even a canvas element.</p>
-   <h3 class="heading settled" data-level="1.1" id="example"><span class="secno">1.1. </span><span class="content">Usage example</span><a class="self-link" href="#example"></a></h3>
+   <div class="non-normative">
+    <p><em>This section is non-normative.</em></p>
+    <p>Load is not a single moment in time — it’s an experience that no one metric can fully capture. There are multiple moments during the load experience that can affect whether a user perceives it as "fast" or "slow".</p>
+    <p>First paint (FP) is the first of these key moments, followed by first contentful paint (FCP). These metrics mark the points in time when the browser renders a given document. This is important to the user because it answers the question: is it happening?</p>
+    <p>The primary difference between the two metrics is FP marks the first time the browser renders anything for a given document. By contrast, FCP marks the time when the browser renders the first bit of image or text content from the DOM.</p>
+    <h3 class="heading settled" data-level="1.1" id="example"><span class="secno">1.1. </span><span class="content">Usage example</span><a class="self-link" href="#example"></a></h3>
 <pre class="example highlight" id="example-a8843108"><a class="self-link" href="#example-a8843108"></a><c- a>var</c-> observer <c- o>=</c-> <c- k>new</c-> PerformanceObserver<c- p>(</c-><c- a>function</c-><c- p>(</c->list<c- p>)</c-> <c- p>{</c->
     <c- a>var</c-> perfEntries <c- o>=</c-> list<c- p>.</c->getEntries<c- p>();</c->
     <c- k>for</c-> <c- p>(</c-><c- a>var</c-> i <c- o>=</c-> <c- mi>0</c-><c- p>;</c-> i <c- o>&lt;</c-> perfEntries<c- p>.</c->length<c- p>;</c-> i<c- o>++</c-><c- p>)</c-> <c- p>{</c->
@@ -354,6 +356,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 <c- c1>// register observer for paint timing notifications</c->
 observer<c- p>.</c->observe<c- p>({</c->entryTypes<c- o>:</c-> <c- p>[</c-><c- u>"paint"</c-><c- p>]});</c->
 </pre>
+   </div>
    <h2 class="heading settled" data-level="2" id="sec-terminology"><span class="secno">2. </span><span class="content">Terminology</span><a class="self-link" href="#sec-terminology"></a></h2>
    <p><dfn data-dfn-type="dfn" data-export id="paint">Paint<a class="self-link" href="#paint"></a></dfn>: the user agent has performed a "paint" (or "render") when it has converted the render tree to pixels on the screen.
 Formally, we consider the user agent to have "rendered" a document when it has performed the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering">update the rendering</a> steps of the event loop.</p>
