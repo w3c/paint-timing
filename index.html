@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
   <meta content="Bikeshed version 7dd49ddf2b095c0a9accc859934f2349a4fb5d3c" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="b79e89b19a479f2e63ba97529afd7056e349f505" name="document-revision">
+  <meta content="2af3ad36f24151ddb9b9fcb00f75ab11b0169a51" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -410,7 +410,7 @@ This allows developers to detect support for paint timing.</p>
      When asked to <a data-link-type="dfn" href="#report-paint-timing" id="ref-for-report-paint-timing②">report paint timing</a> given <var>document</var>, <var>paintType</var>, and <var>paintTimestamp</var> as arguments, perform the following steps: 
     <ol>
      <li data-md>
-      <p>Create a new <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming③">PerformancePaintTiming</a></code> object <var>newEntry</var> and set its attributes as follows:</p>
+      <p>Create a <a data-link-type="dfn" href="https://heycam.github.io/webidl/#new" id="ref-for-new">new</a> <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming③">PerformancePaintTiming</a></code> object <var>newEntry</var> with <var>document</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm">relevant realm</a> and set its attributes as follows:</p>
       <ol>
        <li data-md>
         <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-name" id="ref-for-dom-performanceentry-name①">name</a></code> attribute to <var>paintType</var>.</p>
@@ -422,7 +422,7 @@ This allows developers to detect support for paint timing.</p>
         <p>Set <var>newEntry</var>’s <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration①">duration</a></code> attribute to 0.</p>
       </ol>
      <li data-md>
-      <p><a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> <var>newEntry</var> object, with <var>document</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global">relevant global object</a> as input.</p>
+      <p><a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> <var>newEntry</var> object.</p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="5" id="acknowledgements"><span class="secno">5. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
@@ -471,10 +471,10 @@ specification.</p>
     <li><a href="#ref-for-window">3. The PerformancePaintTiming interface</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-relevant-global">
-   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-concept-relevant-realm">
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm">https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-relevant-global">4.1.2. Report paint timing</a>
+    <li><a href="#ref-for-concept-relevant-realm">4.1.2. Report paint timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-update-the-rendering">
@@ -536,6 +536,12 @@ specification.</p>
     <li><a href="#ref-for-Exposed">3. The PerformancePaintTiming interface</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-new">
+   <a href="https://heycam.github.io/webidl/#new">https://heycam.github.io/webidl/#new</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-new">4.1.2. Report paint timing</a>
+   </ul>
+  </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
@@ -558,7 +564,7 @@ specification.</p>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-window" style="color:initial">Window</span>
-     <li><span class="dfn-paneled" id="term-for-concept-relevant-global" style="color:initial">relevant global object</span>
+     <li><span class="dfn-paneled" id="term-for-concept-relevant-realm" style="color:initial">relevant realm</span>
      <li><span class="dfn-paneled" id="term-for-update-the-rendering" style="color:initial">update the rendering</span>
     </ul>
    <li>
@@ -576,6 +582,7 @@ specification.</p>
     <ul>
      <li><span class="dfn-paneled" id="term-for-idl-DOMString" style="color:initial">DOMString</span>
      <li><span class="dfn-paneled" id="term-for-Exposed" style="color:initial">Exposed</span>
+     <li><span class="dfn-paneled" id="term-for-new" style="color:initial">new</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
