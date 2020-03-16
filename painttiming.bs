@@ -124,12 +124,12 @@ Reporting paint timing {#sec-reporting-paint-timing}
 
 <div algorithm="Report paint timing">
     When asked to [=report paint timing=] given |document|, |paintType|, and |paintTimestamp| as arguments, perform the following steps:
-    1. Create a new {{PerformancePaintTiming}} object |newEntry| and set its attributes as follows:
+    1. Create a <a spec=webidl>new</a> {{PerformancePaintTiming}} object |newEntry| with |document|'s [=relevant realm=] and set its attributes as follows:
         1. Set |newEntry|'s {{PerformanceEntry/name}} attribute to |paintType|.
         1. Set |newEntry|'s {{PerformanceEntry/entryType}} attribute to <code>"paint"</code>.
         1. Set |newEntry|'s {{PerformanceEntry/startTime}} attribute to |paintTimestamp|.
         1. Set |newEntry|'s {{PerformanceEntry/duration}} attribute to 0.
-    1. <a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> |newEntry| object, with |document|'s [=relevant global object=] as input.
+    1. <a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> |newEntry| object.
 </div>
 
 
