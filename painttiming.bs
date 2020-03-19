@@ -32,7 +32,7 @@ urlPrefix: https://www.w3.org/TR/CSS22/visufx.html; spec: CSS-2;
 urlPrefix: https://www.w3.org/TR/css-color-3; spec: CSS-COLOR-3;
     type: dfn; url: #opacity; text: opacity;
 urlPrefix: https://html.spec.whatwg.org/multipage/images.html
-    type: dfn; text: completely available image; url: #img-all
+    type: dfn; text: fully decodable image; url: #img-good
 urlPrefix: https://www.w3.org/TR/SVG2/render.html; spec: CR-SVG2
     type: dfn; url: #Rendered-vs-NonRendered; text: svg element with rendered descendants;
 urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-BACKGROUNDS-3;
@@ -109,19 +109,20 @@ A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> 
 
 An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
 * |target| has a [=text node=] child, with at least one character, excluding [=document white space characters=].
-* |target| is a [=replaced element=] representing a [=completely available image=].
-* |target| has a [=url valued=] [=image=] [=background-image=], and its [=used=] [=background-size=] has non-zero width and height values.
+* |target| is a [=replaced element=] representing a [=fully decodable image=].
+* |target| has a [=background-image=] which is a [=url valued=] [=fully decodable image=], and its [=used=] [=background-size=] has non-zero width and height values.
 * |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * |target| is an [=svg element with rendered descendants=].
-* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=completely available image=] or text with at least one character excluding [=document white space characters=].
+* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=fully decodable image=] [=or text with at least one character excluding [=document white space characters=].
 
-To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, The  is the result of the following algorithm:
+To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run the following steps:
     1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
     1. Let |container| be the [=containing block=] of |target|.
     1. While |container| is not the [=document=]
         1. If container has <code>overflow: clip</code>, or its [=used=] style a css [=clip-path=] property, update |boundingRect| by applying |container|’s clip.
         1. Update |container| to be the [=containing block=] of |container|.
     1. Clip |boundingRect| with the [=document=]'s [=scrolling area=].
+    1. Return |boundingRect|.
 
     NOTE: elements contained by boxes with <code>overflow: scroll</code> or <code>overflow: hidden</code> don't have their [=paintable bounding rect=] clipped, as in both cases the [=element=] can become visible by scrolling.
 
