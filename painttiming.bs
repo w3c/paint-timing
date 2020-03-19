@@ -50,6 +50,7 @@ urlPrefix: https://drafts.csswg.org/css-cascade-4/
     type: dfn; text: used; url: #used;
 urlPrefix: https://html.spec.whatwg.org/multipage/dom.html
     type: dfn; text: element; url: #element;
+    type: dfn; text: represents; url: #represents;
 urlPrefix: https://drafts.csswg.org/css-pseudo-4
     type: dfn; text: generated content pseudo-element; url: #generated-content;
 urlPrefix: https://www.w3.org/TR/cssom-view
@@ -61,6 +62,9 @@ urlPrefix: https://drafts.fxtf.org/css-masking-1/
     type: dfn; text: clip-path; url: #the-clip-path;
 urlPrefix: https://www.w3.org/TR/css-images-3/
     type: dfn; text: CSS image; url: #typedef-image;
+urlPrefix: https://html.spec.whatwg.org/multipage/media.html
+    type: dfn; text: poster frame; url: #poster-frame;
+    type: dfn; text: video element; url: #the-video-element;
 </pre>
 
 Introduction {#intro}
@@ -117,8 +121,9 @@ An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the 
 * |target| is a [=replaced element=] representing an [=available=] [=image=].
 * |target| has a [=background-image=] which is a [=contentful image=], and its [=used=] [=background-size=] has non-zero width and height values.
 * |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
+* |target| is a [=video element=] that [=represents=] its [=poster frame=] or the first video frame.
 * |target| is an [=svg element with rendered descendants=].
-* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=contentful image=] or text with at least one character excluding [=document white space characters=].
+* |target| is an [=originating element=] for a [=paintable pseudo-element=] that [=represents=] a [=contentful image=] or text with at least one character excluding [=document white space characters=].
 
 To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run the following steps:
     1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
