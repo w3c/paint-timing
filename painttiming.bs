@@ -109,7 +109,7 @@ A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> 
 * The pseudo-element generates a non-empty [=box=].
 
 A [=CSS image=] |img| is a <dfn>contentful image</dfn> when all of the following apply:
-* |img| is [=url valued=]
+* |img| is [=url valued=].
 * |img| is [=available=].
 
 An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
