@@ -31,8 +31,8 @@ urlPrefix: https://www.w3.org/TR/CSS22/visufx.html; spec: CSS-2;
     type: dfn; url: #propdef-visibility; text: visibility;
 urlPrefix: https://www.w3.org/TR/css-color-3; spec: CSS-COLOR-3;
     type: dfn; url: #opacity; text: opacity;
-urlPrefix: https://www.w3.org/TR/css-images-3/; spec: CSS-IMAGES-3;
-    type: dfn; text: loaded; url: #typedef-image
+urlPrefix: https://html.spec.whatwg.org/multipage/images.html
+    type: dfn; text: completely available image; url: #img-all
 urlPrefix: https://www.w3.org/TR/SVG2/render.html; spec: CR-SVG2
     type: dfn; url: #Rendered-vs-NonRendered; text: svg element with rendered descendants;
 urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-BACKGROUNDS-3;
@@ -54,6 +54,12 @@ urlPrefix: https://drafts.csswg.org/css-pseudo-4
 urlPrefix: https://www.w3.org/TR/cssom-view
     type: dfn; text: getBoundingClientRect; url: #dom-element-getboundingclientrect;
     type: dfn; text: scrolling area; url: #scrolling-area;
+urlPrefix: https://www.w3.org/TR/css3-values/
+    type: dfn; text: url valued; url: #url-value;
+urlPrefix: https://drafts.fxtf.org/css-masking-1/
+    type: dfn; text: clip-path; url: #the-clip-path;
+urlPrefix: https://www.w3.org/TR/css-images-3/
+    type: dfn; text: image; url: #typedef-image;    
 </pre>
 
 Introduction {#intro}
@@ -101,29 +107,32 @@ A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> 
 * The pseudo-element's [=used=] [=opacity=] is greater than zero.
 * The pseudo-element generates a non-empty [=box=].
 
-An [=element=] is <dfn export>contentful</dfn> when one or more of the following apply:
-* The element has a [=text node=] child, with at least one character, excluding [=document white space characters=].
-* The element is a [=replaced element=] representing a [=loaded=] image.
-* The element has a [=loaded=] [=background-image=], and its [=used=] [=background-size=] has non-zero width and height values.
+An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
+* |target| has a [=text node=] child, with at least one character, excluding [=document white space characters=].
+* |target| is a [=replaced element=] representing a [=completely available image=].
+* |target| has a [=url valued=] [=image=] [=background-image=], and its [=used=] [=background-size=] has non-zero width and height values.
+* |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
+* |target| is an [=svg element with rendered descendants=].
+* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=completely available image=] or text with at least one character excluding [=document white space characters=].
 
-    NOTE: a gradient is not considered a loaded background image, and thus would not make an element count as contentful.
-
-* The element is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
-* The element is an [=svg element with rendered descendants=].
-* The element is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=loaded=] image or text with at least one character excluding [=document white space characters=].
-
-<dfn>Paintable Bounding Rect</dfn>: The paintable bounding rect is the [=element=]'s bounding rect, which would be the result of running the [=getBoundingClientRect=] algorithm on the [=element=], clipped by ancestors with <code>overflow: clip</code>.
+To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, The  is the result of the following algorithm:
+    1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
+    1. Let |container| be the [=containing block=] of |target|.
+    1. While |container| is not the [=document=]
+        1. If container has <code>overflow: clip</code>, or its [=used=] style a css [=clip-path=] property, update |boundingRect| by applying |container|’s clip.
+        1. Update |container| to be the [=containing block=] of |container|.
+    1. Clip |boundingRect| with the [=document=]'s [=scrolling area=].
 
     NOTE: elements contained by boxes with <code>overflow: scroll</code> or <code>overflow: hidden</code> don't have their [=paintable bounding rect=] clipped, as in both cases the [=element=] can become visible by scrolling.
 
-An [=element=] is <dfn>paintable</dfn> when all of the following apply:
-* The element's [=used=] [=visibility=] is <code>visible</code>.
-* The element and all of its ancestors' [=used=] [=opacity=] is greater than zero.
+An [=element=] |el| is <dfn>paintable</dfn> when all of the following apply:
+* |el|'s [=used=] [=visibility=] is <code>visible</code>.
+* |el| and all of its ancestors' [=used=] [=opacity=] is greater than zero.
 
     NOTE: there could be cases where a <code>paintable</code> [=element=] would not be visible to the user, for example in the case of text that has the same color as its background.
     Those elements would still considered as paintable for the purpose of computing [=first contentful paint=].    
 
-* The element's [=paintable bounding rect=] intersects with the [=scrolling area=] of the [=document=]. 
+* |el|'s [=paintable bounding rect=] intersects with the [=scrolling area=] of the [=document=]. 
     
     NOTE: This covers the cases where the element is scaled to zero size, has <code>display: none</code>, or <code>display: contents</code> where the contents resolve to an empty rect.
 
