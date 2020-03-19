@@ -32,7 +32,8 @@ urlPrefix: https://www.w3.org/TR/CSS22/visufx.html; spec: CSS-2;
 urlPrefix: https://www.w3.org/TR/css-color-3; spec: CSS-COLOR-3;
     type: dfn; url: #opacity; text: opacity;
 urlPrefix: https://html.spec.whatwg.org/multipage/images.html
-    type: dfn; text: fully decodable image; url: #img-good
+    type: dfn; text: available; url: #img-available;
+    type: dfn; text: image; url: #images;
 urlPrefix: https://www.w3.org/TR/SVG2/render.html; spec: CR-SVG2
     type: dfn; url: #Rendered-vs-NonRendered; text: svg element with rendered descendants;
 urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-BACKGROUNDS-3;
@@ -59,7 +60,7 @@ urlPrefix: https://www.w3.org/TR/css3-values/
 urlPrefix: https://drafts.fxtf.org/css-masking-1/
     type: dfn; text: clip-path; url: #the-clip-path;
 urlPrefix: https://www.w3.org/TR/css-images-3/
-    type: dfn; text: image; url: #typedef-image;    
+    type: dfn; text: CSS image; url: #typedef-image;
 </pre>
 
 Introduction {#intro}
@@ -107,13 +108,13 @@ A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> 
 * The pseudo-element's [=used=] [=opacity=] is greater than zero.
 * The pseudo-element generates a non-empty [=box=].
 
-A CSS [=image=] |img| is a <dfn>contentful image</dfn> when all of the following apply:
+A [=CSS image=] |img| is a <dfn>contentful image</dfn> when all of the following apply:
 * |img| is [=url valued=]
-* |img| represents a [=fully decodable image=]
+* |img| is [=available=].
 
 An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
 * |target| has a [=text node=] child, with at least one character, excluding [=document white space characters=].
-* |target| is a [=replaced element=] representing a [=fully decodable image=].
+* |target| is a [=replaced element=] representing an [=available=] [=image=].
 * |target| has a [=background-image=] which is a [=contentful image=], and its [=used=] [=background-size=] has non-zero width and height values.
 * |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * |target| is an [=svg element with rendered descendants=].
