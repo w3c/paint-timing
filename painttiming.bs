@@ -124,7 +124,7 @@ To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run t
     1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
     1. Let |container| be the [=containing block=] of |target|.
     1. While |container| is not the [=document=]
-        1. If container has <code>overflow: clip</code>, or its [=used=] style a css [=clip-path=] property, update |boundingRect| by applying |container|’s clip.
+        1. If container has <code>overflow: clip</code>, or its [=used=] style has a css [=clip-path=] property, update |boundingRect| by applying |container|’s clip.
         1. Update |container| to be the [=containing block=] of |container|.
     1. Clip |boundingRect| with the [=document=]'s [=scrolling area=].
     1. Return |boundingRect|.
