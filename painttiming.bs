@@ -123,7 +123,7 @@ An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the 
 * |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * |target| is a [=video element=] that [=represents=] its [=poster frame=] or the first video frame.
 * |target| is an [=svg element with rendered descendants=].
-* |target| is an [=originating element=] for a [=paintable pseudo-element=] that [=represents=] a [=contentful image=] or text with at least one character excluding [=document white space characters=].
+* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=contentful image=] or text with at least one character excluding [=document white space characters=].
 
 To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run the following steps:
     1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
