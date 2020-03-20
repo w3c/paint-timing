@@ -122,10 +122,6 @@ An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the 
 
 To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run the following steps:
     1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
-    1. Let |container| be the [=containing block=] of |target|.
-    1. While |container| is not the [=document=]
-        1. If container has <code>overflow: clip</code>, or its [=used=] style has a css [=clip-path=] property, update |boundingRect| by applying |container|’s clip.
-        1. Update |container| to be the [=containing block=] of |container|.
     1. Clip |boundingRect| with the [=document=]'s [=scrolling area=].
     1. Return |boundingRect|.
 
@@ -189,8 +185,6 @@ Reporting paint timing {#sec-reporting-paint-timing}
         NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
 
     1. If this instance of [=update the rendering=] is the [=first contentful paint=] of |document|, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
-
-        NOTE: This paint must include elements that are both [=contentful=] and [=paintable=].
 
         NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
 </div>
