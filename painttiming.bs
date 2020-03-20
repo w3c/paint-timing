@@ -121,7 +121,7 @@ An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the 
 * |target| is a [=replaced element=] representing an [=available=] [=image=].
 * |target| has a [=background-image=] which is a [=contentful image=], and its [=used=] [=background-size=] has non-zero width and height values.
 * |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
-* |target| is a [=video element=] that [=represents=] its [=poster frame=] or the first video frame.
+* |target| is a [=video element=] that [=represents=] its [=poster frame=] or the first video frame and the frame is available.
 * |target| is an [=svg element with rendered descendants=].
 * |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=contentful image=] or text with at least one character excluding [=document white space characters=].
 
