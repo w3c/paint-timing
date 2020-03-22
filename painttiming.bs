@@ -186,7 +186,9 @@ Reporting paint timing {#sec-reporting-paint-timing}
 
     1. If this instance of [=update the rendering=] is the [=first contentful paint=] of |document|, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
 
-        NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
+        NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes, will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
+
+        NOTE: A [=document=] is not guaranteed to mark [=first paint=] [=first contentful paint=]. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=], may never mark [=first contentful paint=].
 </div>
 
 <h4 dfn>Report paint timing</h4>
