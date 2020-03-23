@@ -68,8 +68,6 @@ urlPrefix: https://html.spec.whatwg.org/multipage/media.html
     type: dfn; text: video element; url: #the-video-element;
 urlPrefix: https://html.spec.whatwg.org/multipage/input.html
     type: dfn; text: input; url: #the-input-element;
-    type: dfn; text: hidden; url: #hidden-state-(type=hidden);
-    type: dfn; text: type attribute; url: #states-of-the-type-attribute;
     type: dfn; text: value attribute; url: #attr-input-value;
 
 </pre>
