@@ -70,9 +70,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/input.html
     type: dfn; text: input; url: #the-input-element;
     type: dfn; text: hidden; url: #hidden-state-(type=hidden);
     type: dfn; text: type attribute; url: #states-of-the-type-attribute;
-urlPrefix: https://html.spec.whatwg.org/multipage/form-elements.html
-    type: dfn; text: form control element;
-    type: dfn; text: datalist; url: #the-datalist-element;
+    type: dfn; text: value attribute; url: #attr-input-value;
 
 </pre>
 
@@ -125,18 +123,17 @@ A [=CSS image=] |img| is a <dfn>contentful image</dfn> when all of the following
 * |img| is [=url valued=].
 * |img| is [=available=].
 
+A {{DOMString}} is <dfn>non-empty</dfn> if it contains at least one character excluding [=document white space characters=].
+
 An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
-* |target| has a [=text node=] child, with at least one character, excluding [=document white space characters=].
+* |target| has a [=text node=] child, representing [=non-empty=] text.
 * |target| is a [=replaced element=] representing an [=available=] [=image=].
 * |target| has a [=background-image=] which is a [=contentful image=], and its [=used=] [=background-size=] has non-zero width and height values.
 * |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * |target| is a [=video element=] that [=represents=] its [=poster frame=] or the first video frame and the frame is available.
 * |target| is an [=svg element with rendered descendants=].
-* |target| is an [=input=] element or a [=form control element=].
-
-    NOTE: [=hidden=] input elements and [=form control element=]s like [=datalist=] will are not considered [=being rendered=], and thus will not be considered [=paintable=].
-
-* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=contentful image=] or text with at least one character excluding [=document white space characters=].
+* |target| is an [=input=] element with a [=non-empty=] [=value attribute=].
+* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=contentful image=] or [=non-empty=] text.
 
 To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run the following steps:
     1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
