@@ -44,6 +44,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/canvas.html
     type: dfn; text: context mode; url: #concept-canvas-context-mode;
 urlPrefix: https://html.spec.whatwg.org/multipage/rendering.html
     type: dfn; text: replaced element; url: #replaced-elements;
+    type: dfn; text: being rendered; url: #being-rendered;
 urlPrefix: https://w3c.github.io/IntersectionObserver/
     type: dfn; text: Intersection rect algorithm; url: #calculate-intersection-rect-algo
 urlPrefix: https://drafts.csswg.org/css-cascade-4/
@@ -65,6 +66,10 @@ urlPrefix: https://www.w3.org/TR/css-images-3/
 urlPrefix: https://html.spec.whatwg.org/multipage/media.html
     type: dfn; text: poster frame; url: #poster-frame;
     type: dfn; text: video element; url: #the-video-element;
+urlPrefix: https://html.spec.whatwg.org/multipage/input.html
+    type: dfn; text: input; url: #the-input-element;
+    type: dfn; text: value attribute; url: #attr-input-value;
+
 </pre>
 
 Introduction {#intro}
@@ -116,14 +121,17 @@ A [=CSS image=] |img| is a <dfn>contentful image</dfn> when all of the following
 * |img| is [=url valued=].
 * |img| is [=available=].
 
+A {{DOMString}} is <dfn>non-empty</dfn> if it contains at least one character excluding [=document white space characters=].
+
 An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
-* |target| has a [=text node=] child, with at least one character, excluding [=document white space characters=].
+* |target| has a [=text node=] child, representing [=non-empty=] text.
 * |target| is a [=replaced element=] representing an [=available=] [=image=].
 * |target| has a [=background-image=] which is a [=contentful image=], and its [=used=] [=background-size=] has non-zero width and height values.
 * |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * |target| is a [=video element=] that [=represents=] its [=poster frame=] or the first video frame and the frame is available.
 * |target| is an [=svg element with rendered descendants=].
-* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=contentful image=] or text with at least one character excluding [=document white space characters=].
+* |target| is an [=input=] element with a [=non-empty=] [=value attribute=].
+* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=contentful image=] or [=non-empty=] text.
 
 To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run the following steps:
     1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
@@ -133,6 +141,7 @@ To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run t
     NOTE: elements contained by boxes with <code>overflow: scroll</code> or <code>overflow: hidden</code> don't have their [=paintable bounding rect=] clipped, as in both cases the [=element=] can become visible by scrolling.
 
 An [=element=] |el| is <dfn>paintable</dfn> when all of the following apply:
+* |el| is [=being rendered=].
 * |el|'s [=used=] [=visibility=] is <code>visible</code>.
 * |el| and all of its ancestors' [=used=] [=opacity=] is greater than zero.
 
