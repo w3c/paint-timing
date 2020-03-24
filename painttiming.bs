@@ -30,7 +30,9 @@ urlPrefix: https://www.w3.org/TR/CSS2/visuren.html; spec: CSS-2;
 urlPrefix: https://www.w3.org/TR/CSS22/visufx.html; spec: CSS-2;
     type: dfn; url: #propdef-visibility; text: visibility;
 urlPrefix: https://www.w3.org/TR/css-color-3; spec: CSS-COLOR-3;
+    type: dfn; url: #foreground; text: foreground color;
     type: dfn; url: #opacity; text: opacity;
+    type: dfn; text: fully transparent; url: #alphavalue-def; 
 urlPrefix: https://html.spec.whatwg.org/multipage/images.html
     type: dfn; text: available; url: #img-available;
     type: dfn; text: image; url: #images;
@@ -59,6 +61,9 @@ urlPrefix: https://www.w3.org/TR/cssom-view
     type: dfn; text: scrolling area; url: #scrolling-area;
 urlPrefix: https://www.w3.org/TR/css3-values/
     type: dfn; text: url valued; url: #url-value;
+    type: dfn; text: length; url: #length-value;
+urlPrefix: https://www.w3.org/TR/css-text-decor-3/
+    type: dfn; text: text-shadow; url: #text-shadow-property;
 urlPrefix: https://drafts.fxtf.org/css-masking-1/
     type: dfn; text: clip-path; url: #the-clip-path;
 urlPrefix: https://www.w3.org/TR/css-images-3/
@@ -112,10 +117,15 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
-A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> when all of the following apply:
-* The pseudo-element's [=used=] [=visibility=] is <code>visible</code>.
-* The pseudo-element's [=used=] [=opacity=] is greater than zero.
-* The pseudo-element generates a non-empty [=box=].
+A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> |target| when all of the following apply:
+* |target| is [=being rendered=].
+* |target|'s [=used=] [=visibility=] is <code>visible</code>.
+* |target|'s [=used=] [=opacity=] is greater than zero.
+* |target|t generates a non-empty [=box=].
+
+A [=generated content pseudo-element=] is a <dfn>contentful pseudo-element</dfn> |target| when one or more of the following apply:
+* |target| represents a [=contentful image=].
+* |target| represents [=non-empty=] text, and its [=used=] style [=may display text=].
 
 A [=CSS image=] |img| is a <dfn>contentful image</dfn> when all of the following apply:
 * |img| is [=url valued=].
@@ -123,15 +133,19 @@ A [=CSS image=] |img| is a <dfn>contentful image</dfn> when all of the following
 
 A {{DOMString}} is <dfn>non-empty</dfn> if it contains at least one character excluding [=document white space characters=].
 
+A style |s| <dfn>may display text</dfn> if one of the following apply:
+* The [=foreground color=] of |s| is not [=fully transparent=].
+* The [=text-shadow=] of |s| contains at least one value that is not [=fully transparent=] and its [=length=] is greater than 0.
+
 An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
-* |target| has a [=text node=] child, representing [=non-empty=] text.
+* |target| has a [=text node=] child, representing [=non-empty=] text, and the [=used=] style of |target| [=may display text=].
 * |target| is a [=replaced element=] representing an [=available=] [=image=].
 * |target| has a [=background-image=] which is a [=contentful image=], and its [=used=] [=background-size=] has non-zero width and height values.
 * |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
 * |target| is a [=video element=] that [=represents=] its [=poster frame=] or the first video frame and the frame is available.
 * |target| is an [=svg element with rendered descendants=].
 * |target| is an [=input=] element with a [=non-empty=] [=value attribute=].
-* |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=contentful image=] or [=non-empty=] text.
+* |target| is an [=originating element=] for a [=paintable pseudo-element=] that is also a [=contentful pseudo-element=].
 
 To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run the following steps:
     1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
