@@ -117,13 +117,13 @@ Formally, we consider the user agent to have "rendered" a document when it has p
 
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
-A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> |target| when all of the following apply:
+A [=generated content pseudo-element=] |target| is a <dfn>paintable pseudo-element</dfn> |target| when all of the following apply:
 * |target| is [=being rendered=].
 * |target|'s [=used=] [=visibility=] is <code>visible</code>.
 * |target|'s [=used=] [=opacity=] is greater than zero.
 * |target|t generates a non-empty [=box=].
 
-A [=generated content pseudo-element=] is a <dfn>contentful pseudo-element</dfn> |target| when one or more of the following apply:
+A [=generated content pseudo-element=] |target| is a <dfn>contentful pseudo-element</dfn> |target| when one or more of the following apply:
 * |target| represents a [=contentful image=].
 * |target| represents [=non-empty=] text, and its [=used=] style [=may display text=].
 
