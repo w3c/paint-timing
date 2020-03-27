@@ -5,9 +5,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 3453c843, updated Thu Mar 26 19:10:58 2020 -0700" name="generator">
+  <meta content="Bikeshed version eea3cd7e, updated Fri Mar 27 07:13:34 2020 -0700" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="53a92ae15274a891d4db0bafed60df878e01f0e9" name="document-revision">
+  <meta content="e891c8710cc4d22f215bf6e0ef9fa8ce457ee186" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -381,11 +381,12 @@ Formally, we consider the user agent to have "rendered" a document when it has p
    <p>An <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#element" id="ref-for-element">element</a> <var>target</var> is <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="contentful">contentful</dfn> when one or more of the following apply:</p>
    <ul>
     <li data-md>
-     <p><var>target</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#text-nodes" id="ref-for-text-nodes">text node</a> child, representing <a data-link-type="dfn" href="#non-empty" id="ref-for-non-empty">non-empty</a> text.</p>
+     <p><var>target</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#text-nodes" id="ref-for-text-nodes">text node</a> child, representing <a data-link-type="dfn" href="#non-empty" id="ref-for-non-empty">non-empty</a> text, and the node’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used" id="ref-for-used②">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-color-3#opacity" id="ref-for-opacity①">opacity</a> is greater than zero.</p>
+     <p class="note" role="note"><span>NOTE:</span> this covers the case where a <a data-link-type="dfn" href="https://drafts.csswg.org/css-pseudo-4#typographic-pseudos" id="ref-for-typographic-pseudos">typographical pseudo-element</a> would override the opacity of the text node.</p>
     <li data-md>
      <p><var>target</var> is a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/rendering.html#replaced-elements" id="ref-for-replaced-elements">replaced element</a> representing an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#img-available" id="ref-for-img-available①">available</a> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#images" id="ref-for-images">image</a>.</p>
     <li data-md>
-     <p><var>target</var> has a <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image" id="ref-for-propdef-background-image">background-image</a> which is a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image">contentful image</a>, and its <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used" id="ref-for-used②">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#background-size" id="ref-for-background-size">background-size</a> has non-zero width and height values.</p>
+     <p><var>target</var> has a <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image" id="ref-for-propdef-background-image">background-image</a> which is a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image">contentful image</a>, and its <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used" id="ref-for-used③">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#background-size" id="ref-for-background-size">background-size</a> has non-zero width and height values.</p>
     <li data-md>
      <p><var>target</var> is a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/canvas.html#canvas" id="ref-for-canvas">canvas</a> with its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-context-mode" id="ref-for-concept-canvas-context-mode">context mode</a> set to any value other than <code class="highlight">none</code>.</p>
     <li data-md>
@@ -412,9 +413,9 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     <li data-md>
      <p><var>el</var> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/rendering.html#being-rendered" id="ref-for-being-rendered">being rendered</a>.</p>
     <li data-md>
-     <p><var>el</var>’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used" id="ref-for-used③">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/CSS22/visufx.html#propdef-visibility" id="ref-for-propdef-visibility①">visibility</a> is <code class="highlight">visible</code>.</p>
+     <p><var>el</var>’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used" id="ref-for-used④">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/CSS22/visufx.html#propdef-visibility" id="ref-for-propdef-visibility①">visibility</a> is <code class="highlight">visible</code>.</p>
     <li data-md>
-     <p><var>el</var> and all of its ancestors' <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used" id="ref-for-used④">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-color-3#opacity" id="ref-for-opacity①">opacity</a> is greater than zero.</p>
+     <p><var>el</var> and all of its ancestors' <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used" id="ref-for-used⑤">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-color-3#opacity" id="ref-for-opacity②">opacity</a> is greater than zero.</p>
      <p class="note" role="note"><span>NOTE:</span> there could be cases where a <code class="highlight">paintable</code> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#element" id="ref-for-element④">element</a> would not be visible to the user, for example in the case of text that has the same color as its background.
 Those elements would still considered as paintable for the purpose of computing <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint">first contentful paint</a>.</p>
     <li data-md>
@@ -532,7 +533,7 @@ specification.</p>
   <aside class="dfn-panel" data-for="term-for-opacity">
    <a href="https://www.w3.org/TR/css-color-3#opacity">https://www.w3.org/TR/css-color-3#opacity</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-opacity">2. Terminology</a> <a href="#ref-for-opacity①">(2)</a>
+    <li><a href="#ref-for-opacity">2. Terminology</a> <a href="#ref-for-opacity①">(2)</a> <a href="#ref-for-opacity②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-box">
