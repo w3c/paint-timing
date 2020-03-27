@@ -25,8 +25,6 @@ urlPrefix: https://www.w3.org/TR/performance-timeline-2/; spec: PERFORMANCE-TIME
         text: supportedEntryTypes; url: #supportedentrytypes-attribute
 urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: HR-TIME-2;
     type: typedef; text: DOMHighResTimeStamp
-urlPrefix: https://www.w3.org/TR/CSS2/visuren.html; spec: CSS-2;
-    type: dfn; url: #viewport; text: viewport
 urlPrefix: https://www.w3.org/TR/CSS22/visufx.html; spec: CSS-2;
     type: dfn; url: #propdef-visibility; text: visibility;
 urlPrefix: https://www.w3.org/TR/css-color-3; spec: CSS-COLOR-3;
@@ -157,10 +155,6 @@ An [=element=] |el| is <dfn>paintable</dfn> when all of the following apply:
 <dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
 <dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered a [=document=] which includes at least one [=element=] that is both [=contentful=] and [=paintable=].
-
-Whenever a user agent preemptively paints content outside of the [=viewport=], those paints must be considered for [=first paint=] and [=first contentful paint=].
-
-    NOTE: a user agent has freedom to choose their own strategy for painting. Such strategy could even be to never paint content that is outside of the viewport. Therefore, different user agents can have different behaviors for [=first paint=] and [=first contentful paint=] in edge cases where the only content occurs outside of the viewport.
 
 The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 =======================================
