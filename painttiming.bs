@@ -71,7 +71,6 @@ urlPrefix: https://html.spec.whatwg.org/multipage/input.html
     type: dfn; text: value attribute; url: #attr-input-value;
 urlPrefix: https://html.spec.whatwg.org/multipage/browsers.html
     type: dfn; text: browsing context; url: #browsing-context;
-    type: dfn; text: top level browsing context; url: #top-level-browsing-context;
     type: dfn; text: nested browsing context; url: #nested-browsing-context;
 
 </pre>
@@ -182,7 +181,7 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
-NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} for any [=top level browsing context=], and may include it for any [=nested browsing context=].
+NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} for any [=browsing context=] that supports it.
 This allows developers to detect support for paint timing for a particular [=browsing context=].
 
 Processing model {#sec-processing-model}
@@ -195,9 +194,15 @@ Reporting paint timing {#sec-reporting-paint-timing}
 
 <div algorithm="Mark paint timing">
     When asked to [=mark paint timing=] given a [=Document=] |document| as input, perform the following steps:
+    1. If the [=document=]'s [=browsing context=] |ctx| is a [=nested browsing context=] and paint-timing is not enabled for |ctx|, return.
+
+        NOTE: this allows user-agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
+        For example, a user-agent may decide to disable paint-timing for cross-origin IFrames.
 
     1. Let |paintTimestamp| be the [=current high resolution time=].
-    1. If this instance of [=update the rendering=] is the [=first paint=] of |document|, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
+    1. If this instance of [=update the rendering=] is the [=first paint=] of |document|:
+        If the user-agent 
+        1. invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
 
         NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
 
