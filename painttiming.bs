@@ -21,7 +21,6 @@ urlPrefix: https://www.w3.org/TR/performance-timeline-2/; spec: PERFORMANCE-TIME
         text: startTime; url: #dom-performanceentry-starttime
         text: duration; url: #dom-performanceentry-duration
     type: dfn; url: #dfn-register-a-performance-entry-type; text: register a performance entry type
-    type: dfn; url: #dfn-frozen-array-of-supported-entry-types; text: frozen array of supported entry types;
     type: attribute; for: PerformanceObserver;
         text: supportedEntryTypes; url: #supportedentrytypes-attribute
 urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: HR-TIME-2;
