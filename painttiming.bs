@@ -54,6 +54,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/dom.html
     type: dfn; text: represents; url: #represents;
 urlPrefix: https://drafts.csswg.org/css-pseudo-4
     type: dfn; text: generated content pseudo-element; url: #generated-content;
+    type: dfn; text: typographical pseudo-element; url: #typographic-pseudos;
 urlPrefix: https://www.w3.org/TR/cssom-view
     type: dfn; text: getBoundingClientRect; url: #dom-element-getboundingclientrect;
     type: dfn; text: scrolling area; url: #scrolling-area;
@@ -123,8 +124,12 @@ A [=CSS image=] |img| is a <dfn>contentful image</dfn> when all of the following
 
 A {{DOMString}} is <dfn>non-empty</dfn> if it contains at least one character excluding [=document white space characters=].
 
+A [=text node=] |n| is a <dfn>paintable text node</dfn> when any of the following apply:
+* |n| is not part of a [=typographical pseudo-element=].
+* |n| is part of a [=typographical pseudo-element=] |e|, and |e| is [=paintable=].
+
 An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
-* |target| has a [=text node=] child, representing [=non-empty=] text.
+* |target| has a [=paintable text node=] child, representing [=non-empty=] text.
 * |target| is a [=replaced element=] representing an [=available=] [=image=].
 * |target| has a [=background-image=] which is a [=contentful image=], and its [=used=] [=background-size=] has non-zero width and height values.
 * |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
