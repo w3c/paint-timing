@@ -71,12 +71,8 @@ urlPrefix: https://html.spec.whatwg.org/multipage/input.html
     type: dfn; text: value attribute; url: #attr-input-value;
 urlPrefix: https://html.spec.whatwg.org/multipage/browsers.html
     type: dfn; text: browsing context; url: #browsing-context;
-    type: dfn; text: browsing context; url: #browsing-context;
     type: dfn; text: top level browsing context; url: #top-level-browsing-context;
     type: dfn; text: nested browsing context; url: #nested-browsing-context;
-
-urlPrefix: https://html.spec.whatwg.org/multipage/webappapis.html
-    type: dfn; text: global object; url: #global-object;
 
 </pre>
 
@@ -186,11 +182,8 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
-Extension to {{PerformanceObserver/supportedEntryTypes}} {#sec-extendSupportedEntryTypesWithPaint}
-=======================================
-To allow developers to detect support for paint timing, the [=frozen array of supported entry types=] must include <code>"paint"</code> if any of the following apply: 
-* The [=relevant global object=] ia associated with a [=top level browsing context=]
-* The [=relevant global object=] is associated with a [=nested browsing context=], and the user-agent would run the [=mark paint timing=] algorithm for the [=document=] associated for that [=browsing context=].
+NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} for any [=top level browsing context=], and may include it for any [=nested browsing context=].
+This allows developers to detect support for paint timing for a particular [=browsing context=].
 
 Processing model {#sec-processing-model}
 ========================================
