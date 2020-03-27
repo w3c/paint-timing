@@ -180,7 +180,7 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
-NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} for any [=browsing context=] that supports it.
+NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} for a [=global object=] associated with a [=browsing context=] that supports paint timing.
 This allows developers to detect support for paint timing for a particular [=browsing context=].
 
 Processing model {#sec-processing-model}
@@ -196,7 +196,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
     1. If the [=document=]'s [=browsing context=] |ctx| is a [=nested browsing context=] and paint-timing is not enabled for |ctx|, return.
 
         NOTE: this allows user-agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
-        For example, a user-agent may decide to disable paint-timing for cross-origin IFrames.
+        For example, a user-agent may decide to disable paint-timing for cross-origin iframes.
 
     1. Let |paintTimestamp| be the [=current high resolution time=].
     1. If this instance of [=update the rendering=] is the [=first paint=] of |document|, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
