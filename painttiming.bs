@@ -221,11 +221,10 @@ Every [=document=] has an associated [=set=] of previously reported paints, init
         NOTE: A [=document=] is not guaranteed to mark [=first paint=] [=first contentful paint=]. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=], may never mark [=first contentful paint=].
 </div>
 
-<h4 dfn export>Report paint timing</h4>
+<h4 dfn>Report paint timing</h4>
 
 <div algorithm="Report paint timing">
     When asked to [=report paint timing=] given |document|, |paintType|, and |paintTimestamp| as arguments, perform the following steps:
-
     1. Let |reportedPaints| be |document|'s associated [=previously reported paints=].
     1. If |reportedPaints| [=contains=] |paintType|, return.
     1. Create a <a spec=webidl>new</a> {{PerformancePaintTiming}} object |newEntry| with |document|'s [=relevant realm=] and set its attributes as follows:
