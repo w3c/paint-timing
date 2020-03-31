@@ -169,7 +169,7 @@ A [=browsing context=] |ctx| is <dfn>paint-timing eligible</dfn> when one of the
 * |ctx| is a [=nested browsing context=], and the user agent has configured |ctx| to report paint timing.
 
     NOTE: this allows user-agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
-    For example, a user-agent may decide to disable paint-timing for cross-origin iframes.
+    For example, a user-agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.
 
 The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 =======================================
