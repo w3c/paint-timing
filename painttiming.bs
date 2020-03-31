@@ -202,7 +202,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
 --------------------------------------------------------
 
 <h4 dfn>Previously reported paints</h4>
-Every [=document=] has an associated [=set=] of previously reported paints, initiallized to an empty list.
+Every [=Document=] has an associated [=set=] of previously reported paints, initiallized to an empty [=set=].
 
 <h4 dfn export>Mark paint timing</h4>
 
@@ -210,11 +210,12 @@ Every [=document=] has an associated [=set=] of previously reported paints, init
     When asked to [=mark paint timing=] given a [=Document=] |document| as input, perform the following steps:
     1. If the [=document=]'s [=responsible browsing context=] is not [=paint-timing eligible=], return.
     1. Let |paintTimestamp| be the [=current high resolution time=].
-    1. If this instance of [=update the rendering=] is the [=first paint=] of |document|, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
+    1. Let |reportedPaints| be the [=previously reported paints=] associated with |document|.
+    1. If this instance of [=update the rendering=] is the [=first paint=] of |document|, and |reportedPaints| does not contain <code>"first-paint"</code>, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
 
         NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
 
-    1. If this instance of [=update the rendering=] is the [=first contentful paint=] of |document|, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
+    1. If this instance of [=update the rendering=] is the [=first contentful paint=] of |document|, and |reportedPaints| does not contain <code>"first-contentful-paint"</code>, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
 
         NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
 
@@ -225,15 +226,13 @@ Every [=document=] has an associated [=set=] of previously reported paints, init
 
 <div algorithm="Report paint timing">
     When asked to [=report paint timing=] given |document|, |paintType|, and |paintTimestamp| as arguments, perform the following steps:
-    1. Let |reportedPaints| be |document|'s associated [=previously reported paints=].
-    1. If |reportedPaints| [=contains=] |paintType|, return.
     1. Create a <a spec=webidl>new</a> {{PerformancePaintTiming}} object |newEntry| with |document|'s [=relevant realm=] and set its attributes as follows:
         1. Set |newEntry|'s {{PerformanceEntry/name}} attribute to |paintType|.
         1. Set |newEntry|'s {{PerformanceEntry/entryType}} attribute to <code>"paint"</code>.
         1. Set |newEntry|'s {{PerformanceEntry/startTime}} attribute to |paintTimestamp|.
         1. Set |newEntry|'s {{PerformanceEntry/duration}} attribute to 0.
     1. <a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> |newEntry| object.
-    1. [=Append=] |paintType| to |reportedPaints|.
+    1. [=Append=] |paintType| to |document|'s associated [=previously reported paints=].
 </div>
 
 
