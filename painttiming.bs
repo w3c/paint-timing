@@ -68,7 +68,11 @@ urlPrefix: https://html.spec.whatwg.org/multipage/media.html
 urlPrefix: https://html.spec.whatwg.org/multipage/input.html
     type: dfn; text: input; url: #the-input-element;
     type: dfn; text: value attribute; url: #attr-input-value;
-
+urlPrefix: https://html.spec.whatwg.org/multipage/browsers.html
+    type: dfn; text: browsing context; url: #browsing-context;
+    type: dfn; text: nested browsing context; url: #nested-browsing-context;
+urlPrefix: https://html.spec.whatwg.org/multipage/webappapis.html
+    type: dfn; text: global object; url: #concept-realm-global;
 </pre>
 
 Introduction {#intro}
@@ -160,6 +164,13 @@ An [=element=] |el| is <dfn>paintable</dfn> when all of the following apply:
 
 <dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered a [=document=] which includes at least one [=element=] that is both [=contentful=] and [=paintable=].
 
+A [=browsing context=] |ctx| is <dfn>paint-timing eligible</dfn> when one of the following apply:
+* |ctx| is a [=top-level browsing context=].
+* |ctx| is a [=nested browsing context=], and the user agent has configured |ctx| to report paint timing.
+
+    NOTE: this allows user-agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
+    For example, a user-agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.
+
 The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 =======================================
 
@@ -177,8 +188,8 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
-NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} for {{Window}} contexts.
-This allows developers to detect support for paint timing.
+NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} of a [=global object=], where its [=responsible browsing context=] is [=paint-timing eligible=].
+This allows developers to detect support for paint timing for a particular [=browsing context=].
 
 Processing model {#sec-processing-model}
 ========================================
@@ -190,7 +201,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
 
 <div algorithm="Mark paint timing">
     When asked to [=mark paint timing=] given a [=Document=] |document| as input, perform the following steps:
-
+    1. If the [=document=]'s [=responsible browsing context=] is not [=paint-timing eligible=], return.
     1. Let |paintTimestamp| be the [=current high resolution time=].
     1. If this instance of [=update the rendering=] is the [=first paint=] of |document|, then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
 
