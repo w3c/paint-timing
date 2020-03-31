@@ -73,6 +73,9 @@ urlPrefix: https://html.spec.whatwg.org/multipage/browsers.html
     type: dfn; text: nested browsing context; url: #nested-browsing-context;
 urlPrefix: https://html.spec.whatwg.org/multipage/webappapis.html
     type: dfn; text: global object; url: #concept-realm-global;
+urlPrefix: https://infra.spec.whatwg.org/
+    type: dfn; text: set; url: #sets;
+    type: dfn; text: contains; url: #list-contain;
 </pre>
 
 Introduction {#intro}
@@ -217,10 +220,10 @@ Reporting paint timing {#sec-reporting-paint-timing}
 <h4 dfn>Report paint timing</h4>
 
 <div algorithm="Report paint timing">
-    Each [=document=] has an associated array of previously reported paint types. Let that array be |reportedPaints|.
+    Each [=document=] has an associated [=set=] of previously reported paint types. Let that array be |reportedPaints|.
 
     When asked to [=report paint timing=] given |document|, |paintType|, and |paintTimestamp| as arguments, perform the following steps:
-    1. If |reportedPaints| associated with |document| includes |paintType|, return.
+    1. If |reportedPaints| associated with |document| [=contains=] |paintType|, return.
     1. Create a <a spec=webidl>new</a> {{PerformancePaintTiming}} object |newEntry| with |document|'s [=relevant realm=] and set its attributes as follows:
         1. Set |newEntry|'s {{PerformanceEntry/name}} attribute to |paintType|.
         1. Set |newEntry|'s {{PerformanceEntry/entryType}} attribute to <code>"paint"</code>.
