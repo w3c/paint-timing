@@ -202,7 +202,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
 --------------------------------------------------------
 
 <h4 dfn>Previously reported paints</h4>
-Every [=document=] has an associated [=set=] of previously reported paints, initiallized to be an empty list.
+Every [=document=] has an associated [=set=] of previously reported paints, initiallized to an empty list.
 
 <h4 dfn export>Mark paint timing</h4>
 
