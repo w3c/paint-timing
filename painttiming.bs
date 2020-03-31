@@ -203,7 +203,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
     When asked to [=mark paint timing=] given a [=Document=] |document| as input, perform the following steps:
     1. If the [=document=]'s [=responsible browsing context=] is not [=paint-timing eligible=], return.
     1. Let |paintTimestamp| be the [=current high resolution time=].
-    1. If this instance of [=update the rendering=] is the [=first paint=] of |document|, and the user-agent is configured to report [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
+    1. If this instance of [=update the rendering=] is the [=first paint=] of |document|, and the user-agent is configured to mark [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
 
         NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
 
