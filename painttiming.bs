@@ -76,6 +76,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/webappapis.html
 urlPrefix: https://infra.spec.whatwg.org/
     type: dfn; text: set; url: #sets;
     type: dfn; text: contains; url: #list-contain;
+    type: dfn; text: append; url: #list-append;
 </pre>
 
 Introduction {#intro}
@@ -230,7 +231,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
         1. Set |newEntry|'s {{PerformanceEntry/startTime}} attribute to |paintTimestamp|.
         1. Set |newEntry|'s {{PerformanceEntry/duration}} attribute to 0.
     1. <a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> |newEntry| object.
-    1. Append |paintType| to |reportedPaints| associated with |document|.
+    1. [=Append=] |paintType| to |reportedPaints| associated with |document|.
 </div>
 
 
