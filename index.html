@@ -5,9 +5,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version eea3cd7e, updated Fri Mar 27 07:13:34 2020 -0700" name="generator">
+  <meta content="Bikeshed version c1dbacab, updated Mon Mar 30 18:56:12 2020 -0700" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="e891c8710cc4d22f215bf6e0ef9fa8ce457ee186" name="document-revision">
+  <meta content="e85cc0a96dd5abeeaa1af5f74d5fdbac77e8b585" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -266,7 +266,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-27">27 March 2020</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-31">31 March 2020</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -425,6 +425,15 @@ Those elements would still considered as paintable for the purpose of computing 
    </ul>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="first-paint">First paint</dfn> entry contains a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp" id="ref-for-idl-def-domhighrestimestampdomhighrestimestamp">DOMHighResTimeStamp</a></code> reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="first-contentful-paint">First contentful paint</dfn> entry contains a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestampdomhighrestimestamp" id="ref-for-idl-def-domhighrestimestampdomhighrestimestamp①">DOMHighResTimeStamp</a></code> reporting the time when the user agent first rendered a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document②">document</a> which includes at least one <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#element" id="ref-for-element⑥">element</a> that is both <a data-link-type="dfn" href="#contentful" id="ref-for-contentful">contentful</a> and <a data-link-type="dfn" href="#paintable" id="ref-for-paintable">paintable</a>.</p>
+   <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context">browsing context</a> <var>ctx</var> is <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="paint-timing-eligible">paint-timing eligible</dfn> when one of the following apply:</p>
+   <ul>
+    <li data-md>
+     <p><var>ctx</var> is a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context" id="ref-for-top-level-browsing-context">top-level browsing context</a>.</p>
+    <li data-md>
+     <p><var>ctx</var> is a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context" id="ref-for-nested-browsing-context">nested browsing context</a>, and the user agent has configured <var>ctx</var> to report paint timing.</p>
+     <p class="note" role="note"><span>NOTE:</span> this allows user-agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
+For example, a user-agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.</p>
+   </ul>
    <h2 class="heading settled" data-level="3" id="sec-PerformancePaintTiming"><span class="secno">3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming">PerformancePaintTiming</a></code> interface</span><a class="self-link" href="#sec-PerformancePaintTiming"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="performancepainttiming"><code class="highlight"><c- g>PerformancePaintTiming</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface" id="ref-for-the-performanceentry-interface"><c- n>PerformanceEntry</c-></a> {};
@@ -446,14 +455,16 @@ Those elements would still considered as paintable for the purpose of computing 
     <li data-md>
      <p>The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration">duration</a></code> attribute’s getter must return 0.</p>
    </ul>
-   <p class="note" role="note"><span>NOTE:</span> A user agent implementing <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming②">PerformancePaintTiming</a></code> would need to include <code class="highlight"><c- u>"paint"</c-></code> in <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#supportedentrytypes-attribute" id="ref-for-supportedentrytypes-attribute">supportedEntryTypes</a></code> for <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-window">Window</a></code> contexts.
-This allows developers to detect support for paint timing.</p>
+   <p class="note" role="note"><span>NOTE:</span> A user agent implementing <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming②">PerformancePaintTiming</a></code> would need to include <code class="highlight"><c- u>"paint"</c-></code> in <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#supportedentrytypes-attribute" id="ref-for-supportedentrytypes-attribute">supportedEntryTypes</a></code> of a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-global" id="ref-for-concept-realm-global">global object</a>, where its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-browsing-context" id="ref-for-responsible-browsing-context">responsible browsing context</a> is <a data-link-type="dfn" href="#paint-timing-eligible" id="ref-for-paint-timing-eligible">paint-timing eligible</a>.
+This allows developers to detect support for paint timing for a particular <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context①">browsing context</a>.</p>
    <h2 class="heading settled" data-level="4" id="sec-processing-model"><span class="secno">4. </span><span class="content">Processing model</span><a class="self-link" href="#sec-processing-model"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="sec-reporting-paint-timing"><span class="secno">4.1. </span><span class="content">Reporting paint timing</span><a class="self-link" href="#sec-reporting-paint-timing"></a></h3>
    <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export data-level="4.1.1" data-lt="Mark paint timing" id="mark-paint-timing"><span class="secno">4.1.1. </span><span class="content">Mark paint timing</span></h4>
    <div class="algorithm" data-algorithm="Mark paint timing">
      When asked to <a data-link-type="dfn" href="#mark-paint-timing" id="ref-for-mark-paint-timing">mark paint timing</a> given a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document③">Document</a> <var>document</var> as input, perform the following steps: 
     <ol>
+     <li data-md>
+      <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document④">document</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-browsing-context" id="ref-for-responsible-browsing-context①">responsible browsing context</a> is not <a data-link-type="dfn" href="#paint-timing-eligible" id="ref-for-paint-timing-eligible①">paint-timing eligible</a>, return.</p>
      <li data-md>
       <p>Let <var>paintTimestamp</var> be the <a data-link-type="dfn" href="https://www.w3.org/TR/hr-time-2/#dfn-current-high-resolution-time" id="ref-for-dfn-current-high-resolution-time">current high resolution time</a>.</p>
      <li data-md>
@@ -462,7 +473,7 @@ This allows developers to detect support for paint timing.</p>
      <li data-md>
       <p>If this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering②">update the rendering</a> is the <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint②">first contentful paint</a> of <var>document</var>, then invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing①">§ 4.1.2 Report paint timing</a> algorithm with <var>document</var>, <code class="highlight"><c- u>"first-contentful-paint"</c-></code>, and <var>paintTimestamp</var> as arguments.</p>
       <p class="note" role="note"><span>NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint③">first paint</a> (due to the enclosing boxes of the iframes) but no <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint③">first contentful paint</a>.</p>
-      <p class="note" role="note"><span>NOTE:</span> A <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document④">document</a> is not guaranteed to mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint④">first paint</a> <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint④">first contentful paint</a>. A completely blank <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑤">document</a> may never mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑤">first paint</a>, and a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑥">document</a> containing only elements that are not <a data-link-type="dfn" href="#contentful" id="ref-for-contentful①">contentful</a>, may never mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint⑤">first contentful paint</a>.</p>
+      <p class="note" role="note"><span>NOTE:</span> A <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑤">document</a> is not guaranteed to mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint④">first paint</a> <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint④">first contentful paint</a>. A completely blank <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑥">document</a> may never mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑤">first paint</a>, and a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑦">document</a> containing only elements that are not <a data-link-type="dfn" href="#contentful" id="ref-for-contentful①">contentful</a>, may never mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint⑤">first contentful paint</a>.</p>
     </ol>
    </div>
    <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.1.2" data-lt="Report paint timing" data-noexport id="report-paint-timing"><span class="secno">4.1.2. </span><span class="content">Report paint timing</span></h4>
@@ -503,6 +514,7 @@ specification.</p>
    <li><a href="#paintable">paintable</a><span>, in §2</span>
    <li><a href="#paintable-bounding-rect">paintable bounding rect</a><span>, in §2</span>
    <li><a href="#paintable-pseudo-element">paintable pseudo-element</a><span>, in §2</span>
+   <li><a href="#paint-timing-eligible">paint-timing eligible</a><span>, in §2</span>
    <li><a href="#performancepainttiming">PerformancePaintTiming</a><span>, in §3</span>
    <li><a href="#report-paint-timing">Report paint timing</a><span>, in §4.1.1</span>
   </ul>
@@ -558,7 +570,7 @@ specification.</p>
    <a href="https://dom.spec.whatwg.org/#concept-document">https://dom.spec.whatwg.org/#concept-document</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-document">2. Terminology</a> <a href="#ref-for-concept-document①">(2)</a> <a href="#ref-for-concept-document②">(3)</a>
-    <li><a href="#ref-for-concept-document③">4.1.1. Mark paint timing</a> <a href="#ref-for-concept-document④">(2)</a> <a href="#ref-for-concept-document⑤">(3)</a> <a href="#ref-for-concept-document⑥">(4)</a>
+    <li><a href="#ref-for-concept-document③">4.1.1. Mark paint timing</a> <a href="#ref-for-concept-document④">(2)</a> <a href="#ref-for-concept-document⑤">(3)</a> <a href="#ref-for-concept-document⑥">(4)</a> <a href="#ref-for-concept-document⑦">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-def-domhighrestimestampdomhighrestimestamp">
@@ -574,16 +586,23 @@ specification.</p>
     <li><a href="#ref-for-dfn-current-high-resolution-time">4.1.1. Mark paint timing</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-window">
-   <a href="https://html.spec.whatwg.org/multipage/window-object.html#window">https://html.spec.whatwg.org/multipage/window-object.html#window</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-window">3. The PerformancePaintTiming interface</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-relevant-realm">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm">https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-relevant-realm">4.1.2. Report paint timing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-responsible-browsing-context">
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-browsing-context">https://html.spec.whatwg.org/multipage/webappapis.html#responsible-browsing-context</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-responsible-browsing-context">3. The PerformancePaintTiming interface</a>
+    <li><a href="#ref-for-responsible-browsing-context①">4.1.1. Mark paint timing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-top-level-browsing-context">
+   <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-top-level-browsing-context">2. Terminology</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-update-the-rendering">
@@ -706,8 +725,9 @@ specification.</p>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-window" style="color:initial">Window</span>
      <li><span class="dfn-paneled" id="term-for-concept-relevant-realm" style="color:initial">relevant realm</span>
+     <li><span class="dfn-paneled" id="term-for-responsible-browsing-context" style="color:initial">responsible browsing context</span>
+     <li><span class="dfn-paneled" id="term-for-top-level-browsing-context" style="color:initial">top-level browsing context</span>
      <li><span class="dfn-paneled" id="term-for-update-the-rendering" style="color:initial">update the rendering</span>
     </ul>
    <li>
@@ -812,6 +832,13 @@ specification.</p>
     <li><a href="#ref-for-first-contentful-paint">2. Terminology</a>
     <li><a href="#ref-for-first-contentful-paint①">3. The PerformancePaintTiming interface</a>
     <li><a href="#ref-for-first-contentful-paint②">4.1.1. Mark paint timing</a> <a href="#ref-for-first-contentful-paint③">(2)</a> <a href="#ref-for-first-contentful-paint④">(3)</a> <a href="#ref-for-first-contentful-paint⑤">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="paint-timing-eligible">
+   <b><a href="#paint-timing-eligible">#paint-timing-eligible</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-paint-timing-eligible">3. The PerformancePaintTiming interface</a>
+    <li><a href="#ref-for-paint-timing-eligible①">4.1.1. Mark paint timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="performancepainttiming">
