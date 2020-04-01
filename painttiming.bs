@@ -199,12 +199,11 @@ Processing model {#sec-processing-model}
 Reporting paint timing {#sec-reporting-paint-timing}
 --------------------------------------------------------
 
-<h4 dfn>Previously reported paints</h4>
-Every [=Document=] has an associated [=set=] of previously reported paints, initiallized to an empty [=set=].
+Every [=Document=] has an associated [=set=] of <dfn>previously reported paints</dfn>, initiallized to an empty [=set=].
 
 <h4 dfn export>First Contentful Paint</h4>
-<div algorithm="Compute first contentful paint">
-    When asked to <dfn>compute first contentful paint</dfn> given |document|, perform the following steps:
+<div algorithm="Should report first contentful paint">
+    To know whether [=Document=] |document| <dfn>should report first contentful paint</dfn>, perform the following steps:
     1. If |document|'s [=previously reported paints=] contains <code>"first-contentful-paint"</code>, then return false.
     1. If |document| contains at least one [=element=] that is both [=paintable=] and [=contentful=], then return true.
     1. Otherwise, return false.
@@ -222,11 +221,8 @@ Every [=Document=] has an associated [=set=] of previously reported paints, init
 
             NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
 
-        1. [=Append=] <code>"first-paint"</code> to |reportedPaints|.
-
-    1. If the result of invoking the [=compute first contentful paint=] with |document| returns <code>true</code>, then:
+    1. If |document| [=should report first contentful paint=], then:
         1. Invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
-        1. [=Append=] <code>"first-contentful-paint"</code> to |reportedPaints|.
 
         NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
 
