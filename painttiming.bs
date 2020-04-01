@@ -220,7 +220,7 @@ Every [=Document=] has an associated [=set=] of <dfn>previously reported paints<
 
         NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
 
-        ISSUE: This should be turned into a normative note.
+            ISSUE: This should be turned into a normative note.
 
     1. If |document| [=should report first contentful paint=], then:
         1. Invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
