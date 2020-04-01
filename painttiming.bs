@@ -216,12 +216,11 @@ Every [=Document=] has an associated [=set=] of <dfn>previously reported paints<
     1. If the [=document=]'s [=responsible browsing context=] is not [=paint-timing eligible=], return.
     1. Let |paintTimestamp| be the [=current high resolution time=].
     1. Let |reportedPaints| be the [=previously reported paints=] associated with |document|.
-    1. If |reportedPaints| does not contain <code>"first-paint"</code>, then:
-        1. If the user agent is configured to mark [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
+    1. If |reportedPaints| does not contain <code>"first-paint"</code>, and the user agent is configured to mark [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
 
-            NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
+        NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
 
-            ISSUE: This should be turned into a normative note.
+        ISSUE: This should be turned into a normative note.
 
     1. If |document| [=should report first contentful paint=], then:
         1. Invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
