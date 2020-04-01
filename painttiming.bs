@@ -170,8 +170,8 @@ A [=browsing context=] |ctx| is <dfn>paint-timing eligible</dfn> when one of the
 * |ctx| is a [=top-level browsing context=].
 * |ctx| is a [=nested browsing context=], and the user agent has configured |ctx| to report paint timing.
 
-    NOTE: this allows user-agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
-    For example, a user-agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.
+    NOTE: this allows user agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
+    For example, a user agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.
 
 The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 =======================================
@@ -217,9 +217,11 @@ Every [=Document=] has an associated [=set=] of <dfn>previously reported paints<
     1. Let |paintTimestamp| be the [=current high resolution time=].
     1. Let |reportedPaints| be the [=previously reported paints=] associated with |document|.
     1. If |reportedPaints| does not contain <code>"first-paint"</code>, then:
-        1. Invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
+        1. If the user agent is configured to mark [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
 
             NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
+
+            ISSUE: This should be turned into a normative note.
 
     1. If |document| [=should report first contentful paint=], then:
         1. Invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
@@ -227,6 +229,8 @@ Every [=Document=] has an associated [=set=] of <dfn>previously reported paints<
         NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
 
         NOTE: A [=document=] is not guaranteed to mark <code>"first-paint"</code> or <code>"first-contentful-paint"</code>. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=], may never mark [=first contentful paint=].
+
+    NOTE: The marking of [=first paint=] is optional. User-agents implementing paint timing should at the very least mark [=first contentful paint=] .
 </div>
 
 <h4 dfn>Report paint timing</h4>
