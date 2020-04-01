@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
   <meta content="Bikeshed version c1dbacab, updated Mon Mar 30 18:56:12 2020 -0700" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="e85cc0a96dd5abeeaa1af5f74d5fdbac77e8b585" name="document-revision">
+  <meta content="6b0033cba82189c109ffaa52f53ad327e2a2205d" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -266,7 +266,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-31">31 March 2020</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-04-01">1 April 2020</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -431,8 +431,8 @@ Those elements would still considered as paintable for the purpose of computing 
      <p><var>ctx</var> is a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context" id="ref-for-top-level-browsing-context">top-level browsing context</a>.</p>
     <li data-md>
      <p><var>ctx</var> is a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context" id="ref-for-nested-browsing-context">nested browsing context</a>, and the user agent has configured <var>ctx</var> to report paint timing.</p>
-     <p class="note" role="note"><span>NOTE:</span> this allows user-agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
-For example, a user-agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.</p>
+     <p class="note" role="note"><span>NOTE:</span> this allows user agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
+For example, a user agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.</p>
    </ul>
    <h2 class="heading settled" data-level="3" id="sec-PerformancePaintTiming"><span class="secno">3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming">PerformancePaintTiming</a></code> interface</span><a class="self-link" href="#sec-PerformancePaintTiming"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -468,13 +468,14 @@ This allows developers to detect support for paint timing for a particular <a da
      <li data-md>
       <p>Let <var>paintTimestamp</var> be the <a data-link-type="dfn" href="https://www.w3.org/TR/hr-time-2/#dfn-current-high-resolution-time" id="ref-for-dfn-current-high-resolution-time">current high resolution time</a>.</p>
      <li data-md>
-      <p>If this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering①">update the rendering</a> is the <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint①">first paint</a> of <var>document</var>, then invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing">§ 4.1.2 Report paint timing</a> algorithm with <var>document</var>, <code class="highlight"><c- u>"first-paint"</c-></code>, and <var>paintTimestamp</var>.</p>
-      <p class="note" role="note"><span>NOTE:</span> <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint②">First paint</a> excludes the default background paint, but includes non-default background paint.</p>
+      <p>If this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering①">update the rendering</a> is the <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint①">first paint</a> of <var>document</var>, and the user agent is configured to mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint②">first paint</a>, then invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing">§ 4.1.2 Report paint timing</a> algorithm with <var>document</var>, <code class="highlight"><c- u>"first-paint"</c-></code>, and <var>paintTimestamp</var>.</p>
+      <p class="note" role="note"><span>NOTE:</span> <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint③">First paint</a> excludes the default background paint, but includes non-default background paint.</p>
      <li data-md>
       <p>If this instance of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering②">update the rendering</a> is the <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint②">first contentful paint</a> of <var>document</var>, then invoke the <a href="#report-paint-timing" id="ref-for-report-paint-timing①">§ 4.1.2 Report paint timing</a> algorithm with <var>document</var>, <code class="highlight"><c- u>"first-contentful-paint"</c-></code>, and <var>paintTimestamp</var> as arguments.</p>
-      <p class="note" role="note"><span>NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint③">first paint</a> (due to the enclosing boxes of the iframes) but no <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint③">first contentful paint</a>.</p>
-      <p class="note" role="note"><span>NOTE:</span> A <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑤">document</a> is not guaranteed to mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint④">first paint</a> <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint④">first contentful paint</a>. A completely blank <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑥">document</a> may never mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑤">first paint</a>, and a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑦">document</a> containing only elements that are not <a data-link-type="dfn" href="#contentful" id="ref-for-contentful①">contentful</a>, may never mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint⑤">first contentful paint</a>.</p>
+      <p class="note" role="note"><span>NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint④">first paint</a> (due to the enclosing boxes of the iframes) but no <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint③">first contentful paint</a>.</p>
+      <p class="note" role="note"><span>NOTE:</span> A <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑤">document</a> is not guaranteed to mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑤">first paint</a> <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint④">first contentful paint</a>. A completely blank <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑥">document</a> may never mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑥">first paint</a>, and a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑦">document</a> containing only elements that are not <a data-link-type="dfn" href="#contentful" id="ref-for-contentful①">contentful</a>, may never mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint⑤">first contentful paint</a>.</p>
     </ol>
+    <p class="note" role="note"><span>NOTE:</span> The marking of <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑦">first paint</a> is optional. User-agents implementing paint timing should at the very least mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint⑥">first contentful paint</a> .</p>
    </div>
    <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.1.2" data-lt="Report paint timing" data-noexport id="report-paint-timing"><span class="secno">4.1.2. </span><span class="content">Report paint timing</span></h4>
    <div class="algorithm" data-algorithm="Report paint timing">
@@ -823,7 +824,7 @@ specification.</p>
    <b><a href="#first-paint">#first-paint</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-first-paint">3. The PerformancePaintTiming interface</a>
-    <li><a href="#ref-for-first-paint①">4.1.1. Mark paint timing</a> <a href="#ref-for-first-paint②">(2)</a> <a href="#ref-for-first-paint③">(3)</a> <a href="#ref-for-first-paint④">(4)</a> <a href="#ref-for-first-paint⑤">(5)</a>
+    <li><a href="#ref-for-first-paint①">4.1.1. Mark paint timing</a> <a href="#ref-for-first-paint②">(2)</a> <a href="#ref-for-first-paint③">(3)</a> <a href="#ref-for-first-paint④">(4)</a> <a href="#ref-for-first-paint⑤">(5)</a> <a href="#ref-for-first-paint⑥">(6)</a> <a href="#ref-for-first-paint⑦">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="first-contentful-paint">
@@ -831,7 +832,7 @@ specification.</p>
    <ul>
     <li><a href="#ref-for-first-contentful-paint">2. Terminology</a>
     <li><a href="#ref-for-first-contentful-paint①">3. The PerformancePaintTiming interface</a>
-    <li><a href="#ref-for-first-contentful-paint②">4.1.1. Mark paint timing</a> <a href="#ref-for-first-contentful-paint③">(2)</a> <a href="#ref-for-first-contentful-paint④">(3)</a> <a href="#ref-for-first-contentful-paint⑤">(4)</a>
+    <li><a href="#ref-for-first-contentful-paint②">4.1.1. Mark paint timing</a> <a href="#ref-for-first-contentful-paint③">(2)</a> <a href="#ref-for-first-contentful-paint④">(3)</a> <a href="#ref-for-first-contentful-paint⑤">(4)</a> <a href="#ref-for-first-contentful-paint⑥">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="paint-timing-eligible">
