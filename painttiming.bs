@@ -166,8 +166,6 @@ An [=element=] |el| is <dfn>paintable</dfn> when all of the following apply:
 
 <dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
-<dfn export>First contentful paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered a [=document=] which includes at least one [=element=] that is both [=contentful=] and [=paintable=].
-
 A [=browsing context=] |ctx| is <dfn>paint-timing eligible</dfn> when one of the following apply:
 * |ctx| is a [=top-level browsing context=].
 * |ctx| is a [=nested browsing context=], and the user agent has configured |ctx| to report paint timing.
@@ -204,6 +202,14 @@ Reporting paint timing {#sec-reporting-paint-timing}
 <h4 dfn>Previously reported paints</h4>
 Every [=Document=] has an associated [=set=] of previously reported paints, initiallized to an empty [=set=].
 
+<h4 dfn export>First Contentful Paint</h4>
+<div algorithm="Compute first contentful paint">
+    When asked to compute [=first contentful paint=] given |document|, perform the following steps:
+    1. If |document|'s [=previously reported paints=] contains <code>"first-contentful-paint"</code>, then return false.
+    1. If |document| contains at least one [=element=] that is both [=paintable=] and [=contentful=], then return true.
+    1. Otherwise, return false.
+</div>
+
 <h4 dfn export>Mark paint timing</h4>
 
 <div algorithm="Mark paint timing">
@@ -211,22 +217,20 @@ Every [=Document=] has an associated [=set=] of previously reported paints, init
     1. If the [=document=]'s [=responsible browsing context=] is not [=paint-timing eligible=], return.
     1. Let |paintTimestamp| be the [=current high resolution time=].
     1. Let |reportedPaints| be the [=previously reported paints=] associated with |document|.
-    1. If this instance of [=update the rendering=] is the [=first paint=] of |document|, and |reportedPaints| does not contain <code>"first-paint"</code>, then:
-        1. invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
+    1. If |reportedPaints| does not contain <code>"first-paint"</code>, then:
+        1. Invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
 
             NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
 
         1. [=Append=] <code>"first-paint"</code> to |reportedPaints|.
 
-    1. If this instance of [=update the rendering=] is the [=first contentful paint=] of |document|, and |reportedPaints| does not contain <code>"first-contentful-paint"</code>, then:
-        1. invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
+    1. If the result of invoking the [-compute first contentful paint=] with |document| returns <code>true</code>, then:
+        1. Invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
         1. [=Append=] <code>"first-contentful-paint"</code> to |reportedPaints|.
 
         NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
 
-        NOTE: A [=document=] is not guaranteed to mark [=first paint=] [=first contentful paint=]. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=], may never mark [=first contentful paint=].
-
-
+        NOTE: A [=document=] is not guaranteed to mark <code>"first-paint"</code> or <code>"first-contentful-paint"</code>. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=], may never mark [=first contentful paint=].
 </div>
 
 <h4 dfn>Report paint timing</h4>
