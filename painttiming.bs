@@ -204,7 +204,7 @@ Every [=Document=] has an associated [=set=] of previously reported paints, init
 
 <h4 dfn export>First Contentful Paint</h4>
 <div algorithm="Compute first contentful paint">
-    When asked to compute [=first contentful paint=] given |document|, perform the following steps:
+    When asked to <dfn>compute first contentful paint</dfn> given |document|, perform the following steps:
     1. If |document|'s [=previously reported paints=] contains <code>"first-contentful-paint"</code>, then return false.
     1. If |document| contains at least one [=element=] that is both [=paintable=] and [=contentful=], then return true.
     1. Otherwise, return false.
@@ -224,7 +224,7 @@ Every [=Document=] has an associated [=set=] of previously reported paints, init
 
         1. [=Append=] <code>"first-paint"</code> to |reportedPaints|.
 
-    1. If the result of invoking the [-compute first contentful paint=] with |document| returns <code>true</code>, then:
+    1. If the result of invoking the [=compute first contentful paint=] with |document| returns <code>true</code>, then:
         1. Invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
         1. [=Append=] <code>"first-contentful-paint"</code> to |reportedPaints|.
 
