@@ -188,7 +188,7 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
-NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} of a [=global object=], where its [=responsible browsing context=] is [=paint-timing eligible=].
+NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} of a [=global object=]'s [=environment settings object=], whose [=responsible browsing context=] is [=paint-timing eligible=].
 This allows developers to detect support for paint timing for a particular [=browsing context=].
 
 Processing model {#sec-processing-model}
