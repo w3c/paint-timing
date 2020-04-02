@@ -77,6 +77,14 @@ urlPrefix: https://infra.spec.whatwg.org/
     type: dfn; text: set; url: #sets;
     type: dfn; text: contains; url: #list-contain;
     type: dfn; text: append; url: #list-append;
+urlPrefix: https://html.spec.whatwg.org/multipage/history.html
+    type: dfn; text: session history; url: #session-history;
+urlPrefix: https://www.w3.org/TR/page-visibility/
+    type: dfn; text: hidden; url: #hidden-attribute;
+    type: dfn; text: now hidden; url: #dfn-now-hidden-algorithm;
+urlPrefix: https://html.spec.whatwg.org/multipage/browsing-the-web.html
+    type: dfn; text: unloaded; url: #unload-a-document;
+
 </pre>
 
 Introduction {#intro}
@@ -193,13 +201,22 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} of a [=global object=] whose [=relevant settings object=]'s [=responsible browsing context=] is [=paint-timing eligible=].
 This allows developers to detect support for paint timing for a particular [=browsing context=].
 
+Extensions to [=Document=] {#sec-document-extension}
+========================================
+
+Every [=paint-timing eligible=] [=browsing context=]'s [=Document=] has an associated [=set=] of <dfn>previously reported paints</dfn>, initiallized to an empty [=set=].
+
+Every [=paint-timing eligible=] [=browsing context=]'s [=Document=] has an associated boolean, tracking wether the [=Document=] has <dfn export>tainted paint timing</dfn>, initiallized to <code>false</code>.
+
+    NOTE: This makes sure that pages don't report misleading paint timing results for pages that became [=hidden=] or [=unloaded=], for example if suspended/restored to [=session history=].
+
+    ISSUE: Change the status of [=tainted paint timing=] in [=now hidden=] and [=unloaded=] specs.
+
 Processing model {#sec-processing-model}
 ========================================
 
 Reporting paint timing {#sec-reporting-paint-timing}
 --------------------------------------------------------
-
-Every [=Document=] has an associated [=set=] of <dfn>previously reported paints</dfn>, initiallized to an empty [=set=].
 
 <h4 dfn export>First Contentful Paint</h4>
 <div algorithm="Should report first contentful paint">
@@ -213,7 +230,8 @@ Every [=Document=] has an associated [=set=] of <dfn>previously reported paints<
 
 <div algorithm="Mark paint timing">
     When asked to [=mark paint timing=] given a [=Document=] |document| as input, perform the following steps:
-    1. If the [=document=]'s [=responsible browsing context=] is not [=paint-timing eligible=], return.
+    1. If |document|'s [=responsible browsing context=] is not [=paint-timing eligible=], return.
+    1. If |document| has [=tainted paint timing=], return.
     1. Let |paintTimestamp| be the [=current high resolution time=].
     1. Let |reportedPaints| be the [=previously reported paints=] associated with |document|.
     1. If |reportedPaints| does not contain <code>"first-paint"</code>, and the user agent is configured to mark [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
