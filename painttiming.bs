@@ -231,7 +231,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
 <div algorithm="Mark paint timing">
     When asked to [=mark paint timing=] given a [=Document=] |document| as input, perform the following steps:
     1. If |document|'s [=responsible browsing context=] is not [=paint-timing eligible=], return.
-    1. If |document| has [=tainted paint timing=], return.
+    1. If |document|'s [=tainted paint timing=] is <code>true</code>, return.
     1. Let |paintTimestamp| be the [=current high resolution time=].
     1. Let |reportedPaints| be the [=previously reported paints=] associated with |document|.
     1. If |reportedPaints| does not contain <code>"first-paint"</code>, and the user agent is configured to mark [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
