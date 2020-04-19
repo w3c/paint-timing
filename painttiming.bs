@@ -7,7 +7,7 @@ ED: https://w3c.github.io/paint-timing/
 TR: https://www.w3.org/TR/paint-timing/
 Status: ED
 Editor: Nicolás Peña Moreno, Google https://google.com, npm@chromium.org
-        Noam Rosenthal
+        Noam Rosenthal, invited expert, noam@webkit.org
         Yoav Weiss, Google https://google.com, yoavweiss@chromium.org
 Former Editor: Shubhie Panicker, Google https://google.com, panicker@google.com
 Repository: w3c/paint-timing
