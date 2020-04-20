@@ -8,7 +8,6 @@ TR: https://www.w3.org/TR/paint-timing/
 Status: ED
 Editor: Nicolás Peña Moreno, Google https://google.com, npm@chromium.org
         Noam Rosenthal, Invited Expert, noam@webkit.org
-        Yoav Weiss, Google https://google.com, yoavweiss@chromium.org
 Former Editor: Shubhie Panicker, Google https://google.com, panicker@google.com
 Repository: w3c/paint-timing
 Abstract: This document defines an API that can be used to capture a series of key moments (first paint, first contentful paint) during pageload which developers care about.
