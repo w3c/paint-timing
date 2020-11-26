@@ -21,7 +21,7 @@ remote: painttiming.html
 ci: painttiming.bs
 	mkdir -p out
 	make remote
-	mv painttiming.html out/painttiming.html
+	mv painttiming.html out/index.html
 
 clean:
 	rm painttiming.html
