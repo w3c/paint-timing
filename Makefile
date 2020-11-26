@@ -22,6 +22,7 @@ ci: painttiming.bs
 	mkdir -p out
 	make remote
 	mv painttiming.html out/index.html
+	cp filmstrip.svg filmstrip.png out/
 
 clean:
 	rm painttiming.html
