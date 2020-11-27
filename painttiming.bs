@@ -158,10 +158,10 @@ An [=element=] |el| is <dfn>paintable</dfn> when all of the following apply:
 * |el| and all of its ancestors' [=used=] [=opacity=] is greater than zero.
 
     NOTE: there could be cases where a <code>paintable</code> [=element=] would not be visible to the user, for example in the case of text that has the same color as its background.
-    Those elements would still considered as paintable for the purpose of computing [=first contentful paint=].    
+    Those elements would still considered as paintable for the purpose of computing [=first contentful paint=].
 
-* |el|'s [=paintable bounding rect=] intersects with the [=scrolling area=] of the [=document=]. 
-    
+* |el|'s [=paintable bounding rect=] intersects with the [=scrolling area=] of the [=document=].
+
     NOTE: This covers the cases where the element is scaled to zero size, has <code>display: none</code>, or <code>display: contents</code> where the contents resolve to an empty rect.
 
     NOTE: As a general rule, an [=element=] is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling or zooming.
@@ -192,7 +192,7 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
-NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} of a [=global object=] whose [=relevant settings object=]'s [=responsible browsing context=] is [=paint-timing eligible=].
+NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} of a [=global object=] whose [=Window/browsing context=] is [=paint-timing eligible=].
 This allows developers to detect support for paint timing for a particular [=browsing context=].
 
 Processing model {#sec-processing-model}
@@ -215,7 +215,7 @@ Every [=Document=] has an associated [=set=] of <dfn>previously reported paints<
 
 <div algorithm="Mark paint timing">
     When asked to [=mark paint timing=] given a [=Document=] |document| as input, perform the following steps:
-    1. If the [=document=]'s [=responsible browsing context=] is not [=paint-timing eligible=], return.
+    1. If the [=document=]'s [=Document/browsing context=] is not [=paint-timing eligible=], return.
     1. Let |paintTimestamp| be the [=current high resolution time=].
     1. Let |reportedPaints| be the [=previously reported paints=] associated with |document|.
     1. If |reportedPaints| does not contain <code>"first-paint"</code>, and the user agent is configured to mark [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.

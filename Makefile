@@ -21,7 +21,9 @@ remote: painttiming.html
 ci: painttiming.bs
 	mkdir -p out
 	make remote
+	echo Move html to out folder
 	mv painttiming.html out/index.html
+	echo Copy images into out folder
 	cp filmstrip.svg filmstrip.png out/
 
 clean:
