@@ -5,13 +5,12 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version bb42a6af, updated Thu Apr 16 07:15:51 2020 -0700" name="generator">
+  <meta content="Bikeshed version c5172e83, updated Fri Nov 20 15:35:20 2020 -0800" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="50fc17bf3bb26f5cfc8c5e0704e95ea30d3d6621" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
-    color: #005a9c;
+    color: var(--a-normal-text);
     font-size: inherit;
     font-family: inherit;
 }
@@ -70,6 +69,115 @@ pre .property::before, pre .property::after {
 [data-link-type=biblio] {
     white-space: pre;
 }</style>
+<style>/* style-colors */
+
+/* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
+:root {
+    color-scheme: light dark;
+
+    --text: black;
+    --bg: white;
+
+    --unofficial-watermark: url(https://www.w3.org/StyleSheets/TR/2016/logos/UD-watermark);
+
+    --logo-bg: #1a5e9a;
+    --logo-active-bg: #c00;
+    --logo-text: white;
+
+    --tocnav-normal-text: #707070;
+    --tocnav-normal-bg: var(--bg);
+    --tocnav-hover-text: var(--tocnav-normal-text);
+    --tocnav-hover-bg: #f8f8f8;
+    --tocnav-active-text: #c00;
+    --tocnav-active-bg: var(--tocnav-normal-bg);
+
+    --tocsidebar-text: var(--text);
+    --tocsidebar-bg: #f7f8f9;
+    --tocsidebar-shadow: rgba(0,0,0,.1);
+    --tocsidebar-heading-text: hsla(203,20%,40%,.7);
+
+    --toclink-text: var(--text);
+    --toclink-underline: #3980b5;
+    --toclink-visited-text: var(--toclink-text);
+    --toclink-visited-underline: #054572;
+
+    --heading-text: #005a9c;
+
+    --hr-text: var(--text);
+
+    --algo-border: #def;
+
+    --del-text: red;
+    --del-bg: transparent;
+    --ins-text: #080;
+    --ins-bg: transparent;
+
+    --a-normal-text: #034575;
+    --a-normal-underline: #707070;
+    --a-visited-text: var(--a-normal-text);
+    --a-visited-underline: #bbb;
+    --a-hover-bg: rgba(75%, 75%, 75%, .25);
+    --a-active-text: #c00;
+    --a-active-underline: #c00;
+
+    --blockquote-border: silver;
+    --blockquote-bg: transparent;
+    --blockquote-text: currentcolor;
+
+    --issue-border: #e05252;
+    --issue-bg: #fbe9e9;
+    --issue-text: var(--text);
+    --issueheading-text: #831616;
+
+    --example-border: #e0cb52;
+    --example-bg: #fcfaee;
+    --example-text: var(--text);
+    --exampleheading-text: #574b0f;
+
+    --note-border: #52e052;
+    --note-bg: #e9fbe9;
+    --note-text: var(--text);
+    --noteheading-text: hsl(120, 70%, 30%);
+    --notesummary-underline: silver;
+
+    --assertion-border: #aaa;
+    --assertion-bg: #eee;
+    --assertion-text: black;
+
+    --advisement-border: orange;
+    --advisement-bg: #fec;
+    --advisement-text: var(--text);
+    --advisementheading-text: #b35f00;
+
+    --warning-border: red;
+    --warning-bg: hsla(40,100%,50%,0.95);
+    --warning-text: var(--text);
+
+    --amendment-border: #330099;
+    --amendment-bg: #F5F0FF;
+    --amendment-text: var(--text);
+    --amendmentheading-text: #220066;
+
+    --def-border: #8ccbf2;
+    --def-bg: #def;
+    --def-text: var(--text);
+    --defrow-border: #bbd7e9;
+
+    --datacell-border: silver;
+
+    --indexinfo-text: #707070;
+
+    --indextable-hover-text: black;
+    --indextable-hover-bg: #f7f8f9;
+
+    --outdatedspec-bg: rgba(0, 0, 0, .5);
+    --outdatedspec-text: black;
+    --outdated-bg: maroon;
+    --outdated-text: white;
+    --outdated-shadow: red;
+
+    --editedrec-bg: darkorange;
+}</style>
 <style>/* style-counters */
 
 body {
@@ -101,6 +209,10 @@ figcaption:not(.no-marker)::before {
 }</style>
 <style>/* style-dfn-panel */
 
+:root {
+    --dfnpanel-bg: #ddd;
+    --dfnpanel-text: var(--text);
+}
 .dfn-panel {
     position: absolute;
     z-index: 35;
@@ -112,14 +224,14 @@ figcaption:not(.no-marker)::before {
     overflow: auto;
     padding: 0.5em 0.75em;
     font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-    background: #DDDDDD;
-    color: black;
+    background: var(--dfnpanel-bg);
+    color: var(--dfnpanel-text);
     border: outset 0.2em;
 }
 .dfn-panel:not(.on) { display: none; }
 .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
 .dfn-panel > b { display: block; }
-.dfn-panel a { color: black; }
+.dfn-panel a { color: var(--dfnpanel-text); }
 .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
 .dfn-panel > b + b { margin-top: 0.25em; }
 .dfn-panel ul { padding: 0; }
@@ -146,8 +258,69 @@ figcaption:not(.no-marker)::before {
 [data-md] > :last-child {
     margin-bottom: 0;
 }</style>
+<style>/* style-mdn-anno */
+
+            @media (max-width: 767px) { .mdn-anno { opacity: .1 } }
+            .mdn-anno { font: 1em sans-serif; padding: 0.3em; position: absolute; z-index: 8; right: 0.3em; background: #EEE; color: black; box-shadow: 0 0 3px #999; overflow: hidden; border-collapse: initial; border-spacing: initial; min-width: 9em; max-width: min-content; white-space: nowrap; word-wrap: normal; hyphens: none}
+            .mdn-anno:not(.wrapped) { opacity: 1}
+            .mdn-anno:hover { z-index: 9 }
+            .mdn-anno.wrapped { min-width: 0 }
+            .mdn-anno.wrapped > :not(button) { display: none; }
+            .mdn-anno > .mdn-anno-btn { cursor: pointer; border: none; color: #000; background: transparent; margin: -8px; float: right; padding: 10px 8px 8px 8px; outline: none; }
+            .mdn-anno > .mdn-anno-btn > .less-than-two-engines-flag { color: red; padding-right: 2px; }
+            .mdn-anno > .mdn-anno-btn > .all-engines-flag { color: green; padding-right: 2px; }
+            .mdn-anno > .mdn-anno-btn > span { color: #fff; background-color: #000; font-weight: normal; font-family: zillaslab, Palatino, "Palatino Linotype", serif; padding: 2px 3px 0px 3px; line-height: 1.3em; vertical-align: top; }
+            .mdn-anno > .feature { margin-top: 20px; }
+            .mdn-anno > .feature:not(:first-of-type) { border-top: 1px solid #999; margin-top: 6px; padding-top: 2px; }
+            .mdn-anno > .feature > .less-than-two-engines-text { color: red }
+            .mdn-anno > .feature > .all-engines-text { color: green }
+            .mdn-anno > .feature > p { font-size: .75em; margin-top: 6px; margin-bottom: 0; }
+            .mdn-anno > .feature > p + p { margin-top: 3px; }
+            .mdn-anno > .feature > .support { display: block; font-size: 0.6em; margin: 0; padding: 0; margin-top: 2px }
+            .mdn-anno > .feature > .support + div { padding-top: 0.5em; }
+            .mdn-anno > .feature > .support > hr { display: block; border: none; border-top: 1px dotted #999; padding: 3px 0px 0px 0px; margin: 2px 3px 0px 3px; }
+            .mdn-anno > .feature > .support > hr::before { content: ""; }
+            .mdn-anno > .feature > .support > span { padding: 0.2em 0; display: block; display: table; }
+            .mdn-anno > .feature > .support > span.no { color: #CCCCCC; filter: grayscale(100%); }
+            .mdn-anno > .feature > .support > span.no::before { opacity: 0.5; }
+            .mdn-anno > .feature > .support > span:first-of-type { padding-top: 0.5em; }
+            .mdn-anno > .feature > .support > span > span { padding: 0 0.5em; display: table-cell; }
+            .mdn-anno > .feature > .support > span > span:first-child { width: 100%; }
+            .mdn-anno > .feature > .support > span > span:last-child { width: 100%; white-space: pre; padding: 0; }
+            .mdn-anno > .feature > .support > span::before { content: ' '; display: table-cell; min-width: 1.5em; height: 1.5em; background: no-repeat center center; background-size: contain; text-align: right; font-size: 0.75em; font-weight: bold; }
+            .mdn-anno > .feature > .support > .chrome_android::before { background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg); }
+            .mdn-anno > .feature > .support > .firefox_android::before { background-image: url(https://resources.whatwg.org/browser-logos/firefox.png); }
+            .mdn-anno > .feature > .support > .chrome::before { background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg); }
+            .mdn-anno > .feature > .support > .edge_blink::before { background-image: url(https://resources.whatwg.org/browser-logos/edge.svg); }
+            .mdn-anno > .feature > .support > .edge::before { background-image: url(https://resources.whatwg.org/browser-logos/edge_legacy.svg); }
+            .mdn-anno > .feature > .support > .firefox::before { background-image: url(https://resources.whatwg.org/browser-logos/firefox.png); }
+            .mdn-anno > .feature > .support > .ie::before { background-image: url(https://resources.whatwg.org/browser-logos/ie.png); }
+            .mdn-anno > .feature > .support > .safari_ios::before { background-image: url(https://resources.whatwg.org/browser-logos/safari-ios.svg); }
+            .mdn-anno > .feature > .support > .nodejs::before { background-image: url(https://nodejs.org/static/images/favicons/favicon.ico); }
+            .mdn-anno > .feature > .support > .opera_android::before { background-image: url(https://resources.whatwg.org/browser-logos/opera.svg); }
+            .mdn-anno > .feature > .support > .opera::before { background-image: url(https://resources.whatwg.org/browser-logos/opera.svg); }
+            .mdn-anno > .feature > .support > .safari::before { background-image: url(https://resources.whatwg.org/browser-logos/safari.png); }
+            .mdn-anno > .feature > .support > .samsunginternet_android::before { background-image: url(https://resources.whatwg.org/browser-logos/samsung.svg); }
+            .mdn-anno > .feature > .support > .webview_android::before { background-image: url(https://resources.whatwg.org/browser-logos/android-webview.png); }
+            .name-slug-mismatch { color: red }
+            .caniuse-status:hover { z-index: 9; }
+
+            /* dt, li, .issue, .note, and .example are "position: relative", so to put annotation at right margin, must move to right of containing block */
+            .h-entry:not(.status-LS) dt > .mdn-anno, .h-entry:not(.status-LS) li > .mdn-anno, .h-entry:not(.status-LS) .issue > .mdn-anno, .h-entry:not(.status-LS) .note > .mdn-anno, .h-entry:not(.status-LS) .example > .mdn-anno { right: -6.7em; }
+            .h-entry p + .mdn-anno { margin-top: 0; }
+            h2 + .mdn-anno.after { margin: -48px 0 0 0; }
+            h3 + .mdn-anno.after { margin: -46px 0 0 0; }
+            h4 + .mdn-anno.after { margin: -42px 0 0 0; }
+            h5 + .mdn-anno.after { margin: -40px 0 0 0; }
+            h6 + .mdn-anno.after { margin: -40px 0 0 0; }
+            </style>
 <style>/* style-selflinks */
 
+:root {
+    --selflink-text: white;
+    --selflink-bg: gray;
+    --selflink-hover-text: black;
+}
 .heading, .issue, .note, .example, li, dt {
     position: relative;
 }
@@ -177,8 +350,8 @@ dfn > a.self-link {
     opacity: 0;
     width: 1.5em;
     height: 1.5em;
-    background: gray;
-    color: white;
+    background: var(--selflink-bg);
+    color: var(--selflink-text);
     font-style: normal;
     transition: opacity .2s, background-color .2s, color .2s;
 }
@@ -186,17 +359,23 @@ dfn:hover > a.self-link {
     opacity: 1;
 }
 dfn > a.self-link:hover {
-    color: black;
+    color: var(--selflink-hover-text);
 }
 
 a.self-link::before            { content: "¶"; }
 .heading > a.self-link::before { content: "§"; }
-dfn > a.self-link::before      { content: "#"; }</style>
+dfn > a.self-link::before      { content: "#"; }
+</style>
 <style>/* style-syntax-highlighting */
-pre.idl.highlight { color: #708090; }
-.highlight:not(.idl) { background: hsl(24, 20%, 95%); }
+
+            pre.idl.highlight {
+                background: var(--borderedblock-bg, var(--def-bg));
+            }
+            
 code.highlight { padding: .1em; border-radius: .3em; }
 pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+
+.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
 c-[a] { color: #990055 } /* Keyword.Declaration */
 c-[b] { color: #990055 } /* Keyword.Type */
 c-[c] { color: #708090 } /* Comment */
@@ -261,12 +440,202 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     var.selected5 { background-color: #82DDFF; box-shadow: 0 0 0 2px #82DDFF; }
     var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
     </style>
+<style>/* style-darkmode */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text: #ddd;
+        --bg: black;
+
+        --unofficial-watermark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cg fill='%23100808' transform='translate(200 200) rotate(-45) translate(-200 -200)' stroke='%23100808' stroke-width='3'%3E%3Ctext x='50%25' y='220' style='font: bold 70px sans-serif; text-anchor: middle; letter-spacing: 6px;'%3EUNOFFICIAL%3C/text%3E%3Ctext x='50%25' y='305' style='font: bold 70px sans-serif; text-anchor: middle; letter-spacing: 6px;'%3EDRAFT%3C/text%3E%3C/g%3E%3C/svg%3E");
+
+        --logo-bg: #1a5e9a;
+        --logo-active-bg: #c00;
+        --logo-text: white;
+
+        --tocnav-normal-text: #999;
+        --tocnav-normal-bg: var(--bg);
+        --tocnav-hover-text: var(--tocnav-normal-text);
+        --tocnav-hover-bg: #080808;
+        --tocnav-active-text: #f44;
+        --tocnav-active-bg: var(--tocnav-normal-bg);
+
+        --tocsidebar-text: var(--text);
+        --tocsidebar-bg: #080808;
+        --tocsidebar-shadow: rgba(255,255,255,.1);
+        --tocsidebar-heading-text: hsla(203,20%,40%,.7);
+
+        --toclink-text: var(--text);
+        --toclink-underline: #6af;
+        --toclink-visited-text: var(--toclink-text);
+        --toclink-visited-underline: #054572;
+
+        --heading-text: #8af;
+
+        --hr-text: var(--text);
+
+        --algo-border: #456;
+
+        --del-text: #f44;
+        --del-bg: transparent;
+        --ins-text: #4a4;
+        --ins-bg: transparent;
+
+        --a-normal-text: #6af;
+        --a-normal-underline: #555;
+        --a-visited-text: var(--a-normal-text);
+        --a-visited-underline: var(--a-normal-underline);
+        --a-hover-bg: rgba(25%, 25%, 25%, .2);
+        --a-active-text: #f44;
+        --a-active-underline: var(--a-active-text);
+
+        --borderedblock-bg: rgba(255, 255, 255, .05);
+
+        --blockquote-border: silver;
+        --blockquote-bg: var(--borderedblock-bg);
+        --blockquote-text: currentcolor;
+
+        --issue-border: #e05252;
+        --issue-bg: var(--borderedblock-bg);
+        --issue-text: var(--text);
+        --issueheading-text: hsl(0deg, 70%, 70%);
+
+        --example-border: hsl(50deg, 90%, 60%);
+        --example-bg: var(--borderedblock-bg);
+        --example-text: var(--text);
+        --exampleheading-text: hsl(50deg, 70%, 70%);
+
+        --note-border: hsl(120deg, 100%, 35%);
+        --note-bg: var(--borderedblock-bg);
+        --note-text: var(--text);
+        --noteheading-text: hsl(120, 70%, 70%);
+        --notesummary-underline: silver;
+
+        --assertion-border: #444;
+        --assertion-bg: var(--borderedblock-bg);
+        --assertion-text: var(--text);
+
+        --advisement-border: orange;
+        --advisement-bg: #222218;
+        --advisement-text: var(--text);
+        --advisementheading-text: #f84;
+
+        --warning-border: red;
+        --warning-bg: hsla(40,100%,20%,0.95);
+        --warning-text: var(--text);
+
+        --amendment-border: #330099;
+        --amendment-bg: #080010;
+        --amendment-text: var(--text);
+        --amendmentheading-text: #cc00ff;
+
+        --def-border: #8ccbf2;
+        --def-bg: #080818;
+        --def-text: var(--text);
+        --defrow-border: #136;
+
+        --datacell-border: silver;
+
+        --indexinfo-text: #aaa;
+
+        --indextable-hover-text: var(--text);
+        --indextable-hover-bg: #181818;
+
+        --outdatedspec-bg: rgba(255, 255, 255, .5);
+        --outdatedspec-text: black;
+        --outdated-bg: maroon;
+        --outdated-text: white;
+        --outdated-shadow: red;
+
+        --editedrec-bg: darkorange;
+    }
+    /* In case a transparent-bg image doesn't expect to be on a dark bg,
+       which is quite common in practice... */
+    img { background: white; }
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --selflink-text: black;
+        --selflink-bg: silver;
+        --selflink-hover-text: white;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dfnpanel-bg: #222;
+        --dfnpanel-text: var(--text);
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
+
+    c-[a] { color: #d33682 } /* Keyword.Declaration */
+    c-[b] { color: #d33682 } /* Keyword.Type */
+    c-[c] { color: #2aa198 } /* Comment */
+    c-[d] { color: #2aa198 } /* Comment.Multiline */
+    c-[e] { color: #268bd2 } /* Name.Attribute */
+    c-[f] { color: #b58900 } /* Name.Tag */
+    c-[g] { color: #cb4b16 } /* Name.Variable */
+    c-[k] { color: #d33682 } /* Keyword */
+    c-[l] { color: #657b83 } /* Literal */
+    c-[m] { color: #657b83 } /* Literal.Number */
+    c-[n] { color: #268bd2 } /* Name */
+    c-[o] { color: #657b83 } /* Operator */
+    c-[p] { color: #657b83 } /* Punctuation */
+    c-[s] { color: #6c71c4 } /* Literal.String */
+    c-[t] { color: #6c71c4 } /* Literal.String.Single */
+    c-[u] { color: #6c71c4 } /* Literal.String.Double */
+    c-[ch] { color: #2aa198 } /* Comment.Hashbang */
+    c-[cp] { color: #2aa198 } /* Comment.Preproc */
+    c-[cpf] { color: #2aa198 } /* Comment.PreprocFile */
+    c-[c1] { color: #2aa198 } /* Comment.Single */
+    c-[cs] { color: #2aa198 } /* Comment.Special */
+    c-[kc] { color: #d33682 } /* Keyword.Constant */
+    c-[kn] { color: #d33682 } /* Keyword.Namespace */
+    c-[kp] { color: #d33682 } /* Keyword.Pseudo */
+    c-[kr] { color: #d33682 } /* Keyword.Reserved */
+    c-[ld] { color: #657b83 } /* Literal.Date */
+    c-[nc] { color: #268bd2 } /* Name.Class */
+    c-[no] { color: #268bd2 } /* Name.Constant */
+    c-[nd] { color: #268bd2 } /* Name.Decorator */
+    c-[ni] { color: #268bd2 } /* Name.Entity */
+    c-[ne] { color: #268bd2 } /* Name.Exception */
+    c-[nf] { color: #268bd2 } /* Name.Function */
+    c-[nl] { color: #268bd2 } /* Name.Label */
+    c-[nn] { color: #268bd2 } /* Name.Namespace */
+    c-[py] { color: #268bd2 } /* Name.Property */
+    c-[ow] { color: #657b83 } /* Operator.Word */
+    c-[mb] { color: #657b83 } /* Literal.Number.Bin */
+    c-[mf] { color: #657b83 } /* Literal.Number.Float */
+    c-[mh] { color: #657b83 } /* Literal.Number.Hex */
+    c-[mi] { color: #657b83 } /* Literal.Number.Integer */
+    c-[mo] { color: #657b83 } /* Literal.Number.Oct */
+    c-[sa] { color: #6c71c4 } /* Literal.String.Affix */
+    c-[sb] { color: #6c71c4 } /* Literal.String.Backtick */
+    c-[sc] { color: #6c71c4 } /* Literal.String.Char */
+    c-[dl] { color: #6c71c4 } /* Literal.String.Delimiter */
+    c-[sd] { color: #6c71c4 } /* Literal.String.Doc */
+    c-[se] { color: #6c71c4 } /* Literal.String.Escape */
+    c-[sh] { color: #6c71c4 } /* Literal.String.Heredoc */
+    c-[si] { color: #6c71c4 } /* Literal.String.Interpol */
+    c-[sx] { color: #6c71c4 } /* Literal.String.Other */
+    c-[sr] { color: #6c71c4 } /* Literal.String.Regex */
+    c-[ss] { color: #6c71c4 } /* Literal.String.Symbol */
+    c-[fm] { color: #268bd2 } /* Name.Function.Magic */
+    c-[vc] { color: #cb4b16 } /* Name.Variable.Class */
+    c-[vg] { color: #cb4b16 } /* Name.Variable.Global */
+    c-[vi] { color: #cb4b16 } /* Name.Variable.Instance */
+    c-[vm] { color: #cb4b16 } /* Name.Variable.Magic */
+    c-[il] { color: #657b83 } /* Literal.Number.Integer.Long */
+}
+</style>
  <body class="h-entry">
   <div class="head">
    <header>
     <p data-fill-with="logo"><a href="https://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"></a> </p>
     <h1 class="p-name no-ref" id="title">Paint Timing 1</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-04-20">20 April 2020</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-11-30">30 November 2020</time></span></h2>
    </header>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -301,8 +670,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <p> Publication as an Editors Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may
     be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite
     this document as other than work in progress. </p>
-   <p> This document was produced by a group operating under the <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/2004/01/pp-impl/45211/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. </p>
-   <p>This document is governed by the <a href="https://www.w3.org/2019/Process-20190301/" id="w3c_process_revision">1 March 2019 W3C Process Document</a>. </p>
+   <p> This document was produced by a group operating under the <a href="https://www.w3.org/Consortium/Patent-Policy-20170801/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/2004/01/pp-impl/45211/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20170801/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20170801/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. </p>
+   <p>This document is governed by the <a href="https://www.w3.org/2020/Process-20200915/" id="w3c_process_revision">15 September 2020 W3C Process Document</a>. </p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
@@ -440,8 +809,24 @@ Those elements would still considered as paintable for the purpose of computing 
 For example, a user agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.</p>
    </ul>
    <h2 class="heading settled" data-level="3" id="sec-PerformancePaintTiming"><span class="secno">3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming">PerformancePaintTiming</a></code> interface</span><a class="self-link" href="#sec-PerformancePaintTiming"></a></h2>
+   <div class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming" title="The PerformancePaintTiming interface of the Paint Timing provides timing information about &quot;paint&quot; (also called &quot;render&quot;) operations during web page construction. &quot;Paint&quot; refers to conversion of the render tree to on-screen pixels.">PerformancePaintTiming</a></p>
+     <p class="less-than-two-engines-text">In only one current engine.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>?</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>60+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>47+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>60+</span></span><span class="webview_android yes"><span>Android WebView</span><span>60+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>8.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>44+</span></span>
+     </div>
+    </div>
+   </div>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
-<c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="performancepainttiming"><code class="highlight"><c- g>PerformancePaintTiming</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface" id="ref-for-the-performanceentry-interface"><c- n>PerformanceEntry</c-></a> {};
+<c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="performancepainttiming"><code class="highlight"><c- g>PerformancePaintTiming</c-></code></dfn> : <a data-link-type="idl-name" href="https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface" id="ref-for-the-performanceentry-interface"><c- n>PerformanceEntry</c-></a> {};
 </pre>
    <p><code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming①">PerformancePaintTiming</a></code> extends the following attributes of <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface" id="ref-for-the-performanceentry-interface①">PerformanceEntry</a></code> interface:</p>
    <ul>
@@ -460,12 +845,12 @@ For example, a user agent may decide to disable paint-timing for cross-origin if
     <li data-md>
      <p>The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration">duration</a></code> attribute’s getter must return 0.</p>
    </ul>
-   <p class="note" role="note"><span>NOTE:</span> A user agent implementing <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming②">PerformancePaintTiming</a></code> would need to include <code class="highlight"><c- u>"paint"</c-></code> in <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#supportedentrytypes-attribute" id="ref-for-supportedentrytypes-attribute">supportedEntryTypes</a></code> of a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-global" id="ref-for-concept-realm-global">global object</a> whose <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>'s <a data-link-type="dfn">responsible browsing context</a> is <a data-link-type="dfn" href="#paint-timing-eligible" id="ref-for-paint-timing-eligible">paint-timing eligible</a>.
+   <p class="note" role="note"><span>NOTE:</span> A user agent implementing <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming②">PerformancePaintTiming</a></code> would need to include <code class="highlight"><c- u>"paint"</c-></code> in <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/performance-timeline-2/#supportedentrytypes-attribute" id="ref-for-supportedentrytypes-attribute">supportedEntryTypes</a></code> of a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-global" id="ref-for-concept-realm-global">global object</a> whose <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/window-object.html#window-bc" id="ref-for-window-bc">browsing context</a> is <a data-link-type="dfn" href="#paint-timing-eligible" id="ref-for-paint-timing-eligible">paint-timing eligible</a>.
 This allows developers to detect support for paint timing for a particular <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context①">browsing context</a>.</p>
    <h2 class="heading settled" data-level="4" id="sec-processing-model"><span class="secno">4. </span><span class="content">Processing model</span><a class="self-link" href="#sec-processing-model"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="sec-reporting-paint-timing"><span class="secno">4.1. </span><span class="content">Reporting paint timing</span><a class="self-link" href="#sec-reporting-paint-timing"></a></h3>
    <p>Every <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document②">Document</a> has an associated <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#sets" id="ref-for-sets">set</a> of <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="previously-reported-paints">previously reported paints</dfn>, initiallized to an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#sets" id="ref-for-sets①">set</a>.</p>
-   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export data-level="4.1.1" data-lt="First Contentful Paint" id="first-contentful-paint"><span class="secno">4.1.1. </span><span class="content">First Contentful Paint</span></h4>
+   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export data-level="4.1.1" data-lt="First Contentful Paint" id="first-contentful-paint"><span class="secno">4.1.1. </span><span class="content">First Contentful Paint</span><a class="self-link" href="#first-contentful-paint" id="ref-for-first-contentful-paint⑤"></a></h4>
    <div class="algorithm" data-algorithm="Should report first contentful paint">
      To know whether <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document③">Document</a> <var>document</var> <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="should-report-first-contentful-paint">should report first contentful paint</dfn>, perform the following steps: 
     <ol>
@@ -477,12 +862,12 @@ This allows developers to detect support for paint timing for a particular <a da
       <p>Otherwise, return false.</p>
     </ol>
    </div>
-   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export data-level="4.1.2" data-lt="Mark paint timing" id="mark-paint-timing"><span class="secno">4.1.2. </span><span class="content">Mark paint timing</span></h4>
+   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export data-level="4.1.2" data-lt="Mark paint timing" id="mark-paint-timing"><span class="secno">4.1.2. </span><span class="content">Mark paint timing</span><a class="self-link" href="#mark-paint-timing" id="ref-for-mark-paint-timing"></a></h4>
    <div class="algorithm" data-algorithm="Mark paint timing">
-     When asked to <a data-link-type="dfn" href="#mark-paint-timing" id="ref-for-mark-paint-timing">mark paint timing</a> given a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document④">Document</a> <var>document</var> as input, perform the following steps: 
+     When asked to <a data-link-type="dfn" href="#mark-paint-timing" id="ref-for-mark-paint-timing①">mark paint timing</a> given a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document④">Document</a> <var>document</var> as input, perform the following steps: 
     <ol>
      <li data-md>
-      <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑤">document</a>'s <a data-link-type="dfn">responsible browsing context</a> is not <a data-link-type="dfn" href="#paint-timing-eligible" id="ref-for-paint-timing-eligible①">paint-timing eligible</a>, return.</p>
+      <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑤">document</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-document-bc" id="ref-for-concept-document-bc">browsing context</a> is not <a data-link-type="dfn" href="#paint-timing-eligible" id="ref-for-paint-timing-eligible①">paint-timing eligible</a>, return.</p>
      <li data-md>
       <p>Let <var>paintTimestamp</var> be the <a data-link-type="dfn" href="https://www.w3.org/TR/hr-time-2/#dfn-current-high-resolution-time" id="ref-for-dfn-current-high-resolution-time">current high resolution time</a>.</p>
      <li data-md>
@@ -502,9 +887,9 @@ This allows developers to detect support for paint timing for a particular <a da
     </ol>
     <p class="note" role="note"><span>NOTE:</span> The marking of <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑤">first paint</a> is optional. User-agents implementing paint timing should at the very least mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint④">first contentful paint</a> .</p>
    </div>
-   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.1.3" data-lt="Report paint timing" data-noexport id="report-paint-timing"><span class="secno">4.1.3. </span><span class="content">Report paint timing</span></h4>
+   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="4.1.3" data-lt="Report paint timing" data-noexport id="report-paint-timing"><span class="secno">4.1.3. </span><span class="content">Report paint timing</span><a class="self-link" href="#report-paint-timing" id="ref-for-report-paint-timing②"></a></h4>
    <div class="algorithm" data-algorithm="Report paint timing">
-     When asked to <a data-link-type="dfn" href="#report-paint-timing" id="ref-for-report-paint-timing②">report paint timing</a> given <var>document</var>, <var>paintType</var>, and <var>paintTimestamp</var> as arguments, perform the following steps: 
+     When asked to <a data-link-type="dfn" href="#report-paint-timing" id="ref-for-report-paint-timing③">report paint timing</a> given <var>document</var>, <var>paintType</var>, and <var>paintTimestamp</var> as arguments, perform the following steps: 
     <ol>
      <li data-md>
       <p>Create a <a data-link-type="dfn" href="https://heycam.github.io/webidl/#new" id="ref-for-new">new</a> <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming③">PerformancePaintTiming</a></code> object <var>newEntry</var> with <var>document</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm">relevant realm</a> and set its attributes as follows:</p>
@@ -618,16 +1003,16 @@ specification.</p>
     <li><a href="#ref-for-dfn-current-high-resolution-time">4.1.2. Mark paint timing</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-window-bc">
+   <a href="https://html.spec.whatwg.org/multipage/window-object.html#window-bc">https://html.spec.whatwg.org/multipage/window-object.html#window-bc</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-window-bc">3. The PerformancePaintTiming interface</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-relevant-realm">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm">https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-relevant-realm">4.1.3. Report paint timing</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-relevant-settings-object">
-   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-relevant-settings-object">3. The PerformancePaintTiming interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-top-level-browsing-context">
@@ -712,75 +1097,75 @@ specification.</p>
    <li>
     <a data-link-type="biblio">[cr-svg2]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-Rendered-vs-NonRendered" style="color:initial">svg element with rendered descendants</span>
+     <li><span class="dfn-paneled" id="term-for-Rendered-vs-NonRendered">svg element with rendered descendants</span>
     </ul>
    <li>
     <a data-link-type="biblio">[css-2]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-propdef-visibility" style="color:initial">visibility</span>
+     <li><span class="dfn-paneled" id="term-for-propdef-visibility">visibility</span>
     </ul>
    <li>
     <a data-link-type="biblio">[css-backgrounds-3]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-propdef-background-image" style="color:initial">background-image</span>
-     <li><span class="dfn-paneled" id="term-for-background-size" style="color:initial">background-size</span>
+     <li><span class="dfn-paneled" id="term-for-propdef-background-image">background-image</span>
+     <li><span class="dfn-paneled" id="term-for-background-size">background-size</span>
     </ul>
    <li>
     <a data-link-type="biblio">[css-color-3]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-opacity" style="color:initial">opacity</span>
+     <li><span class="dfn-paneled" id="term-for-opacity">opacity</span>
     </ul>
    <li>
     <a data-link-type="biblio">[css-display-3]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-box" style="color:initial">box</span>
-     <li><span class="dfn-paneled" id="term-for-text-nodes" style="color:initial">text node</span>
+     <li><span class="dfn-paneled" id="term-for-box">box</span>
+     <li><span class="dfn-paneled" id="term-for-text-nodes">text node</span>
     </ul>
    <li>
     <a data-link-type="biblio">[css-text-3]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-white-space" style="color:initial">document white space characters</span>
+     <li><span class="dfn-paneled" id="term-for-white-space">document white space characters</span>
     </ul>
    <li>
     <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-concept-document" style="color:initial">document</span>
+     <li><span class="dfn-paneled" id="term-for-concept-document">document</span>
     </ul>
    <li>
     <a data-link-type="biblio">[hr-time-2]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-idl-def-domhighrestimestampdomhighrestimestamp" style="color:initial">DOMHighResTimeStamp</span>
-     <li><span class="dfn-paneled" id="term-for-dfn-current-high-resolution-time" style="color:initial">current high resolution time</span>
+     <li><span class="dfn-paneled" id="term-for-idl-def-domhighrestimestampdomhighrestimestamp">DOMHighResTimeStamp</span>
+     <li><span class="dfn-paneled" id="term-for-dfn-current-high-resolution-time">current high resolution time</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-concept-relevant-realm" style="color:initial">relevant realm</span>
-     <li><span class="dfn-paneled" id="term-for-relevant-settings-object" style="color:initial">relevant settings object</span>
-     <li><span class="dfn-paneled" id="term-for-top-level-browsing-context" style="color:initial">top-level browsing context</span>
-     <li><span class="dfn-paneled" id="term-for-update-the-rendering" style="color:initial">update the rendering</span>
+     <li><span class="dfn-paneled" id="term-for-window-bc">browsing context <small>(for Window)</small></span>
+     <li><span class="dfn-paneled" id="term-for-concept-relevant-realm">relevant realm</span>
+     <li><span class="dfn-paneled" id="term-for-top-level-browsing-context">top-level browsing context</span>
+     <li><span class="dfn-paneled" id="term-for-update-the-rendering">update the rendering</span>
     </ul>
    <li>
     <a data-link-type="biblio">[performance-timeline-2]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-the-performanceentry-interface" style="color:initial">PerformanceEntry</span>
-     <li><span class="dfn-paneled" id="term-for-dom-performanceentry-duration" style="color:initial">duration</span>
-     <li><span class="dfn-paneled" id="term-for-dom-performanceentry-entrytype" style="color:initial">entryType</span>
-     <li><span class="dfn-paneled" id="term-for-dom-performanceentry-name" style="color:initial">name</span>
-     <li><span class="dfn-paneled" id="term-for-dom-performanceentry-starttime" style="color:initial">startTime</span>
-     <li><span class="dfn-paneled" id="term-for-supportedentrytypes-attribute" style="color:initial">supportedEntryTypes</span>
+     <li><span class="dfn-paneled" id="term-for-the-performanceentry-interface">PerformanceEntry</span>
+     <li><span class="dfn-paneled" id="term-for-dom-performanceentry-duration">duration</span>
+     <li><span class="dfn-paneled" id="term-for-dom-performanceentry-entrytype">entryType</span>
+     <li><span class="dfn-paneled" id="term-for-dom-performanceentry-name">name</span>
+     <li><span class="dfn-paneled" id="term-for-dom-performanceentry-starttime">startTime</span>
+     <li><span class="dfn-paneled" id="term-for-supportedentrytypes-attribute">supportedEntryTypes</span>
     </ul>
    <li>
     <a data-link-type="biblio">[selectors-4]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-originating-element" style="color:initial">originating element</span>
+     <li><span class="dfn-paneled" id="term-for-originating-element">originating element</span>
     </ul>
    <li>
     <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-idl-DOMString" style="color:initial">DOMString</span>
-     <li><span class="dfn-paneled" id="term-for-Exposed" style="color:initial">Exposed</span>
-     <li><span class="dfn-paneled" id="term-for-new" style="color:initial">new</span>
+     <li><span class="dfn-paneled" id="term-for-idl-DOMString">DOMString</span>
+     <li><span class="dfn-paneled" id="term-for-Exposed">Exposed</span>
+     <li><span class="dfn-paneled" id="term-for-new">new</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -791,9 +1176,9 @@ specification.</p>
    <dt id="biblio-css-color-3">[CSS-COLOR-3]
    <dd>Tantek Çelik; Chris Lilley; David Baron. <a href="https://www.w3.org/TR/css-color-3/">CSS Color Module Level 3</a>. 19 June 2018. REC. URL: <a href="https://www.w3.org/TR/css-color-3/">https://www.w3.org/TR/css-color-3/</a>
    <dt id="biblio-css-display-3">[CSS-DISPLAY-3]
-   <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://www.w3.org/TR/css-display-3/">CSS Display Module Level 3</a>. 11 July 2019. CR. URL: <a href="https://www.w3.org/TR/css-display-3/">https://www.w3.org/TR/css-display-3/</a>
+   <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://www.w3.org/TR/css-display-3/">CSS Display Module Level 3</a>. 19 May 2020. CR. URL: <a href="https://www.w3.org/TR/css-display-3/">https://www.w3.org/TR/css-display-3/</a>
    <dt id="biblio-css-text-3">[CSS-TEXT-3]
-   <dd>Elika Etemad; Koji Ishii; Florian Rivoal. <a href="https://www.w3.org/TR/css-text-3/">CSS Text Module Level 3</a>. 13 November 2019. WD. URL: <a href="https://www.w3.org/TR/css-text-3/">https://www.w3.org/TR/css-text-3/</a>
+   <dd>Elika Etemad; Koji Ishii; Florian Rivoal. <a href="https://www.w3.org/TR/css-text-3/">CSS Text Module Level 3</a>. 29 April 2020. WD. URL: <a href="https://www.w3.org/TR/css-text-3/">https://www.w3.org/TR/css-text-3/</a>
    <dt id="biblio-dom">[DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-hr-time-2">[HR-TIME-2]
@@ -809,7 +1194,7 @@ specification.</p>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
-<c- b>interface</c-> <a href="#performancepainttiming"><code class="highlight"><c- g>PerformancePaintTiming</c-></code></a> : <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface"><c- n>PerformanceEntry</c-></a> {};
+<c- b>interface</c-> <a href="#performancepainttiming"><code class="highlight"><c- g>PerformancePaintTiming</c-></code></a> : <a data-link-type="idl-name" href="https://www.w3.org/TR/performance-timeline-2/#the-performanceentry-interface"><c- n>PerformanceEntry</c-></a> {};
 
 </pre>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
@@ -887,6 +1272,7 @@ specification.</p>
    <ul>
     <li><a href="#ref-for-first-contentful-paint">2. Terminology</a>
     <li><a href="#ref-for-first-contentful-paint①">3. The PerformancePaintTiming interface</a>
+    <li><a href="#ref-for-first-contentful-paint">4.1.1. First Contentful Paint</a>
     <li><a href="#ref-for-first-contentful-paint②">4.1.2. Mark paint timing</a> <a href="#ref-for-first-contentful-paint③">(2)</a> <a href="#ref-for-first-contentful-paint④">(3)</a>
    </ul>
   </aside>
@@ -899,14 +1285,14 @@ specification.</p>
   <aside class="dfn-panel" data-for="mark-paint-timing">
    <b><a href="#mark-paint-timing">#mark-paint-timing</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-mark-paint-timing">4.1.2. Mark paint timing</a>
+    <li><a href="#ref-for-mark-paint-timing">4.1.2. Mark paint timing</a> <a href="#ref-for-mark-paint-timing">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="report-paint-timing">
    <b><a href="#report-paint-timing">#report-paint-timing</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-report-paint-timing">4.1.2. Mark paint timing</a> <a href="#ref-for-report-paint-timing">(2)</a>
-    <li><a href="#ref-for-report-paint-timing">4.1.3. Report paint timing</a>
+    <li><a href="#ref-for-report-paint-timing">4.1.3. Report paint timing</a> <a href="#ref-for-report-paint-timing">(2)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
@@ -965,6 +1351,14 @@ document.body.addEventListener("click", function(e) {
 
 });
 </script>
+<script>/* script-mdn-anno */
+
+            document.body.addEventListener("click", (e) => {
+                if(e.target.closest(".mdn-anno-btn")) {
+                    e.target.closest(".mdn-anno").classList.toggle("wrapped");
+                }
+            });
+            </script>
 <script>/* script-var-click-highlighting */
 
     document.addEventListener("click", e=>{
