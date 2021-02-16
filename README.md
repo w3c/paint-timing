@@ -37,9 +37,9 @@ The rendering pipeline is very complex, and the timestamp should be the latest t
 
 ```javascript
 
-var observer = new PerformanceObserver(function(list) {
-  var perfEntries = list.getEntries();
-  for (var i = 0; i < perfEntries.length; i++) {
+const observer = new PerformanceObserver(function(list) {
+  const perfEntries = list.getEntries();
+  for (const perfEntry of perfEntries) {
      // Process entries
      // report back for analytics and monitoring
      // ...
