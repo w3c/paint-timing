@@ -5,7 +5,7 @@ Shortname: paint-timing
 Level: 1
 ED: https://w3c.github.io/paint-timing/
 TR: https://www.w3.org/TR/paint-timing/
-Status: ED
+Status: WD
 Editor: Nicolás Peña Moreno, Google https://google.com, npm@chromium.org
         Noam Rosenthal, Invited Expert, noam@webkit.org
 Former Editor: Shubhie Panicker, Google https://google.com, panicker@google.com
