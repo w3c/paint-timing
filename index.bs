@@ -119,8 +119,6 @@ Terminology {#sec-terminology}
 <dfn export>Paint</dfn>: the user agent has performed a "paint" (or "render") when it has converted the render tree to pixels on the screen.
 Formally, we consider the user agent to have "rendered" a document when it has performed the [=update the rendering=] steps of the event loop.
 
-    NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
-
 A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> when all of the following apply:
 * The pseudo-element's [=used=] [=visibility=] is <code>visible</code>.
 * The pseudo-element's [=used=] [=opacity=] is greater than zero.
