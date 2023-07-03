@@ -2,7 +2,7 @@
 Title: Paint Timing
 Group: webperf
 Shortname: paint-timing
-Level: 1
+Level: none
 ED: https://w3c.github.io/paint-timing/
 TR: https://www.w3.org/TR/paint-timing/
 Status: WD

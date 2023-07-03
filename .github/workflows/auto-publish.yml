@@ -20,4 +20,5 @@ jobs:
           W3C_WG_DECISION_URL: "https://lists.w3.org/Archives/Public/public-web-perf/2021Apr/0005.html"
           W3C_NOTIFICATIONS_CC: "${{ secrets.CC }}"
           W3C_BUILD_OVERRIDE: |
-            status: w3c/WD
+            status: WD
+            TR: http://www.w3.org/TR/paint-timing/
