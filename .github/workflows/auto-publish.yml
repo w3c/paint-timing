@@ -1,16 +1,23 @@
-name: CI
+# Configuration options https://w3c.github.io/spec-prod/
+name: Node CI
+
 on:
-  pull_request: {}
-  workflow_dispatch: {}
   push:
-    branches: [main]
+    branches:
+      - main
+  pull_request: {}
+
 jobs:
-  main:
-    name: Build, Validate and Deploy
-    runs-on: ubuntu-20.04
+  validate-and-publish:
+    name: Validate and Publish
+    runs-on: ubuntu-latest # only linux supported at present
     steps:
       - uses: actions/checkout@v2
       - uses: w3c/spec-prod@v2
         with:
-          W3C_ECHIDNA_TOKEN: ${{ secrets.W3C_TR_TOKEN }}
-          W3C_WG_DECISION_URL: https://lists.w3.org/Archives/Public/public-web-perf/2021Apr/0005.html
+          TOOLCHAIN: bikeshed
+          W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
+          W3C_WG_DECISION_URL: "https://lists.w3.org/Archives/Public/public-web-perf/2021Apr/0005.html"
+          W3C_NOTIFICATIONS_CC: "${{ secrets.CC }}"
+          W3C_BUILD_OVERRIDE: |
+            status: w3c/WD
