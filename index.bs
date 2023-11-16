@@ -13,24 +13,11 @@ Repository: w3c/paint-timing
 Abstract: This document defines an API that can be used to capture a series of key moments (first paint, first contentful paint) during pageload which developers care about.
 Default Highlight: js
 </pre>
-
+<pre class=link-defaults>
+spec:dom; type:dfn; text:element
+spec:css22; type:dfn; text:visibility
+</pre>
 <pre class=anchors>
-urlPrefix: https://www.w3.org/TR/performance-timeline-2/; spec: PERFORMANCE-TIMELINE-2;
-    type: interface; url: #the-performanceentry-interface; text: PerformanceEntry;
-    type: attribute; for: PerformanceEntry;
-        text: name; url: #dom-performanceentry-name
-        text: entryType; url: #dom-performanceentry-entrytype
-        text: startTime; url: #dom-performanceentry-starttime
-        text: duration; url: #dom-performanceentry-duration
-    type: dfn; url: #dfn-register-a-performance-entry-type; text: register a performance entry type
-    type: attribute; for: PerformanceObserver;
-        text: supportedEntryTypes; url: #supportedentrytypes-attribute
-urlPrefix: https://www.w3.org/TR/hr-time-2/#idl-def-domhighrestimestamp; spec: HR-TIME-2;
-    type: typedef; text: DOMHighResTimeStamp
-urlPrefix: https://www.w3.org/TR/CSS22/visufx.html; spec: CSS-2;
-    type: dfn; url: #propdef-visibility; text: visibility;
-urlPrefix: https://www.w3.org/TR/css-color-3; spec: CSS-COLOR-3;
-    type: dfn; url: #opacity; text: opacity;
 urlPrefix: https://html.spec.whatwg.org/multipage/images.html
     type: dfn; text: available; url: #img-available;
     type: dfn; text: image; url: #images;
@@ -40,23 +27,17 @@ urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-BACKGROUNDS-3;
     type: dfn; text: background-image; url: #propdef-background-image;
     type: dfn; text: background-size; url: #background-size;
 urlPrefix: https://html.spec.whatwg.org/multipage/canvas.html
-    type: dfn; text: canvas;
     type: dfn; text: context mode; url: #concept-canvas-context-mode;
 urlPrefix: https://html.spec.whatwg.org/multipage/rendering.html
-    type: dfn; text: replaced element; url: #replaced-elements;
     type: dfn; text: being rendered; url: #being-rendered;
 urlPrefix: https://w3c.github.io/IntersectionObserver/
     type: dfn; text: Intersection rect algorithm; url: #calculate-intersection-rect-algo
-urlPrefix: https://drafts.csswg.org/css-cascade-4/
-    type: dfn; text: used; url: #used;
 urlPrefix: https://html.spec.whatwg.org/multipage/dom.html
-    type: dfn; text: element; url: #element;
     type: dfn; text: represents; url: #represents;
 urlPrefix: https://drafts.csswg.org/css-pseudo-4
     type: dfn; text: generated content pseudo-element; url: #generated-content;
     type: dfn; text: typographical pseudo-element; url: #typographic-pseudos;
 urlPrefix: https://www.w3.org/TR/cssom-view
-    type: dfn; text: getBoundingClientRect; url: #dom-element-getboundingclientrect;
     type: dfn; text: scrolling area; url: #scrolling-area;
 urlPrefix: https://www.w3.org/TR/css3-values/
     type: dfn; text: url valued; url: #url-value;
@@ -66,19 +47,9 @@ urlPrefix: https://www.w3.org/TR/css-images-3/
     type: dfn; text: CSS image; url: #typedef-image;
 urlPrefix: https://html.spec.whatwg.org/multipage/media.html
     type: dfn; text: poster frame; url: #poster-frame;
-    type: dfn; text: video element; url: #the-video-element;
-urlPrefix: https://html.spec.whatwg.org/multipage/input.html
-    type: dfn; text: input; url: #the-input-element;
-    type: dfn; text: value attribute; url: #attr-input-value;
 urlPrefix: https://html.spec.whatwg.org/multipage/browsers.html
     type: dfn; text: browsing context; url: #browsing-context;
     type: dfn; text: nested browsing context; url: #nested-browsing-context;
-urlPrefix: https://html.spec.whatwg.org/multipage/webappapis.html
-    type: dfn; text: global object; url: #concept-realm-global;
-urlPrefix: https://infra.spec.whatwg.org/
-    type: dfn; text: set; url: #sets;
-    type: dfn; text: contains; url: #list-contain;
-    type: dfn; text: append; url: #list-append;
 </pre>
 
 Introduction {#intro}
@@ -122,8 +93,8 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
 A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> when all of the following apply:
-* The pseudo-element's [=used=] [=visibility=] is <code>visible</code>.
-* The pseudo-element's [=used=] [=opacity=] is greater than zero.
+* The pseudo-element's [=used value|used=] [=visibility=] is <code>visible</code>.
+* The pseudo-element's [=used value|used=] [=opacity=] is greater than zero.
 * The pseudo-element generates a non-empty [=box=].
 
 A [=CSS image=] |img| is a <dfn>contentful image</dfn> when all of the following apply:
@@ -132,39 +103,39 @@ A [=CSS image=] |img| is a <dfn>contentful image</dfn> when all of the following
 
 A {{DOMString}} is <dfn>non-empty</dfn> if it contains at least one character excluding [=document white space characters=].
 
-An [=element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
-* |target| has a [=text node=] child, representing [=non-empty=] text, and the node's [=used=] [=opacity=] is greater than zero.
+An [=/element=] |target| is <dfn export>contentful</dfn> when one or more of the following apply:
+* |target| has a [=text node=] child, representing [=non-empty=] text, and the node's [=used value|used=] [=opacity=] is greater than zero.
 
     NOTE: this covers the case where a [=typographical pseudo-element=] would override the opacity of the text node.
 
 * |target| is a [=replaced element=] representing an [=available=] [=image=].
-* |target| has a [=background-image=] which is a [=contentful image=], and its [=used=] [=background-size=] has non-zero width and height values.
-* |target| is a [=canvas=] with its [=context mode=] set to any value other than <code>none</code>.
-* |target| is a [=video element=] that [=represents=] its [=poster frame=] or the first video frame and the frame is available.
+* |target| has a [=background-image=] which is a [=contentful image=], and its [=used value|used=] [=background-size=] has non-zero width and height values.
+* |target| is a <{canvas}> with its [=context mode=] set to any value other than <code>none</code>.
+* |target| is a <{video}> element that [=represents=] its [=poster frame=] or the first video frame and the frame is available.
 * |target| is an [=svg element with rendered descendants=].
-* |target| is an [=input=] element with a [=non-empty=] [=value attribute=].
+* |target| is an <{input}> element with a [=non-empty=] <{input/value}> attribute.
 * |target| is an [=originating element=] for a [=paintable pseudo-element=] that represents a [=contentful image=] or [=non-empty=] text.
 
-To compute the <dfn>paintable bounding rect</dfn> of [=element=] |target|, run the following steps:
-    1. Let |boundingRect| be the result of running the [=getBoundingClientRect=] on |target|.
+To compute the <dfn>paintable bounding rect</dfn> of [=/element=] |target|, run the following steps:
+    1. Let |boundingRect| be the result of running the {{Element/getBoundingClientRect()}} on |target|.
     1. Clip |boundingRect| with the [=document=]'s [=scrolling area=].
     1. Return |boundingRect|.
 
-    NOTE: elements contained by boxes with <code>overflow: scroll</code> or <code>overflow: hidden</code> don't have their [=paintable bounding rect=] clipped, as in both cases the [=element=] can become visible by scrolling.
+    NOTE: elements contained by boxes with <code>overflow: scroll</code> or <code>overflow: hidden</code> don't have their [=paintable bounding rect=] clipped, as in both cases the [=/element=] can become visible by scrolling.
 
-An [=element=] |el| is <dfn>paintable</dfn> when all of the following apply:
+An [=/element=] |el| is <dfn>paintable</dfn> when all of the following apply:
 * |el| is [=being rendered=].
-* |el|'s [=used=] [=visibility=] is <code>visible</code>.
-* |el| and all of its ancestors' [=used=] [=opacity=] is greater than zero.
+* |el|'s [=used value|used=] [=visibility=] is <code>visible</code>.
+* |el| and all of its ancestors' [=used value|used=] [=opacity=] is greater than zero.
 
-    NOTE: there could be cases where a <code>paintable</code> [=element=] would not be visible to the user, for example in the case of text that has the same color as its background.
+    NOTE: there could be cases where a <code>paintable</code> [=/element=] would not be visible to the user, for example in the case of text that has the same color as its background.
     Those elements would still considered as paintable for the purpose of computing [=first contentful paint=].
 
 * |el|'s [=paintable bounding rect=] intersects with the [=scrolling area=] of the [=document=].
 
     NOTE: This covers the cases where the element is scaled to zero size, has <code>display: none</code>, or <code>display: contents</code> where the contents resolve to an empty rect.
 
-    NOTE: As a general rule, an [=element=] is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling or zooming.
+    NOTE: As a general rule, an [=/element=] is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling or zooming.
 
 <dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
@@ -192,7 +163,7 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
-NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} of a [=global object=] whose [=Window/browsing context=] is [=paint-timing eligible=].
+NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} of a [=realm/global object=] whose [=Window/browsing context=] is [=paint-timing eligible=].
 This allows developers to detect support for paint timing for a particular [=browsing context=].
 
 Processing model {#sec-processing-model}
@@ -201,13 +172,13 @@ Processing model {#sec-processing-model}
 Reporting paint timing {#sec-reporting-paint-timing}
 --------------------------------------------------------
 
-Every [=Document=] has an associated [=set=] of <dfn>previously reported paints</dfn>, initiallized to an empty [=set=].
+Every [=Document=] has an associated [=ordered set=] of <dfn>previously reported paints</dfn>, initiallized to an empty [=ordered set=].
 
 <h4 dfn export>First Contentful Paint</h4>
 <div algorithm="Should report first contentful paint">
     To know whether [=Document=] |document| <dfn>should report first contentful paint</dfn>, perform the following steps:
     1. If |document|'s [=previously reported paints=] contains <code>"first-contentful-paint"</code>, then return false.
-    1. If |document| contains at least one [=element=] that is both [=paintable=] and [=contentful=], then return true.
+    1. If |document| contains at least one [=/element=] that is both [=paintable=] and [=contentful=], then return true.
     1. Otherwise, return false.
 </div>
 
@@ -244,7 +215,7 @@ Every [=Document=] has an associated [=set=] of <dfn>previously reported paints<
         1. Set |newEntry|'s {{PerformanceEntry/startTime}} attribute to |paintTimestamp|.
         1. Set |newEntry|'s {{PerformanceEntry/duration}} attribute to 0.
     1. <a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> |newEntry| object.
-    1. [=Append=] |paintType| to |document|'s associated [=previously reported paints=].
+    1. [=list/Append=] |paintType| to |document|'s associated [=previously reported paints=].
 </div>
 
 
