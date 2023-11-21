@@ -348,6 +348,24 @@ called.
 </div>
 
 
+Common algorithms {#sec-common-algorithms}
+------------------------------------------
+
+<h4 dfn export>Exposed for paint timing</h4>
+
+<div algorithm="Exposed for paint timing">
+
+    To determine whether an [=/Element=] |element| is [=exposed for paint timing=], given a [=Document=] or null |document|, perform the following steps:
+
+    1. If |element| is not [=connected=], return false.
+    1. If |document| is null, let |document| be [=this=]'s [=relevant settings object=]'s [=relevant global object=]'s [=associated document=].
+    1. If |document| is not [=fully active=], return false.
+    1. If |element|'s [=tree/root=] is not equal to |document|, return false.
+    1. Return true.
+</div>
+
+
+
 <!-- ============================================================ -->
 <h2 id=acknowledgements>Acknowledgements</h2>
 <!-- ============================================================ -->
