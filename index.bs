@@ -207,75 +207,105 @@ This allows developers to detect support for paint timing for a particular [=bro
 Processing model {#sec-processing-model}
 ========================================
 
+Associated Image Requests {#sec-associated-image-requests}
+----------------------------------------------------------
+
+Each {{Element}} has an <dfn>associated image request</dfn> which is initially
+null.
+
+When the processing model for an {{Element}} <em>element</em> of type
+{{HTMLImageElement}}, {{SVGImageElement}}, or {{HTMLVideoElement}} creates a
+new image resource (e.g., to be displayed as an image or poster image),
+<em>element</em>'s <a>associated image request</a> is set to the <a>image
+request</a> of the created image resource.
+
+Note: Every image resource that is obtained from a URL whose
+<a spec=url>scheme</a> is equal to "data" has an associated <a>image request</a>
+which is not fetched but still needs to be loaded. This request can be the
+<a>associated image request</a> of an {{Element}}.
+
+Note: The current language is vague since it does not point to specific
+algorithms. This can be made more rigorous when the corresponding processing
+models have a more unified processing model.
+
+Every {{Element}} has a list of <dfn>associated background image requests</dfn>
+which is initially an empty array. When the processing model for the {{Element}}
+<em>element</em>'s style requires a new image resource (to be displayed as
+background image), the <a>image request</a> created by the new resource is
+appended to <em>element</em>'s <a>associated background image requests</a>.
+
+NOTE: We assume that there is one <a>image request</a> for each {{Element}} that
+a <a>background-image</a> property affects, for each URL that the
+<a>background-image</a> property specifies. So, in the following example, a
+single <a>background-image</a> property produces four [=image requests=], each
+of which will be recorded and reported by the algorithms below.
+
+```html
+<!DOCTYPE html>
+<style>
+div {
+  background-image: url(https://images.example/background1.png),
+                    url(https://images.example/background2.png);
+}
+</style>
+<div></div>
+<div></div>
+```
+
 Recording paint timing {#sec-recording-paint-timing}
 --------------------------------------------------------
 
-<h4 id="sec-modifications-dom">Modifications to the DOM specification</h4>
+A <dfn>pending image record</dfn> is a [=struct=] with the following members:
 
-Each {{Element}} has an <dfn>associated image request</dfn> which is initially null.
-When the processing model for an {{Element}} <em>element</em> of type {{HTMLImageElement}}, {{SVGImageElement}}, or {{HTMLVideoElement}} creates a new image resource (e.g., to be displayed as an image or poster image), <em>element</em>'s <a>associated image request</a> is set to the <a>image request</a> of the created image resource.
+    * <dfn for="pending image record">element</dfn>, an {{Element}}
+    * <dfn for="pending image record">request</dfn>, an [=image request=]
+    * <dfn for="pending image record">loadTime</dfn>, a {{DOMHighResTimeStamp}}
 
-Note: Every image resource that is obtained from a URL whose <a spec=url>scheme</a> is equal to "data" has an associated <a>image request</a> which is not fetched but still needs to be loaded.
-This request can be the <a>associated image request</a> of an {{Element}}.
+Each {{Element}} has a <dfn>set of owned text nodes</dfn>, which is an [=ordered set=] of {{Text}} nodes, initially empty.
 
-Note: The current language is vague since it does not point to specific algorithms.
-This can be made more rigorous when the corresponding processing models have a more unified processing model.
+Each {{Document}} has a <dfn>set of previously reported paints</dfn>, which is an [=ordered set=] of [=strings=], initially empty.
 
-When an {{Element}} <em>element</em>'s <a>associated image request</a> has become <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> passing in <em>element</em> and its <a>associated image request</a> as inputs.
+Each {{Document}} has an <dfn>images pending rendering</dfn>, which is a [=/list=] of [=pending image records=], initally empty.
+
+Each {{Document}} has a <dfn>set of elements with rendered text</dfn>, which is an [=ordered set=] of {{Element}}s, initially empty.
 
 <h4 id="sec-modifications-CSS">Modifications to the CSS specification</h4>
 
-When the user agent is executing the <a>painting order</a>, it must populate the <a>set of owned text nodes</a> of the painted {{Element|Elements}} so that the following is true:
-
-<div algorithm="text aggregation">
-    * If a {{Text}} object |text| will not be painted due to the font face being in its <a>font block period</a>, then it is not <a for="set">appended</a> to the <a>set of owned text nodes</a> of any {{Element}}.
-    * Otherwise, |text| is <a for="set">appended</a> to the <a>set of owned text nodes</a> of the {{Element}} which determines the <a>containing block</a> of |text|.
-</div>
-
-NOTE: A user agent might want to use a stack to efficiently compute the <a>set of owned text nodes</a> while implementing the <a>painting order</a>.
-
-Every {{Element}} has a list of <dfn>associated background image requests</dfn> which is initially an empty array.
-When the processing model for the {{Element}} <em>element</em>'s style requires a new image resource (to be displayed as background image), the <a>image request</a> created by the new resource is appended to <em>element</em>'s <a>associated background image requests</a>.
 Whenever an <a>image request</a> in an {{Element}} <em>element</em>'s <a>associated background image requests</a> becomes <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> with <em>element</em> and <a>image request</a> as inputs.
 
-NOTE: we assume that there is one <a>image request</a> for each {{Element}} that a <a>background-image</a> property affects and for each URL that the <a>background-image</a> property specifies.
-So, for example, if there is a style with two URLs affecting all <{div}>s, and there are two <{div}>s, then there will be four <a>image requests</a>.
-This means that a single <a>background-image</a> property could produce multiple timings, because it can affect multiple elements and because it can specify multiple URLs.
+
+<h4 id="sec-modifications-dom">Modifications to the HTML specification</h4>
+
+When an {{Element}} <em>element</em>'s <a>associated image request</a> has become <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> passing in <em>element</em> and its <a>associated image request</a> as inputs.
+
+<div algorithm="text aggregation">
+When the user agent paints a {{Text}} node |text| for the first time, it should execute the following steps:
+
+    * If |text| will not be painted due to the font face being in its <a>font block period</a>, then return.
+    * Let |element| be the {{Element}} which determines the <a>containing block</a> of |text|.
+    * <a for="set">Append</a> |text| to |element|'s <a>set of owned text nodes</a>.
+</div>
+
 
 <h4 dfn>Process image that finished loading</h4>
 
 <div algorithm="image element loaded">
-To <dfn>process an image that finished loading</dfn> given |element| and |imageRequest| as inputs:
-    1. Let |element| be the input {{Element}}.
-    1. Let |imageRequest| be |element|'s <a>associated image request</a>.
-    1. Let |root| be |element|'s <a for="tree">root</a>.
+To <dfn>process an image that finished loading</dfn> given an {{Element}} |element| and an [=image request=] |imageRequest|:
+    1. Let |root| be |element|'s [=tree/root=].
     1. If |root| is not a {{Document}}, return.
-    1. Let |now| be the <a>current high resolution time</a> given |element|'s <a>relevant global object</a>.
+    1. Let |now| be the [=current high resolution time=] given |element|'s <a>relevant global object</a>.
     1. If |imageRequest| is a data URL [[RFC2397]], or the <a>timing allow check</a> succeeds for |imageRequest|'s resource:
-        1. Add the triple (|element|, |imageRequest|, |now|) to |root|'s [=images pending rendering=].
+        1. Let |record| be a [=pending image record=] with [=pending image record/element=] |element|, [=pending image record/request=] |imageRequest| and [=pending image record/loadTime=] |now|.
+        1. Add |record| to |root|'s [=images pending rendering=].
 </div>
 
 Reporting paint timing {#sec-reporting-paint-timing}
 --------------------------------------------------------
 
-Note: Every image resource that is obtained from a URL whose <a spec=url>scheme</a> is equal to "data" has an associated <a>image request</a> which is not fetched but still needs to be loaded.
-This request can be the <a>associated image request</a> of an {{Element}}.
-
-Note: The current language is vague since it does not point to specific algorithms.
-This can be made more rigorous when the corresponding processing models have a more unified processing model.
-
-Each {{Element}} has a <dfn>set of owned text nodes</dfn>, which is initially an empty <a>ordered set</a>.
-
-Every [=Document=] has an associated [=ordered set=] of <dfn>previously reported paints</dfn>, initiallized to an empty [=ordered set=].
-
-Each {{Document}} has <dfn>images pending rendering</dfn>, a list of triples ({{Element}}, [=image request=], {{DOMHighResTimeStamp}}) which are considered loaded but not yet rendered.
-
-Each {{Document}} also has a <dfn>set of elements with rendered text</dfn>, which is initially an empty, <a>ordered set</a>.
-
 <h4 dfn export>First Contentful Paint</h4>
 <div algorithm="Should report first contentful paint">
     To know whether [=Document=] |document| <dfn>should report first contentful paint</dfn>, perform the following steps:
-    1. If |document|'s [=previously reported paints=] contains <code>"first-contentful-paint"</code>, then return false.
+    1. If |document|'s [=set of previously reported paints=] contains <code>"first-contentful-paint"</code>, then return false.
     1. If |document| contains at least one [=/element=] that is both [=paintable=] and [=contentful=], then return true.
     1. Otherwise, return false.
 </div>
@@ -288,15 +318,14 @@ Each {{Document}} also has a <dfn>set of elements with rendered text</dfn>, whic
     1. Let |paintTimestamp| be the [=current high resolution time=].
     1. Let |paintedImages| be a new [=ordered set=]
     1. Let |paintedTextNodes| be a new [=ordered set=]
-    1. For each |imagePendingRenderingTriple| in |doc|'s [=images pending rendering=] list:
-        1. Let |imageRequest| be the [=image request=] of |imagePendingRenderingTriple|.
-        1. If |imageRequest| is fully decoded, then run the following steps:
-            1. Append |imagePendingRenderingTriple| to |paintedImages|.
-            1. Remove |imagePendingRenderingTriple| from |doc|'s <a>images pending rendering</a> list.
+    1. For each |record| in |doc|'s [=images pending rendering=] list:
+        1. If |record|'s [=pending image record/request=] is fully decoded, then run the following steps:
+            1. Append |record| to |paintedImages|.
+            1. Remove |record| from |doc|'s <a>images pending rendering</a> list.
     1. For each {{Element}} |element| in |doc|'s <a>descendants</a>:
         1. If |element| is contained in |doc|'s <a>set of elements with rendered text</a>, continue.
         1. If |element|'s <a>set of owned text nodes</a> is empty, continue.
-        1. <a for="set">Append</a> |element| to |doc|'s <a>set of elements with rendered text</a>.
+        1. [=set/Append=] |element| to |doc|'s <a>set of elements with rendered text</a>.
         1. [=set/Append=] |element| to |paintedTextNodes|.
     1. Run [=the paint timing steps=] given |document|, |paintTimestamp|,
         |paintedImages| and |paintedTextNodes|.
@@ -313,11 +342,11 @@ called.
 <div algorithm="The paint timing steps">
 
     [=The paint timing steps=], given a [=Document=] |document|, a {{DOMHighResTimeStamp}} |paintTimestamp|,
-    an [=ordered set=] of triples <var ignore>paintedImages</var>, and an
+    an [=ordered set=] of [=pending image records=] <var ignore>paintedImages</var>, and an
     [=ordered set=] of [=/elements=] <var ignore>paintedTextNodes</var>, are:
 
 
-    1. Let |reportedPaints| be the [=previously reported paints=] associated with |document|.
+    1. Let |reportedPaints| be the |document|'s [=set of previously reported paints=].
     1. If |reportedPaints| does not contain <code>"first-paint"</code>, and the user agent is configured to mark [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
 
         NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
@@ -329,9 +358,9 @@ called.
 
         NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
 
-        NOTE: A [=document=] is not guaranteed to mark <code>"first-paint"</code> or <code>"first-contentful-paint"</code>. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=], may never mark [=first contentful paint=].
+        NOTE: A [=document=] is not guaranteed to mark <code>"first-paint"</code> or <code>"first-contentful-paint"</code>. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=] may never mark [=first contentful paint=].
 
-    NOTE: The marking of [=first paint=] is optional. User-agents implementing paint timing should at the very least mark [=first contentful paint=] .
+    NOTE: The marking of [=first paint=] is optional. User-agents implementing paint timing should at the very least mark [=first contentful paint=].
 </div>
 
 <h4 dfn>Report paint timing</h4>
@@ -344,7 +373,7 @@ called.
         1. Set |newEntry|'s {{PerformanceEntry/startTime}} attribute to |paintTimestamp|.
         1. Set |newEntry|'s {{PerformanceEntry/duration}} attribute to 0.
     1. <a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> |newEntry| object.
-    1. [=list/Append=] |paintType| to |document|'s associated [=previously reported paints=].
+    1. [=list/Append=] |paintType| to |document|'s [=set of previously reported paints=].
 </div>
 
 
@@ -358,7 +387,7 @@ Common algorithms {#sec-common-algorithms}
     To determine whether an [=/Element=] |element| is [=exposed for paint timing=], given a [=Document=] or null |document|, perform the following steps:
 
     1. If |element| is not [=connected=], return false.
-    1. If |document| is null, let |document| be [=this=]'s [=relevant settings object=]'s [=relevant global object=]'s [=associated document=].
+    1. If |document| is null, let |document| be |element|'s [=relevant settings object=]'s [=relevant global object=]'s [=associated document=].
     1. If |document| is not [=fully active=], return false.
     1. If |element|'s [=tree/root=] is not equal to |document|, return false.
     1. Return true.
