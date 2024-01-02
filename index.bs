@@ -299,9 +299,9 @@ To <dfn>process an image that finished loading</dfn> given an {{Element}} |eleme
     1. Let |root| be |element|'s [=tree/root=].
     1. If |root| is not a {{Document}}, return.
     1. Let |now| be the [=current high resolution time=] given |element|'s <a>relevant global object</a>.
-    1. If |imageRequest| is a data URL [[RFC2397]], or the <a>timing allow check</a> succeeds for |imageRequest|'s resource:
-        1. Let |record| be a [=pending image record=] with [=pending image record/element=] |element|, [=pending image record/request=] |imageRequest| and [=pending image record/loadTime=] |now|.
-        1. Add |record| to |root|'s [=images pending rendering=].
+    1. Let |record| be a [=pending image record=] with [=pending image record/element=] |element|, [=pending image record/request=] |imageRequest| and [=pending image record/loadTime=] |now|.
+    1. If |imageRequest| is a data URL [[RFC2397]], or the <a>timing allow check</a> succeeds for |imageRequest|'s resource, add |record| to |root|'s [=images pending rendering=].
+    1. Otherwise, [=report element timing=] given |root|, |now|, «|record|» and «».
 </div>
 
 Reporting paint timing {#sec-reporting-paint-timing}
