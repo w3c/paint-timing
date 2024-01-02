@@ -154,7 +154,7 @@ An [=/element=] is <dfn export>timing-eligible</dfn> if it is one of the followi
 
 * an <{img}> element.
 * an <{image}> element inside an <{svg}> element.
-* the [=poster frame=] of a <{video}> element.
+* a <{video}> element with a [=poster frame=].
 * an element with a [=contentful image|contentful=] <a>background-image</a>.
 * a text node.
 
@@ -324,7 +324,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
     1. Let |paintedImages| be a new [=ordered set=]
     1. Let |paintedTextNodes| be a new [=ordered set=]
     1. For each |record| in |doc|'s [=images pending rendering=] list:
-        1. If |record|'s [=pending image record/request=] is fully decoded, then run the following steps:
+        1. If |record|'s [=pending image record/request=] is [=available=] and ready to be painted, then run the following steps:
             1. Append |record| to |paintedImages|.
             1. Remove |record| from |doc|'s <a>images pending rendering</a> list.
     1. For each {{Element}} |element| in |doc|'s <a>descendants</a>:
