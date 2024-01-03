@@ -346,7 +346,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
 
         NOTE: A [=document=] is not guaranteed to mark <code>"first-paint"</code> or <code>"first-contentful-paint"</code>. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=] may never mark [=first contentful paint=].
 
-    NOTE: The marking of [=first paint=] is optional. User-agents implementing paint timing should at the very least mark [=first contentful paint=].
+        NOTE: The marking of [=first paint=] is optional. User-agents implementing paint timing should at the very least mark [=first contentful paint=].
 
     1. [=Report largest contentful paint=] given |document|, |paintTimestamp|,
         |paintedImages| and |paintedTextNodes|.
