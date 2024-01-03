@@ -237,11 +237,11 @@ which is initially an empty array. When the processing model for the {{Element}}
 background image), the <a>image request</a> created by the new resource is
 appended to <em>element</em>'s <a>associated background image requests</a>.
 
-NOTE: We assume that there is one <a>image request</a> for each {{Element}} that
-a <a>background-image</a> property affects, for each URL that the
-<a>background-image</a> property specifies. So, in the following example, a
-single <a>background-image</a> property produces four [=image requests=], each
-of which will be recorded and reported by the algorithms below.
+NOTE: An {{Element}} can have several [=image requests=], e.g. if its
+<a>background-image</a> property has multiple values. For instance, in the
+following example, a single <a>background-image</a> property produces four
+[=image requests=], each of which will be recorded and reported by the
+algorithms below.
 
 ```html
 <!DOCTYPE html>
