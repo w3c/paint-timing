@@ -98,7 +98,6 @@ First paint (FP) is the first of these key moments, followed by first contentful
 
 The primary difference between the two metrics is FP marks the first time the browser renders anything for a given document. By contrast, FCP marks the time when the browser renders the first bit of image or text content from the DOM.
 
-
 Usage example {#example}
 ------------------------
 
