@@ -5,10 +5,11 @@ Shortname: paint-timing
 Level: none
 ED: https://w3c.github.io/paint-timing/
 TR: https://www.w3.org/TR/paint-timing/
-Status: WD
-Editor: Nicolás Peña Moreno, Google https://google.com, npm@chromium.org, w3cid 103755
+Status: ED
+Editor: Ian Clelland, Google https://google.com, iclelland@chromium.org, w3cid 76841
         Noam Rosenthal, Invited Expert, noam@webkit.org, w3cid 121539
 Former Editor: Shubhie Panicker, Google https://google.com, panicker@google.com, w3cid 92587
+               Nicolás Peña Moreno, Google https://google.com, npm@chromium.org, w3cid 103755
 Repository: w3c/paint-timing
 Abstract: This document defines an API that can be used to capture a series of key moments (first paint, first contentful paint) during pageload which developers care about.
 Default Highlight: js
