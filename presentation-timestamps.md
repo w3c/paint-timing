@@ -36,7 +36,12 @@ interface mixin PaintTimingMixin {
 
 * Note that `presentationTime` is optional: user-agents can opt to not expose them.
 
+## Impact on current attributes
+Currently paint timing's `startTime` and element timing's `renderTime` use the presentation time if that's available (Chromium), and the paint time if it's not (WebKit/Gecko).
+In this proposal, this would be explicit: both paint timing's `startTime` and element timing's `renderTime` would return something like `presentationTime || paintTime`.
+This would keep compatibility with what's out there today, allowing progressive enhancement and returning the "best known value" from these attributes.
+
 ## Conclusion
 
-When exposing paint timings, we look for the right trade-off between "UX-percise" and "interoperable".
+When exposing paint timings, we look for the right trade-off between "UX-precise" and "interoperable".
 By exposing those as two timestamps, and making one of them optional, we give web developers the information that can help them optimize, without compromising on interoperability.
