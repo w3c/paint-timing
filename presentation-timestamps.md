@@ -5,8 +5,9 @@ Aligning different paint-related timestamps in all the relevant specs.
 ## Overview
 When originally introduced, paint timing ("`first-paint`" and "`first-contentful-paint`") aspired to represent an important moment in terms of user experience - "The pixels on the screen" representing a certain state.
 However, this is tricky in terms of interopability - that moment is not always measured in the same way, and is not part of the flow of operations covered by web standards.
-Originally in the paint-timing spec, a different time is used instead as the `startTime` - the end of the "update the rendering" phase, where the document is done setting up the rendering and hands over rendering to the user agent.
-This is confusing and non-interoperable, as Chromium still reports the VSync-time, which sufficiently to corresponds to "pixels on the screen".
+In the paint-timing spec, a different time is used instead as the `startTime` - [the end of the "update the rendering" phase](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model%3Amark-paint-timing),
+where the document is done setting up the rendering and hands over rendering to the user agent.
+This is confusing and non-interoperable, as Chromium still reports the VSync-time, which sufficiently corresponds to "pixels on the screen".
 In addition, the "long animation frame" timing exposes the hand-over time as its end time, and element-timing/largest contentful paint exposes the VSync time as its `renderTime`.
 
 The `PaintTimingMixin` attempts to clean up this confusion, by always providing two timestamps, one mandatory and interoperative, one optional and somewhat implementation-defined.
