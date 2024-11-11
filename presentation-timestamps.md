@@ -23,7 +23,7 @@ The `PaintTimingMixin` attempts to clean up this confusion, by always providing 
 - `first-contentful-paint`
 - `long-animation-frame`
 
-It would the following shape:
+It would have the following shape:
 
 ```webidl
 interface mixin PaintTimingMixin {
