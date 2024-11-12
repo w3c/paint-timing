@@ -210,7 +210,7 @@ Objects including the {{PaintTimingMixin}} interface mixin have an associated <d
 
 The {{PaintTimingMixin/paintTime}} attribute's getter step is to return [=/this=]'s [=PaintTimingMixin/paint timing info=]'s [=paint timing info/rendering update end time=].
 
-The {{PaintTimingMixin/presentationTime}} attribute's getter step is to return [=/this=]'s [=PaintTimingMixin/paint timing info=]'s [=paint timing info/implementation-defined presentation time=] if it is not null; Otherwise zero.
+The {{PaintTimingMixin/presentationTime}} attribute's getter step, if exists, is to return [=/this=]'s [=PaintTimingMixin/paint timing info=]'s [=paint timing info/implementation-defined presentation time=].
 
 To get the <dfn>default paint timestamp</dfn> for a [=/paint timing info=] |paintTimingInfo|, return |paintTimingInfo|'s [=implementation-defined presentation time=] if it is non-null, otherwise |paintTimingInfo|'s [=rendering update end time=].
 
@@ -389,7 +389,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
         1. If |document|'s [=environment settings object/cross-origin isolated capability=] is false, then:
             1. Coarsen |paintTimingInfo|'s [=implementation-defined presentation time=] to the next multiple of 4 milliseconds, or coarser.
             1. Wait until the [=current high resolution time=] is |paintTimingInfo|'s [=implementation-defined presentation time=].
-        1. [=Queue a global task=] on the [=performance timeline task source=] given |document|'s [=relevant global object=] to |flushPaintTimings|.
+        1. [=Queue a global task=] on the [=performance timeline task source=] given |document|'s [=relevant global object=] to run |flushPaintTimings|.
 </div>
 
 <h4 dfn>Report paint timing</h4>
