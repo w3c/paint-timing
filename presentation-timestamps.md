@@ -53,7 +53,8 @@ See [Self-Review Questionnaire: Security and Privacy](https://w3ctag.github.io/s
 
 ### 01. What information might this feature expose to Web sites or other parties, and for what purposes is that exposure necessary?
 
-It exposes timing information of a platform/OS operation, namely "VSync".
+It exposes timing information of a platform/OS operation, namely "VSync". This is already exposed to some extend by the `requestAnimationFrame` callback timestamp.
+It is necessary in order to reflect to web developers the impact on user experience performance in practice, as other metrics offer approximations that lose too much information.
 
 #### 02. Do features in your specification expose the minimum amount of information necessary to enable their intended uses?
 
@@ -73,9 +74,9 @@ No. This feature only applies to the current document.
 
 #### 06. Do the features in your specification expose information about the underlying platform to origins?
 
-To some extent, the timing of committing a frame is information about the underlying platform.
+To some extent, the timing of committing a frame is information about the underlying platform, like the refresh rate.
 However, this information is already exposed in other ways (the `requestAnimationFrame` callback timestamp),
-and in this specification it is over-coarsen to avoid exposing meaningful information in terms of security.
+and in this specification it is coarsened on top of the usual coarsening, to avoid exposing meaningful information in terms of security/fingerprinting.
 
 #### 07. Does this specification allow an origin to send data to the underlying platform?
 
