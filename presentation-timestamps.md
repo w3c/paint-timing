@@ -53,7 +53,7 @@ See [Self-Review Questionnaire: Security and Privacy](https://w3ctag.github.io/s
 
 ### 01. What information might this feature expose to Web sites or other parties, and for what purposes is that exposure necessary?
 
-It exposes timing information of a platform/OS operation, namely "VSync". This is already exposed to some extend by the `requestAnimationFrame` callback timestamp.
+It exposes timing information of a platform/OS operation, a coarse approximation of "VSync". This is already exposed to some extend by the `requestAnimationFrame` callback timestamp.
 It is necessary in order to reflect to web developers the impact on user experience performance in practice, as other metrics offer approximations that lose too much information.
 
 #### 02. Do features in your specification expose the minimum amount of information necessary to enable their intended uses?
