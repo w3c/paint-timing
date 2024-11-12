@@ -188,12 +188,40 @@ A [=browsing context=] |ctx| is <dfn>paint-timing eligible</dfn> when one of the
     NOTE: this allows user agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
     For example, a user agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.
 
+The {{PaintTimingMixin}} interface {#sec-PaintTimingMixin}
+<pre class="idl">
+    [Exposed=Window]
+    interface mixin PaintTimingMixin {
+        readonly attribute DOMHighResTimeStamp paintTime;
+        readonly attribute DOMHighResTimeStamp? presentationTime;
+    };
+</pre>
+
+Objects including the {{PaintTimingMixin}} interface mixin have an associated <dfn for=PaintTimingMixin>paint timing info</dfn> (null or a [=/paint timing info=]).
+
+<dfn export>paint timing info</dfn> is a [=struct=]. It has the following [=struct/items=]:
+
+<dl dfn-for="paint timing info">
+    : <dfn>rendering update end time</dfn>
+    :: A {{DOMHighResTimeStamp}}
+    : <dfn>implementation-defined presentation time</dfn>
+    :: Null or a {{DOMHighResTimeStamp}}
+</dl>
+
+The {{PaintTimingMixin/paintTime}} attribute's getter step is to return [=/this=]'s [=PaintTimingMixin/paint timing info=]'s [=paint timing info/rendering update end time=].
+
+The {{PaintTimingMixin/presentationTime}} attribute's getter step is to return [=/this=]'s [=PaintTimingMixin/paint timing info=]'s [=paint timing info/implementation-defined presentation time=] if it is not null; Otherwise zero.
+
+To get the <dfn>default paint timestamp</dfn> for a [=/paint timing info=] |paintTimingInfo|, return |paintTimingInfo|'s [=implementation-defined presentation time=] if it is non-null, otherwise |paintTimingInfo|'s [=rendering update end time=].
+
+
 The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 =======================================
 
 <pre class="idl">
     [Exposed=Window]
     interface PerformancePaintTiming : PerformanceEntry {};
+    PerformancePaintTiming includes PaintTimingMixin;
 </pre>
 
 {{PerformancePaintTiming}} extends the following attributes of {{PerformanceEntry}} interface:
@@ -319,7 +347,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
 <div algorithm="Mark paint timing">
     When asked to [=mark paint timing=] given a [=Document=] |document| as input, perform the following steps:
     1. If the [=document=]'s [=Document/browsing context=] is not [=paint-timing eligible=], return.
-    1. Let |paintTimestamp| be the [=current high resolution time=] given |document|'s [=relevant global object=].
+    1. Let |paintTimingInfo| be a new [=/paint timing info=], whose [=rendering update end time=] is the [=current high resolution time=] given |document|'s [=relevant global object=].
     1. Let |paintedImages| be a new [=ordered set=]
     1. Let |paintedTextNodes| be a new [=ordered set=]
     1. For each |record| in |doc|'s [=images pending rendering=] list:
@@ -332,37 +360,49 @@ Reporting paint timing {#sec-reporting-paint-timing}
         1. [=set/Append=] |element| to |doc|'s <a>set of elements with rendered text</a>.
         1. [=set/Append=] |element| to |paintedTextNodes|.
     1. Let |reportedPaints| be the |document|'s [=set of previously reported paints=].
-    1. If |reportedPaints| does not contain <code>"first-paint"</code>, and the user agent is configured to mark [=first paint=], then invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-paint"</code>, and |paintTimestamp|.
+    1. Let |flushPaintTimings| be the following steps:
+        1. If |reportedPaints| does not contain <code>"first-paint"</code>, and the user agent is configured to mark [=first paint=], then [=report paint timing=] given |document|, <code>"first-paint"</code>, and |paintTimingInfo|.
 
-        NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
+            NOTE: [=First paint=] excludes the default background paint, but includes non-default background paint.
 
-            ISSUE: This should be turned into a normative note.
+                ISSUE: This should be turned into a normative note.
 
-    1. If |document| [=should report first contentful paint=], then:
-        1. Invoke the [[#report-paint-timing]] algorithm with |document|, <code>"first-contentful-paint"</code>, and |paintTimestamp| as arguments.
+        1. If |document| [=should report first contentful paint=], then:
+            1. [=Report paint timing=] given |document|, <code>"first-contentful-paint"</code>, and |paintTimingInfo|.
 
-        NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
+            NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
 
-        NOTE: A [=document=] is not guaranteed to mark <code>"first-paint"</code> or <code>"first-contentful-paint"</code>. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=] may never mark [=first contentful paint=].
+            NOTE: A [=document=] is not guaranteed to mark <code>"first-paint"</code> or <code>"first-contentful-paint"</code>. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=] may never mark [=first contentful paint=].
 
-        NOTE: The marking of [=first paint=] is optional. User-agents implementing paint timing should at the very least mark [=first contentful paint=].
+            NOTE: The marking of [=first paint=] is optional. User-agents implementing paint timing should at the very least mark [=first contentful paint=].
 
-    1. [=Report largest contentful paint=] given |document|, |paintTimestamp|,
-        |paintedImages| and |paintedTextNodes|.
-    1. [=Report element timing=] given |document|, |paintTimestamp|,
-        |paintedImages| and |paintedTextNodes|.
+        1. [=Report largest contentful paint=] given |document|, |paintTimingInfo|,
+            |paintedImages| and |paintedTextNodes|.
+        1. [=Report element timing=] given |document|, |paintTimingInfo|,
+            |paintedImages| and |paintedTextNodes|.
+
+    1. If the user-agent does not support implementation-defined presentation times, call |flushPaintTimings| and return.
+
+    1. Run the following steps [=In parallel=]:
+        1. Wait until an implementation-defined time when the current frame has been presented to the user.
+        1. Set |paintTimingInfo|'s [=implementation-defined presentation time=] to the [=current high resolution time=] given |document|'s [=relevant global object=].
+        1. If |document|'s [=environment settings object/cross-origin isolated capability=] is false, then:
+            1. Coarsen |paintTimingInfo|'s [=implementation-defined presentation time=] to the next multiple of 4 milliseconds, or coarser.
+            1. Wait until the [=current high resolution time=] is |paintTimingInfo|'s [=implementation-defined presentation time=].
+        1. [=Queue a global task=] on the [=performance timeline task source=] given |document|'s [=relevant global object=] to |flushPaintTimings|.
 </div>
 
 <h4 dfn>Report paint timing</h4>
 
 <div algorithm="Report paint timing">
-    When asked to [=report paint timing=] given |document|, |paintType|, and |paintTimestamp| as arguments, perform the following steps:
+    To [=report paint timing=] given |document|, |paintType|, and a [=/paint timing info=] |paintTimingInfo| as arguments, perform the following steps:
     1. Create a <a spec=webidl>new</a> {{PerformancePaintTiming}} object |newEntry| with |document|'s [=relevant realm=] and set its attributes as follows:
         1. Set |newEntry|'s {{PerformanceEntry/name}} attribute to |paintType|.
         1. Set |newEntry|'s {{PerformanceEntry/entryType}} attribute to <code>"paint"</code>.
-        1. Set |newEntry|'s {{PerformanceEntry/startTime}} attribute to |paintTimestamp|.
+        1. Set |newEntry|'s {{PerformanceEntry/startTime}} attribute to the [=default paint timestamp=] given |paintTimingInfo|.
         1. Set |newEntry|'s {{PerformanceEntry/duration}} attribute to 0.
-    1. <a href="https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry">Add the PerformanceEntry</a> |newEntry| object.
+    1. Set |newEntry|'s [=PaintTimingMixin/paint timing info=] to |paintTimingInfo|.
+    1.  [=queue a PerformanceEntry|Queue=] |newEntry| in |document|'s [=relevant realm=].
     1. [=list/Append=] |paintType| to |document|'s [=set of previously reported paints=].
 </div>
 
