@@ -46,3 +46,83 @@ This would keep compatibility with what's out there today, allowing progressive 
 
 When exposing paint timings, we look for the right trade-off between "UX-precise" and "interoperable".
 By exposing those as two timestamps, and making one of them optional, we give web developers the information that can help them optimize, without compromising on interoperability.
+
+## Security & privacy self review 
+
+See [Self-Review Questionnaire: Security and Privacy](https://w3ctag.github.io/security-questionnaire/)
+
+### 01. What information might this feature expose to Web sites or other parties, and for what purposes is that exposure necessary?
+
+It exposes timing information of a platform/OS operation, namely "VSync".
+
+#### 02. Do features in your specification expose the minimum amount of information necessary to enable their intended uses?
+
+Yes.
+
+#### 03. How do the features in your specification deal with personal information, personally-identifiable information (PII), or information derived from them?
+
+This feature does not deal with personal information.
+
+#### 04. How do the features in your specification deal with sensitive information?
+
+This feature does not deal with sensitive information.
+
+#### 05. Do the features in your specification introduce new state for an origin that persists across browsing sessions?
+
+No. This feature only applies to the current document.
+
+#### 06. Do the features in your specification expose information about the underlying platform to origins?
+
+To some extent, the timing of committing a frame is information about the underlying platform.
+However, this information is already exposed in other ways (the `requestAnimationFrame` callback timestamp),
+and in this specification it is over-coarsen to avoid exposing meaningful information in terms of security.
+
+#### 07. Does this specification allow an origin to send data to the underlying platform?
+
+No.
+
+#### 08. Do features in this specification allow an origin access to sensors on a user’s device?
+
+No.
+
+#### 09. What data do the features in this specification expose to an origin? Please also document what data is identical to data exposed by other features, in the same or different contexts.
+
+Timing information only.
+
+#### 10. Do feautres in this specification enable new script execution/loading mechanisms?
+
+No.
+
+#### 11. Do features in this specification allow an origin to access other devices?
+
+No.
+
+#### 12. Do features in this specification allow an origin some measure of control over a user agent's native UI?
+
+None.
+
+#### 13. What temporary identifiers do the features in this specification create or expose to the web?
+
+None.
+
+#### 14. How does this specification distinguish between behavior in first-party and third-party contexts?
+
+Timing information receives extra coarsening in documents that are not cross-origin isolated.
+Cross-origin isolation is more appropriate here than per-resource protections, as the same presentation timing is shared
+across all the resources presented in the same frame, be it cross-origin or same-origin resources.
+
+#### 15. How do the features in this specification work in the context of a browser’s Private Browsing or Incognito mode?
+
+The feature is unaffected by these modes.
+
+#### 16. Does this specification have both "Security Considerations" and "Privacy Considerations" sections?
+
+Yes.
+
+#### 17. Do features in your specification enable origins to downgrade default security protections?
+
+Yes, using cross-origin isolation.
+
+#### 18. What should this questionnaire have asked?
+
+The questionnaire asked for sufficient information.
