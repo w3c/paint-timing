@@ -62,6 +62,9 @@ urlPrefix: https://wicg.github.io/largest-contentful-paint/; spec: ELEMENT-TIMIN
     type: dfn; url:#report-largest-contentful-paint; text: Report largest contentful paint
 urlPrefix: https://wicg.github.io/element-timing/; spec: ELEMENT-TIMING
     type: dfn; url:#report-element-timing; text: Report element timing
+urlPrefix: https://w3c.github.io/long-animation-frame/; spec: LONG-ANIMATION-FRAME
+    type: dfn; url:#queue-a-long-animation-frame-entry; text: Queue a long animation frame entry
+    type: dfn; text: current frame timing info
 </pre>
 
 Introduction {#intro}
@@ -360,6 +363,8 @@ Reporting paint timing {#sec-reporting-paint-timing}
         1. [=set/Append=] |element| to |doc|'s <a>set of elements with rendered text</a>.
         1. [=set/Append=] |element| to |paintedTextNodes|.
     1. Let |reportedPaints| be the |document|'s [=set of previously reported paints=].
+    1. Let |frameTimingInfo| be |document|'s [=current frame timing info=].
+    1. Set |document|'s [=current frame timing info=] to null.
     1. Let |flushPaintTimings| be the following steps:
         1. If |reportedPaints| does not contain <code>"first-paint"</code>, and the user agent is configured to mark [=first paint=], then [=report paint timing=] given |document|, <code>"first-paint"</code>, and |paintTimingInfo|.
 
@@ -380,6 +385,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
             |paintedImages| and |paintedTextNodes|.
         1. [=Report element timing=] given |document|, |paintTimingInfo|,
             |paintedImages| and |paintedTextNodes|.
+        1. If |frameTimingInfo| is not null, then [=queue a long animation frame entry=] given |document|, |frameTimingInfo|, and |paintTimingInfo|.
 
     1. If the user-agent does not support implementation-defined presentation times, call |flushPaintTimings| and return.
 
