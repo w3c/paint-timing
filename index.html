@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 742f3d674, updated Mon Nov 4 14:56:54 2024 -0800" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="a4a2a86643bc1664ed544541061641874bf4e28f" name="revision">
+  <meta content="b5204cf4ec4a419963121d877cb007757650d463" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -962,7 +962,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Paint Timing</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-11-12">12 November 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-11-26">26 November 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1361,6 +1361,10 @@ algorithms below.</p>
      <li data-md>
       <p>Let <var>reportedPaints</var> be the <var>document</var>’s <a data-link-type="dfn" href="#set-of-previously-reported-paints" id="ref-for-set-of-previously-reported-paints①">set of previously reported paints</a>.</p>
      <li data-md>
+      <p>Let <var>frameTimingInfo</var> be <var>document</var>’s <a data-link-type="dfn" href="https://w3c.github.io/long-animation-frame/#current-frame-timing-info" id="ref-for-current-frame-timing-info">current frame timing info</a>.</p>
+     <li data-md>
+      <p>Set <var>document</var>’s <a data-link-type="dfn" href="https://w3c.github.io/long-animation-frame/#current-frame-timing-info" id="ref-for-current-frame-timing-info①">current frame timing info</a> to null.</p>
+     <li data-md>
       <p>Let <var>flushPaintTimings</var> be the following steps:</p>
       <ol>
        <li data-md>
@@ -1380,6 +1384,8 @@ algorithms below.</p>
         <p><a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#report-largest-contentful-paint" id="ref-for-report-largest-contentful-paint">Report largest contentful paint</a> given <var>document</var>, <var>paintTimingInfo</var>, <var>paintedImages</var> and <var>paintedTextNodes</var>.</p>
        <li data-md>
         <p><a data-link-type="dfn" href="https://wicg.github.io/element-timing/#report-element-timing" id="ref-for-report-element-timing">Report element timing</a> given <var>document</var>, <var>paintTimingInfo</var>, <var>paintedImages</var> and <var>paintedTextNodes</var>.</p>
+       <li data-md>
+        <p>If <var>frameTimingInfo</var> is not null, then <a data-link-type="dfn" href="https://w3c.github.io/long-animation-frame/#queue-a-long-animation-frame-entry" id="ref-for-queue-a-long-animation-frame-entry">queue a long animation frame entry</a> given <var>document</var>, <var>frameTimingInfo</var>, and <var>paintTimingInfo</var>.</p>
       </ol>
      <li data-md>
       <p>If the user-agent does not support implementation-defined presentation times, call <var>flushPaintTimings</var> and return.</p>
@@ -1664,6 +1670,12 @@ specification.</p>
      <li><span class="dfn-paneled" id="692595fe">ordered set</span>
      <li><span class="dfn-paneled" id="0698d556">string</span>
      <li><span class="dfn-paneled" id="984221ca">struct</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[LONG-ANIMATION-FRAME]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="730f4098">current frame timing info</span>
+     <li><span class="dfn-paneled" id="9df02964">Queue a long animation frame entry</span>
     </ul>
    <li>
     <a data-link-type="biblio">[PERFORMANCE-TIMELINE]</a> defines the following terms:
@@ -2016,6 +2028,7 @@ let dfnPanelData = {
 "6b28585b": {"dfnID":"6b28585b","dfnText":"scrolling area","external":true,"refSections":[{"refs":[{"id":"ref-for-scrolling-area"},{"id":"ref-for-scrolling-area\u2460"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/cssom-view#scrolling-area"},
 "6d88ab2e": {"dfnID":"6d88ab2e","dfnText":"browsing context (for Window)","external":true,"refSections":[{"refs":[{"id":"ref-for-window-bc"}],"title":"3. The PerformancePaintTiming interface"}],"url":"https://html.spec.whatwg.org/multipage/nav-history-apis.html#window-bc"},
 "70bf9cbc": {"dfnID":"70bf9cbc","dfnText":"image","external":true,"refSections":[{"refs":[{"id":"ref-for-images"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/images.html#images"},
+"730f4098": {"dfnID":"730f4098","dfnText":"current frame timing info","external":true,"refSections":[{"refs":[{"id":"ref-for-current-frame-timing-info"},{"id":"ref-for-current-frame-timing-info\u2460"}],"title":"4.3.2. Mark paint timing"}],"url":"https://w3c.github.io/long-animation-frame/#current-frame-timing-info"},
 "7c5cb560": {"dfnID":"7c5cb560","dfnText":"supportedEntryTypes","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceobserver-supportedentrytypes"}],"title":"3. The PerformancePaintTiming interface"}],"url":"https://w3c.github.io/performance-timeline/#dom-performanceobserver-supportedentrytypes"},
 "7e0ffe19": {"dfnID":"7e0ffe19","dfnText":"context mode","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-canvas-context-mode"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-context-mode"},
 "7e7cc1d8": {"dfnID":"7e7cc1d8","dfnText":"current high resolution time","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-current-high-resolution-time"}],"title":"4.2.3. Process image that finished loading"},{"refs":[{"id":"ref-for-dfn-current-high-resolution-time\u2460"},{"id":"ref-for-dfn-current-high-resolution-time\u2461"},{"id":"ref-for-dfn-current-high-resolution-time\u2462"}],"title":"4.3.2. Mark paint timing"}],"url":"https://w3c.github.io/hr-time/#dfn-current-high-resolution-time"},
@@ -2029,6 +2042,7 @@ let dfnPanelData = {
 "984221ca": {"dfnID":"984221ca","dfnText":"struct","external":true,"refSections":[{"refs":[{"id":"ref-for-struct"}],"title":"2. Terminology"},{"refs":[{"id":"ref-for-struct\u2460"}],"title":"4.2. Recording paint timing"}],"url":"https://infra.spec.whatwg.org/#struct"},
 "9a155e4d": {"dfnID":"9a155e4d","dfnText":"svg element with rendered descendants","external":true,"refSections":[{"refs":[{"id":"ref-for-Rendered-vs-NonRendered"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/SVG2/render.html#Rendered-vs-NonRendered"},
 "9c4c1e66": {"dfnID":"9c4c1e66","dfnText":"relevant settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-relevant-settings-object"}],"title":"4.4.1. Exposed for paint timing"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"},
+"9df02964": {"dfnID":"9df02964","dfnText":"Queue a long animation frame entry","external":true,"refSections":[{"refs":[{"id":"ref-for-queue-a-long-animation-frame-entry"}],"title":"4.3.2. Mark paint timing"}],"url":"https://w3c.github.io/long-animation-frame/#queue-a-long-animation-frame-entry"},
 "a3b18719": {"dfnID":"a3b18719","dfnText":"append (for set)","external":true,"refSections":[{"refs":[{"id":"ref-for-set-append"}],"title":"4.2.2. Modifications to the HTML specification"},{"refs":[{"id":"ref-for-set-append\u2460"},{"id":"ref-for-set-append\u2461"}],"title":"4.3.2. Mark paint timing"}],"url":"https://infra.spec.whatwg.org/#set-append"},
 "a4eb3c57": {"dfnID":"a4eb3c57","dfnText":"used value","external":true,"refSections":[{"refs":[{"id":"ref-for-used-value"},{"id":"ref-for-used-value\u2460"},{"id":"ref-for-used-value\u2461"},{"id":"ref-for-used-value\u2462"},{"id":"ref-for-used-value\u2463"},{"id":"ref-for-used-value\u2464"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-cascade-5/#used-value"},
 "a72449dd": {"dfnID":"a72449dd","dfnText":"in parallel","external":true,"refSections":[{"refs":[{"id":"ref-for-in-parallel"}],"title":"4.3.2. Mark paint timing"}],"url":"https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel"},
@@ -2641,6 +2655,8 @@ let refsData = {
 "https://url.spec.whatwg.org/#concept-url-scheme": {"displayText":"scheme","export":true,"for_":["url"],"level":"1","normative":true,"shortname":"url","spec":"url","status":"current","text":"scheme","type":"dfn","url":"https://url.spec.whatwg.org/#concept-url-scheme"},
 "https://w3c.github.io/hr-time/#dfn-current-high-resolution-time": {"displayText":"current high resolution time","export":true,"for_":[],"level":"3","normative":true,"shortname":"hr-time","spec":"hr-time-3","status":"current","text":"current high resolution time","type":"dfn","url":"https://w3c.github.io/hr-time/#dfn-current-high-resolution-time"},
 "https://w3c.github.io/hr-time/#dom-domhighrestimestamp": {"displayText":"DOMHighResTimeStamp","export":true,"for_":[],"level":"3","normative":true,"shortname":"hr-time","spec":"hr-time-3","status":"current","text":"DOMHighResTimeStamp","type":"typedef","url":"https://w3c.github.io/hr-time/#dom-domhighrestimestamp"},
+"https://w3c.github.io/long-animation-frame/#current-frame-timing-info": {"displayText":"current frame timing info","export":true,"for_":[],"level":"","normative":true,"shortname":"long-animation-frame","spec":"long-animation-frame","status":"anchor-block","text":"current frame timing info","type":"dfn","url":"https://w3c.github.io/long-animation-frame/#current-frame-timing-info"},
+"https://w3c.github.io/long-animation-frame/#queue-a-long-animation-frame-entry": {"displayText":"Queue a long animation frame entry","export":true,"for_":[],"level":"","normative":true,"shortname":"long-animation-frame","spec":"long-animation-frame","status":"anchor-block","text":"queue a long animation frame entry","type":"dfn","url":"https://w3c.github.io/long-animation-frame/#queue-a-long-animation-frame-entry"},
 "https://w3c.github.io/performance-timeline/#dfn-performance-timeline-task-source": {"displayText":"performance timeline task source","export":true,"for_":[],"level":"1","normative":true,"shortname":"performance-timeline","spec":"performance-timeline","status":"current","text":"performance timeline task source","type":"dfn","url":"https://w3c.github.io/performance-timeline/#dfn-performance-timeline-task-source"},
 "https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry": {"displayText":"queue a PerformanceEntry","export":true,"for_":[],"level":"1","normative":true,"shortname":"performance-timeline","spec":"performance-timeline","status":"current","text":"queue a performanceentry","type":"dfn","url":"https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry"},
 "https://w3c.github.io/performance-timeline/#dom-performanceentry": {"displayText":"PerformanceEntry","export":true,"for_":[],"level":"1","normative":true,"shortname":"performance-timeline","spec":"performance-timeline","status":"current","text":"PerformanceEntry","type":"interface","url":"https://w3c.github.io/performance-timeline/#dom-performanceentry"},
