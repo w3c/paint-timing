@@ -62,7 +62,7 @@ urlPrefix: https://wicg.github.io/largest-contentful-paint/; spec: ELEMENT-TIMIN
     type: dfn; url:#report-largest-contentful-paint; text: Report largest contentful paint
 urlPrefix: https://wicg.github.io/element-timing/; spec: ELEMENT-TIMING
     type: dfn; url:#report-element-timing; text: Report element timing
-urlPrefix: https://w3c.github.io/long-animation-frame/; spec: LONG-ANIMATION-FRAME
+urlPrefix: https://w3c.github.io/long-animation-frames/; spec: LONG-ANIMATION-FRAME
     type: dfn; url:#queue-a-long-animation-frame-entry; text: Queue a long animation frame entry
     type: dfn; text: current frame timing info
 </pre>
