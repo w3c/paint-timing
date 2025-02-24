@@ -192,6 +192,8 @@ A [=browsing context=] |ctx| is <dfn>paint-timing eligible</dfn> when one of the
     For example, a user agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.
 
 The {{PaintTimingMixin}} interface {#sec-PaintTimingMixin}
+=======================================
+
 <pre class="idl">
     [Exposed=Window]
     interface mixin PaintTimingMixin {
