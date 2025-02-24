@@ -5,9 +5,9 @@
   <title>Paint Timing</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 742f3d674, updated Mon Nov 4 14:56:54 2024 -0800" name="generator">
+  <meta content="Bikeshed version 60c422380, updated Thu Feb 20 19:11:22 2025 -0800" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="b5204cf4ec4a419963121d877cb007757650d463" name="revision">
+  <meta content="2a09cb6a9ae4c9b289e126585f54f09ce735246d" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -656,7 +656,7 @@ a[href].issue-return {
 	background-image: url(https://resources.whatwg.org/browser-logos/safari-ios.svg);
 }
 .mdn-anno > .feature > .support > .nodejs::before {
-	background-image: url(https://nodejs.org/static/images/favicons/favicon.ico);
+	background-image: url(https://nodejs.org/favicon.ico);
 }
 .mdn-anno > .feature > .support > .opera_android::before {
 	background-image: url(https://resources.whatwg.org/browser-logos/opera.svg);
@@ -962,7 +962,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Paint Timing</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-11-26">26 November 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2025-02-24">24 February 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -984,7 +984,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2024 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2025 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -999,7 +999,6 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
 	Don’t cite this document other than as work in progress. </p>
    <p><a href="https://github.com/w3c/paint-timing/issues">GitHub Issues</a> are preferred for discussion of this specification. </p>
    <p>This document is governed by the <a href="https://www.w3.org/policies/process/20231103/" id="w3c_process_revision">03 November 2023 W3C Process Document</a>. </p>
-   <p></p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
@@ -1111,7 +1110,7 @@ Formally, we consider the user agent to have "rendered" a document when it has p
    <p>A <a data-link-type="dfn" href="https://drafts.csswg.org/css-pseudo-4#generated-content" id="ref-for-generated-content">generated content pseudo-element</a> is a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="paintable-pseudo-element">paintable pseudo-element</dfn> when all of the following apply:</p>
    <ul>
     <li data-md>
-     <p>The pseudo-element’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/CSS22/visufx.html#propdef-visibility" id="ref-for-propdef-visibility">visibility</a> is <code class="highlight">visible</code>.</p>
+     <p>The pseudo-element’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value">used</a> <a data-link-type="dfn">visibility</a> is <code class="highlight">visible</code>.</p>
     <li data-md>
      <p>The pseudo-element’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value①">used</a> <a data-link-type="dfn" href="https://drafts.csswg.org/css-color-3/#opacity" id="ref-for-opacity">opacity</a> is greater than zero.</p>
     <li data-md>
@@ -1135,24 +1134,24 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     <li data-md>
      <p><var>target</var> has a <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image" id="ref-for-propdef-background-image">background-image</a> which is a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image">contentful image</a>, and its <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value③">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#background-size" id="ref-for-background-size">background-size</a> has non-zero width and height values.</p>
     <li data-md>
-     <p><var>target</var> is a <code class="highlight"><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/canvas.html#canvas" id="ref-for-canvas">canvas</a></code> with its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-context-mode" id="ref-for-concept-canvas-context-mode">context mode</a> set to any value other than <code class="highlight">none</code>.</p>
+     <p><var>target</var> is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/canvas.html#canvas" id="ref-for-canvas">canvas</a></code> with its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-context-mode" id="ref-for-concept-canvas-context-mode">context mode</a> set to any value other than <code class="highlight">none</code>.</p>
     <li data-md>
-     <p><var>target</var> is a <code class="highlight"><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/media.html#video" id="ref-for-video">video</a></code> element that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents">represents</a> its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#poster-frame" id="ref-for-poster-frame">poster frame</a> or the first video frame and the frame is available.</p>
+     <p><var>target</var> is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/media.html#video" id="ref-for-video">video</a></code> element that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents">represents</a> its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#poster-frame" id="ref-for-poster-frame">poster frame</a> or the first video frame and the frame is available.</p>
     <li data-md>
      <p><var>target</var> is an <a data-link-type="dfn" href="https://www.w3.org/TR/SVG2/render.html#Rendered-vs-NonRendered" id="ref-for-Rendered-vs-NonRendered">svg element with rendered descendants</a>.</p>
     <li data-md>
-     <p><var>target</var> is an <code class="highlight"><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/input.html#the-input-element" id="ref-for-the-input-element">input</a></code> element with a <a data-link-type="dfn" href="#non-empty" id="ref-for-non-empty①">non-empty</a> <code class="highlight"><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/input.html#attr-input-value" id="ref-for-attr-input-value">value</a></code> attribute.</p>
+     <p><var>target</var> is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/input.html#the-input-element" id="ref-for-the-input-element">input</a></code> element with a <a data-link-type="dfn" href="#non-empty" id="ref-for-non-empty①">non-empty</a> <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/input.html#attr-input-value" id="ref-for-attr-input-value">value</a></code> attribute.</p>
     <li data-md>
      <p><var>target</var> is an <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#originating-element" id="ref-for-originating-element">originating element</a> for a <a data-link-type="dfn" href="#paintable-pseudo-element" id="ref-for-paintable-pseudo-element">paintable pseudo-element</a> that represents a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image①">contentful image</a> or <a data-link-type="dfn" href="#non-empty" id="ref-for-non-empty②">non-empty</a> text.</p>
    </ul>
    <p>An <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element①">element</a> is <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="timing-eligible">timing-eligible</dfn> if it is one of the following:</p>
    <ul>
     <li data-md>
-     <p>an <code class="highlight"><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element">img</a></code> element.</p>
+     <p>an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element">img</a></code> element.</p>
     <li data-md>
-     <p>an <code class="highlight"><a data-link-type="element" href="https://svgwg.org/svg2-draft/embedded.html#elementdef-image" id="ref-for-elementdef-image">image</a></code> element inside an <code class="highlight"><a data-link-type="element" href="https://svgwg.org/svg2-draft/struct.html#elementdef-svg" id="ref-for-elementdef-svg">svg</a></code> element.</p>
+     <p>an <code><a data-link-type="element" href="https://svgwg.org/svg2-draft/embedded.html#elementdef-image" id="ref-for-elementdef-image">image</a></code> element inside an <code><a data-link-type="element" href="https://svgwg.org/svg2-draft/struct.html#elementdef-svg" id="ref-for-elementdef-svg">svg</a></code> element.</p>
     <li data-md>
-     <p>a <code class="highlight"><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/media.html#video" id="ref-for-video①">video</a></code> element with a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#poster-frame" id="ref-for-poster-frame①">poster frame</a>.</p>
+     <p>a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/media.html#video" id="ref-for-video①">video</a></code> element with a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#poster-frame" id="ref-for-poster-frame①">poster frame</a>.</p>
     <li data-md>
      <p>an element with a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image②">contentful</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image" id="ref-for-propdef-background-image①">background-image</a>.</p>
     <li data-md>
@@ -1163,7 +1162,7 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     <li data-md>
      <p>Let <var>boundingRect</var> be the result of running the <code class="idl"><a data-link-type="idl" href="https://drafts.csswg.org/cssom-view-1/#dom-element-getboundingclientrect" id="ref-for-dom-element-getboundingclientrect">getBoundingClientRect()</a></code> on <var>target</var>.</p>
     <li data-md>
-     <p>Clip <var>boundingRect</var> with the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document">document</a>'s <a data-link-type="dfn" href="https://www.w3.org/TR/cssom-view#scrolling-area" id="ref-for-scrolling-area">scrolling area</a>.</p>
+     <p>Clip <var>boundingRect</var> with the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document">document</a>’s <a data-link-type="dfn" href="https://www.w3.org/TR/cssom-view#scrolling-area" id="ref-for-scrolling-area">scrolling area</a>.</p>
     <li data-md>
      <p>Return <var>boundingRect</var>.</p>
    </ol>
@@ -1173,13 +1172,13 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     <li data-md>
      <p><var>el</var> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/rendering.html#being-rendered" id="ref-for-being-rendered">being rendered</a>.</p>
     <li data-md>
-     <p><var>el</var>’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value④">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/CSS22/visufx.html#propdef-visibility" id="ref-for-propdef-visibility①">visibility</a> is <code class="highlight">visible</code>.</p>
+     <p><var>el</var>’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value④">used</a> <a data-link-type="dfn">visibility</a> is <code class="highlight">visible</code>.</p>
     <li data-md>
      <p><var>el</var> and all of its ancestors' <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value⑤">used</a> <a data-link-type="dfn" href="https://drafts.csswg.org/css-color-3/#opacity" id="ref-for-opacity②">opacity</a> is greater than zero.</p>
      <p class="note" role="note"><span class="marker">NOTE:</span> there could be cases where a <code class="highlight">paintable</code> <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element⑤">element</a> would not be visible to the user, for example in the case of text that has the same color as its background.
 Those elements would still considered as paintable for the purpose of computing <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint">first contentful paint</a>.</p>
     <li data-md>
-     <p><var>el</var>’s <a data-link-type="dfn" href="#paintable-bounding-rect" id="ref-for-paintable-bounding-rect①">paintable bounding rect</a> intersects with the <a data-link-type="dfn" href="https://www.w3.org/TR/cssom-view#scrolling-area" id="ref-for-scrolling-area①">scrolling area</a> of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document①">document</a>.</p>
+     <p><var>el</var>’s <a data-link-type="dfn" href="#paintable-bounding-rect" id="ref-for-paintable-bounding-rect①">paintable bounding rect</a> intersects with the <a data-link-type="dfn" href="https://www.w3.org/TR/cssom-view#scrolling-area" id="ref-for-scrolling-area①">scrolling area</a> of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document①">document</a>.</p>
      <p class="note" role="note"><span class="marker">NOTE:</span> This covers the cases where the element is scaled to zero size, has <code class="highlight">display<c- o>:</c-> none</code>, or <code class="highlight">display<c- o>:</c-> contents</code> where the contents resolve to an empty rect.</p>
      <p class="note" role="note"><span class="marker">NOTE:</span> As a general rule, an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element⑥">element</a> is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling or zooming.</p>
    </ul>
@@ -1210,8 +1209,8 @@ For example, a user agent may decide to disable paint-timing for cross-origin if
     <dd data-md>
      <p>Null or a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp④">DOMHighResTimeStamp</a></code></p>
    </dl>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-painttimingmixin-painttime" id="ref-for-dom-painttimingmixin-painttime">paintTime</a></code> attribute’s getter step is to return <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a>'s <a data-link-type="dfn" href="#painttimingmixin-paint-timing-info" id="ref-for-painttimingmixin-paint-timing-info">paint timing info</a>'s <a data-link-type="dfn" href="#paint-timing-info-rendering-update-end-time" id="ref-for-paint-timing-info-rendering-update-end-time">rendering update end time</a>.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-painttimingmixin-presentationtime" id="ref-for-dom-painttimingmixin-presentationtime">presentationTime</a></code> attribute’s getter step, if exists, is to return <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①">this</a>'s <a data-link-type="dfn" href="#painttimingmixin-paint-timing-info" id="ref-for-painttimingmixin-paint-timing-info①">paint timing info</a>'s <a data-link-type="dfn" href="#paint-timing-info-implementation-defined-presentation-time" id="ref-for-paint-timing-info-implementation-defined-presentation-time">implementation-defined presentation time</a>.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-painttimingmixin-painttime" id="ref-for-dom-painttimingmixin-painttime">paintTime</a></code> attribute’s getter step is to return <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a>’s <a data-link-type="dfn" href="#painttimingmixin-paint-timing-info" id="ref-for-painttimingmixin-paint-timing-info">paint timing info</a>’s <a data-link-type="dfn" href="#paint-timing-info-rendering-update-end-time" id="ref-for-paint-timing-info-rendering-update-end-time">rendering update end time</a>.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-painttimingmixin-presentationtime" id="ref-for-dom-painttimingmixin-presentationtime">presentationTime</a></code> attribute’s getter step, if exists, is to return <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①">this</a>’s <a data-link-type="dfn" href="#painttimingmixin-paint-timing-info" id="ref-for-painttimingmixin-paint-timing-info①">paint timing info</a>’s <a data-link-type="dfn" href="#paint-timing-info-implementation-defined-presentation-time" id="ref-for-paint-timing-info-implementation-defined-presentation-time">implementation-defined presentation time</a>.</p>
    <p>To get the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="default-paint-timestamp">default paint timestamp</dfn> for a <a data-link-type="dfn" href="#paint-timing-info" id="ref-for-paint-timing-info①">paint timing info</a> <var>paintTimingInfo</var>, return <var>paintTimingInfo</var>’s <a data-link-type="dfn" href="#paint-timing-info-implementation-defined-presentation-time" id="ref-for-paint-timing-info-implementation-defined-presentation-time①">implementation-defined presentation time</a> if it is non-null, otherwise <var>paintTimingInfo</var>’s <a data-link-type="dfn" href="#paint-timing-info-rendering-update-end-time" id="ref-for-paint-timing-info-rendering-update-end-time①">rendering update end time</a>.</p>
    <h2 class="heading settled" data-level="3" id="sec-PerformancePaintTiming"><span class="secno">3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming">PerformancePaintTiming</a></code> interface</span><a class="self-link" href="#sec-PerformancePaintTiming"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -1239,8 +1238,7 @@ For example, a user agent may decide to disable paint-timing for cross-origin if
 This allows developers to detect support for paint timing for a particular <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context①">browsing context</a>.</p>
    <h2 class="heading settled" data-level="4" id="sec-processing-model"><span class="secno">4. </span><span class="content">Processing model</span><a class="self-link" href="#sec-processing-model"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="sec-associated-image-requests"><span class="secno">4.1. </span><span class="content">Associated Image Requests</span><a class="self-link" href="#sec-associated-image-requests"></a></h3>
-   <p>Each <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element">Element</a></code> has an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="associated-image-request">associated image request</dfn> which is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#image-request" id="ref-for-image-request">image
-request</a> or null, initially null.</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element">Element</a></code> has an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="associated-image-request">associated image request</dfn> which is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#image-request" id="ref-for-image-request">image request</a> or null, initially null.</p>
    <p>When the processing model for an <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①">Element</a></code> <em>element</em> of type <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlimageelement" id="ref-for-htmlimageelement">HTMLImageElement</a></code>, <code class="idl"><a data-link-type="idl" href="https://svgwg.org/svg2-draft/embedded.html#InterfaceSVGImageElement" id="ref-for-InterfaceSVGImageElement">SVGImageElement</a></code>, or <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/media.html#htmlvideoelement" id="ref-for-htmlvideoelement">HTMLVideoElement</a></code> creates a
 new image resource (e.g., to be displayed as an image or poster image), <em>element</em>’s <a data-link-type="dfn" href="#associated-image-request" id="ref-for-associated-image-request">associated image request</a> is set to the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#image-request" id="ref-for-image-request①">image
 request</a> of the created image resource.</p>
@@ -1312,7 +1310,7 @@ algorithms below.</p>
    <h3 class="heading settled" data-level="4.3" id="sec-reporting-paint-timing"><span class="secno">4.3. </span><span class="content">Reporting paint timing</span><a class="self-link" href="#sec-reporting-paint-timing"></a></h3>
    <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export data-level="4.3.1" data-lt="First Contentful Paint" id="first-contentful-paint"><span class="secno">4.3.1. </span><span class="content">First Contentful Paint</span><a class="self-link" href="#first-contentful-paint" id="ref-for-first-contentful-paint⑤"></a></h4>
    <div class="algorithm" data-algorithm="Should report first contentful paint">
-     To know whether <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document②">Document</a> <var>document</var> <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="should-report-first-contentful-paint">should report first contentful paint</dfn>, perform the following steps: 
+     To know whether <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document②">Document</a> <var>document</var> <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="should-report-first-contentful-paint">should report first contentful paint</dfn>, perform the following steps: 
     <ol>
      <li data-md>
       <p>If <var>document</var>’s <a data-link-type="dfn" href="#set-of-previously-reported-paints" id="ref-for-set-of-previously-reported-paints">set of previously reported paints</a> contains <code class="highlight"><c- u>"first-contentful-paint"</c-></code>, then return false.</p>
@@ -1324,10 +1322,10 @@ algorithms below.</p>
    </div>
    <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export data-level="4.3.2" data-lt="Mark paint timing" id="mark-paint-timing"><span class="secno">4.3.2. </span><span class="content">Mark paint timing</span><a class="self-link" href="#mark-paint-timing" id="ref-for-mark-paint-timing"></a></h4>
    <div class="algorithm" data-algorithm="Mark paint timing">
-     When asked to <a data-link-type="dfn" href="#mark-paint-timing" id="ref-for-mark-paint-timing①">mark paint timing</a> given a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document③">Document</a> <var>document</var> as input, perform the following steps: 
+     When asked to <a data-link-type="dfn" href="#mark-paint-timing" id="ref-for-mark-paint-timing①">mark paint timing</a> given a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document③">Document</a> <var>document</var> as input, perform the following steps: 
     <ol>
      <li data-md>
-      <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document④">document</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#concept-document-bc" id="ref-for-concept-document-bc">browsing context</a> is not <a data-link-type="dfn" href="#paint-timing-eligible" id="ref-for-paint-timing-eligible①">paint-timing eligible</a>, return.</p>
+      <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document④">document</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#concept-document-bc" id="ref-for-concept-document-bc">browsing context</a> is not <a data-link-type="dfn" href="#paint-timing-eligible" id="ref-for-paint-timing-eligible①">paint-timing eligible</a>, return.</p>
      <li data-md>
       <p>Let <var>paintTimingInfo</var> be a new <a data-link-type="dfn" href="#paint-timing-info" id="ref-for-paint-timing-info②">paint timing info</a>, whose <a data-link-type="dfn" href="#paint-timing-info-rendering-update-end-time" id="ref-for-paint-timing-info-rendering-update-end-time②">rendering update end time</a> is the <a data-link-type="dfn" href="https://w3c.github.io/hr-time/#dfn-current-high-resolution-time" id="ref-for-dfn-current-high-resolution-time①">current high resolution time</a> given <var>document</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global①">relevant global object</a>.</p>
      <li data-md>
@@ -1361,9 +1359,9 @@ algorithms below.</p>
      <li data-md>
       <p>Let <var>reportedPaints</var> be the <var>document</var>’s <a data-link-type="dfn" href="#set-of-previously-reported-paints" id="ref-for-set-of-previously-reported-paints①">set of previously reported paints</a>.</p>
      <li data-md>
-      <p>Let <var>frameTimingInfo</var> be <var>document</var>’s <a data-link-type="dfn" href="https://w3c.github.io/long-animation-frame/#current-frame-timing-info" id="ref-for-current-frame-timing-info">current frame timing info</a>.</p>
+      <p>Let <var>frameTimingInfo</var> be <var>document</var>’s <a data-link-type="dfn" href="https://w3c.github.io/long-animation-frames/#current-frame-timing-info" id="ref-for-current-frame-timing-info">current frame timing info</a>.</p>
      <li data-md>
-      <p>Set <var>document</var>’s <a data-link-type="dfn" href="https://w3c.github.io/long-animation-frame/#current-frame-timing-info" id="ref-for-current-frame-timing-info①">current frame timing info</a> to null.</p>
+      <p>Set <var>document</var>’s <a data-link-type="dfn" href="https://w3c.github.io/long-animation-frames/#current-frame-timing-info" id="ref-for-current-frame-timing-info①">current frame timing info</a> to null.</p>
      <li data-md>
       <p>Let <var>flushPaintTimings</var> be the following steps:</p>
       <ol>
@@ -1378,14 +1376,14 @@ algorithms below.</p>
           <p><a data-link-type="dfn" href="#report-paint-timing" id="ref-for-report-paint-timing①">Report paint timing</a> given <var>document</var>, <code class="highlight"><c- u>"first-contentful-paint"</c-></code>, and <var>paintTimingInfo</var>.</p>
         </ol>
         <p class="note" role="note"><span class="marker">NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint③">first paint</a> (due to the enclosing boxes of the iframes) but no <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint②">first contentful paint</a>.</p>
-        <p class="note" role="note"><span class="marker">NOTE:</span> A <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑤">document</a> is not guaranteed to mark <code class="highlight"><c- u>"first-paint"</c-></code> or <code class="highlight"><c- u>"first-contentful-paint"</c-></code>. A completely blank <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑥">document</a> may never mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint④">first paint</a>, and a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑦">document</a> containing only elements that are not <a data-link-type="dfn" href="#contentful" id="ref-for-contentful①">contentful</a> may never mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint③">first contentful paint</a>.</p>
+        <p class="note" role="note"><span class="marker">NOTE:</span> A <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document⑤">document</a> is not guaranteed to mark <code class="highlight"><c- u>"first-paint"</c-></code> or <code class="highlight"><c- u>"first-contentful-paint"</c-></code>. A completely blank <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document⑥">document</a> may never mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint④">first paint</a>, and a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document⑦">document</a> containing only elements that are not <a data-link-type="dfn" href="#contentful" id="ref-for-contentful①">contentful</a> may never mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint③">first contentful paint</a>.</p>
         <p class="note" role="note"><span class="marker">NOTE:</span> The marking of <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑤">first paint</a> is optional. User-agents implementing paint timing should at the very least mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint④">first contentful paint</a>.</p>
        <li data-md>
         <p><a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#report-largest-contentful-paint" id="ref-for-report-largest-contentful-paint">Report largest contentful paint</a> given <var>document</var>, <var>paintTimingInfo</var>, <var>paintedImages</var> and <var>paintedTextNodes</var>.</p>
        <li data-md>
         <p><a data-link-type="dfn" href="https://wicg.github.io/element-timing/#report-element-timing" id="ref-for-report-element-timing">Report element timing</a> given <var>document</var>, <var>paintTimingInfo</var>, <var>paintedImages</var> and <var>paintedTextNodes</var>.</p>
        <li data-md>
-        <p>If <var>frameTimingInfo</var> is not null, then <a data-link-type="dfn" href="https://w3c.github.io/long-animation-frame/#queue-a-long-animation-frame-entry" id="ref-for-queue-a-long-animation-frame-entry">queue a long animation frame entry</a> given <var>document</var>, <var>frameTimingInfo</var>, and <var>paintTimingInfo</var>.</p>
+        <p>If <var>frameTimingInfo</var> is not null, then <a data-link-type="dfn" href="https://w3c.github.io/long-animation-frames/#queue-a-long-animation-frame-entry" id="ref-for-queue-a-long-animation-frame-entry">queue a long animation frame entry</a> given <var>document</var>, <var>frameTimingInfo</var>, and <var>paintTimingInfo</var>.</p>
       </ol>
      <li data-md>
       <p>If the user-agent does not support implementation-defined presentation times, call <var>flushPaintTimings</var> and return.</p>
@@ -1436,12 +1434,12 @@ algorithms below.</p>
    <h3 class="heading settled" data-level="4.4" id="sec-common-algorithms"><span class="secno">4.4. </span><span class="content">Common algorithms</span><a class="self-link" href="#sec-common-algorithms"></a></h3>
    <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export data-level="4.4.1" data-lt="Exposed for paint timing" id="exposed-for-paint-timing"><span class="secno">4.4.1. </span><span class="content">Exposed for paint timing</span><a class="self-link" href="#exposed-for-paint-timing" id="ref-for-exposed-for-paint-timing"></a></h4>
    <div class="algorithm" data-algorithm="Exposed for paint timing">
-    <p>To determine whether an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element⑧">Element</a> <var>element</var> is <a data-link-type="dfn" href="#exposed-for-paint-timing" id="ref-for-exposed-for-paint-timing①">exposed for paint timing</a>, given a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑧">Document</a> or null <var>document</var>, perform the following steps:</p>
+    <p>To determine whether an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element⑧">Element</a> <var>element</var> is <a data-link-type="dfn" href="#exposed-for-paint-timing" id="ref-for-exposed-for-paint-timing①">exposed for paint timing</a>, given a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document⑧">Document</a> or null <var>document</var>, perform the following steps:</p>
     <ol>
      <li data-md>
       <p>If <var>element</var> is not <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#connected" id="ref-for-connected">connected</a>, return false.</p>
      <li data-md>
-      <p>If <var>document</var> is null, let <var>document</var> be <var>element</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global④">relevant global object</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window">associated document</a>.</p>
+      <p>If <var>document</var> is null, let <var>document</var> be <var>element</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global④">relevant global object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window">associated document</a>.</p>
      <li data-md>
       <p>If <var>document</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-fully-active">fully active</a>, return false.</p>
      <li data-md>
@@ -1599,11 +1597,6 @@ specification.</p>
      <li><span class="dfn-paneled" id="a963f9ba">document white space characters</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[CSS22]</a> defines the following terms:
-    <ul>
-     <li><span class="dfn-paneled" id="5d5f4fe6">visibility</span>
-    </ul>
-   <li>
     <a data-link-type="biblio">[CSSOM-VIEW-1]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="d38f9598">getBoundingClientRect()</span>
@@ -1616,7 +1609,7 @@ specification.</p>
      <li><span class="dfn-paneled" id="597088f0">Text</span>
      <li><span class="dfn-paneled" id="9638f92b">connected</span>
      <li><span class="dfn-paneled" id="da8b8e0e">descendant</span>
-     <li><span class="dfn-paneled" id="a973e0fe">document</span>
+     <li><span class="dfn-paneled" id="a84c14c9">document</span>
      <li><span class="dfn-paneled" id="27d9b7ea">element</span>
      <li><span class="dfn-paneled" id="f7960529">root</span>
     </ul>
@@ -1674,8 +1667,8 @@ specification.</p>
    <li>
     <a data-link-type="biblio">[LONG-ANIMATION-FRAME]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="730f4098">current frame timing info</span>
-     <li><span class="dfn-paneled" id="9df02964">Queue a long animation frame entry</span>
+     <li><span class="dfn-paneled" id="7d6635d4">current frame timing info</span>
+     <li><span class="dfn-paneled" id="51fa7442">Queue a long animation frame entry</span>
     </ul>
    <li>
     <a data-link-type="biblio">[PERFORMANCE-TIMELINE]</a> defines the following terms:
@@ -1725,19 +1718,17 @@ specification.</p>
    <dt id="biblio-css-color-3">[CSS-COLOR-3]
    <dd>Tantek Çelik; Chris Lilley; David Baron. <a href="https://drafts.csswg.org/css-color-3/"><cite>CSS Color Module Level 3</cite></a>. URL: <a href="https://drafts.csswg.org/css-color-3/">https://drafts.csswg.org/css-color-3/</a>
    <dt id="biblio-css-display-4">[CSS-DISPLAY-4]
-   <dd><a href="https://drafts.csswg.org/css-display-4/"><cite>CSS Display Module Level 4</cite></a>. Editor's Draft. URL: <a href="https://drafts.csswg.org/css-display-4/">https://drafts.csswg.org/css-display-4/</a>
+   <dd>Elika Etemad; Tab Atkins Jr.. <a href="https://drafts.csswg.org/css-display/"><cite>CSS Display Module Level 4</cite></a>. URL: <a href="https://drafts.csswg.org/css-display/">https://drafts.csswg.org/css-display/</a>
    <dt id="biblio-css-fonts-4">[CSS-FONTS-4]
    <dd>Chris Lilley. <a href="https://drafts.csswg.org/css-fonts-4/"><cite>CSS Fonts Module Level 4</cite></a>. URL: <a href="https://drafts.csswg.org/css-fonts-4/">https://drafts.csswg.org/css-fonts-4/</a>
    <dt id="biblio-css-text-4">[CSS-TEXT-4]
    <dd>Elika Etemad; et al. <a href="https://drafts.csswg.org/css-text-4/"><cite>CSS Text Module Level 4</cite></a>. URL: <a href="https://drafts.csswg.org/css-text-4/">https://drafts.csswg.org/css-text-4/</a>
-   <dt id="biblio-css22">[CSS22]
-   <dd>Bert Bos. <a href="https://drafts.csswg.org/css2/"><cite>Cascading Style Sheets Level 2 Revision 2 (CSS 2.2) Specification</cite></a>. URL: <a href="https://drafts.csswg.org/css2/">https://drafts.csswg.org/css2/</a>
    <dt id="biblio-cssom-view-1">[CSSOM-VIEW-1]
    <dd>Simon Pieters. <a href="https://drafts.csswg.org/cssom-view/"><cite>CSSOM View Module</cite></a>. URL: <a href="https://drafts.csswg.org/cssom-view/">https://drafts.csswg.org/cssom-view/</a>
    <dt id="biblio-dom">[DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/"><cite>DOM Standard</cite></a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-element-timing">[ELEMENT-TIMING]
-   <dd><a href="https://wicg.github.io/element-timing/"><cite>Element Timing API</cite></a>. cg-draft. URL: <a href="https://wicg.github.io/element-timing/">https://wicg.github.io/element-timing/</a>
+   <dd><a href="https://w3c.github.io/element-timing/"><cite>Element Timing API</cite></a>. Editor's Draft. URL: <a href="https://w3c.github.io/element-timing/">https://w3c.github.io/element-timing/</a>
    <dt id="biblio-hr-time-3">[HR-TIME-3]
    <dd>Yoav Weiss. <a href="https://w3c.github.io/hr-time/"><cite>High Resolution Time</cite></a>. URL: <a href="https://w3c.github.io/hr-time/">https://w3c.github.io/hr-time/</a>
    <dt id="biblio-html">[HTML]
@@ -2015,6 +2006,7 @@ let dfnPanelData = {
 "48438eb3": {"dfnID":"48438eb3","dfnText":"queue a global task","external":true,"refSections":[{"refs":[{"id":"ref-for-queue-a-global-task"}],"title":"4.3.2. Mark paint timing"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task"},
 "4bae84e6": {"dfnID":"4bae84e6","dfnText":"Report largest contentful paint","external":true,"refSections":[{"refs":[{"id":"ref-for-report-largest-contentful-paint"}],"title":"4.3.2. Mark paint timing"}],"url":"https://wicg.github.io/largest-contentful-paint/#report-largest-contentful-paint"},
 "51c2724d": {"dfnID":"51c2724d","dfnText":"SVGImageElement","external":true,"refSections":[{"refs":[{"id":"ref-for-InterfaceSVGImageElement"}],"title":"4.1. Associated Image Requests"}],"url":"https://svgwg.org/svg2-draft/embedded.html#InterfaceSVGImageElement"},
+"51fa7442": {"dfnID":"51fa7442","dfnText":"Queue a long animation frame entry","external":true,"refSections":[{"refs":[{"id":"ref-for-queue-a-long-animation-frame-entry"}],"title":"4.3.2. Mark paint timing"}],"url":"https://w3c.github.io/long-animation-frames/#queue-a-long-animation-frame-entry"},
 "53275e46": {"dfnID":"53275e46","dfnText":"append (for list)","external":true,"refSections":[{"refs":[{"id":"ref-for-list-append"}],"title":"4.3.3. Report paint timing"}],"url":"https://infra.spec.whatwg.org/#list-append"},
 "565ece29": {"dfnID":"565ece29","dfnText":"poster frame","external":true,"refSections":[{"refs":[{"id":"ref-for-poster-frame"},{"id":"ref-for-poster-frame\u2460"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/media.html#poster-frame"},
 "56f81a8e": {"dfnID":"56f81a8e","dfnText":"new","external":true,"refSections":[{"refs":[{"id":"ref-for-new"}],"title":"4.3.3. Report paint timing"}],"url":"https://webidl.spec.whatwg.org/#new"},
@@ -2022,14 +2014,13 @@ let dfnPanelData = {
 "5991ccfb": {"dfnID":"5991ccfb","dfnText":"relevant realm","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-relevant-realm"},{"id":"ref-for-concept-relevant-realm\u2460"}],"title":"4.3.3. Report paint timing"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm"},
 "5b31c866": {"dfnID":"5b31c866","dfnText":"font block period","external":true,"refSections":[{"refs":[{"id":"ref-for-font-block-period"}],"title":"4.2.2. Modifications to the HTML specification"}],"url":"https://drafts.csswg.org/css-fonts-4/#font-block-period"},
 "5ced56d0": {"dfnID":"5ced56d0","dfnText":"background-image","external":true,"refSections":[{"refs":[{"id":"ref-for-propdef-background-image"},{"id":"ref-for-propdef-background-image\u2460"}],"title":"2. Terminology"},{"refs":[{"id":"ref-for-propdef-background-image\u2461"},{"id":"ref-for-propdef-background-image\u2462"}],"title":"4.1. Associated Image Requests"}],"url":"https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image"},
-"5d5f4fe6": {"dfnID":"5d5f4fe6","dfnText":"visibility","external":true,"refSections":[{"refs":[{"id":"ref-for-propdef-visibility"},{"id":"ref-for-propdef-visibility\u2460"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/CSS22/visufx.html#propdef-visibility"},
 "649608b9": {"dfnID":"649608b9","dfnText":"list","external":true,"refSections":[{"refs":[{"id":"ref-for-list"}],"title":"4.2. Recording paint timing"}],"url":"https://infra.spec.whatwg.org/#list"},
 "692595fe": {"dfnID":"692595fe","dfnText":"ordered set","external":true,"refSections":[{"refs":[{"id":"ref-for-ordered-set"},{"id":"ref-for-ordered-set\u2460"},{"id":"ref-for-ordered-set\u2461"}],"title":"4.2. Recording paint timing"},{"refs":[{"id":"ref-for-ordered-set\u2462"},{"id":"ref-for-ordered-set\u2463"}],"title":"4.3.2. Mark paint timing"}],"url":"https://infra.spec.whatwg.org/#ordered-set"},
 "6b28585b": {"dfnID":"6b28585b","dfnText":"scrolling area","external":true,"refSections":[{"refs":[{"id":"ref-for-scrolling-area"},{"id":"ref-for-scrolling-area\u2460"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/cssom-view#scrolling-area"},
 "6d88ab2e": {"dfnID":"6d88ab2e","dfnText":"browsing context (for Window)","external":true,"refSections":[{"refs":[{"id":"ref-for-window-bc"}],"title":"3. The PerformancePaintTiming interface"}],"url":"https://html.spec.whatwg.org/multipage/nav-history-apis.html#window-bc"},
 "70bf9cbc": {"dfnID":"70bf9cbc","dfnText":"image","external":true,"refSections":[{"refs":[{"id":"ref-for-images"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/images.html#images"},
-"730f4098": {"dfnID":"730f4098","dfnText":"current frame timing info","external":true,"refSections":[{"refs":[{"id":"ref-for-current-frame-timing-info"},{"id":"ref-for-current-frame-timing-info\u2460"}],"title":"4.3.2. Mark paint timing"}],"url":"https://w3c.github.io/long-animation-frame/#current-frame-timing-info"},
 "7c5cb560": {"dfnID":"7c5cb560","dfnText":"supportedEntryTypes","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceobserver-supportedentrytypes"}],"title":"3. The PerformancePaintTiming interface"}],"url":"https://w3c.github.io/performance-timeline/#dom-performanceobserver-supportedentrytypes"},
+"7d6635d4": {"dfnID":"7d6635d4","dfnText":"current frame timing info","external":true,"refSections":[{"refs":[{"id":"ref-for-current-frame-timing-info"},{"id":"ref-for-current-frame-timing-info\u2460"}],"title":"4.3.2. Mark paint timing"}],"url":"https://w3c.github.io/long-animation-frames/#current-frame-timing-info"},
 "7e0ffe19": {"dfnID":"7e0ffe19","dfnText":"context mode","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-canvas-context-mode"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-context-mode"},
 "7e7cc1d8": {"dfnID":"7e7cc1d8","dfnText":"current high resolution time","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-current-high-resolution-time"}],"title":"4.2.3. Process image that finished loading"},{"refs":[{"id":"ref-for-dfn-current-high-resolution-time\u2460"},{"id":"ref-for-dfn-current-high-resolution-time\u2461"},{"id":"ref-for-dfn-current-high-resolution-time\u2462"}],"title":"4.3.2. Mark paint timing"}],"url":"https://w3c.github.io/hr-time/#dfn-current-high-resolution-time"},
 "82805a4e": {"dfnID":"82805a4e","dfnText":"originating element","external":true,"refSections":[{"refs":[{"id":"ref-for-originating-element"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/selectors-4/#originating-element"},
@@ -2042,14 +2033,13 @@ let dfnPanelData = {
 "984221ca": {"dfnID":"984221ca","dfnText":"struct","external":true,"refSections":[{"refs":[{"id":"ref-for-struct"}],"title":"2. Terminology"},{"refs":[{"id":"ref-for-struct\u2460"}],"title":"4.2. Recording paint timing"}],"url":"https://infra.spec.whatwg.org/#struct"},
 "9a155e4d": {"dfnID":"9a155e4d","dfnText":"svg element with rendered descendants","external":true,"refSections":[{"refs":[{"id":"ref-for-Rendered-vs-NonRendered"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/SVG2/render.html#Rendered-vs-NonRendered"},
 "9c4c1e66": {"dfnID":"9c4c1e66","dfnText":"relevant settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-relevant-settings-object"}],"title":"4.4.1. Exposed for paint timing"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"},
-"9df02964": {"dfnID":"9df02964","dfnText":"Queue a long animation frame entry","external":true,"refSections":[{"refs":[{"id":"ref-for-queue-a-long-animation-frame-entry"}],"title":"4.3.2. Mark paint timing"}],"url":"https://w3c.github.io/long-animation-frame/#queue-a-long-animation-frame-entry"},
 "a3b18719": {"dfnID":"a3b18719","dfnText":"append (for set)","external":true,"refSections":[{"refs":[{"id":"ref-for-set-append"}],"title":"4.2.2. Modifications to the HTML specification"},{"refs":[{"id":"ref-for-set-append\u2460"},{"id":"ref-for-set-append\u2461"}],"title":"4.3.2. Mark paint timing"}],"url":"https://infra.spec.whatwg.org/#set-append"},
 "a4eb3c57": {"dfnID":"a4eb3c57","dfnText":"used value","external":true,"refSections":[{"refs":[{"id":"ref-for-used-value"},{"id":"ref-for-used-value\u2460"},{"id":"ref-for-used-value\u2461"},{"id":"ref-for-used-value\u2462"},{"id":"ref-for-used-value\u2463"},{"id":"ref-for-used-value\u2464"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-cascade-5/#used-value"},
 "a72449dd": {"dfnID":"a72449dd","dfnText":"in parallel","external":true,"refSections":[{"refs":[{"id":"ref-for-in-parallel"}],"title":"4.3.2. Mark paint timing"}],"url":"https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel"},
 "a7f8f241": {"dfnID":"a7f8f241","dfnText":"PerformanceEntry","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceentry"},{"id":"ref-for-dom-performanceentry\u2460"}],"title":"3. The PerformancePaintTiming interface"}],"url":"https://w3c.github.io/performance-timeline/#dom-performanceentry"},
 "a8485ff4": {"dfnID":"a8485ff4","dfnText":"replaced element","external":true,"refSections":[{"refs":[{"id":"ref-for-replaced-element"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-display-4/#replaced-element"},
+"a84c14c9": {"dfnID":"a84c14c9","dfnText":"document","external":true,"refSections":[{"refs":[{"id":"ref-for-clone-a-node-document"},{"id":"ref-for-clone-a-node-document\u2460"}],"title":"2. Terminology"},{"refs":[{"id":"ref-for-clone-a-node-document\u2461"}],"title":"4.3.1. First Contentful Paint"},{"refs":[{"id":"ref-for-clone-a-node-document\u2462"},{"id":"ref-for-clone-a-node-document\u2463"},{"id":"ref-for-clone-a-node-document\u2464"},{"id":"ref-for-clone-a-node-document\u2465"},{"id":"ref-for-clone-a-node-document\u2466"}],"title":"4.3.2. Mark paint timing"},{"refs":[{"id":"ref-for-clone-a-node-document\u2467"}],"title":"4.4.1. Exposed for paint timing"}],"url":"https://dom.spec.whatwg.org/#clone-a-node-document"},
 "a963f9ba": {"dfnID":"a963f9ba","dfnText":"document white space characters","external":true,"refSections":[{"refs":[{"id":"ref-for-white-space"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-text-4/#white-space"},
-"a973e0fe": {"dfnID":"a973e0fe","dfnText":"document","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-document"},{"id":"ref-for-concept-document\u2460"}],"title":"2. Terminology"},{"refs":[{"id":"ref-for-concept-document\u2461"}],"title":"4.3.1. First Contentful Paint"},{"refs":[{"id":"ref-for-concept-document\u2462"},{"id":"ref-for-concept-document\u2463"},{"id":"ref-for-concept-document\u2464"},{"id":"ref-for-concept-document\u2465"},{"id":"ref-for-concept-document\u2466"}],"title":"4.3.2. Mark paint timing"},{"refs":[{"id":"ref-for-concept-document\u2467"}],"title":"4.4.1. Exposed for paint timing"}],"url":"https://dom.spec.whatwg.org/#concept-document"},
 "a9ea380f": {"dfnID":"a9ea380f","dfnText":"queue a PerformanceEntry","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-queue-a-performanceentry"}],"title":"4.3.3. Report paint timing"}],"url":"https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry"},
 "aa7bbf63": {"dfnID":"aa7bbf63","dfnText":"video","external":true,"refSections":[{"refs":[{"id":"ref-for-video"},{"id":"ref-for-video\u2460"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/media.html#video"},
 "ae2a6342": {"dfnID":"ae2a6342","dfnText":"top-level browsing context","external":true,"refSections":[{"refs":[{"id":"ref-for-top-level-browsing-context"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-browsing-context"},
@@ -2592,7 +2582,7 @@ let refsData = {
 "#set-of-owned-text-nodes": {"displayText":"set of owned text nodes","export":true,"for_":[],"level":"","normative":true,"shortname":"paint-timing","spec":"paint-timing","status":"local","text":"set of owned text nodes","type":"dfn","url":"#set-of-owned-text-nodes"},
 "#set-of-previously-reported-paints": {"displayText":"set of previously reported paints","export":true,"for_":[],"level":"","normative":true,"shortname":"paint-timing","spec":"paint-timing","status":"local","text":"set of previously reported paints","type":"dfn","url":"#set-of-previously-reported-paints"},
 "#should-report-first-contentful-paint": {"displayText":"should report first contentful paint","export":true,"for_":[],"level":"","normative":true,"shortname":"paint-timing","spec":"paint-timing","status":"local","text":"should report first contentful paint","type":"dfn","url":"#should-report-first-contentful-paint"},
-"https://dom.spec.whatwg.org/#concept-document": {"displayText":"document","export":true,"for_":[],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"document","type":"dfn","url":"https://dom.spec.whatwg.org/#concept-document"},
+"https://dom.spec.whatwg.org/#clone-a-node-document": {"displayText":"document","export":true,"for_":["clone a node"],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"document","type":"dfn","url":"https://dom.spec.whatwg.org/#clone-a-node-document"},
 "https://dom.spec.whatwg.org/#concept-element": {"displayText":"element","export":true,"for_":[],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"element","type":"dfn","url":"https://dom.spec.whatwg.org/#concept-element"},
 "https://dom.spec.whatwg.org/#concept-tree-descendant": {"displayText":"descendant","export":true,"for_":["tree"],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"descendant","type":"dfn","url":"https://dom.spec.whatwg.org/#concept-tree-descendant"},
 "https://dom.spec.whatwg.org/#concept-tree-root": {"displayText":"root","export":true,"for_":["tree"],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"root","type":"dfn","url":"https://dom.spec.whatwg.org/#concept-tree-root"},
@@ -2655,8 +2645,8 @@ let refsData = {
 "https://url.spec.whatwg.org/#concept-url-scheme": {"displayText":"scheme","export":true,"for_":["url"],"level":"1","normative":true,"shortname":"url","spec":"url","status":"current","text":"scheme","type":"dfn","url":"https://url.spec.whatwg.org/#concept-url-scheme"},
 "https://w3c.github.io/hr-time/#dfn-current-high-resolution-time": {"displayText":"current high resolution time","export":true,"for_":[],"level":"3","normative":true,"shortname":"hr-time","spec":"hr-time-3","status":"current","text":"current high resolution time","type":"dfn","url":"https://w3c.github.io/hr-time/#dfn-current-high-resolution-time"},
 "https://w3c.github.io/hr-time/#dom-domhighrestimestamp": {"displayText":"DOMHighResTimeStamp","export":true,"for_":[],"level":"3","normative":true,"shortname":"hr-time","spec":"hr-time-3","status":"current","text":"DOMHighResTimeStamp","type":"typedef","url":"https://w3c.github.io/hr-time/#dom-domhighrestimestamp"},
-"https://w3c.github.io/long-animation-frame/#current-frame-timing-info": {"displayText":"current frame timing info","export":true,"for_":[],"level":"","normative":true,"shortname":"long-animation-frame","spec":"long-animation-frame","status":"anchor-block","text":"current frame timing info","type":"dfn","url":"https://w3c.github.io/long-animation-frame/#current-frame-timing-info"},
-"https://w3c.github.io/long-animation-frame/#queue-a-long-animation-frame-entry": {"displayText":"Queue a long animation frame entry","export":true,"for_":[],"level":"","normative":true,"shortname":"long-animation-frame","spec":"long-animation-frame","status":"anchor-block","text":"queue a long animation frame entry","type":"dfn","url":"https://w3c.github.io/long-animation-frame/#queue-a-long-animation-frame-entry"},
+"https://w3c.github.io/long-animation-frames/#current-frame-timing-info": {"displayText":"current frame timing info","export":true,"for_":[],"level":"","normative":true,"shortname":"long-animation-frame","spec":"long-animation-frame","status":"anchor-block","text":"current frame timing info","type":"dfn","url":"https://w3c.github.io/long-animation-frames/#current-frame-timing-info"},
+"https://w3c.github.io/long-animation-frames/#queue-a-long-animation-frame-entry": {"displayText":"Queue a long animation frame entry","export":true,"for_":[],"level":"","normative":true,"shortname":"long-animation-frame","spec":"long-animation-frame","status":"anchor-block","text":"queue a long animation frame entry","type":"dfn","url":"https://w3c.github.io/long-animation-frames/#queue-a-long-animation-frame-entry"},
 "https://w3c.github.io/performance-timeline/#dfn-performance-timeline-task-source": {"displayText":"performance timeline task source","export":true,"for_":[],"level":"1","normative":true,"shortname":"performance-timeline","spec":"performance-timeline","status":"current","text":"performance timeline task source","type":"dfn","url":"https://w3c.github.io/performance-timeline/#dfn-performance-timeline-task-source"},
 "https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry": {"displayText":"queue a PerformanceEntry","export":true,"for_":[],"level":"1","normative":true,"shortname":"performance-timeline","spec":"performance-timeline","status":"current","text":"queue a performanceentry","type":"dfn","url":"https://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry"},
 "https://w3c.github.io/performance-timeline/#dom-performanceentry": {"displayText":"PerformanceEntry","export":true,"for_":[],"level":"1","normative":true,"shortname":"performance-timeline","spec":"performance-timeline","status":"current","text":"PerformanceEntry","type":"interface","url":"https://w3c.github.io/performance-timeline/#dom-performanceentry"},
@@ -2671,7 +2661,6 @@ let refsData = {
 "https://webidl.spec.whatwg.org/#this": {"displayText":"this","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"this","type":"dfn","url":"https://webidl.spec.whatwg.org/#this"},
 "https://wicg.github.io/element-timing/#report-element-timing": {"displayText":"Report element timing","export":true,"for_":[],"level":"","normative":true,"shortname":"element-timing","spec":"element-timing","status":"anchor-block","text":"report element timing","type":"dfn","url":"https://wicg.github.io/element-timing/#report-element-timing"},
 "https://wicg.github.io/largest-contentful-paint/#report-largest-contentful-paint": {"displayText":"Report largest contentful paint","export":true,"for_":[],"level":"","normative":true,"shortname":"element-timing","spec":"element-timing","status":"anchor-block","text":"report largest contentful paint","type":"dfn","url":"https://wicg.github.io/largest-contentful-paint/#report-largest-contentful-paint"},
-"https://www.w3.org/TR/CSS22/visufx.html#propdef-visibility": {"displayText":"visibility","export":true,"for_":[],"level":"1","normative":true,"shortname":"css","spec":"css22","status":"snapshot","text":"visibility","type":"dfn","url":"https://www.w3.org/TR/CSS22/visufx.html#propdef-visibility"},
 "https://www.w3.org/TR/SVG2/render.html#Rendered-vs-NonRendered": {"displayText":"svg element with rendered descendants","export":true,"for_":[],"level":"","normative":true,"shortname":"cr-svg2","spec":"cr-svg2","status":"anchor-block","text":"svg element with rendered descendants","type":"dfn","url":"https://www.w3.org/TR/SVG2/render.html#Rendered-vs-NonRendered"},
 "https://www.w3.org/TR/css-backgrounds-3/#background-size": {"displayText":"background-size","export":true,"for_":[],"level":"3","normative":true,"shortname":"css-backgrounds","spec":"css-backgrounds-3","status":"anchor-block","text":"background-size","type":"dfn","url":"https://www.w3.org/TR/css-backgrounds-3/#background-size"},
 "https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image": {"displayText":"background-image","export":true,"for_":[],"level":"3","normative":true,"shortname":"css-backgrounds","spec":"css-backgrounds-3","status":"anchor-block","text":"background-image","type":"dfn","url":"https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image"},
@@ -2759,7 +2748,12 @@ function hideRefHint(refHint) {
 function showRefHint(link) {
     if(link.classList.contains("dfn-link")) return;
     const url = link.getAttribute("href");
-    const ref = refsData[url];
+    const refHintKey = link.getAttribute("data-refhint-key");
+    let key = url;
+    if(refHintKey) {
+        key = refHintKey + "_" + url;
+    }
+    const ref = refsData[key];
     if(!ref) return;
 
     hideAllRefHints(); // Only display one at this time.
