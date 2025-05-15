@@ -223,7 +223,9 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 
 <pre class="idl">
     [Exposed=Window]
-    interface PerformancePaintTiming : PerformanceEntry {};
+    interface PerformancePaintTiming : PerformanceEntry {
+        [Default] object toJSON();
+    };
     PerformancePaintTiming includes PaintTimingMixin;
 </pre>
 
@@ -235,6 +237,7 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
 * The {{PerformanceEntry/entryType}} attribute's getter must return <code>"paint"</code>.
 * The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
 * The {{PerformanceEntry/duration}} attribute's getter must return 0.
+* When <dfn for="PerformancePaintTiming" export>toJSON</dfn> is called, run the [=default toJSON steps=] for {{PerformancePaintTiming}}.
 
 NOTE: A user agent implementing {{PerformancePaintTiming}} would need to include <code>"paint"</code> in {{PerformanceObserver/supportedEntryTypes}} of a [=realm/global object=] whose [=Window/browsing context=] is [=paint-timing eligible=].
 This allows developers to detect support for paint timing for a particular [=browsing context=].
