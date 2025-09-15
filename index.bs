@@ -194,6 +194,23 @@ A [=browsing context=] |ctx| is <dfn>paint-timing eligible</dfn> when one of the
 The {{PaintTimingMixin}} interface {#sec-PaintTimingMixin}
 =======================================
 
+<div class=non-normative>
+
+<em>This section is non-normative.</em>
+
+The {{PaintTimingMixin}} interface exposes timestamps related to the rendering cycle.
+It is included in [=platform objects=] that extend {{PerformanceEntry}},
+specifically by {{PefrormanceElementTiming}}, {{LargestContentfulPaint}}, {{PerformanceEventTiming}}, {{PerformancePaintTiming}}, and {{PerformanceLongAnimationFrameTiming}}.
+
+The {{PaintTimingMixin/paintTime}} attribute represent the timestamp at the end of the [=update the rendering=] loop
+while the {{PaintTimingMixin/presentationTime}} represents an implementation-specific timestamp marked when the frame is presented to the user.
+The [=mark paint timing=] alorithm, called from [=update the rendering=] in the HTML standard, populates both attributes.
+
+Attributes in entries that rely on paint timing, like {{LargestContentfulPaint}}'s {{LargestContentfulPaint/renderTime}} (as well as its {{LargestContentfulPaint/startTime}}),
+usually return the [=default paint timestamp=] rather than one of the specific timestamps, making them agnostic to the implementation-specific nature of {{PaintTimingMixin/presentationTime}}.
+
+</div>
+
 <pre class="idl">
     [Exposed=Window]
     interface mixin PaintTimingMixin {
