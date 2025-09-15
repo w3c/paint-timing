@@ -191,7 +191,7 @@ A [=browsing context=] |ctx| is <dfn>paint-timing eligible</dfn> when one of the
     NOTE: this allows user agents to enable paint-timing only for some of the frames, in addition to the main frame, if they so choose.
     For example, a user agent may decide to disable paint-timing for cross-origin iframes, as in some scenarios their paint-timing might reveal information about the main frame.
 
-The {{PaintTimingMixin}} interface {#sec-PaintTimingMixin}
+The Paint Timing Mixin
 =======================================
 
 <div class=non-normative>
@@ -200,7 +200,7 @@ The {{PaintTimingMixin}} interface {#sec-PaintTimingMixin}
 
 The {{PaintTimingMixin}} interface exposes timestamps related to the rendering cycle.
 It is included in [=platform objects=] that extend {{PerformanceEntry}},
-specifically by {{PefrormanceElementTiming}}, {{LargestContentfulPaint}}, {{PerformanceEventTiming}}, {{PerformancePaintTiming}}, and {{PerformanceLongAnimationFrameTiming}}.
+specifically by {{PerformanceElementTiming}}, {{LargestContentfulPaint}}, {{PerformanceEventTiming}}, {{PerformancePaintTiming}}, and {{PerformanceLongAnimationFrameTiming}}.
 
 The {{PaintTimingMixin/paintTime}} attribute represent the timestamp at the end of the [=update the rendering=] loop
 while the {{PaintTimingMixin/presentationTime}} represents an implementation-specific timestamp marked when the frame is presented to the user.
@@ -210,6 +210,9 @@ Attributes in entries that rely on paint timing, like {{LargestContentfulPaint}}
 usually return the [=default paint timestamp=] rather than one of the specific timestamps, making them agnostic to the implementation-specific nature of {{PaintTimingMixin/presentationTime}}.
 
 </div>
+
+The {{PaintTimingMixin}} interface {#sec-PaintTimingMixin}
+----------------------------------------------------------
 
 <pre class="idl">
     [Exposed=Window]
