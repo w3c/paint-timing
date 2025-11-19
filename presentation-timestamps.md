@@ -49,7 +49,7 @@ This would keep compatibility with what's out there today, allowing progressive 
 
 ## Considered alternatives
 An alternative to this would be keeping the status-quo, where presentation timings are included in some performance entries and not others,
-creating confusion for RUM solutions and requiring more processing of entries to find overlaps.
+creating confusion for RUM solutions and requiring more processing of entries to find overlaps, as well as delicate interoperability issues.
 
 ## Conclusion
 
