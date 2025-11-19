@@ -12,6 +12,11 @@ In addition, the "long animation frame" timing exposes the hand-over time as its
 
 The `PaintTimingMixin` attempts to clean up this confusion, by always providing two timestamps, one mandatory and interoperative, one optional and somewhat implementation-defined.
 
+## User value
+Real user monitoring (RUM) is an important part of the ecosystem of measuring performance, which is a big contributor to user experience.
+This proposal makes the data fed to these solutions easier to understand and more consistent across entries,
+making it easier for these solutions to explain performance regressions to the website authors, and thus improve them for users.
+
 ## `PaintTimingMixin`
 
 `PaintTimingMixin` is a mixin that would be included in the interfaces representing all the relevant performance entries:
@@ -41,6 +46,10 @@ interface mixin PaintTimingMixin {
 Currently paint timing's `startTime` and element timing's `renderTime` use the presentation time if that's available (Chromium), and the paint time if it's not (WebKit/Gecko).
 In this proposal, this would be explicit: both paint timing's `startTime` and element timing's `renderTime` would return something like `presentationTime || paintTime`.
 This would keep compatibility with what's out there today, allowing progressive enhancement and returning the "best known value" from these attributes.
+
+## Considered alternatives
+An alternative to this would be keeping the status-quo, where presentation timings are included in some performance entries and not others,
+creating confusion for RUM solutions and requiring more processing of entries to find overlaps.
 
 ## Conclusion
 
