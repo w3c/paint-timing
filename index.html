@@ -5,9 +5,9 @@
   <title>Paint Timing</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 86e3be07a, updated Tue Nov 18 16:58:08 2025 +0000" name="generator">
+  <meta content="Bikeshed version 3c53a5b02, updated Thu Nov 27 17:03:30 2025 +0000" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="401de50d1daec81a530ab9af81930269bfaa47a4" name="revision">
+  <meta content="83857e54bc869f0aff300f856f7fdefdc2f86303" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -966,7 +966,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
 </p>
    <h1 class="no-ref p-name" id="title">Paint Timing</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2025-11-19">19 November 2025</time></p>
+    <time class="dt-updated" datetime="2026-01-07">7 January 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -988,7 +988,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2025 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply.
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2026 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply.
 </p>
    <hr title="Separator for header">
   </div>
@@ -1016,7 +1016,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-ref no-toc" id="contents">Table of Contents</h2>
-   <ol class="toc" role="directory">
+   <ol class="toc">
     <li>
      <a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
      <ol class="toc">
@@ -1085,7 +1085,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
 resources into pixels on a screen for users. Measuring the performance of a web
 page often involves measuring the time it takes to perform these tasks - to
 render content, whether text or image, to the screen. There are many different
-ways to use this timing to make statemements about the performance of a page,
+ways to use this timing to make statements about the performance of a page,
 or about the user experience of loading, but fundamentally all of those ways
 begin with a common means of measuring time.</p>
     <p>This is a foundational document which specifies how to measure paint timing as a
@@ -1194,7 +1194,7 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     <li data-md>
      <p><var>el</var> and all of its ancestors' <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value⑤">used</a> <a data-link-type="dfn" href="https://drafts.csswg.org/css-color-3/#opacity" id="ref-for-opacity②">opacity</a> is greater than zero.</p>
      <p class="note" role="note"><span class="marker">NOTE:</span> there could be cases where a <code class="highlight">paintable</code> <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element⑤">element</a> would not be visible to the user, for example in the case of text that has the same color as its background.
-Those elements would still considered as paintable for the purpose of computing <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint">first contentful paint</a>.</p>
+Those elements would still be considered as paintable for the purpose of computing <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint">first contentful paint</a>.</p>
     <li data-md>
      <p><var>el</var>’s <a data-link-type="dfn" href="#paintable-bounding-rect" id="ref-for-paintable-bounding-rect①">paintable bounding rect</a> intersects with the <a data-link-type="dfn" href="https://www.w3.org/TR/cssom-view#scrolling-area" id="ref-for-scrolling-area①">scrolling area</a> of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#clone-a-node-document" id="ref-for-clone-a-node-document①">document</a>.</p>
      <p class="note" role="note"><span class="marker">NOTE:</span> This covers the cases where the element is scaled to zero size, has <code class="highlight">display<c- o>:</c-> none</code>, or <code class="highlight">display<c- o>:</c-> contents</code> where the contents resolve to an empty rect.</p>
@@ -1216,9 +1216,9 @@ For example, a user agent may decide to disable paint-timing for cross-origin if
     <p>The <code class="idl"><a data-link-type="idl" href="#painttimingmixin" id="ref-for-painttimingmixin">PaintTimingMixin</a></code> interface exposes timestamps related to the rendering cycle.
 It is included in <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-platform-object" id="ref-for-dfn-platform-object">platform objects</a> that extend <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#dom-performanceentry" id="ref-for-dom-performanceentry">PerformanceEntry</a></code>,
 specifically by <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/element-timing/#performanceelementtiming" id="ref-for-performanceelementtiming">PerformanceElementTiming</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/largest-contentful-paint/#largestcontentfulpaint" id="ref-for-largestcontentfulpaint">LargestContentfulPaint</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/event-timing/#performanceeventtiming" id="ref-for-performanceeventtiming">PerformanceEventTiming</a></code>, <code class="idl"><a data-link-type="idl" href="#performancepainttiming" id="ref-for-performancepainttiming">PerformancePaintTiming</a></code>, and <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/long-animation-frames/#performancelonganimationframetiming" id="ref-for-performancelonganimationframetiming">PerformanceLongAnimationFrameTiming</a></code>.</p>
-    <p>The <code class="idl"><a data-link-type="idl" href="#dom-painttimingmixin-painttime" id="ref-for-dom-painttimingmixin-painttime">paintTime</a></code> attribute represent the timestamp at the end of the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering①">update the rendering</a> loop
+    <p>The <code class="idl"><a data-link-type="idl" href="#dom-painttimingmixin-painttime" id="ref-for-dom-painttimingmixin-painttime">paintTime</a></code> attribute represents the timestamp at the end of the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering①">update the rendering</a> loop
 while the <code class="idl"><a data-link-type="idl" href="#dom-painttimingmixin-presentationtime" id="ref-for-dom-painttimingmixin-presentationtime">presentationTime</a></code> represents an implementation-specific timestamp marked when the frame is presented to the user.
-The <a data-link-type="dfn" href="#mark-paint-timing" id="ref-for-mark-paint-timing">mark paint timing</a> alorithm, called from <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering②">update the rendering</a> in the HTML standard, populates both attributes.</p>
+The <a data-link-type="dfn" href="#mark-paint-timing" id="ref-for-mark-paint-timing">mark paint timing</a> algorithm, called from <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering②">update the rendering</a> in the HTML standard, populates both attributes.</p>
     <p>Attributes in entries that rely on paint timing, like <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/largest-contentful-paint/#largestcontentfulpaint" id="ref-for-largestcontentfulpaint①">LargestContentfulPaint</a></code>’s <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/largest-contentful-paint/#dom-largestcontentfulpaint-rendertime" id="ref-for-dom-largestcontentfulpaint-rendertime">renderTime</a></code> (as well as its <code class="idl"><u class="link-error" data-lt="startTime" title="LINK ERROR: No &apos;idl&apos; refs found for &apos;startTime&apos; with for=&apos;[&apos;LargestContentfulPaint&apos;]&apos;.">startTime</u></code>),
 usually return the <a data-link-type="dfn" href="#default-paint-timestamp" id="ref-for-default-paint-timestamp">default paint timestamp</a> rather than one of the specific timestamps, making them agnostic to the implementation-specific nature of <code class="idl"><a data-link-type="idl" href="#dom-painttimingmixin-presentationtime" id="ref-for-dom-painttimingmixin-presentationtime①">presentationTime</a></code>.</p>
    </div>
@@ -1262,7 +1262,7 @@ usually return the <a data-link-type="dfn" href="#default-paint-timestamp" id="r
     <li data-md>
      <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#dom-performanceentry-entrytype" id="ref-for-dom-performanceentry-entrytype">entryType</a></code> attribute’s getter must return <code class="highlight"><c- u>"paint"</c-></code>.</p>
     <li data-md>
-     <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#dom-performanceentry-starttime" id="ref-for-dom-performanceentry-starttime">startTime</a></code> attribute’s getter must return a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp⑤">DOMHighResTimeStamp</a></code> of when the paint occured.</p>
+     <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#dom-performanceentry-starttime" id="ref-for-dom-performanceentry-starttime">startTime</a></code> attribute’s getter must return a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp⑤">DOMHighResTimeStamp</a></code> of when the paint occurred.</p>
     <li data-md>
      <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration">duration</a></code> attribute’s getter must return 0.</p>
     <li data-md>
@@ -1318,7 +1318,7 @@ algorithms below.</p>
    </ul>
    <p>Each <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element⑦">Element</a></code> has a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="set-of-owned-text-nodes">set of owned text nodes</dfn>, which is an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-set" id="ref-for-ordered-set">ordered set</a> of <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#text" id="ref-for-text">Text</a></code> nodes, initially empty.</p>
    <p>Each <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document">Document</a></code> has a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="set-of-previously-reported-paints">set of previously reported paints</dfn>, which is an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-set" id="ref-for-ordered-set①">ordered set</a> of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string" id="ref-for-string">strings</a>, initially empty.</p>
-   <p>Each <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document①">Document</a></code> has an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="images-pending-rendering">images pending rendering</dfn>, which is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list">list</a> of <a data-link-type="dfn" href="#pending-image-record" id="ref-for-pending-image-record">pending image records</a>, initally empty.</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document①">Document</a></code> has an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="images-pending-rendering">images pending rendering</dfn>, which is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list">list</a> of <a data-link-type="dfn" href="#pending-image-record" id="ref-for-pending-image-record">pending image records</a>, initially empty.</p>
    <p>Each <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document②">Document</a></code> has a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="set-of-elements-with-rendered-text">set of elements with rendered text</dfn>, which is an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-set" id="ref-for-ordered-set②">ordered set</a> of <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element⑧">Element</a></code>s, initially empty.</p>
    <h4 class="heading settled" data-level="5.2.1" id="sec-modifications-CSS"><span class="secno">5.2.1. </span><span class="content">Modifications to the CSS specification</span><a class="self-link" href="#sec-modifications-CSS"></a></h4>
    <p>Whenever an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#image-request" id="ref-for-image-request⑦">image request</a> in an <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element⑨">Element</a></code> <em>element</em>’s <a data-link-type="dfn" href="#associated-background-image-requests" id="ref-for-associated-background-image-requests①">associated background image requests</a> becomes <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#img-all" id="ref-for-img-all">completely available</a>, run the algorithm to <a data-link-type="dfn" href="#process-an-image-that-finished-loading" id="ref-for-process-an-image-that-finished-loading">process an image that finished loading</a> with <em>element</em> and <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#image-request" id="ref-for-image-request⑧">image request</a> as inputs.</p>
