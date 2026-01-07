@@ -78,7 +78,7 @@ Much of the purpose of a web browser is to translate HTML, CSS and image
 resources into pixels on a screen for users. Measuring the performance of a web
 page often involves measuring the time it takes to perform these tasks - to
 render content, whether text or image, to the screen. There are many different
-ways to use this timing to make statemements about the performance of a page,
+ways to use this timing to make statements about the performance of a page,
 or about the user experience of loading, but fundamentally all of those ways
 begin with a common means of measuring time.
 
@@ -174,7 +174,7 @@ An [=/element=] |el| is <dfn>paintable</dfn> when all of the following apply:
 * |el| and all of its ancestors' [=used value|used=] [=opacity=] is greater than zero.
 
     NOTE: there could be cases where a <code>paintable</code> [=/element=] would not be visible to the user, for example in the case of text that has the same color as its background.
-    Those elements would still considered as paintable for the purpose of computing [=first contentful paint=].
+    Those elements would still be considered as paintable for the purpose of computing [=first contentful paint=].
 
 * |el|'s [=paintable bounding rect=] intersects with the [=scrolling area=] of the [=document=].
 
@@ -202,9 +202,9 @@ The {{PaintTimingMixin}} interface exposes timestamps related to the rendering c
 It is included in [=platform objects=] that extend {{PerformanceEntry}},
 specifically by {{PerformanceElementTiming}}, {{LargestContentfulPaint}}, {{PerformanceEventTiming}}, {{PerformancePaintTiming}}, and {{PerformanceLongAnimationFrameTiming}}.
 
-The {{PaintTimingMixin/paintTime}} attribute represent the timestamp at the end of the [=update the rendering=] loop
+The {{PaintTimingMixin/paintTime}} attribute represents the timestamp at the end of the [=update the rendering=] loop
 while the {{PaintTimingMixin/presentationTime}} represents an implementation-specific timestamp marked when the frame is presented to the user.
-The [=mark paint timing=] alorithm, called from [=update the rendering=] in the HTML standard, populates both attributes.
+The [=mark paint timing=] algorithm, called from [=update the rendering=] in the HTML standard, populates both attributes.
 
 Attributes in entries that rely on paint timing, like {{LargestContentfulPaint}}'s {{LargestContentfulPaint/renderTime}} (as well as its {{LargestContentfulPaint/startTime}}),
 usually return the [=default paint timestamp=] rather than one of the specific timestamps, making them agnostic to the implementation-specific nature of {{PaintTimingMixin/presentationTime}}.
@@ -257,7 +257,7 @@ The {{PerformancePaintTiming}} interface {#sec-PerformancePaintTiming}
     * <code>"first-paint"</code>: for [=first paint=]
     * <code>"first-contentful-paint"</code>: for [=first contentful paint=]
 * The {{PerformanceEntry/entryType}} attribute's getter must return <code>"paint"</code>.
-* The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occured.
+* The {{PerformanceEntry/startTime}} attribute's getter must return a {{DOMHighResTimeStamp}} of when the paint occurred.
 * The {{PerformanceEntry/duration}} attribute's getter must return 0.
 * When <dfn for="PerformancePaintTiming" export>toJSON</dfn> is called, run the [=default toJSON steps=] for {{PerformancePaintTiming}}.
 
@@ -326,7 +326,7 @@ Each {{Element}} has a <dfn>set of owned text nodes</dfn>, which is an [=ordered
 
 Each {{Document}} has a <dfn>set of previously reported paints</dfn>, which is an [=ordered set=] of [=strings=], initially empty.
 
-Each {{Document}} has an <dfn>images pending rendering</dfn>, which is a [=/list=] of [=pending image records=], initally empty.
+Each {{Document}} has an <dfn>images pending rendering</dfn>, which is a [=/list=] of [=pending image records=], initially empty.
 
 Each {{Document}} has a <dfn>set of elements with rendered text</dfn>, which is an [=ordered set=] of {{Element}}s, initially empty.
 
