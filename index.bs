@@ -16,8 +16,9 @@ Default Highlight: js
 </pre>
 <pre class=link-defaults>
 spec:dom; type:dfn; text:descendant
+spec:dom; type:dfn; for:/; text:document
 spec:dom; type:dfn; text:element
-spec:css22; type:dfn; text:visibility
+spec:css2; type:property; text:visibility
 </pre>
 <pre class=anchors>
 urlPrefix: https://html.spec.whatwg.org/multipage/images.html
@@ -130,7 +131,7 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     NOTE: The rendering pipeline is very complex, and the timestamp should be the latest timestamp the user agent is able to note in this pipeline (best effort). Typically the time at which the frame is submitted to the OS for display is recommended for this API.
 
 A [=generated content pseudo-element=] is a <dfn>paintable pseudo-element</dfn> when all of the following apply:
-* The pseudo-element's [=used value|used=] [=visibility=] is <code>visible</code>.
+* The pseudo-element's [=used value|used=] 'visibility' is <code>visible</code>.
 * The pseudo-element's [=used value|used=] [=opacity=] is greater than zero.
 * The pseudo-element generates a non-empty [=box=].
 
@@ -170,7 +171,7 @@ To compute the <dfn>paintable bounding rect</dfn> of [=/element=] |target|, run 
 
 An [=/element=] |el| is <dfn>paintable</dfn> when all of the following apply:
 * |el| is [=being rendered=].
-* |el|'s [=used value|used=] [=visibility=] is <code>visible</code>.
+* |el|'s [=used value|used=] 'visibility' is <code>visible</code>.
 * |el| and all of its ancestors' [=used value|used=] [=opacity=] is greater than zero.
 
     NOTE: there could be cases where a <code>paintable</code> [=/element=] would not be visible to the user, for example in the case of text that has the same color as its background.
@@ -206,7 +207,7 @@ The {{PaintTimingMixin/paintTime}} attribute represents the timestamp at the end
 while the {{PaintTimingMixin/presentationTime}} represents an implementation-specific timestamp marked when the frame is presented to the user.
 The [=mark paint timing=] algorithm, called from [=update the rendering=] in the HTML standard, populates both attributes.
 
-Attributes in entries that rely on paint timing, like {{LargestContentfulPaint}}'s {{LargestContentfulPaint/renderTime}} (as well as its {{LargestContentfulPaint/startTime}}),
+Attributes in entries that rely on paint timing, like {{LargestContentfulPaint}}'s {{LargestContentfulPaint/renderTime}} (as well as its {{PerformanceEntry/startTime}}),
 usually return the [=default paint timestamp=] rather than one of the specific timestamps, making them agnostic to the implementation-specific nature of {{PaintTimingMixin/presentationTime}}.
 
 </div>
