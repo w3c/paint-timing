@@ -331,6 +331,10 @@ Each {{Document}} has an <dfn>images pending rendering</dfn>, which is a [=/list
 
 Each {{Document}} has a <dfn>set of elements with rendered text</dfn>, which is an [=ordered set=] of {{Element}}s, initially empty.
 
+A <dfn>paintedImages</dfn> is an ordered set of [=pending image records=] collected when asked to [=mark paint timing=], initially empty.
+
+A <dfn>paintedTextNodes</dfn> is an ordered set of {{Element}}s having non-empty [=set of owned text nodes=] collected when asked to [=mark paint timing=], initially empty.
+
 <h4 id="sec-modifications-CSS">Modifications to the CSS specification</h4>
 
 Whenever an <a>image request</a> in an {{Element}} <em>element</em>'s <a>associated background image requests</a> becomes <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> with <em>element</em> and <a>image request</a> as inputs.
@@ -377,17 +381,17 @@ Reporting paint timing {#sec-reporting-paint-timing}
     When asked to [=mark paint timing=] given a [=Document=] |document| as input, perform the following steps:
     1. If the [=document=]'s [=Document/browsing context=] is not [=paint-timing eligible=], return.
     1. Let |paintTimingInfo| be a new [=/paint timing info=], whose [=rendering update end time=] is the [=current high resolution time=] given |document|'s [=relevant global object=].
-    1. Let |paintedImages| be a new [=ordered set=]
-    1. Let |paintedTextNodes| be a new [=ordered set=]
+    1. Let |[=paintedImages=]| be a new [=ordered set=]
+    1. Let |[=paintedTextNodes=]| be a new [=ordered set=]
     1. For each |record| in |doc|'s [=images pending rendering=] list:
         1. If |record|'s [=pending image record/request=] is [=available=] and ready to be painted, then run the following steps:
-            1. Append |record| to |paintedImages|.
+            1. Append |record| to |[=paintedImages=]|.
             1. Remove |record| from |doc|'s <a>images pending rendering</a> list.
     1. For each {{Element}} |element| in |doc|'s <a>descendants</a>:
         1. If |element| is contained in |doc|'s <a>set of elements with rendered text</a>, continue.
         1. If |element|'s <a>set of owned text nodes</a> is empty, continue.
         1. [=set/Append=] |element| to |doc|'s <a>set of elements with rendered text</a>.
-        1. [=set/Append=] |element| to |paintedTextNodes|.
+        1. [=set/Append=] |element| to |[=paintedTextNodes=]|.
     1. Let |reportedPaints| be the |document|'s [=set of previously reported paints=].
     1. Let |frameTimingInfo| be |document|'s [=current frame timing info=].
     1. Set |document|'s [=current frame timing info=] to null.
@@ -408,9 +412,9 @@ Reporting paint timing {#sec-reporting-paint-timing}
             NOTE: The marking of [=first paint=] is optional. User-agents implementing paint timing should at the very least mark [=first contentful paint=].
 
         1. [=Report largest contentful paint=] given |document|, |paintTimingInfo|,
-            |paintedImages| and |paintedTextNodes|.
+            |[=paintedImages=]| and |[=paintedTextNodes=]|.
         1. [=Report element timing=] given |document|, |paintTimingInfo|,
-            |paintedImages| and |paintedTextNodes|.
+            |[=paintedImages=]| and |[=paintedTextNodes=]|.
         1. If |frameTimingInfo| is not null, then [=queue a long animation frame entry=] given |document|, |frameTimingInfo|, and |paintTimingInfo|.
 
     1. If the user-agent does not support implementation-defined presentation times, call |flushPaintTimings| and return.
