@@ -5,9 +5,9 @@
   <title>Paint Timing</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 0ef803fdf, updated Tue Jan 6 11:59:39 2026 -0800" name="generator">
+  <meta content="Bikeshed version ac92c2f0d, updated Fri Aug 21 16:01:29 2026 -0700" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="448d1426e34c0e9b360ed606df64f4d545dae9cb" name="revision">
+  <meta content="053f575b305f714ab46869aec01201abdc4dbe34" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -303,7 +303,7 @@ pre .property::before, pre .property::after {
 </style>
 <style>/* Boilerplate: style-counters */
 body {
-    counter-reset: example figure issue;
+    counter-reset: example figure issue table;
 }
 .issue {
     counter-increment: issue;
@@ -328,6 +328,13 @@ figcaption {
 }
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
+}
+
+figure.table figcaption {
+    counter-increment: table;
+}
+figure.table figcaption:not(.no-marker)::before {
+    content: "Table " counter(table) " ";
 }
 </style>
 <style>/* Boilerplate: style-dfn-panel */
@@ -914,6 +921,30 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     c-[vm] { color: #cb4b16 } /* Name.Variable.Magic */
     c-[il] { color: #657b83 } /* Literal.Number.Integer.Long */
 }
+
+@media print {
+    /* Darken colors for print that would otherwise print too faintly */
+    c-[c]  { color: #555555 } /* Comment */
+    c-[d]  { color: #555555 } /* Comment.Multiline */
+    c-[cp] { color: #555555 } /* Comment.Preproc */
+    c-[c1] { color: #555555 } /* Comment.Single */
+    c-[cs] { color: #555555 } /* Comment.Special */
+    c-[o]  { color: #222222 } /* Operator */
+    c-[p]  { color: #222222 } /* Punctuation */
+    c-[ow] { color: #222222 } /* Operator.Word */
+    c-[s]  { color: #664400 } /* Literal.String */
+    c-[t]  { color: #664400 } /* Literal.String.Single */
+    c-[u]  { color: #664400 } /* Literal.String.Double */
+    c-[sb] { color: #664400 } /* Literal.String.Backtick */
+    c-[sc] { color: #664400 } /* Literal.String.Char */
+    c-[sd] { color: #664400 } /* Literal.String.Doc */
+    c-[se] { color: #664400 } /* Literal.String.Escape */
+    c-[sh] { color: #664400 } /* Literal.String.Heredoc */
+    c-[si] { color: #664400 } /* Literal.String.Interpol */
+    c-[sx] { color: #664400 } /* Literal.String.Other */
+    c-[sr] { color: #664400 } /* Literal.String.Regex */
+    c-[ss] { color: #664400 } /* Literal.String.Symbol */
+}
 </style>
 <style>/* Boilerplate: style-var-click-highlighting */
 /*
@@ -966,7 +997,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
 </p>
    <h1 class="no-ref p-name" id="title">Paint Timing</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2026-03-24">24 March 2026</time></p>
+    <time class="dt-updated" datetime="2026-09-02">2 September 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1071,7 +1102,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
-      <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
+      <li><a href="#informative"><span class="secno"></span> <span class="content">Non-Normative References</span></a>
      </ol>
     <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
     <li><a href="#issues-index"><span class="secno"></span> <span class="content">Issues Index</span></a>
@@ -1152,6 +1183,8 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     <li data-md>
      <p><var>target</var> has a <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image" id="ref-for-propdef-background-image">background-image</a> which is a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image">contentful image</a>, and its <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value③">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#background-size" id="ref-for-background-size">background-size</a> has non-zero width and height values.</p>
     <li data-md>
+     <p><var>target</var> has a <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#propdef-border-image-source" id="ref-for-propdef-border-image-source">border-image-source</a> which is a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image①">contentful image</a>, and its <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value④">used</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#border-image-width" id="ref-for-border-image-width">border-image-width</a> has non-zero value.</p>
+    <li data-md>
      <p><var>target</var> is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/canvas.html#canvas" id="ref-for-canvas">canvas</a></code> with its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-context-mode" id="ref-for-concept-canvas-context-mode">context mode</a> set to any value other than <code class="highlight">none</code>.</p>
     <li data-md>
      <p><var>target</var> is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/media.html#video" id="ref-for-video">video</a></code> element that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents">represents</a> its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#poster-frame" id="ref-for-poster-frame">poster frame</a> or the first video frame and the frame is available.</p>
@@ -1160,18 +1193,18 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     <li data-md>
      <p><var>target</var> is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/input.html#the-input-element" id="ref-for-the-input-element">input</a></code> element with a <a data-link-type="dfn" href="#non-empty" id="ref-for-non-empty①">non-empty</a> <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/input.html#attr-input-value" id="ref-for-attr-input-value">value</a></code> attribute.</p>
     <li data-md>
-     <p><var>target</var> is an <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#originating-element" id="ref-for-originating-element">originating element</a> for a <a data-link-type="dfn" href="#paintable-pseudo-element" id="ref-for-paintable-pseudo-element">paintable pseudo-element</a> that represents a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image①">contentful image</a> or <a data-link-type="dfn" href="#non-empty" id="ref-for-non-empty②">non-empty</a> text.</p>
+     <p><var>target</var> is an <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#originating-element" id="ref-for-originating-element">originating element</a> for a <a data-link-type="dfn" href="#paintable-pseudo-element" id="ref-for-paintable-pseudo-element">paintable pseudo-element</a> that represents a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image②">contentful image</a> or <a data-link-type="dfn" href="#non-empty" id="ref-for-non-empty②">non-empty</a> text.</p>
    </ul>
    <p>An <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element①">element</a> is <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="timing-eligible">timing-eligible</dfn> if it is one of the following:</p>
    <ul>
     <li data-md>
      <p>an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element">img</a></code> element.</p>
     <li data-md>
-     <p>an <code><a data-link-type="element" href="https://svgwg.org/svg2-draft/embedded.html#elementdef-image" id="ref-for-elementdef-image">image</a></code> element inside an <code><a data-link-type="element" href="https://svgwg.org/svg2-draft/struct.html#elementdef-svg" id="ref-for-elementdef-svg">svg</a></code> element.</p>
+     <p>an <code><a data-link-type="element" href="https://w3c.github.io/svgwg/svg2-draft/embedded.html#elementdef-image" id="ref-for-elementdef-image">image</a></code> element inside an <code><a data-link-type="element" href="https://w3c.github.io/svgwg/svg2-draft/struct.html#elementdef-svg" id="ref-for-elementdef-svg">svg</a></code> element.</p>
     <li data-md>
      <p>a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/media.html#video" id="ref-for-video①">video</a></code> element with a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/media.html#poster-frame" id="ref-for-poster-frame①">poster frame</a>.</p>
     <li data-md>
-     <p>an element with a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image②">contentful</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image" id="ref-for-propdef-background-image①">background-image</a>.</p>
+     <p>an element with a <a data-link-type="dfn" href="#contentful-image" id="ref-for-contentful-image③">contentful</a> <a data-link-type="dfn" href="https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image" id="ref-for-propdef-background-image①">background-image</a>.</p>
     <li data-md>
      <p>a text node.</p>
    </ul>
@@ -1190,9 +1223,9 @@ Formally, we consider the user agent to have "rendered" a document when it has p
     <li data-md>
      <p><var>el</var> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/rendering.html#being-rendered" id="ref-for-being-rendered">being rendered</a>.</p>
     <li data-md>
-     <p><var>el</var>’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value④">used</a> <a class="css property" data-link-type="property" href="https://drafts.csswg.org/css2/#propdef-visibility" id="ref-for-propdef-visibility①">visibility</a> is <code class="highlight">visible</code>.</p>
+     <p><var>el</var>’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value⑤">used</a> <a class="css property" data-link-type="property" href="https://drafts.csswg.org/css2/#propdef-visibility" id="ref-for-propdef-visibility①">visibility</a> is <code class="highlight">visible</code>.</p>
     <li data-md>
-     <p><var>el</var> and all of its ancestors' <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value⑤">used</a> <a data-link-type="dfn" href="https://drafts.csswg.org/css-color-3/#opacity" id="ref-for-opacity②">opacity</a> is greater than zero.</p>
+     <p><var>el</var> and all of its ancestors' <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-5/#used-value" id="ref-for-used-value⑥">used</a> <a data-link-type="dfn" href="https://drafts.csswg.org/css-color-3/#opacity" id="ref-for-opacity②">opacity</a> is greater than zero.</p>
      <p class="note" role="note"><span class="marker">NOTE:</span> there could be cases where a <code class="highlight">paintable</code> <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element⑤">element</a> would not be visible to the user, for example in the case of text that has the same color as its background.
 Those elements would still be considered as paintable for the purpose of computing <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint">first contentful paint</a>.</p>
     <li data-md>
@@ -1274,7 +1307,7 @@ This allows developers to detect support for paint timing for a particular <a da
    <h3 class="heading settled" data-level="5.1" id="sec-associated-image-requests"><span class="secno">5.1. </span><span class="content">Associated Image Requests</span><a class="self-link" href="#sec-associated-image-requests"></a></h3>
    <p>Each <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element">Element</a></code> has an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="associated-image-request">associated image request</dfn> which is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#image-request" id="ref-for-image-request">image request</a> or null, initially null.</p>
    <p>When the processing model for an <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①">Element</a></code> <em>element</em> of type
-<code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlimageelement" id="ref-for-htmlimageelement">HTMLImageElement</a></code>, <code class="idl"><a data-link-type="idl" href="https://svgwg.org/svg2-draft/embedded.html#InterfaceSVGImageElement" id="ref-for-InterfaceSVGImageElement">SVGImageElement</a></code>, or <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/media.html#htmlvideoelement" id="ref-for-htmlvideoelement">HTMLVideoElement</a></code> creates a
+<code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/embedded-content.html#htmlimageelement" id="ref-for-htmlimageelement">HTMLImageElement</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/svgwg/svg2-draft/embedded.html#InterfaceSVGImageElement" id="ref-for-InterfaceSVGImageElement">SVGImageElement</a></code>, or <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/media.html#htmlvideoelement" id="ref-for-htmlvideoelement">HTMLVideoElement</a></code> creates a
 new image resource (e.g., to be displayed as an image or poster image),
 <em>element</em>’s <a data-link-type="dfn" href="#associated-image-request" id="ref-for-associated-image-request">associated image request</a> is set to the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/images.html#image-request" id="ref-for-image-request①">image
 request</a> of the created image resource.</p>
@@ -1639,6 +1672,8 @@ specification.</p>
     <ul>
      <li><span class="dfn-paneled" id="5ced56d0">background-image</span>
      <li><span class="dfn-paneled" id="d4119dee">background-size</span>
+     <li><span class="dfn-paneled" id="8fc9a97c">border-image-source</span>
+     <li><span class="dfn-paneled" id="96741ccd">border-image-width</span>
     </ul>
    <li>
     <a data-link-type="biblio">[CSS-CASCADE-5]</a> defines the following terms:
@@ -1784,9 +1819,9 @@ specification.</p>
    <li>
     <a data-link-type="biblio">[SVG2]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="51c2724d">SVGImageElement</span>
-     <li><span class="dfn-paneled" id="11a8832d">image</span>
-     <li><span class="dfn-paneled" id="4299a926">svg</span>
+     <li><span class="dfn-paneled" id="ea57e271">SVGImageElement</span>
+     <li><span class="dfn-paneled" id="145c402c">image</span>
+     <li><span class="dfn-paneled" id="6d50fd63">svg</span>
     </ul>
    <li>
     <a data-link-type="biblio">[URL]</a> defines the following terms:
@@ -1842,18 +1877,18 @@ specification.</p>
    <dt id="biblio-selectors-4">[SELECTORS-4]
    <dd>Elika Etemad; Tab Atkins Jr.. <a href="https://drafts.csswg.org/selectors/"><cite>Selectors Level 4</cite></a>. URL: <a href="https://drafts.csswg.org/selectors/">https://drafts.csswg.org/selectors/</a>
    <dt id="biblio-svg2">[SVG2]
-   <dd>Amelia Bellamy-Royds; et al. <a href="https://svgwg.org/svg2-draft/"><cite>Scalable Vector Graphics (SVG) 2</cite></a>. URL: <a href="https://svgwg.org/svg2-draft/">https://svgwg.org/svg2-draft/</a>
+   <dd>Amelia Bellamy-Royds; et al. <a href="https://w3c.github.io/svgwg/svg2-draft/"><cite>Scalable Vector Graphics (SVG) 2</cite></a>. URL: <a href="https://w3c.github.io/svgwg/svg2-draft/">https://w3c.github.io/svgwg/svg2-draft/</a>
    <dt id="biblio-webidl">[WEBIDL]
    <dd>Edgar Chen; Timothy Gu. <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
   </dl>
-  <h3 class="heading no-num no-ref settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <h3 class="heading no-num no-ref settled" id="informative"><span class="content">Non-Normative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-event-timing">[EVENT-TIMING]
    <dd>Michal Mocny. <a href="https://w3c.github.io/event-timing/"><cite>Event Timing API</cite></a>. URL: <a href="https://w3c.github.io/event-timing/">https://w3c.github.io/event-timing/</a>
    <dt id="biblio-largest-contentful-paint">[LARGEST-CONTENTFUL-PAINT]
    <dd>Yoav Weiss. <a href="https://w3c.github.io/largest-contentful-paint/"><cite>Largest Contentful Paint</cite></a>. URL: <a href="https://w3c.github.io/largest-contentful-paint/">https://w3c.github.io/largest-contentful-paint/</a>
    <dt id="biblio-long-animation-frames">[LONG-ANIMATION-FRAMES]
-   <dd><a href="https://w3c.github.io/long-animation-frames/"><cite>Long Animation Frames API</cite></a>. Editor's Draft. URL: <a href="https://w3c.github.io/long-animation-frames/">https://w3c.github.io/long-animation-frames/</a>
+   <dd>Noam Rosenthal. <a href="https://w3c.github.io/long-animation-frames/"><cite>Long Animation Frames API</cite></a>. URL: <a href="https://w3c.github.io/long-animation-frames/">https://w3c.github.io/long-animation-frames/</a>
    <dt id="biblio-url">[URL]
    <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
   </dl>
@@ -2097,8 +2132,8 @@ let dfnPanelData = {
 "09c54b53": {"dfnID":"09c54b53","dfnText":"name","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceentry-name"}],"title":"4. The PerformancePaintTiming interface"},{"refs":[{"id":"ref-for-dom-performanceentry-name\u2460"}],"title":"5.3.3. Report paint timing"}],"url":"https://w3c.github.io/performance-timeline/#dom-performanceentry-name"},
 "0e3ba9f8": {"dfnID":"0e3ba9f8","dfnText":"fully active","external":true,"refSections":[{"refs":[{"id":"ref-for-fully-active"}],"title":"5.4.1. Exposed for paint timing"}],"url":"https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active"},
 "0fc40460": {"dfnID":"0fc40460","dfnText":"canvas","external":true,"refSections":[{"refs":[{"id":"ref-for-canvas"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/canvas.html#canvas"},
-"11a8832d": {"dfnID":"11a8832d","dfnText":"image","external":true,"refSections":[{"refs":[{"id":"ref-for-elementdef-image"}],"title":"2. Terminology"}],"url":"https://svgwg.org/svg2-draft/embedded.html#elementdef-image"},
 "1352f720": {"dfnID":"1352f720","dfnText":"PerformanceElementTiming","external":true,"refSections":[{"refs":[{"id":"ref-for-performanceelementtiming"}],"title":"3. The Paint Timing Mixin"}],"url":"https://w3c.github.io/element-timing/#performanceelementtiming"},
+"145c402c": {"dfnID":"145c402c","dfnText":"image","external":true,"refSections":[{"refs":[{"id":"ref-for-elementdef-image"}],"title":"2. Terminology"}],"url":"https://w3c.github.io/svgwg/svg2-draft/embedded.html#elementdef-image"},
 "160b3687": {"dfnID":"160b3687","dfnText":"available","external":true,"refSections":[{"refs":[{"id":"ref-for-img-available"},{"id":"ref-for-img-available\u2460"}],"title":"2. Terminology"},{"refs":[{"id":"ref-for-img-available\u2461"}],"title":"5.3.2. Mark paint timing"}],"url":"https://html.spec.whatwg.org/multipage/images.html#img-available"},
 "168f1b6e": {"dfnID":"168f1b6e","dfnText":"global object","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-realm-global"}],"title":"4. The PerformancePaintTiming interface"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-global"},
 "192b2479": {"dfnID":"192b2479","dfnText":"generated content pseudo-element","external":true,"refSections":[{"refs":[{"id":"ref-for-generated-content"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-pseudo-4#generated-content"},
@@ -2110,12 +2145,10 @@ let dfnPanelData = {
 "3b2ff63e": {"dfnID":"3b2ff63e","dfnText":"browsing context (for Document)","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-document-bc"}],"title":"5.3.2. Mark paint timing"}],"url":"https://html.spec.whatwg.org/multipage/document-sequences.html#concept-document-bc"},
 "3f4f9d05": {"dfnID":"3f4f9d05","dfnText":"Report element timing","external":true,"refSections":[{"refs":[{"id":"ref-for-report-element-timing"}],"title":"5.3.2. Mark paint timing"}],"url":"https://wicg.github.io/element-timing/#report-element-timing"},
 "4013a022": {"dfnID":"4013a022","dfnText":"this","external":true,"refSections":[{"refs":[{"id":"ref-for-this"},{"id":"ref-for-this\u2460"}],"title":"3.1. The PaintTimingMixin interface"}],"url":"https://webidl.spec.whatwg.org/#this"},
-"4299a926": {"dfnID":"4299a926","dfnText":"svg","external":true,"refSections":[{"refs":[{"id":"ref-for-elementdef-svg"}],"title":"2. Terminology"}],"url":"https://svgwg.org/svg2-draft/struct.html#elementdef-svg"},
 "473036cd": {"dfnID":"473036cd","dfnText":"cross-origin isolated capability","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-cross-origin-isolated-capability"}],"title":"5.3.2. Mark paint timing"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability"},
 "48438eb3": {"dfnID":"48438eb3","dfnText":"queue a global task","external":true,"refSections":[{"refs":[{"id":"ref-for-queue-a-global-task"}],"title":"5.3.2. Mark paint timing"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task"},
 "4bae84e6": {"dfnID":"4bae84e6","dfnText":"Report largest contentful paint","external":true,"refSections":[{"refs":[{"id":"ref-for-report-largest-contentful-paint"}],"title":"5.3.2. Mark paint timing"}],"url":"https://wicg.github.io/largest-contentful-paint/#report-largest-contentful-paint"},
 "4dcc69ad": {"dfnID":"4dcc69ad","dfnText":"PerformanceLongAnimationFrameTiming","external":true,"refSections":[{"refs":[{"id":"ref-for-performancelonganimationframetiming"}],"title":"3. The Paint Timing Mixin"}],"url":"https://w3c.github.io/long-animation-frames/#performancelonganimationframetiming"},
-"51c2724d": {"dfnID":"51c2724d","dfnText":"SVGImageElement","external":true,"refSections":[{"refs":[{"id":"ref-for-InterfaceSVGImageElement"}],"title":"5.1. Associated Image Requests"}],"url":"https://svgwg.org/svg2-draft/embedded.html#InterfaceSVGImageElement"},
 "51fa7442": {"dfnID":"51fa7442","dfnText":"Queue a long animation frame entry","external":true,"refSections":[{"refs":[{"id":"ref-for-queue-a-long-animation-frame-entry"}],"title":"5.3.2. Mark paint timing"}],"url":"https://w3c.github.io/long-animation-frames/#queue-a-long-animation-frame-entry"},
 "53275e46": {"dfnID":"53275e46","dfnText":"append (for list)","external":true,"refSections":[{"refs":[{"id":"ref-for-list-append"}],"title":"5.3.3. Report paint timing"}],"url":"https://infra.spec.whatwg.org/#list-append"},
 "565ece29": {"dfnID":"565ece29","dfnText":"poster frame","external":true,"refSections":[{"refs":[{"id":"ref-for-poster-frame"},{"id":"ref-for-poster-frame\u2460"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/media.html#poster-frame"},
@@ -2129,6 +2162,7 @@ let dfnPanelData = {
 "6728fdee": {"dfnID":"6728fdee","dfnText":"platform object","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-platform-object"}],"title":"3. The Paint Timing Mixin"}],"url":"https://webidl.spec.whatwg.org/#dfn-platform-object"},
 "692595fe": {"dfnID":"692595fe","dfnText":"ordered set","external":true,"refSections":[{"refs":[{"id":"ref-for-ordered-set"},{"id":"ref-for-ordered-set\u2460"},{"id":"ref-for-ordered-set\u2461"}],"title":"5.2. Recording paint timing"},{"refs":[{"id":"ref-for-ordered-set\u2462"},{"id":"ref-for-ordered-set\u2463"}],"title":"5.3.2. Mark paint timing"}],"url":"https://infra.spec.whatwg.org/#ordered-set"},
 "6b28585b": {"dfnID":"6b28585b","dfnText":"scrolling area","external":true,"refSections":[{"refs":[{"id":"ref-for-scrolling-area"},{"id":"ref-for-scrolling-area\u2460"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/cssom-view#scrolling-area"},
+"6d50fd63": {"dfnID":"6d50fd63","dfnText":"svg","external":true,"refSections":[{"refs":[{"id":"ref-for-elementdef-svg"}],"title":"2. Terminology"}],"url":"https://w3c.github.io/svgwg/svg2-draft/struct.html#elementdef-svg"},
 "6d88ab2e": {"dfnID":"6d88ab2e","dfnText":"browsing context (for Window)","external":true,"refSections":[{"refs":[{"id":"ref-for-window-bc"}],"title":"4. The PerformancePaintTiming interface"}],"url":"https://html.spec.whatwg.org/multipage/nav-history-apis.html#window-bc"},
 "6d8bccc7": {"dfnID":"6d8bccc7","dfnText":"PerformanceEventTiming","external":true,"refSections":[{"refs":[{"id":"ref-for-performanceeventtiming"}],"title":"3. The Paint Timing Mixin"}],"url":"https://w3c.github.io/event-timing/#performanceeventtiming"},
 "70bf9cbc": {"dfnID":"70bf9cbc","dfnText":"image","external":true,"refSections":[{"refs":[{"id":"ref-for-images"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/images.html#images"},
@@ -2141,13 +2175,15 @@ let dfnPanelData = {
 "881c2f72": {"dfnID":"881c2f72","dfnText":"box","external":true,"refSections":[{"refs":[{"id":"ref-for-box"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-display-4/#box"},
 "8855a9aa": {"dfnID":"8855a9aa","dfnText":"DOMString","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-DOMString"}],"title":"2. Terminology"},{"refs":[{"id":"ref-for-idl-DOMString\u2460"}],"title":"4. The PerformancePaintTiming interface"}],"url":"https://webidl.spec.whatwg.org/#idl-DOMString"},
 "889e932f": {"dfnID":"889e932f","dfnText":"Exposed","external":true,"refSections":[{"refs":[{"id":"ref-for-Exposed"}],"title":"3.1. The PaintTimingMixin interface"},{"refs":[{"id":"ref-for-Exposed\u2460"}],"title":"4. The PerformancePaintTiming interface"}],"url":"https://webidl.spec.whatwg.org/#Exposed"},
+"8fc9a97c": {"dfnID":"8fc9a97c","dfnText":"border-image-source","external":true,"refSections":[{"refs":[{"id":"ref-for-propdef-border-image-source"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/css-backgrounds-3/#propdef-border-image-source"},
 "95414ede": {"dfnID":"95414ede","dfnText":"opacity","external":true,"refSections":[{"refs":[{"id":"ref-for-opacity"},{"id":"ref-for-opacity\u2460"},{"id":"ref-for-opacity\u2461"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-color-3/#opacity"},
 "9638f92b": {"dfnID":"9638f92b","dfnText":"connected","external":true,"refSections":[{"refs":[{"id":"ref-for-connected"}],"title":"5.4.1. Exposed for paint timing"}],"url":"https://dom.spec.whatwg.org/#connected"},
+"96741ccd": {"dfnID":"96741ccd","dfnText":"border-image-width","external":true,"refSections":[{"refs":[{"id":"ref-for-border-image-width"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/css-backgrounds-3/#border-image-width"},
 "984221ca": {"dfnID":"984221ca","dfnText":"struct","external":true,"refSections":[{"refs":[{"id":"ref-for-struct"}],"title":"3.1. The PaintTimingMixin interface"},{"refs":[{"id":"ref-for-struct\u2460"}],"title":"5.2. Recording paint timing"}],"url":"https://infra.spec.whatwg.org/#struct"},
 "9a155e4d": {"dfnID":"9a155e4d","dfnText":"svg element with rendered descendants","external":true,"refSections":[{"refs":[{"id":"ref-for-Rendered-vs-NonRendered"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/SVG2/render.html#Rendered-vs-NonRendered"},
 "9c4c1e66": {"dfnID":"9c4c1e66","dfnText":"relevant settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-relevant-settings-object"}],"title":"5.4.1. Exposed for paint timing"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"},
 "a3b18719": {"dfnID":"a3b18719","dfnText":"append (for set)","external":true,"refSections":[{"refs":[{"id":"ref-for-set-append"}],"title":"5.2.2. Modifications to the HTML specification"},{"refs":[{"id":"ref-for-set-append\u2460"},{"id":"ref-for-set-append\u2461"}],"title":"5.3.2. Mark paint timing"}],"url":"https://infra.spec.whatwg.org/#set-append"},
-"a4eb3c57": {"dfnID":"a4eb3c57","dfnText":"used value","external":true,"refSections":[{"refs":[{"id":"ref-for-used-value"},{"id":"ref-for-used-value\u2460"},{"id":"ref-for-used-value\u2461"},{"id":"ref-for-used-value\u2462"},{"id":"ref-for-used-value\u2463"},{"id":"ref-for-used-value\u2464"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-cascade-5/#used-value"},
+"a4eb3c57": {"dfnID":"a4eb3c57","dfnText":"used value","external":true,"refSections":[{"refs":[{"id":"ref-for-used-value"},{"id":"ref-for-used-value\u2460"},{"id":"ref-for-used-value\u2461"},{"id":"ref-for-used-value\u2462"},{"id":"ref-for-used-value\u2463"},{"id":"ref-for-used-value\u2464"},{"id":"ref-for-used-value\u2465"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-cascade-5/#used-value"},
 "a72449dd": {"dfnID":"a72449dd","dfnText":"in parallel","external":true,"refSections":[{"refs":[{"id":"ref-for-in-parallel"}],"title":"5.3.2. Mark paint timing"}],"url":"https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel"},
 "a8485ff4": {"dfnID":"a8485ff4","dfnText":"replaced element","external":true,"refSections":[{"refs":[{"id":"ref-for-replaced-element"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-display-4/#replaced-element"},
 "a963f9ba": {"dfnID":"a963f9ba","dfnText":"document white space characters","external":true,"refSections":[{"refs":[{"id":"ref-for-white-space"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/css-text-4/#white-space"},
@@ -2166,7 +2202,7 @@ let dfnPanelData = {
 "c96ebde0": {"dfnID":"c96ebde0","dfnText":"performance timeline task source","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-performance-timeline-task-source"}],"title":"5.3.2. Mark paint timing"}],"url":"https://w3c.github.io/performance-timeline/#dfn-performance-timeline-task-source"},
 "cc7c9b78": {"dfnID":"cc7c9b78","dfnText":"startTime","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceentry-starttime"}],"title":"3. The Paint Timing Mixin"},{"refs":[{"id":"ref-for-dom-performanceentry-starttime\u2460"}],"title":"4. The PerformancePaintTiming interface"},{"refs":[{"id":"ref-for-dom-performanceentry-starttime\u2461"}],"title":"5.3.3. Report paint timing"}],"url":"https://w3c.github.io/performance-timeline/#dom-performanceentry-starttime"},
 "contentful": {"dfnID":"contentful","dfnText":"contentful","external":false,"refSections":[{"refs":[{"id":"ref-for-contentful"}],"title":"5.3.1. First Contentful Paint"},{"refs":[{"id":"ref-for-contentful\u2460"}],"title":"5.3.2. Mark paint timing"}],"url":"#contentful"},
-"contentful-image": {"dfnID":"contentful-image","dfnText":"contentful image","external":false,"refSections":[{"refs":[{"id":"ref-for-contentful-image"},{"id":"ref-for-contentful-image\u2460"},{"id":"ref-for-contentful-image\u2461"}],"title":"2. Terminology"}],"url":"#contentful-image"},
+"contentful-image": {"dfnID":"contentful-image","dfnText":"contentful image","external":false,"refSections":[{"refs":[{"id":"ref-for-contentful-image"},{"id":"ref-for-contentful-image\u2460"},{"id":"ref-for-contentful-image\u2461"},{"id":"ref-for-contentful-image\u2462"}],"title":"2. Terminology"}],"url":"#contentful-image"},
 "d38f9598": {"dfnID":"d38f9598","dfnText":"getBoundingClientRect()","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-element-getboundingclientrect"}],"title":"2. Terminology"}],"url":"https://drafts.csswg.org/cssom-view-1/#dom-element-getboundingclientrect"},
 "d4119dee": {"dfnID":"d4119dee","dfnText":"background-size","external":true,"refSections":[{"refs":[{"id":"ref-for-background-size"}],"title":"2. Terminology"}],"url":"https://www.w3.org/TR/css-backgrounds-3/#background-size"},
 "d7d642a2": {"dfnID":"d7d642a2","dfnText":"input","external":true,"refSections":[{"refs":[{"id":"ref-for-the-input-element"}],"title":"2. Terminology"}],"url":"https://html.spec.whatwg.org/multipage/input.html#the-input-element"},
@@ -2180,6 +2216,7 @@ let dfnPanelData = {
 "dom-performancepainttiming-tojson": {"dfnID":"dom-performancepainttiming-tojson","dfnText":"toJSON","external":false,"refSections":[],"url":"#dom-performancepainttiming-tojson"},
 "e6935299": {"dfnID":"e6935299","dfnText":"LargestContentfulPaint","external":true,"refSections":[{"refs":[{"id":"ref-for-largestcontentfulpaint"},{"id":"ref-for-largestcontentfulpaint\u2460"}],"title":"3. The Paint Timing Mixin"}],"url":"https://w3c.github.io/largest-contentful-paint/#largestcontentfulpaint"},
 "e99bd18e": {"dfnID":"e99bd18e","dfnText":"relevant global object","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-relevant-global"}],"title":"5.2.3. Process image that finished loading"},{"refs":[{"id":"ref-for-concept-relevant-global\u2460"},{"id":"ref-for-concept-relevant-global\u2461"},{"id":"ref-for-concept-relevant-global\u2462"}],"title":"5.3.2. Mark paint timing"},{"refs":[{"id":"ref-for-concept-relevant-global\u2463"}],"title":"5.4.1. Exposed for paint timing"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global"},
+"ea57e271": {"dfnID":"ea57e271","dfnText":"SVGImageElement","external":true,"refSections":[{"refs":[{"id":"ref-for-InterfaceSVGImageElement"}],"title":"5.1. Associated Image Requests"}],"url":"https://w3c.github.io/svgwg/svg2-draft/embedded.html#InterfaceSVGImageElement"},
 "ea663a43": {"dfnID":"ea663a43","dfnText":"containing block","external":true,"refSections":[{"refs":[{"id":"ref-for-containing-block"}],"title":"5.2.2. Modifications to the HTML specification"}],"url":"https://drafts.csswg.org/css-display-4/#containing-block"},
 "efd1ec5d": {"dfnID":"efd1ec5d","dfnText":"object","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-object"}],"title":"4. The PerformancePaintTiming interface"}],"url":"https://webidl.spec.whatwg.org/#idl-object"},
 "exposed-for-paint-timing": {"dfnID":"exposed-for-paint-timing","dfnText":"5.4.1. Exposed for paint timing","external":false,"refSections":[{"refs":[{"id":"ref-for-exposed-for-paint-timing"},{"id":"ref-for-exposed-for-paint-timing"}],"title":"5.4.1. Exposed for paint timing"}],"url":"#exposed-for-paint-timing"},
@@ -2760,9 +2797,6 @@ let refsData = {
 "https://infra.spec.whatwg.org/#string": {"displayText":"string","export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"string","type":"dfn","url":"https://infra.spec.whatwg.org/#string"},
 "https://infra.spec.whatwg.org/#struct": {"displayText":"struct","export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"struct","type":"dfn","url":"https://infra.spec.whatwg.org/#struct"},
 "https://infra.spec.whatwg.org/#struct-item": {"displayText":"item","export":true,"for_":["struct","tuple"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"item","type":"dfn","url":"https://infra.spec.whatwg.org/#struct-item"},
-"https://svgwg.org/svg2-draft/embedded.html#InterfaceSVGImageElement": {"displayText":"SVGImageElement","export":true,"for_":[],"level":"2","normative":true,"shortname":"svg","spec":"svg2","status":"current","text":"SVGImageElement","type":"interface","url":"https://svgwg.org/svg2-draft/embedded.html#InterfaceSVGImageElement"},
-"https://svgwg.org/svg2-draft/embedded.html#elementdef-image": {"displayText":"image","export":true,"for_":[],"level":"2","normative":true,"shortname":"svg","spec":"svg2","status":"current","text":"image","type":"element","url":"https://svgwg.org/svg2-draft/embedded.html#elementdef-image"},
-"https://svgwg.org/svg2-draft/struct.html#elementdef-svg": {"displayText":"svg","export":true,"for_":[],"level":"2","normative":true,"shortname":"svg","spec":"svg2","status":"current","text":"svg","type":"element","url":"https://svgwg.org/svg2-draft/struct.html#elementdef-svg"},
 "https://url.spec.whatwg.org/#concept-url-scheme": {"displayText":"scheme","export":true,"for_":["url"],"level":"1","normative":true,"shortname":"url","spec":"url","status":"current","text":"scheme","type":"dfn","url":"https://url.spec.whatwg.org/#concept-url-scheme"},
 "https://w3c.github.io/element-timing/#performanceelementtiming": {"displayText":"PerformanceElementTiming","export":true,"for_":[],"level":"1","normative":true,"shortname":"element-timing","spec":"element-timing","status":"current","text":"PerformanceElementTiming","type":"interface","url":"https://w3c.github.io/element-timing/#performanceelementtiming"},
 "https://w3c.github.io/event-timing/#performanceeventtiming": {"displayText":"PerformanceEventTiming","export":true,"for_":[],"level":"1","normative":true,"shortname":"event-timing","spec":"event-timing","status":"current","text":"PerformanceEventTiming","type":"interface","url":"https://w3c.github.io/event-timing/#performanceeventtiming"},
@@ -2781,6 +2815,9 @@ let refsData = {
 "https://w3c.github.io/performance-timeline/#dom-performanceentry-starttime": {"displayText":"startTime","export":true,"for_":["PerformanceEntry"],"level":"1","normative":true,"shortname":"performance-timeline","spec":"performance-timeline","status":"current","text":"startTime","type":"attribute","url":"https://w3c.github.io/performance-timeline/#dom-performanceentry-starttime"},
 "https://w3c.github.io/performance-timeline/#dom-performanceobserver-supportedentrytypes": {"displayText":"supportedEntryTypes","export":true,"for_":["PerformanceObserver"],"level":"1","normative":true,"shortname":"performance-timeline","spec":"performance-timeline","status":"current","text":"supportedEntryTypes","type":"attribute","url":"https://w3c.github.io/performance-timeline/#dom-performanceobserver-supportedentrytypes"},
 "https://w3c.github.io/performance-timeline/#performanceentry": {"displayText":"PerformanceEntry","export":true,"for_":[],"level":"1","normative":true,"shortname":"performance-timeline","spec":"performance-timeline","status":"current","text":"PerformanceEntry","type":"interface","url":"https://w3c.github.io/performance-timeline/#performanceentry"},
+"https://w3c.github.io/svgwg/svg2-draft/embedded.html#InterfaceSVGImageElement": {"displayText":"SVGImageElement","export":true,"for_":[],"level":"2","normative":true,"shortname":"svg","spec":"svg2","status":"current","text":"SVGImageElement","type":"interface","url":"https://w3c.github.io/svgwg/svg2-draft/embedded.html#InterfaceSVGImageElement"},
+"https://w3c.github.io/svgwg/svg2-draft/embedded.html#elementdef-image": {"displayText":"image","export":true,"for_":[],"level":"2","normative":true,"shortname":"svg","spec":"svg2","status":"current","text":"image","type":"element","url":"https://w3c.github.io/svgwg/svg2-draft/embedded.html#elementdef-image"},
+"https://w3c.github.io/svgwg/svg2-draft/struct.html#elementdef-svg": {"displayText":"svg","export":true,"for_":[],"level":"2","normative":true,"shortname":"svg","spec":"svg2","status":"current","text":"svg","type":"element","url":"https://w3c.github.io/svgwg/svg2-draft/struct.html#elementdef-svg"},
 "https://webidl.spec.whatwg.org/#Default": {"displayText":"Default","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"Default","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#Default"},
 "https://webidl.spec.whatwg.org/#Exposed": {"displayText":"Exposed","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"Exposed","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#Exposed"},
 "https://webidl.spec.whatwg.org/#default-tojson-steps": {"displayText":"default toJSON steps","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"default tojson steps","type":"dfn","url":"https://webidl.spec.whatwg.org/#default-tojson-steps"},
@@ -2793,7 +2830,9 @@ let refsData = {
 "https://wicg.github.io/largest-contentful-paint/#report-largest-contentful-paint": {"displayText":"Report largest contentful paint","export":true,"for_":[],"level":"","normative":true,"shortname":"element-timing","spec":"element-timing","status":"anchor-block","text":"report largest contentful paint","type":"dfn","url":"https://wicg.github.io/largest-contentful-paint/#report-largest-contentful-paint"},
 "https://www.w3.org/TR/SVG2/render.html#Rendered-vs-NonRendered": {"displayText":"svg element with rendered descendants","export":true,"for_":[],"level":"","normative":true,"shortname":"cr-svg2","spec":"cr-svg2","status":"anchor-block","text":"svg element with rendered descendants","type":"dfn","url":"https://www.w3.org/TR/SVG2/render.html#Rendered-vs-NonRendered"},
 "https://www.w3.org/TR/css-backgrounds-3/#background-size": {"displayText":"background-size","export":true,"for_":[],"level":"3","normative":true,"shortname":"css-backgrounds","spec":"css-backgrounds-3","status":"anchor-block","text":"background-size","type":"dfn","url":"https://www.w3.org/TR/css-backgrounds-3/#background-size"},
+"https://www.w3.org/TR/css-backgrounds-3/#border-image-width": {"displayText":"border-image-width","export":true,"for_":[],"level":"3","normative":true,"shortname":"css-backgrounds","spec":"css-backgrounds-3","status":"anchor-block","text":"border-image-width","type":"dfn","url":"https://www.w3.org/TR/css-backgrounds-3/#border-image-width"},
 "https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image": {"displayText":"background-image","export":true,"for_":[],"level":"3","normative":true,"shortname":"css-backgrounds","spec":"css-backgrounds-3","status":"anchor-block","text":"background-image","type":"dfn","url":"https://www.w3.org/TR/css-backgrounds-3/#propdef-background-image"},
+"https://www.w3.org/TR/css-backgrounds-3/#propdef-border-image-source": {"displayText":"border-image-source","export":true,"for_":[],"level":"3","normative":true,"shortname":"css-backgrounds","spec":"css-backgrounds-3","status":"anchor-block","text":"border-image-source","type":"dfn","url":"https://www.w3.org/TR/css-backgrounds-3/#propdef-border-image-source"},
 "https://www.w3.org/TR/css-images-3/#typedef-image": {"displayText":"CSS image","export":true,"for_":[],"level":"","normative":true,"shortname":"paint-timing","spec":"","status":"anchor-block","text":"css image","type":"dfn","url":"https://www.w3.org/TR/css-images-3/#typedef-image"},
 "https://www.w3.org/TR/css3-values/#url-value": {"displayText":"url valued","export":true,"for_":[],"level":"","normative":true,"shortname":"paint-timing","spec":"","status":"anchor-block","text":"url valued","type":"dfn","url":"https://www.w3.org/TR/css3-values/#url-value"},
 "https://www.w3.org/TR/cssom-view#scrolling-area": {"displayText":"scrolling area","export":true,"for_":[],"level":"","normative":true,"shortname":"paint-timing","spec":"","status":"anchor-block","text":"scrolling area","type":"dfn","url":"https://www.w3.org/TR/cssom-view#scrolling-area"},
