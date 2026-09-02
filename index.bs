@@ -29,6 +29,8 @@ urlPrefix: https://www.w3.org/TR/SVG2/render.html; spec: CR-SVG2
 urlPrefix: https://www.w3.org/TR/css-backgrounds-3/; spec: CSS-BACKGROUNDS-3;
     type: dfn; text: background-image; url: #propdef-background-image;
     type: dfn; text: background-size; url: #background-size;
+    type: dfn; text: border-image-source; url: #propdef-border-image-source;
+    type: dfn; text: border-image-width; url: #border-image-width;    
 urlPrefix: https://html.spec.whatwg.org/multipage/canvas.html; spec: HTML;
     type: dfn; text: context mode; url: #concept-canvas-context-mode;
 urlPrefix: https://html.spec.whatwg.org/multipage/images.html; spec: HTML;
@@ -148,6 +150,7 @@ An [=/element=] |target| is <dfn export>contentful</dfn> when one or more of the
 
 * |target| is a [=replaced element=] representing an [=available=] [=image=].
 * |target| has a [=background-image=] which is a [=contentful image=], and its [=used value|used=] [=background-size=] has non-zero width and height values.
+* |target| has a [=border-image-source=] which is a [=contentful image=], and its [=used value|used=] [=border-image-width=] has non-zero value.
 * |target| is a <{canvas}> with its [=context mode=] set to any value other than <code>none</code>.
 * |target| is a <{video}> element that [=represents=] its [=poster frame=] or the first video frame and the frame is available.
 * |target| is an [=svg element with rendered descendants=].
