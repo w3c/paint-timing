@@ -159,10 +159,10 @@ An [=/element=] |target| is <dfn export>contentful</dfn> when one or more of the
 
 An [=/element=] is <dfn export>timing-eligible</dfn> if it is one of the following:
 
-* an <{img}> element.
+* an <{img}> element representing a [=contentful image=].
 * an <{image}> element inside an <{svg}> element.
 * a <{video}> element with a [=poster frame=].
-* an element with a [=contentful image|contentful=] <a>background-image</a>.
+* an element has a <a>background-image</a> which is a [=contentful image=].
 * a text node.
 
 To compute the <dfn>paintable bounding rect</dfn> of [=/element=] |target|, run the following steps:
