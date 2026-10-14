@@ -5,9 +5,9 @@
   <title>Paint Timing</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version ea4009a02, updated Thu Sep 17 15:24:44 2026 -0700" name="generator">
+  <meta content="Bikeshed version 49e9fdd4f, updated Tue Oct 13 14:27:53 2026 -0700" name="generator">
   <link href="https://www.w3.org/TR/paint-timing/" rel="canonical">
-  <meta content="52ce488efd9c0c0bf96c6f92174da0970469809b" name="revision">
+  <meta content="4bceb4c50227d23ec605d81c127712b40c9fd35f" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -559,11 +559,10 @@ a[href].issue-return {
 	vertical-align: top;
 }
 .mdn-anno > .feature {
-	margin-top: 20px;
+	margin-top: 6px;
 }
 .mdn-anno > .feature:not(:first-of-type) {
 	border-top: 1px solid #999;
-	margin-top: 6px;
 	padding-top: 2px;
 }
 .mdn-anno > .feature > .less-than-two-engines-text {
@@ -997,7 +996,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
 </p>
    <h1 class="no-ref p-name" id="title">Paint Timing</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2026-10-02">2 October 2026</time></p>
+    <time class="dt-updated" datetime="2026-10-14">14 October 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1233,7 +1232,7 @@ Those elements would still be considered as paintable for the purpose of computi
      <p class="note" role="note"><span class="marker">NOTE:</span> This covers the cases where the element is scaled to zero size, has <code class="highlight">display<c- o>:</c-> none</code>, or <code class="highlight">display<c- o>:</c-> contents</code> where the contents resolve to an empty rect.</p>
      <p class="note" role="note"><span class="marker">NOTE:</span> As a general rule, an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element⑥">element</a> is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling or zooming.</p>
    </ul>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="first-paint">First paint</dfn> entry contains a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#typedefdef-domhighrestimestamp" id="ref-for-typedefdef-domhighrestimestamp">DOMHighResTimeStamp</a></code> reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="first-paint">First paint</dfn> entry contains a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#typedefdef-domhighrestimestamp" id="ref-for-typedefdef-domhighrestimestamp">DOMHighResTimeStamp</a></code> reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of a <a data-link-type="dfn" href="#paintable" id="ref-for-paintable">paintable</a> iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.</p>
    <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" id="ref-for-browsing-context">browsing context</a> <var>ctx</var> is <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="paint-timing-eligible">paint-timing eligible</dfn> when one of the following apply:</p>
    <ul>
     <li data-md>
@@ -1399,7 +1398,7 @@ To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="process-an-ima
      <li data-md>
       <p>If <var>document</var>’s <a data-link-type="dfn" href="#set-of-previously-reported-paints" id="ref-for-set-of-previously-reported-paints">set of previously reported paints</a> contains <code class="highlight"><c- u>"first-contentful-paint"</c-></code>, then return false.</p>
      <li data-md>
-      <p>If <var>document</var> contains at least one <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element⑦">element</a> that is both <a data-link-type="dfn" href="#paintable" id="ref-for-paintable">paintable</a> and <a data-link-type="dfn" href="#contentful" id="ref-for-contentful">contentful</a>, then return true.</p>
+      <p>If <var>document</var> contains at least one <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element" id="ref-for-concept-element⑦">element</a> that is both <a data-link-type="dfn" href="#paintable" id="ref-for-paintable①">paintable</a> and <a data-link-type="dfn" href="#contentful" id="ref-for-contentful">contentful</a>, then return true.</p>
      <li data-md>
       <p>Otherwise, return false.</p>
     </ol>
@@ -1461,7 +1460,7 @@ To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="process-an-ima
          <li data-md>
           <p><a data-link-type="dfn" href="#report-paint-timing" id="ref-for-report-paint-timing①">Report paint timing</a> given <var>document</var>, <code class="highlight"><c- u>"first-contentful-paint"</c-></code>, and <var>paintTimingInfo</var>.</p>
         </ol>
-        <p class="note" role="note"><span class="marker">NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint③">first paint</a> (due to the enclosing boxes of the iframes) but no <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint②">first contentful paint</a>.</p>
+        <p class="note" role="note"><span class="marker">NOTE:</span> A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint③">first paint</a> (due to the enclosing boxes of the <a data-link-type="dfn" href="#paintable" id="ref-for-paintable②">paintable</a> iframes) but no <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint②">first contentful paint</a>.</p>
         <p class="note" role="note"><span class="marker">NOTE:</span> A <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑤">document</a> is not guaranteed to mark <code class="highlight"><c- u>"first-paint"</c-></code> or <code class="highlight"><c- u>"first-contentful-paint"</c-></code>. A completely blank <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑥">document</a> may never mark <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint④">first paint</a>, and a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑦">document</a> containing only elements that are not <a data-link-type="dfn" href="#contentful" id="ref-for-contentful①">contentful</a> may never mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint③">first contentful paint</a>.</p>
         <p class="note" role="note"><span class="marker">NOTE:</span> The marking of <a data-link-type="dfn" href="#first-paint" id="ref-for-first-paint⑤">first paint</a> is optional. User-agents implementing paint timing should at the very least mark <a data-link-type="dfn" href="#first-contentful-paint" id="ref-for-first-contentful-paint④">first contentful paint</a>.</p>
        <li data-md>
@@ -1877,7 +1876,7 @@ specification.</p>
    <dt id="biblio-selectors-4">[SELECTORS-4]
    <dd>Elika Etemad; Tab Atkins Jr.. <a href="https://drafts.csswg.org/selectors/"><cite>Selectors Level 4</cite></a>. URL: <a href="https://drafts.csswg.org/selectors/">https://drafts.csswg.org/selectors/</a>
    <dt id="biblio-svg2">[SVG2]
-   <dd>Amelia Bellamy-Royds; et al. <a href="https://w3c.github.io/svgwg/svg2-draft/"><cite>Scalable Vector Graphics (SVG) 2</cite></a>. URL: <a href="https://w3c.github.io/svgwg/svg2-draft/">https://w3c.github.io/svgwg/svg2-draft/</a>
+   <dd>Karl Dubost; et al. <a href="https://w3c.github.io/svgwg/svg2-draft/"><cite>Scalable Vector Graphics (SVG) 2</cite></a>. URL: <a href="https://w3c.github.io/svgwg/svg2-draft/">https://w3c.github.io/svgwg/svg2-draft/</a>
    <dt id="biblio-webidl">[WEBIDL]
    <dd>Edgar Chen; Timothy Gu. <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
   </dl>
@@ -1910,21 +1909,8 @@ specification.</p>
   <div style="counter-reset:issue">
    <div class="issue"> This should be turned into a normative note. <a class="issue-return" href="#issue-6cf50d70" title="Jump to section">↵</a></div>
   </div>
-  <details class="mdn-anno unpositioned" data-anno-for="sec-PerformancePaintTiming">
+  <details class="mdn-anno unpositioned" data-anno-for="sec-PerformancePaintTiming" data-mdn="v1|API/PerformancePaintTiming|9|84,14.1,60,@!,79,@?,-,@!,@!,@!,@!,@!,@!,">
    <summary><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></summary>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming" title="The PerformancePaintTiming interface provides timing information about &quot;paint&quot; (also called &quot;render&quot;) operations during web page construction. &quot;Paint&quot; refers to conversion of the render tree to on-screen pixels.">PerformancePaintTiming</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>84+</span></span><span class="safari yes"><span>Safari</span><span>14.1+</span></span><span class="chrome yes"><span>Chrome</span><span>60+</span></span>
-     <hr>
-     <span class="no opera"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="no safari_ios"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="no webview_android"><span>Android WebView</span><span>?</span></span><span class="no samsunginternet_android"><span>Samsung Internet</span><span>?</span></span><span class="no opera_android"><span>Opera Mobile</span><span>?</span></span>
-    </div>
-   </div>
   </details>
 <script>/* Boilerplate: script-dom-helper */
 "use strict";
@@ -2242,7 +2228,7 @@ let dfnPanelData = {
 "paint-timing-info": {"dfnID":"paint-timing-info","dfnText":"paint timing info","external":false,"refSections":[{"refs":[{"id":"ref-for-paint-timing-info"},{"id":"ref-for-paint-timing-info\u2460"}],"title":"3.1. The PaintTimingMixin interface"},{"refs":[{"id":"ref-for-paint-timing-info\u2461"}],"title":"5.3.2. Mark paint timing"},{"refs":[{"id":"ref-for-paint-timing-info\u2462"}],"title":"5.3.3. Report paint timing"}],"url":"#paint-timing-info"},
 "paint-timing-info-implementation-defined-presentation-time": {"dfnID":"paint-timing-info-implementation-defined-presentation-time","dfnText":"implementation-defined presentation time","external":false,"refSections":[{"refs":[{"id":"ref-for-paint-timing-info-implementation-defined-presentation-time"},{"id":"ref-for-paint-timing-info-implementation-defined-presentation-time\u2460"}],"title":"3.1. The PaintTimingMixin interface"},{"refs":[{"id":"ref-for-paint-timing-info-implementation-defined-presentation-time\u2461"},{"id":"ref-for-paint-timing-info-implementation-defined-presentation-time\u2462"},{"id":"ref-for-paint-timing-info-implementation-defined-presentation-time\u2463"}],"title":"5.3.2. Mark paint timing"}],"url":"#paint-timing-info-implementation-defined-presentation-time"},
 "paint-timing-info-rendering-update-end-time": {"dfnID":"paint-timing-info-rendering-update-end-time","dfnText":"rendering update end time","external":false,"refSections":[{"refs":[{"id":"ref-for-paint-timing-info-rendering-update-end-time"},{"id":"ref-for-paint-timing-info-rendering-update-end-time\u2460"}],"title":"3.1. The PaintTimingMixin interface"},{"refs":[{"id":"ref-for-paint-timing-info-rendering-update-end-time\u2461"}],"title":"5.3.2. Mark paint timing"}],"url":"#paint-timing-info-rendering-update-end-time"},
-"paintable": {"dfnID":"paintable","dfnText":"paintable","external":false,"refSections":[{"refs":[{"id":"ref-for-paintable"}],"title":"5.3.1. First Contentful Paint"}],"url":"#paintable"},
+"paintable": {"dfnID":"paintable","dfnText":"paintable","external":false,"refSections":[{"refs":[{"id":"ref-for-paintable"}],"title":"2. Terminology"},{"refs":[{"id":"ref-for-paintable\u2460"}],"title":"5.3.1. First Contentful Paint"},{"refs":[{"id":"ref-for-paintable\u2461"}],"title":"5.3.2. Mark paint timing"}],"url":"#paintable"},
 "paintable-bounding-rect": {"dfnID":"paintable-bounding-rect","dfnText":"paintable bounding rect","external":false,"refSections":[{"refs":[{"id":"ref-for-paintable-bounding-rect"},{"id":"ref-for-paintable-bounding-rect\u2460"}],"title":"2. Terminology"}],"url":"#paintable-bounding-rect"},
 "paintable-pseudo-element": {"dfnID":"paintable-pseudo-element","dfnText":"paintable pseudo-element","external":false,"refSections":[{"refs":[{"id":"ref-for-paintable-pseudo-element"}],"title":"2. Terminology"}],"url":"#paintable-pseudo-element"},
 "painttimingmixin": {"dfnID":"painttimingmixin","dfnText":"PaintTimingMixin","external":false,"refSections":[{"refs":[{"id":"ref-for-painttimingmixin"}],"title":"3. The Paint Timing Mixin"},{"refs":[{"id":"ref-for-painttimingmixin\u2460"},{"id":"ref-for-painttimingmixin\u2461"}],"title":"3.1. The PaintTimingMixin interface"},{"refs":[{"id":"ref-for-painttimingmixin\u2462"}],"title":"4. The PerformancePaintTiming interface"}],"url":"#painttimingmixin"},
@@ -2643,6 +2629,213 @@ function genLinkingSyntaxes(dfn) {
         )
     ];
 }
+}
+</script>
+<script>/* Boilerplate: script-mdn-anno */
+"use strict";
+{
+'use strict';
+// File copied from https://github.com/whatwg/whatwg.org/blob/main/resources.whatwg.org/standard-mdn-annos.js
+
+// Builds MDN annotation panels on demand from the compact `data-mdn` attribute written by
+// the spec generator (wattsi's EncodeMDNAnnotations; Bikeshed's mdnspeclinks.py builds its
+// panels eagerly for now). Only the wire format is shared: the browser labels, the
+// engine-support strings and the render grouping all live here.
+//
+// Archived commit snapshots load this file forever, so every format version this script
+// has ever understood has to keep working. Evolve the format by adding a branch in
+// `hydrate`, never by redefining a version that has already shipped.
+
+const MDN_URL = 'https://developer.mozilla.org/en-US/docs/Web/';
+const CANIUSE_URL = 'https://caniuse.com/#feat=';
+
+// Render groups, in the order they appear in a panel, separated by <hr>.
+const CURRENT_ENGINES = 0;
+const BORROWED_ENGINES = 1;
+const RETIRED_ENGINES = 2;
+const MOBILE = 3;
+const NON_BROWSER = 4;
+const GROUP_COUNT = 5;
+
+// Cell slots, in the order they appear in `data-mdn`. APPEND-ONLY: a new browser goes at
+// the end and is never inserted, so that old data still lines up and old copies of this
+// script can keep ignoring the cells they don't know about. `group` is what decides where
+// a row is rendered, so appending to this list doesn't constrain where the row shows up.
+const SLOTS = [
+  { id: 'firefox', label: 'Firefox', group: CURRENT_ENGINES },
+  { id: 'safari', label: 'Safari', group: CURRENT_ENGINES },
+  { id: 'chrome', label: 'Chrome', group: CURRENT_ENGINES },
+  { id: 'opera', label: 'Opera', group: BORROWED_ENGINES, mirrors: 'Chrome' },
+  { id: 'edge_blink', label: 'Edge', group: BORROWED_ENGINES },
+  { id: 'edge', label: 'Edge (Legacy)', group: RETIRED_ENGINES },
+  { id: 'ie', label: 'IE', group: RETIRED_ENGINES },
+  { id: 'firefox_android', label: 'Firefox for Android', group: MOBILE, mirrors: 'Firefox' },
+  { id: 'safari_ios', label: 'iOS Safari', group: MOBILE, mirrors: 'Safari' },
+  { id: 'chrome_android', label: 'Chrome for Android', group: MOBILE, mirrors: 'Chrome' },
+  { id: 'webview_android', label: 'Android WebView', group: MOBILE, mirrors: 'Chrome' },
+  { id: 'samsunginternet_android', label: 'Samsung Internet', group: MOBILE, mirrors: 'Chrome' },
+  { id: 'opera_android', label: 'Opera Mobile', group: MOBILE, mirrors: 'Chrome' },
+  { id: 'nodejs', label: 'Node.js', group: NON_BROWSER },
+];
+
+// One mnemonic character per engine-support note.
+const LEVELS = {
+  '0': { class: 'less-than-two-engines-text', text: 'In no current engines.' },
+  '1': { class: 'less-than-two-engines-text', text: 'In only one current engine.' },
+  '9': { class: 'all-engines-text', text: 'In all current engines.' },
+  's': { class: 'less-than-two-engines-text', text: 'Support in one engine under other name.' },
+  'S': { class: 'less-than-two-engines-text', text: 'Support in some engines under other name.' },
+  'v': { class: 'less-than-two-engines-text', text: 'Prefixed support in one engine.' },
+  'V': { class: 'less-than-two-engines-text', text: 'Prefixed support in some engines.' },
+  'p': { class: 'less-than-two-engines-text', text: 'Partial support in one engine.' },
+  'P': { class: 'less-than-two-engines-text', text: 'Partial support in some engines.' },
+};
+
+// Leading character of a cell, qualifying how the version after it should be read. `flag`
+// is whether to mark the version with 🔰 as well as explaining it in a tooltip.
+const CAVEATS = {
+  '*': { flag: true, title: () => 'Partial implementation.' },
+  '^': { flag: true, title: () => 'Requires setting a user preference or runtime flag.' },
+  '$': { flag: true, title: () => 'Requires a prefix or alternative name.' },
+  // Mirrored support is far too common to flag every occurrence; the tooltip is enough.
+  '@': { flag: false, title: (slot) => `Support is mirrored from ${slot.mirrors ?? 'the upstream browser'}.` },
+};
+
+const FLAG = '\u{1F530}'; // 🔰, marks a version that comes with a caveat
+const EN_DASH = '–';
+
+function element(name, attributes, ...children) {
+  const node = document.createElement(name);
+  for (const [attribute, value] of Object.entries(attributes)) {
+    if (value !== undefined) {
+      node.setAttribute(attribute, value);
+    }
+  }
+  node.append(...children);
+  return node;
+}
+
+function splitOnce(string, separator) {
+  const at = string.indexOf(separator);
+  return at === -1 ? [string, undefined] : [string.slice(0, at), string.slice(at + 1)];
+}
+
+// A version body says both whether the browser supports the feature and since when.
+function readVersion(body) {
+  if (body === '?') {
+    return { state: 'unknown', version: '?' };
+  }
+  if (body === '-') {
+    return { state: 'no', version: 'None' };
+  }
+  if (body === '!') {
+    return { state: 'yes', version: 'Yes' };
+  }
+  if (body.startsWith('=')) {
+    // A version that will never be superseded, so no trailing "+".
+    return { state: 'yes', version: body.slice(1) };
+  }
+  const [added, removed] = body.split('-');
+  if (removed !== undefined) {
+    return { state: 'no', version: added + EN_DASH + removed };
+  }
+  return { state: 'yes', version: added + '+' };
+}
+
+function readCell(cell, slot) {
+  const caveat = CAVEATS[cell[0]];
+  const { state, version } = readVersion(caveat ? cell.slice(1) : cell);
+  return {
+    state,
+    version: caveat?.flag ? `${FLAG} ${version}` : version,
+    title: caveat?.title(slot),
+  };
+}
+
+// A browser row is the browser's name in one cell and its version in the next. The logo
+// comes from CSS, keyed off the browser id in the row's class.
+function browserRow(slot, cell) {
+  const { state, version, title } = readCell(cell, slot);
+  return element('span', { class: `${slot.id} ${state}` },
+    element('span', {}, slot.label),
+    element('span', { title }, version));
+}
+
+// The caniuse row has a single cell instead, since its logo needs no label beside it.
+function caniuseRow(field) {
+  const [feature, title] = splitOnce(field, ',');
+  const link = element('a', { href: CANIUSE_URL + feature, title }, 'caniuse.com table');
+  return element('span', { class: 'caniuse' }, element('span', {}, link));
+}
+
+function supportTable(cells, caniuse) {
+  const groups = Array.from({ length: GROUP_COUNT }, () => []);
+  SLOTS.forEach((slot, slotIndex) => {
+    // An empty cell means this browser gets no row at all. Cells beyond SLOTS are
+    // browsers added after this copy of the script was written; ignore them.
+    if (cells[slotIndex]) {
+      groups[slot.group].push(browserRow(slot, cells[slotIndex]));
+    }
+  });
+  if (caniuse !== undefined) {
+    groups.push([caniuseRow(caniuse)]);
+  }
+
+  const table = element('div', { class: 'support' });
+  for (const rows of groups.filter((rows) => rows.length > 0)) {
+    if (table.hasChildNodes()) {
+      table.append(element('hr', {}));
+    }
+    table.append(...rows);
+  }
+  return table;
+}
+
+function featurePanel(record) {
+  const [slug, level, cells, caniuse] = record.split('|');
+
+  const article = element('a', { href: MDN_URL + slug }, slug.slice(slug.indexOf('/') + 1));
+  const panel = element('div', { class: 'feature' }, element('p', {}, article));
+
+  if (level in LEVELS) {
+    panel.append(element('p', { class: LEVELS[level].class }, LEVELS[level].text));
+  }
+  if (cells) {
+    panel.append(supportTable(cells.split(','), caniuse));
+  }
+  return panel;
+}
+
+function hydrate(anno) {
+  const [version, features] = splitOnce(anno.dataset.mdn, '|');
+  delete anno.dataset.mdn; // Only ever hydrate a panel once.
+
+  if (version !== 'v1') {
+    console.warn(`Unsupported MDN annotation data version "${version}".`, anno);
+    return;
+  }
+  anno.append(...features.split('~').map(featurePanel));
+}
+
+function hydrateIfNeeded(node) {
+  if (node instanceof Element && node.matches('.mdn-anno[data-mdn]')) {
+    hydrate(node);
+  }
+}
+
+// A click on the summary arrives before the browser opens the <details>, so hydrating
+// from it means the panel never flashes empty. That covers pointers and the keyboard,
+// since activating a summary dispatches a click either way.
+document.addEventListener('click', (event) => {
+  if (event.target instanceof Element) {
+    hydrateIfNeeded(event.target.closest('summary')?.parentElement);
+  }
+}, true);
+
+// And `toggle` is the catch-all for a panel opened some other way, such as find-in-page
+// or a fragment navigation into it. It fires a task after the state has already changed,
+// and it doesn't bubble, so it has to be a capture listener.
+document.addEventListener('toggle', (event) => hydrateIfNeeded(event.target), true);
 }
 </script>
 <script>/* Boilerplate: script-position-annos */
