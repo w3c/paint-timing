@@ -186,7 +186,7 @@ An [=/element=] |el| is <dfn>paintable</dfn> when all of the following apply:
 
     NOTE: As a general rule, an [=/element=] is paintable if it is within the viewport, or can potentially be in the viewport as a result of scrolling or zooming.
 
-<dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of an iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
+<dfn export>First paint</dfn> entry contains a {{DOMHighResTimeStamp}} reporting the time when the user agent first rendered after navigation. This excludes the default background paint, but includes non-default background paint and the enclosing box of a [=paintable=] iframe. This is the first key moment developers care about in page load – when the user agent has started to render the page.
 
 A [=browsing context=] |ctx| is <dfn>paint-timing eligible</dfn> when one of the following apply:
 * |ctx| is a [=top-level browsing context=].
@@ -404,7 +404,7 @@ Reporting paint timing {#sec-reporting-paint-timing}
         1. If |document| [=should report first contentful paint=], then:
             1. [=Report paint timing=] given |document|, <code>"first-contentful-paint"</code>, and |paintTimingInfo|.
 
-            NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the iframes) but no [=first contentful paint=].
+            NOTE: A parent frame should not be aware of the paint events from its child iframes, and vice versa. This means that a frame that contains just iframes will have [=first paint=] (due to the enclosing boxes of the [=paintable=] iframes) but no [=first contentful paint=].
 
             NOTE: A [=document=] is not guaranteed to mark <code>"first-paint"</code> or <code>"first-contentful-paint"</code>. A completely blank [=document=] may never mark [=first paint=], and a [=document=] containing only elements that are not [=contentful=] may never mark [=first contentful paint=].
 
