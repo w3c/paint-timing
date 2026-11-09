@@ -455,6 +455,7 @@ Common algorithms {#sec-common-algorithms}
     1. If |document| is null, let |document| be |node|'s [=relevant settings object=]'s [=relevant global object=]'s [=associated document=].
     1. If |document| is not [=fully active=], return false.
     1. If |node|'s [=tree/root=] is not equal to |document|, return false.
+    1. Return true.
 </div>
 
 
