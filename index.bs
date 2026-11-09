@@ -449,13 +449,12 @@ Common algorithms {#sec-common-algorithms}
 
 <div algorithm="Exposed for paint timing">
 
-    To determine whether an [=/Element=] |element| is [=exposed for paint timing=], given a [=Document=] or null |document|, perform the following steps:
+    To determine whether a [=/Node=] |node| is [=exposed for paint timing=], given a [=Document=] or null |document|, perform the following steps:
 
-    1. If |element| is not [=connected=], return false.
-    1. If |document| is null, let |document| be |element|'s [=relevant settings object=]'s [=relevant global object=]'s [=associated document=].
+    1. If |node| is not [=connected=], return false.
+    1. If |document| is null, let |document| be |node|'s [=relevant settings object=]'s [=relevant global object=]'s [=associated document=].
     1. If |document| is not [=fully active=], return false.
-    1. If |element|'s [=tree/root=] is not equal to |document|, return false.
-    1. Return true.
+    1. If |node|'s [=tree/root=] is not equal to |document|, return false.
 </div>
 
 
